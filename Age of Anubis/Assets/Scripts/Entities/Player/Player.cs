@@ -16,10 +16,16 @@ public class Player : Damageable
 	public int m_jumpCounter;
 	private Vector2 m_velocity = Vector2.zero;
 
+	public Animator m_anim;
+
+	public Weapon m_currentWeapon;
+
 	public override void AwakeOverride() 
     {
 		m_colFeet = GetComponent<CircleCollider2D>();
 		m_colBody = GetComponent<BoxCollider2D>();
+
+		m_anim = GetComponent<Animator>();
 	}
 
 	public override void UpdateOverride()
@@ -56,6 +62,17 @@ public class Player : Damageable
 		{
 			JumpStop();
 		}
+
+		if (Input.GetButtonDown("Fire1"))
+		{
+			if (m_currentWeapon != null)
+				m_currentWeapon.Attack(m_anim);
+		}
+		if (Input.GetButtonDown("Fire2"))
+		{
+			m_currentWeapon = PlayerInventory.Inst.SwitchWeapon();
+		}
+
 
 		m_rb.velocity = m_velocity;
 	}

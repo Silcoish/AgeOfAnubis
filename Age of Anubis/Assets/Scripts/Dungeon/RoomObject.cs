@@ -16,6 +16,7 @@ public class RoomObject : MonoBehaviour
 
 	void Awake()
 	{
+		m_allEnemies = new List<Enemy>();
 		SetupEnemies();
 		SetupDoors();
 	}
