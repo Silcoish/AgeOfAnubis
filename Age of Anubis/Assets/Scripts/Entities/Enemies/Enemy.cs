@@ -14,6 +14,8 @@ public class Enemy : Damageable
 	private BoxCollider2D m_belowCol;
 	private BoxCollider2D m_cornerCol;
 
+	private RoomObject m_room;
+
 	protected enum CheckReturnEnum { None, Grounded, ReachedEdge, ReachedWall };
 
 	protected struct CheckReturn
@@ -179,6 +181,11 @@ public class Enemy : Damageable
 		}
 
 		return tempReturn;
+	}
+
+	public void SetRoom(RoomObject r)
+	{
+		m_room = r;
 	}
 
 }
