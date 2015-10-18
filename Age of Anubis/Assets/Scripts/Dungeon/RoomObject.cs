@@ -89,7 +89,7 @@ public class RoomObject : MonoBehaviour
 			else if (d.m_dir == Door.Direction.WEST)
 				m_doorWest = d;
 
-			d.m_parentRoom = gameObject;
+			d.m_parentRoom = gameObject.transform;
 		}
 
 
