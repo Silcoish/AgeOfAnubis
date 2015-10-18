@@ -45,8 +45,8 @@ public class DungeonLayoutLoader : MonoBehaviour
 					//tempDoor1.transform.parent = rooms[i].gameObject.transform;
 					//tempDoor2.transform.parent = rooms[i + 1].gameObject.transform;
 
-					Door tempDoor1Door = rooms[i].doorWest;//tempDoor1.GetComponent<Door>();
-					Door tempDoor2Door = rooms[i].doorEast;//tempDoor2.GetComponent<Door>();
+					Door tempDoor1Door = rooms[i].m_doorWest;//tempDoor1.GetComponent<Door>();
+					Door tempDoor2Door = rooms[i].m_doorEast;//tempDoor2.GetComponent<Door>();
 					tempDoor1Door.partnerDoor = tempDoor2Door.gameObject.transform;
                     tempDoor2Door.partnerDoor = tempDoor1Door.gameObject.transform;
 					tempDoor1Door.parentRoom = rooms[i].gameObject.transform;
@@ -74,8 +74,8 @@ public class DungeonLayoutLoader : MonoBehaviour
 					tempDoor1Door.parentRoom = rooms[i].gameObject.transform;
 					tempDoor2Door.parentRoom = rooms[i + SIZE].gameObject.transform;
 
-					rooms[i].doorSouth = tempDoor1Door;
-					rooms[i + SIZE].doorNorth = tempDoor2Door;
+					rooms[i].m_doorSouth = tempDoor1Door;
+					rooms[i + SIZE].m_doorNorth = tempDoor2Door;
                 }
 			}
 		}
@@ -122,11 +122,11 @@ public class DungeonLayoutLoader : MonoBehaviour
 							{
 								GameObject tempRoom = (GameObject)Instantiate(templateRooms[0], new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
 								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
-								rooms[lineNum * SIZE + i].enemiesParent = tempRoom.transform.FindChild("Enemies").gameObject;
-								
-								rooms[lineNum * SIZE + i].enemiesCount = rooms[lineNum * SIZE + i].enemiesParent.transform.childCount;
+								rooms[lineNum * SIZE + i].m_enemiesParent = tempRoom.transform.FindChild("Enemies").gameObject;
+
+								//rooms[lineNum * SIZE + i].m_enemiesCount = rooms[lineNum * SIZE + i].m_enemiesParent.transform.childCount;
 								rooms[lineNum * SIZE + i].SetupEnemies();
-								rooms[lineNum * SIZE + i].enemiesParent.SetActive(false);
+								rooms[lineNum * SIZE + i].m_enemiesParent.SetActive(false);
 							}
 
 							if(entries[i] == "2" || entries[i] == " 2")

@@ -2,70 +2,106 @@
 *  Script Created by:
 *  Corey Underdown
 */
- 
+
 using UnityEngine;
- 
+using System.Collections.Generic;
+
 public class RoomObject : MonoBehaviour
 {
-	public GameObject enemiesParent;
-	public int enemiesCount;
-	public Door doorNorth;
-	public Door doorSouth;
-	public Door doorEast;
-	public Door doorWest;
+	public List<Enemy> m_allEnemies;
+	public Door m_doorNorth;
+	public Door m_doorSouth;
+	public Door m_doorEast;
+	public Door m_doorWest;
+
+	public GameObject m_enemiesParent;
+
+	void Awake()
+	{
+		m_allEnemies = new List<Enemy>();
+		SetupEnemies();
+		SetupDoors();
+	}
+
+	void Start()
+	{
+
+
+	}
 
 	public void EnteredRoom()
 	{
-		enemiesParent.SetActive(true);
-		if(enemiesCount > 0)
+		foreach (var en in m_allEnemies)
 		{
-			LockDoors();
+			en.gameObject.SetActive(true);
 		}
 		//Camera.main.GetComponent<CameraSystem>().MoveRoom(transform);
 	}
 
 	void LockDoors()
 	{
-		if (doorNorth != null)
-			doorNorth.Lock();
-		if (doorSouth != null)
-			doorSouth.Lock();
-		if (doorEast != null)
-			doorEast.Lock();
-		if (doorWest != null)
-			doorWest.Lock();
+		if (m_doorNorth != null)
+			m_doorNorth.Lock();
+		if (m_doorSouth != null)
+			m_doorSouth.Lock();
+		if (m_doorEast != null)
+			m_doorEast.Lock();
+		if (m_doorWest != null)
+			m_doorWest.Lock();
 
 		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
 	}
 
 	void UnlockDoors()
 	{
-		if (doorNorth != null)
-			doorNorth.Unlock();
-		if (doorSouth != null)
-			doorSouth.Unlock();
-		if (doorEast != null)
-			doorEast.Unlock();
-		if (doorWest != null)
-			doorWest.Unlock();
+		if (m_doorNorth != null)
+			m_doorNorth.Unlock();
+		if (m_doorSouth != null)
+			m_doorSouth.Unlock();
+		if (m_doorEast != null)
+			m_doorEast.Unlock();
+		if (m_doorWest != null)
+			m_doorWest.Unlock();
 
 		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_idle);
-
-		//if(GameManager.inst.questManager != null) GameManager.inst.questManager.currentQuest.CheckProgress();
 	}
 
 	public void SetupEnemies()
 	{
-		for(int i = 0; i < enemiesCount; i++)
+		Enemy[] tempAllEnemies = gameObject.GetComponentsInChildren<Enemy>();
+
+		foreach (var en in tempAllEnemies)
 		{
-			//enemiesParent.transform.GetChild(i).GetComponent<Enemy>().room = this;
+			m_allEnemies.Add(en);
+			en.SetRoom(this);
 		}
 	}
 
-	public void EnemyDied()
+	void SetupDoors()
 	{
-		enemiesCount--;
-		if (enemiesCount == 0)
+		Door[] tempDoors = gameObject.GetComponentsInChildren<Door>();
+
+		foreach (var d in tempDoors)
+		{
+			if (d.dir == Door.Direction.NORTH)
+				m_doorNorth = d;
+			else if (d.dir == Door.Direction.SOUTH)
+				m_doorSouth = d;
+			else if (d.dir == Door.Direction.EAST)
+				m_doorEast = d;
+			else if (d.dir == Door.Direction.WEST)
+				m_doorWest = d;
+
+			d.parentRoom = gameObject.transform;
+		}
+
+
+	}
+
+	public void EnemyDied(Enemy en)
+	{
+		m_allEnemies.Remove(en);
+		if (m_allEnemies.Count == 0)
 			UnlockDoors();
 	}
 
