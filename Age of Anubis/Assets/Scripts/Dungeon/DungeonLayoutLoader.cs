@@ -28,7 +28,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 		if(fileName == "")
 			ChooseLayout();
 		SetupLayout();
-		//PlaceDoors();
+		PlaceDoors();
 	}
 
 	void PlaceDoors()
@@ -40,20 +40,20 @@ public class DungeonLayoutLoader : MonoBehaviour
 			{
 				if (rooms[i] != null && rooms[i + 1] != null)
 				{
-					GameObject tempDoor1 = (GameObject)Instantiate(doorEast, (Vector2)rooms[i].gameObject.transform.position + new Vector2(doorOffset[1], 0f), doorEast.transform.rotation);
-					GameObject tempDoor2 = (GameObject)Instantiate(doorWest, (Vector2)rooms[i + 1].gameObject.transform.position - new Vector2(doorOffset[3], 0f), doorWest.transform.rotation);
-					tempDoor1.transform.parent = rooms[i].gameObject.transform;
-					tempDoor2.transform.parent = rooms[i + 1].gameObject.transform;
+					//GameObject tempDoor1 = (GameObject)Instantiate(doorEast, (Vector2)rooms[i].gameObject.transform.position + new Vector2(doorOffset[1], 0f), doorEast.transform.rotation);
+					//GameObject tempDoor2 = (GameObject)Instantiate(doorWest, (Vector2)rooms[i + 1].gameObject.transform.position - new Vector2(doorOffset[3], 0f), doorWest.transform.rotation);
+					//tempDoor1.transform.parent = rooms[i].gameObject.transform;
+					//tempDoor2.transform.parent = rooms[i + 1].gameObject.transform;
 
-                    Door tempDoor1Door = tempDoor1.GetComponent<Door>();
-                    Door tempDoor2Door = tempDoor2.GetComponent<Door>();
-                    tempDoor1Door.partnerDoor = tempDoor2.transform;
-                    tempDoor2Door.partnerDoor = tempDoor1.transform;
+					Door tempDoor1Door = rooms[i].doorWest;//tempDoor1.GetComponent<Door>();
+					Door tempDoor2Door = rooms[i].doorEast;//tempDoor2.GetComponent<Door>();
+					tempDoor1Door.partnerDoor = tempDoor2Door.gameObject.transform;
+                    tempDoor2Door.partnerDoor = tempDoor1Door.gameObject.transform;
 					tempDoor1Door.parentRoom = rooms[i].gameObject.transform;
 					tempDoor2Door.parentRoom = rooms[i + 1].gameObject.transform;
 
-					rooms[i].doorEast = tempDoor1Door;
-					rooms[i + 1].doorWest = tempDoor2Door;
+					//rooms[i].doorEast = tempDoor1Door;
+					//rooms[i + 1].doorWest = tempDoor2Door;
 				}
 			}
 
