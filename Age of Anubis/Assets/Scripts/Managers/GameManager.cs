@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	//public DungeonSets dungeonSets;
     //public Inventory inventory;
 	public GameObject player;
+	public SaveManager m_saveManager;
 
 	void Awake()
 	{
