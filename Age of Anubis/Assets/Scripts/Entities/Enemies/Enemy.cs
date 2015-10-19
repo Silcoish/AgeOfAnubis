@@ -61,6 +61,7 @@ public class Enemy : Damageable
 
 	public override void OnDeath()
 	{
+		m_room.EnemyDied(this);
 		gameObject.SetActive(false);
 	}
 
