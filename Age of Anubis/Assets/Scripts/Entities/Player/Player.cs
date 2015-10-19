@@ -17,6 +17,8 @@ public class Player : Damageable
 	private Vector2 m_velocity = Vector2.zero;
 
 	public Animator m_anim;
+    public Animator m_anim_arm;
+    private bool isFacingRight = true;
 
 	public Weapon m_currentWeapon;
 
@@ -26,6 +28,15 @@ public class Player : Damageable
 		m_colBody = GetComponent<BoxCollider2D>();
 
 		m_anim = GetComponent<Animator>();
+        
+        Animator[] tempAnims = gameObject.GetComponentsInChildren<Animator>();
+        foreach(var d in tempAnims)
+        {
+            if(d.name == "Player_Arm")
+            {
+                m_anim_arm = d;
+            }
+        }
 	}
 
 	public override void UpdateOverride()
@@ -51,6 +62,10 @@ public class Player : Damageable
 		float move = Input.GetAxisRaw("Horizontal");
 		m_velocity.x = move * m_moveSpeed * m_globalMoveSpeed;
 
+        // Update player animation state
+        UpdateAnimationState(move);
+        SetAnimSpeed(move);
+        SetAnimVSpeed(m_velocity.y);
 
 		if (Input.GetButtonDown("Jump"))
 		{
@@ -84,6 +99,8 @@ public class Player : Damageable
 			print("Conter > 0");
 			m_velocity.y = m_jumpHeight * m_globalMoveSpeed;
 			m_jumpCounter--;
+
+            SetAnimGrounded(false); // Tell the animator we are airborne
 		}
 	}
 
@@ -110,8 +127,13 @@ public class Player : Damageable
 					if (m_colFeet.bounds.min.y >= hit.collider.bounds.max.y)
 					{
 						m_jumpCounter = m_jumpMax;
+                        SetAnimGrounded(true); // Tell the animator we have landed
 					}
 				}
+                else
+                {
+                    SetAnimGrounded(false); // Either we are still airborne from jumping, or are falling off a platform
+                }
 			}
 		}
 	}
@@ -140,4 +162,42 @@ public class Player : Damageable
 			}
 		}
 	}
+
+    // Flip the character object for left/right facing.
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    // Update player animations based on Input.
+    void UpdateAnimationState(float input)
+    {
+        if (input > 0 && !isFacingRight)
+            Flip();
+        else if (input < 0 && isFacingRight)
+            Flip();
+    }
+    
+    // Set the Speed value of the animators
+    void SetAnimSpeed(float speed)
+    {
+        m_anim.SetFloat("Speed", Mathf.Abs(speed));
+        m_anim_arm.SetFloat("Speed", Mathf.Abs(speed));
+    }
+
+    // Set the Grounded value of the animators
+    void SetAnimGrounded(bool isGrounded)
+    {
+        m_anim.SetBool("Grounded", isGrounded);
+        m_anim_arm.SetBool("Grounded", isGrounded);
+    }
+
+    void SetAnimVSpeed(float vSpeed)
+    {
+        m_anim.SetFloat("VSpeed", Mathf.Abs(vSpeed));
+        m_anim_arm.SetFloat("VSpeed", Mathf.Abs(vSpeed));
+    }
 }
