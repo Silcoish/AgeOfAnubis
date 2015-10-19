@@ -17,6 +17,8 @@ public class Player : Damageable
 	private Vector2 m_velocity = Vector2.zero;
 
 	public Animator m_anim;
+    public Animator m_anim_arm;
+    private bool isFacingRight = true;
 
 	public Weapon m_currentWeapon;
 
@@ -26,6 +28,15 @@ public class Player : Damageable
 		m_colBody = GetComponent<BoxCollider2D>();
 
 		m_anim = GetComponent<Animator>();
+        
+        Animator[] tempAnims = gameObject.GetComponentsInChildren<Animator>();
+        foreach(var d in tempAnims)
+        {
+            if(d.name == "Player_Arm")
+            {
+                m_anim_arm = d;
+            }
+        }
 	}
 
 	public override void UpdateOverride()
@@ -51,6 +62,10 @@ public class Player : Damageable
 		float move = Input.GetAxisRaw("Horizontal");
 		m_velocity.x = move * m_moveSpeed * m_globalMoveSpeed;
 
+        // Update player animation state
+        UpdateAnimationState(move);
+        m_anim.SetFloat("Speed", Mathf.Abs(move));
+        m_anim_arm.SetFloat("Speed", Mathf.Abs(move));
 
 		if (Input.GetButtonDown("Jump"))
 		{
@@ -140,4 +155,22 @@ public class Player : Damageable
 			}
 		}
 	}
+
+    // Flip the character object for left/right facing.
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    // Update player animations based on Input.
+    void UpdateAnimationState(float input)
+    {
+        if (input > 0 && !isFacingRight)
+            Flip();
+        else if (input < 0 && isFacingRight)
+            Flip();
+    }
 }
