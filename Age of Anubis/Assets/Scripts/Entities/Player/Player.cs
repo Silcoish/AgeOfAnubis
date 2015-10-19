@@ -20,6 +20,8 @@ public class Player : Damageable
     public Animator m_anim_arm;
     private bool isFacingRight = true;
 
+	private Vector2 m_inputAxis = Vector2.zero;
+
 	public Weapon m_currentWeapon;
 
 	public override void AwakeOverride() 
@@ -58,13 +60,14 @@ public class Player : Damageable
 		//Set velocity to current to maintain any current velocity if not effected by the player.
 		m_velocity = m_rb.velocity;
 
+		m_inputAxis.x = Input.GetAxisRaw("Horizontal");
+		m_inputAxis.y = Input.GetAxisRaw("Vertical");
 
-		float move = Input.GetAxisRaw("Horizontal");
-		m_velocity.x = move * m_moveSpeed * m_globalMoveSpeed;
+		m_velocity.x = m_inputAxis.x * m_moveSpeed * m_globalMoveSpeed;
 
         // Update player animation state
-        UpdateAnimationState(move);
-        SetAnimSpeed(move);
+		UpdateAnimationState(m_inputAxis.x);
+		SetAnimSpeed(m_inputAxis.x);
         SetAnimVSpeed(m_velocity.y);
 
 		if (Input.GetButtonDown("Jump"))
@@ -86,6 +89,22 @@ public class Player : Damageable
 		if (Input.GetButtonDown("Fire2"))
 		{
 			m_currentWeapon = PlayerInventory.Inst.SwitchWeapon();
+		}
+
+		if (m_inputAxis.y < -0.7 && Mathf.Abs(m_inputAxis.y) > Mathf.Abs(m_inputAxis.x))
+		{
+			RaycastHit2D[] hit = Physics2D.CircleCastAll(transform.position, m_colFeet.radius, Vector2.down, 2);
+
+			
+
+			foreach (var h in hit)
+			{
+				if (h.collider.gameObject.tag == "NotSolid")
+				{
+					Physics2D.IgnoreCollision(h.collider, m_colBody, true);
+					Physics2D.IgnoreCollision(h.collider, m_colFeet, true);
+				}
+			}
 		}
 
 
