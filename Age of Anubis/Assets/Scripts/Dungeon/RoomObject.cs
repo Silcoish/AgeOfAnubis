@@ -25,8 +25,31 @@ public class RoomObject : MonoBehaviour
 
 	void Start()
 	{
-
-
+		Transform doorParentTransform = transform.FindChild("Doors");
+		int doorChildren = doorParentTransform.childCount;
+		for(int i = 0; i < doorChildren; i++)
+		{
+			Door childDoor = doorParentTransform.GetChild(i).GetComponent<Door>();
+			Door.Direction doorDir = childDoor.dir;
+			switch(doorDir)
+			{
+				case Door.Direction.NORTH:
+					m_doorNorth = childDoor;
+					break;
+				case Door.Direction.EAST:
+					m_doorEast = childDoor;
+					break;
+				case Door.Direction.SOUTH:
+					m_doorSouth = childDoor;
+					break;
+				case Door.Direction.WEST:
+					m_doorWest = childDoor;
+					break;
+				default:
+					Debug.LogError("Error: Invalid Door Direction on GameObject " + gameObject.name);
+					break;
+			}
+		}
 	}
 
 	public void EnteredRoom()
