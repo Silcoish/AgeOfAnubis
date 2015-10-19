@@ -64,8 +64,8 @@ public class Player : Damageable
 
         // Update player animation state
         UpdateAnimationState(move);
-        m_anim.SetFloat("Speed", Mathf.Abs(move));
-        m_anim_arm.SetFloat("Speed", Mathf.Abs(move));
+        SetAnimSpeed(move);
+        SetAnimVSpeed(m_velocity.y);
 
 		if (Input.GetButtonDown("Jump"))
 		{
@@ -99,6 +99,8 @@ public class Player : Damageable
 			print("Conter > 0");
 			m_velocity.y = m_jumpHeight * m_globalMoveSpeed;
 			m_jumpCounter--;
+
+            SetAnimGrounded(false); // Tell the animator we are airborne
 		}
 	}
 
@@ -125,8 +127,13 @@ public class Player : Damageable
 					if (m_colFeet.bounds.min.y >= hit.collider.bounds.max.y)
 					{
 						m_jumpCounter = m_jumpMax;
+                        SetAnimGrounded(true); // Tell the animator we have landed
 					}
 				}
+                else
+                {
+                    SetAnimGrounded(false); // Either we are still airborne from jumping, or are falling off a platform
+                }
 			}
 		}
 	}
@@ -172,5 +179,25 @@ public class Player : Damageable
             Flip();
         else if (input < 0 && isFacingRight)
             Flip();
+    }
+    
+    // Set the Speed value of the animators
+    void SetAnimSpeed(float speed)
+    {
+        m_anim.SetFloat("Speed", Mathf.Abs(speed));
+        m_anim_arm.SetFloat("Speed", Mathf.Abs(speed));
+    }
+
+    // Set the Grounded value of the animators
+    void SetAnimGrounded(bool isGrounded)
+    {
+        m_anim.SetBool("Grounded", isGrounded);
+        m_anim_arm.SetBool("Grounded", isGrounded);
+    }
+
+    void SetAnimVSpeed(float vSpeed)
+    {
+        m_anim.SetFloat("VSpeed", Mathf.Abs(vSpeed));
+        m_anim_arm.SetFloat("VSpeed", Mathf.Abs(vSpeed));
     }
 }
