@@ -22,7 +22,8 @@ public class Player : Damageable
 
 	private Vector2 m_inputAxis = Vector2.zero;
 
-	public Weapon m_currentWeapon;
+    public GameObject m_playerHand;
+	public GameObject m_currentWeapon;
 
 	public override void AwakeOverride() 
     {
@@ -31,6 +32,7 @@ public class Player : Damageable
 
 		m_anim = GetComponent<Animator>();
         
+        // Get the animator on the player arm
         Animator[] tempAnims = gameObject.GetComponentsInChildren<Animator>();
         foreach(var d in tempAnims)
         {
@@ -39,6 +41,10 @@ public class Player : Damageable
                 m_anim_arm = d;
             }
         }
+
+        // Get the players hand and equip current weapon
+        m_playerHand = m_anim_arm.transform.FindChild("Player_Hand").gameObject;
+        UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 	}
 
 	public override void UpdateOverride()
@@ -84,18 +90,16 @@ public class Player : Damageable
 		if (Input.GetButtonDown("Fire1"))
 		{
 			if (m_currentWeapon != null)
-				m_currentWeapon.Attack(m_anim);
+				m_currentWeapon.GetComponent<Weapon>().Attack(m_anim);
 		}
 		if (Input.GetButtonDown("Fire2"))
 		{
-			m_currentWeapon = PlayerInventory.Inst.SwitchWeapon();
+			UpdateEquippedWeapon(PlayerInventory.Inst.SwitchWeapon());
 		}
 
 		if (m_inputAxis.y < -0.7 && Mathf.Abs(m_inputAxis.y) > Mathf.Abs(m_inputAxis.x))
 		{
 			RaycastHit2D[] hit = Physics2D.CircleCastAll(transform.position, m_colFeet.radius, Vector2.down, 2);
-
-			
 
 			foreach (var h in hit)
 			{
@@ -106,7 +110,6 @@ public class Player : Damageable
 				}
 			}
 		}
-
 
 		m_rb.velocity = m_velocity;
 	}
@@ -182,6 +185,18 @@ public class Player : Damageable
 		}
 	}
 
+    // Updates the weapon object equipped to the player.
+    public void UpdateEquippedWeapon(GameObject newWep)
+    {
+        if (m_currentWeapon)
+        {
+            Destroy(m_currentWeapon);
+        }
+
+        m_currentWeapon = Instantiate(newWep, m_playerHand.transform.position, m_playerHand.transform.rotation) as GameObject;
+        m_currentWeapon.transform.parent = m_playerHand.transform;
+    }
+
     // Flip the character object for left/right facing.
     void Flip()
     {
@@ -214,6 +229,7 @@ public class Player : Damageable
         m_anim_arm.SetBool("Grounded", isGrounded);
     }
 
+    // Set the vertical speed value of the animators
     void SetAnimVSpeed(float vSpeed)
     {
         m_anim.SetFloat("VSpeed", Mathf.Abs(vSpeed));

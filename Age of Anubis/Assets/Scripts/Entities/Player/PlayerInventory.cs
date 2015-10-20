@@ -7,8 +7,8 @@ public class PlayerInventory : MonoBehaviour
 	public static PlayerInventory Inst;
 	public int m_gold;
 
-	public Weapon m_currentWeapon;
-	public Weapon m_secondaryWeapon;
+	public GameObject m_currentWeapon;
+	public GameObject m_secondaryWeapon;
 
 	void Awake()
 	{
@@ -18,9 +18,9 @@ public class PlayerInventory : MonoBehaviour
 		}
 	}
 
-	public Weapon SwitchWeapon()
+	public GameObject SwitchWeapon()
 	{
-		Weapon temp = m_secondaryWeapon;
+		GameObject temp = m_secondaryWeapon;
 		m_secondaryWeapon = m_currentWeapon;
 		m_currentWeapon = temp;
 

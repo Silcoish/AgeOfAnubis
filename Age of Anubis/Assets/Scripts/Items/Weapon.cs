@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum WeaponSwing {LIGHT, MEDIUM, HEAVY}
+
 public class Weapon : MonoBehaviour 
 {
 	public Attack m_attack;
 	private PolygonCollider2D m_col;
 
-	public string m_animationString;
+	public WeaponSwing m_swingType;
 	public float m_cooldown = 0.5f;
 	public float m_colliderEnableDelay = 0.1f;
 	public float m_colliderEnableTime = 0.3f;
@@ -47,7 +49,7 @@ public class Weapon : MonoBehaviour
     {
         if (!m_isAttacking)
 		{
-			anim.SetTrigger(m_animationString);
+			anim.SetTrigger((int)m_swingType);
 			m_isAttacking = true;
 			m_timer = 0;
 		} 
