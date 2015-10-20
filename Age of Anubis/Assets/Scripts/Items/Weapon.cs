@@ -49,7 +49,8 @@ public class Weapon : MonoBehaviour
     {
         if (!m_isAttacking)
 		{
-			anim.SetTrigger((int)m_swingType);
+			anim.SetInteger("AttackType", (int)m_swingType);
+            anim.SetTrigger("Attack");
 			m_isAttacking = true;
 			m_timer = 0;
 		} 

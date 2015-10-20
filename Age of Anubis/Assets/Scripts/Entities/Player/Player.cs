@@ -90,7 +90,7 @@ public class Player : Damageable
 		if (Input.GetButtonDown("Fire1"))
 		{
 			if (m_currentWeapon != null)
-				m_currentWeapon.GetComponent<Weapon>().Attack(m_anim);
+				m_currentWeapon.GetComponent<Weapon>().Attack(m_anim_arm);
 		}
 		if (Input.GetButtonDown("Fire2"))
 		{
