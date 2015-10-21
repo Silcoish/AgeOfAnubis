@@ -74,7 +74,8 @@ public class RoomObject : MonoBehaviour
 		if (m_doorWest != null)
 			m_doorWest.Lock();
 
-		//AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorShut);
+		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
 	}
 
 	void UnlockDoors()
@@ -88,7 +89,8 @@ public class RoomObject : MonoBehaviour
 		if (m_doorWest != null)
 			m_doorWest.Unlock();
 
-		//AudioManager.Inst.FadeMusic(AudioManager.Inst.s_idle);
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorOpen);
+		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_idle);
 	}
 
 	public void SetupEnemies()
