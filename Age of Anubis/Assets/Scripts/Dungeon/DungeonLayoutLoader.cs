@@ -46,8 +46,11 @@ public class DungeonLayoutLoader : MonoBehaviour
 					Door tempWestDoor = rooms[i + 1].m_doorWest;
 					tempEastDoor.partnerDoor = tempWestDoor;
                     tempWestDoor.partnerDoor = tempEastDoor;
-					tempEastDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
-					tempWestDoor.parentRoom = rooms[i + 1].gameObject.transform.FindChild("Doors");
+					//tempEastDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
+					//tempWestDoor.parentRoom = rooms[i + 1].gameObject.transform.FindChild("Doors");
+
+					tempEastDoor.Unlock();
+					tempWestDoor.Unlock();
 
 				}
 			}
@@ -61,8 +64,11 @@ public class DungeonLayoutLoader : MonoBehaviour
                     Door tempNorthDoor = rooms[i + SIZE].m_doorNorth;
 					tempSouthDoor.partnerDoor = tempNorthDoor;
 					tempNorthDoor.partnerDoor = tempSouthDoor;
-					tempSouthDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
-					tempNorthDoor.parentRoom = rooms[i + SIZE].gameObject.transform.FindChild("Doors");
+					//tempSouthDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
+					//tempNorthDoor.parentRoom = rooms[i + SIZE].gameObject.transform.FindChild("Doors");
+
+					tempSouthDoor.Unlock();
+					tempNorthDoor.Unlock();
                 }
 			}
 		}
@@ -113,7 +119,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 
 								//rooms[lineNum * SIZE + i].m_enemiesCount = rooms[lineNum * SIZE + i].m_enemiesParent.transform.childCount;
 								rooms[lineNum * SIZE + i].SetupEnemies();
-								rooms[lineNum * SIZE + i].m_enemiesParent.SetActive(false);
+								//rooms[lineNum * SIZE + i].m_enemiesParent.SetActive(false);
 							}
 
 							if(entries[i] == "2" || entries[i] == " 2")

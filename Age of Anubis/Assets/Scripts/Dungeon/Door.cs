@@ -11,20 +11,27 @@ public class Door : MonoBehaviour {
 		WEST
 	}
 
-	public Sprite closedDoorSprite;
-	Sprite openedDoorSprite;
+	SpriteRenderer m_sr;
 
     public Door partnerDoor;
     public Transform parentRoom;
 
 	BoxCollider2D doorCol;
 
+	Vector2 m_startPos;
+	Vector2 m_endPos;
+	Transform m_t;
+
 	public Direction dir;
 
-	void Start()
+	void Awake()
 	{
-		//openedDoorSprite = GetComponent<SpriteRenderer>().sprite;
+		m_t = transform;
+		m_startPos = m_t.position;
+		m_sr = m_t.GetChild(1).GetComponent<SpriteRenderer>();
 		doorCol = GetComponent<BoxCollider2D>();
+		parentRoom = gameObject.transform.parent.parent;
+		Lock();
 	}
 
 	void OnTriggerEnter2D(Collider2D col)
@@ -32,22 +39,25 @@ public class Door : MonoBehaviour {
 		if(col.tag == "Player")
 		{
 			col.transform.position = partnerDoor.transform.GetChild(0).position;
-            //col.GetComponent<Player>().currentRoom = partnerDoor.gameObject.GetComponent<Door>().parentRoom;
-			//partnerDoor.GetComponent<Door>().parentRoom.GetComponent<RoomObject>().EnteredRoom();
+			partnerDoor.parentRoom.GetComponent<RoomObject>().EnteredRoom();
 		}
 	}
 
 	public void Lock()
 	{
-		//GetComponent<SpriteRenderer>().sprite = closedDoorSprite;
 		doorCol.isTrigger = false;
-		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorShut);
+		m_sr.enabled = true;
+		//m_t.position = Vector2.Lerp(m_t.position, m_startPos, 0.1f);
+		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorShut);
 	}
 
 	public void Unlock()
 	{
-		//GetComponent<SpriteRenderer>().sprite = openedDoorSprite;
+		//If partner doesn't exist, don't actually unlock the door. 
+		if (partnerDoor == null)
+			return;
 		doorCol.isTrigger = true;
-		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorOpen);
+		m_sr.enabled = false;
+		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorOpen);
 	}
 }

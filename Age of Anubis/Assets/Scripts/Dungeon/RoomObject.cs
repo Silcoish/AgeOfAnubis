@@ -58,6 +58,8 @@ public class RoomObject : MonoBehaviour
 		{
 			en.gameObject.SetActive(true);
 		}
+
+		LockDoors();
 		//Camera.main.GetComponent<CameraSystem>().MoveRoom(transform);
 	}
 
@@ -72,7 +74,7 @@ public class RoomObject : MonoBehaviour
 		if (m_doorWest != null)
 			m_doorWest.Lock();
 
-		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
+		//AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
 	}
 
 	void UnlockDoors()
@@ -86,7 +88,7 @@ public class RoomObject : MonoBehaviour
 		if (m_doorWest != null)
 			m_doorWest.Unlock();
 
-		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_idle);
+		//AudioManager.Inst.FadeMusic(AudioManager.Inst.s_idle);
 	}
 
 	public void SetupEnemies()
@@ -97,6 +99,7 @@ public class RoomObject : MonoBehaviour
 		{
 			m_allEnemies.Add(en);
 			en.SetRoom(this);
+			en.gameObject.SetActive(false);
 		}
 	}
 

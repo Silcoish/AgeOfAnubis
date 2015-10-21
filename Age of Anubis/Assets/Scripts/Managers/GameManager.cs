@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -24,7 +25,14 @@ public class GameManager : MonoBehaviour {
 
 	void Start()
 	{
-		player = FindObjectOfType<Player>().gameObject;
+		try
+		{
+			player = FindObjectOfType<Player>().gameObject;
+		}
+		catch(Exception e)
+		{
+			print(e.Message);
+		}
 	}
 
 }

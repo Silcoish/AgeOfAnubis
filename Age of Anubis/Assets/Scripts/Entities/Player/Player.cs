@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Player : Damageable 
@@ -44,7 +44,7 @@ public class Player : Damageable
 
         // Get the players hand and equip current weapon
         m_playerHand = m_anim_arm.transform.FindChild("Player_Hand").gameObject;
-        UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
+        //UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 	}
 
 	public override void UpdateOverride()

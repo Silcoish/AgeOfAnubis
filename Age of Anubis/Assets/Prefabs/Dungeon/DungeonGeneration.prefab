@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &193258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 419732}
+  - 114: {fileID: 11448484}
+  m_Layer: 0
+  m_Name: DungeonGeneration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &419732
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.1874504, y: 9.10964298, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11448484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94bfa5672af0d6644b4dc4c3b544eb81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: layout5.csv
+  startRoom: {fileID: 102450, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
+  bossRoom: {fileID: 124226, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
+  templateRooms:
+  - {fileID: 175582, guid: 097ec222baefb2b42a7e7b6c8f1592e9, type: 2}
+  rooms: []
+  player: {fileID: 118678, guid: fb13bc690afc35d47ba84b4b24f1688e, type: 2}
+  doorNorth: {fileID: 0}
+  doorSouth: {fileID: 0}
+  doorEast: {fileID: 0}
+  doorWest: {fileID: 0}
+  roomOffset: {x: 32, y: 18}
+  doorOffset: {x: 4.07999992, y: 9.15999985, z: 4.94999981, w: 8.94999981}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 193258}
+  m_IsPrefabParent: 1
