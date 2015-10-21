@@ -20,18 +20,21 @@ public class PlayerInventory : MonoBehaviour
 
 	public GameObject SwitchWeapon()
 	{
-		GameObject temp = m_secondaryWeapon;
-		m_secondaryWeapon = m_currentWeapon;
-		m_currentWeapon = temp;
-
-        //if (m_currentWeapon != null)
-        //    m_currentWeapon.gameObject.SetActive(true);
-        //if (m_secondaryWeapon != null)
-        //    m_secondaryWeapon.gameObject.SetActive(false);
+		if(m_secondaryWeapon)
+        {
+            GameObject temp = m_secondaryWeapon;
+            m_secondaryWeapon = m_currentWeapon;
+            m_currentWeapon = temp;
+        }
 
 		return m_currentWeapon;
 	}
 
-
+    // Reset temporary values on player death.
+    public void DeathReset()
+    {
+        m_gold = 0;
+        m_secondaryWeapon = null;
+    }
     
 }

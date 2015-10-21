@@ -173,7 +173,7 @@ public class Damageable : MonoBehaviour
 		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_takeDamage);
 
         Vector2 kbForce = (transform.position - dam.fromGO.position).normalized * dam.knockback;
-        kbForce = new Vector2(kbForce.x, 0); // Remove Y axis calculations from knockback.
+        kbForce = new Vector2(kbForce.x, 0); // Remove Y axis calculations from knockback. NOTE: Consider halving y force to create a smaller "bounce" effect
         m_rb.AddForce(kbForce, ForceMode2D.Impulse);
 
 		switch (dam.type)
