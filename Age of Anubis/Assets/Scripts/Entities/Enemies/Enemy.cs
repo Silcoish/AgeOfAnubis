@@ -14,7 +14,7 @@ public class Enemy : Damageable
 	private BoxCollider2D m_belowCol;
 	private BoxCollider2D m_cornerCol;
 
-	private RoomObject m_room;
+	protected RoomObject m_room;
 
 	protected enum CheckReturnEnum { None, Grounded, ReachedEdge, ReachedWall };
 
@@ -45,15 +45,15 @@ public class Enemy : Damageable
 
 		if (CheckEnemyLocation().type == CheckReturnEnum.None)
 		{
-			print("Airborne");
+			//print("Airborne");
 		}
 		else if (CheckEnemyLocation().type == CheckReturnEnum.ReachedEdge)
 		{
-			print("ReachedEdge");
+			//print("ReachedEdge");
 		}
 		else if (CheckEnemyLocation().type == CheckReturnEnum.ReachedWall)
 		{
-			print("ReachedWall");
+			//print("ReachedWall");
 		}
 
 	}

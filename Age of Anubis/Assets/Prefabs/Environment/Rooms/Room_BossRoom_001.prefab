@@ -76,6 +76,7 @@ GameObject:
   - 4: {fileID: 473748}
   - 114: {fileID: 11441890}
   - 61: {fileID: 6160792}
+  - 114: {fileID: 11431716}
   m_Layer: 0
   m_Name: Room_BossRoom_001
   m_TagString: Untagged
@@ -528,6 +529,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 409350}
   - 212: {fileID: 21236100}
+  - 114: {fileID: 11480222}
+  - 61: {fileID: 6117866}
   m_Layer: 0
   m_Name: Anubis
   m_TagString: Untagged
@@ -1158,7 +1161,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.67783022, y: -113.394798, z: 0}
+  m_LocalPosition: {x: -.0467893481, y: 1.09090543, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 461128}
@@ -1422,6 +1425,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .5, y: .5}
+--- !u!61 &6117866
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171164}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: .431395531, y: -.431395531}
+  serializedVersion: 2
+  m_Size: {x: 3.10710835, y: 7.98495102}
 --- !u!61 &6126422
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1697,6 +1713,18 @@ MonoBehaviour:
   partnerDoor: {fileID: 0}
   parentRoom: {fileID: 0}
   dir: 0
+--- !u!114 &11431716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68151612c5ed9cc4fbb478f9fcce413c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anubis: {fileID: 171164}
 --- !u!114 &11441890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1742,6 +1770,34 @@ MonoBehaviour:
   partnerDoor: {fileID: 0}
   parentRoom: {fileID: 0}
   dir: 1
+--- !u!114 &11480222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b057659b10edcbe4a923ed44ef1230bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: 
+  hitPoints: 10
+  m_attack:
+    m_attackStrength: 0
+    m_effectType: 0
+    m_effectDuration: 0
+    m_effectStrength: 0
+    m_knockbackForce: 0
+  m_deathParticle: {fileID: 0}
+  curState: 0
+  m_projectile: {fileID: 0}
+  m_projectileHorizSpeed: 0
+  m_projectileVertSpeed: 0
+  m_projectileTopRow: 0
+  m_projectileMiddleRow: 0
+  m_projectileBottomRow: 0
+  m_projectileCooldown: 0
 --- !u!212 &21202632
 SpriteRenderer:
   m_ObjectHideFlags: 1
