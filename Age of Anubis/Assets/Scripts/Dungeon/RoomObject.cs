@@ -14,7 +14,11 @@ public class RoomObject : MonoBehaviour
 	public Door m_doorEast;
 	public Door m_doorWest;
 
+	public int arrayIndex;
+
 	public GameObject m_enemiesParent;
+
+	bool isActiveRoom = false;
 
 	void Awake()
 	{
@@ -52,8 +56,21 @@ public class RoomObject : MonoBehaviour
 		}
 	}
 
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.P) && isActiveRoom)
+		{
+			for(int i = 0; i < m_allEnemies.Count; i++)
+			{
+				m_allEnemies[i].GetComponent<Enemy>().hitPoints = 0;
+			}
+		}
+	}
+
 	public void EnteredRoom()
 	{
+		isActiveRoom = true;
+
 		foreach (var en in m_allEnemies)
 		{
 			en.gameObject.SetActive(true);
@@ -61,7 +78,17 @@ public class RoomObject : MonoBehaviour
 
 		Camera.main.GetComponent<CameraController>().SetRoom(gameObject);
 
+		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(1, 0, 0, 0.5f));
+		GameManager.inst.RefreshMinimap();
+
 		LockDoors();
+	}
+
+	public void LeaveRoom()
+	{
+		isActiveRoom = false;
+		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(0, 0, 0, 0.5f));
+		GameManager.inst.RefreshMinimap();
 	}
 
 	void LockDoors()

@@ -18,7 +18,8 @@ public class Anubis : Enemy
 		DASH,
 		STUCK,
 		ESCAPE, //Breaking out of the wall after being stuck
-		CROUCH //Used to go into the lava and appear elsewhere
+		CROUCH, //Used to go into the lava and appear elsewhere
+		BASH //Anubis bashes the wall, rocks fall
 	}
 
 	enum Side
@@ -72,6 +73,7 @@ public class Anubis : Enemy
 	public override void EnemyBehaviour()
 	{
 		CheckSide();
+		DebugKeyboardCommands();
 		switch (curState)
 		{
 			case State.IDLE:
@@ -125,18 +127,21 @@ public class Anubis : Enemy
 	{
 		if (!hasSpawnedEnemies)
 		{
+			hasSpawnedEnemies = true;
 			for (int i = 0; i < 3; i++)
 			{
 				spawnedEnemies.Add((GameObject)Instantiate(eyeOfHorusGO, spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position, Quaternion.identity));
 				enemiesCount++;
 			}
-			hasSpawnedEnemies = true;
 		}
 
-		for (int i = 0; i < spawnedEnemies.Count; i++)
+		for (int i = 0; i < enemiesCount; i++)
 		{
 			if (spawnedEnemies[i].GetComponent<Eye>().hitPoints <= 0)
+			{
+				enemiesCount--;
 				spawnedEnemies.RemoveAt(i);
+			}
 		}
 
 		enemyWaitCounter += Time.deltaTime;
@@ -215,5 +220,27 @@ public class Anubis : Enemy
 			return f;
 		else
 			return -f;
+	}
+
+	void DebugKeyboardCommands()
+	{
+		if (Input.GetKeyDown(KeyCode.Keypad1))
+			curState = State.IDLE;
+		if (Input.GetKeyDown(KeyCode.Keypad2))
+			curState = State.PROJECTILE;
+		if (Input.GetKeyDown(KeyCode.Keypad3))
+			curState = State.ENEMIES;
+		if (Input.GetKeyDown(KeyCode.Keypad4))
+			curState = State.PROJECTILEANDENEMIES;
+		if (Input.GetKeyDown(KeyCode.Keypad5))
+			curState = State.DASH;
+		if (Input.GetKeyDown(KeyCode.Keypad6))
+			curState = State.STUCK;
+		if (Input.GetKeyDown(KeyCode.Keypad7))
+			curState = State.ESCAPE;
+		if (Input.GetKeyDown(KeyCode.Keypad8))
+			curState = State.CROUCH;
+		if (Input.GetKeyDown(KeyCode.Keypad9))
+			curState = State.BASH;
 	}
 }

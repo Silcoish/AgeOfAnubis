@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class EnterDungeon : ActivateArea 
@@ -10,7 +10,7 @@ public class EnterDungeon : ActivateArea
 
 
 		//TODO Load Dungeon
-		LoadingManager.Inst.LoadLevel("Room Prefab Scene");
+		LoadingManager.Inst.LoadLevel("DungeonGenTest");
 		
 	}
 

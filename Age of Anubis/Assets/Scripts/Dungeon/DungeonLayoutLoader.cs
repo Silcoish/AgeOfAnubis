@@ -11,6 +11,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 	public GameObject startRoom;
 	public GameObject bossRoom;
 	public List<GameObject> templateRooms;
+
 	[SerializeField] RoomObject[] rooms;
 	public GameObject player;
 	public GameObject doorNorth;
@@ -31,6 +32,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 			ChooseLayout();
 		SetupLayout();
 		PlaceDoors();
+		MakeMinimap();
 	}
 
 	void PlaceDoors()
@@ -119,17 +121,26 @@ public class DungeonLayoutLoader : MonoBehaviour
 
 								//rooms[lineNum * SIZE + i].m_enemiesCount = rooms[lineNum * SIZE + i].m_enemiesParent.transform.childCount;
 								rooms[lineNum * SIZE + i].SetupEnemies();
+								rooms[lineNum * SIZE + i].arrayIndex = lineNum * SIZE + i;
 								//rooms[lineNum * SIZE + i].m_enemiesParent.SetActive(false);
 							}
 
-							if(entries[i] == "2" || entries[i] == " 2")
+							if (entries[i] == "2" || entries[i] == " 2")
 							{
 								GameObject tempRoom = (GameObject)Instantiate(startRoom, new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
 								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
+								rooms[lineNum * SIZE + i].arrayIndex = lineNum * SIZE + i;
 
 								GameObject tempPlayer = (GameObject)Instantiate(player, rooms[lineNum * SIZE + i].gameObject.transform.position, Quaternion.identity);
 								GameManager.inst.player = tempPlayer;
 								Camera.main.GetComponent<CameraController>().SetRoom(tempRoom);
+							}
+
+							if (entries[i] == "3" || entries[i] == " 3")
+							{
+								GameObject tempRoom = (GameObject)Instantiate(bossRoom, new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
+								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
+								rooms[lineNum * SIZE + i].arrayIndex = lineNum * SIZE + i;
 							}
 						}
 					}
@@ -141,5 +152,32 @@ public class DungeonLayoutLoader : MonoBehaviour
 
 			reader.Close();
 		}
+	}
+
+	public void MakeMinimap()
+	{
+		GameManager.inst.minimap = new GameObject("Minimap");
+		GameManager.inst.minimap.transform.position = new Vector2(-40, 0);
+		GameManager.inst.minimap.AddComponent<SpriteRenderer>();
+
+		GameManager.inst.minimapTex = new Texture2D(SIZE * 16, SIZE * 8, TextureFormat.RGBA32, false, true);
+		Texture2D tex = GameManager.inst.minimapTex;
+		tex.filterMode = FilterMode.Point;
+
+		for (int i = 0; i < rooms.Length; i++)
+		{
+			if (rooms[i] != null)
+			{
+				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(0, 0, 0, 0.5f));
+			}
+			else
+			{
+				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(1, 1, 1, 0.5f));
+			}
+		}
+
+		tex.Apply();
+
+		GameManager.inst.RefreshMinimap();
 	}
 }
