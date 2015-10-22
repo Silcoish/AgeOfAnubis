@@ -16,8 +16,8 @@ public class Anubis : Enemy
 		PROJECTILEANDENEMIES,
 		DASH,
 		STUCK,
-		ESCAPE,
-		CROUCH
+		ESCAPE, //Breaking out of the wall after being stuck
+		CROUCH //Used to go into the lava and appear elsewhere
 	}
 
 	enum Side
