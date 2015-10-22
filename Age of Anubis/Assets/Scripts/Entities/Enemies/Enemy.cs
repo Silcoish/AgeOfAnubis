@@ -62,6 +62,7 @@ public class Enemy : Damageable
 	public override void OnDeath()
 	{
 		m_room.EnemyDied(this);
+        Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
 		gameObject.SetActive(false);
 	}
 

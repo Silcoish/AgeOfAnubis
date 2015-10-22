@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     //public Inventory inventory;
 	public GameObject player;
 	public SaveManager m_saveManager;
+    public GameObject coinPrefab;
 
 	void Awake()
 	{

@@ -20,6 +20,7 @@ public class Weapon : MonoBehaviour
     void Awake()
     {
 		m_col = gameObject.GetComponent<PolygonCollider2D>();
+        m_col.enabled = false;
     }
 
 	void Update()
