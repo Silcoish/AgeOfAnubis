@@ -383,6 +383,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &143932
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 481266}
+  - 212: {fileID: 21277320}
+  - 95: {fileID: 9512924}
+  - 114: {fileID: 11414596}
+  - 61: {fileID: 6184520}
+  m_Layer: 0
+  m_Name: EyeOfHorus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &144220
 GameObject:
   m_ObjectHideFlags: 1
@@ -1335,7 +1354,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.2662048, y: -122.183563, z: 0}
+  m_LocalPosition: {x: 24.5634212, y: 4.35617876, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 489178}
@@ -1706,6 +1725,7 @@ Transform:
   - {fileID: 483108}
   - {fileID: 487888}
   - {fileID: 486850}
+  - {fileID: 481266}
   m_Father: {fileID: 419852}
   m_RootOrder: 3
 --- !u!4 &464306
@@ -1870,6 +1890,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 447238}
   m_RootOrder: 1
+--- !u!4 &481266
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143932}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.22982979, y: 6.00685263, z: 3.75}
+  m_LocalScale: {x: .300000012, y: .300000012, z: .329871446}
+  m_Children: []
+  m_Father: {fileID: 464304}
+  m_RootOrder: 11
 --- !u!4 &483108
 Transform:
   m_ObjectHideFlags: 1
@@ -2835,6 +2867,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .5, y: .5}
+--- !u!61 &6184520
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143932}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -.084695816, y: .338786602}
+  serializedVersion: 2
+  m_Size: {x: 3.33691549, y: 1.89751816}
 --- !u!61 &6188114
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2913,6 +2958,46 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .5, y: .5}
+--- !u!95 &9512924
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143932}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40435ae7e527b5041b196ce9b09ba3c8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11414596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b89f5d0b79d65e49842bbb85d8ca74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: 
+  hitPoints: 10
+  m_attack:
+    m_attackStrength: 0
+    m_effectType: 0
+    m_effectDuration: 0
+    m_effectStrength: 0
+    m_knockbackForce: 0
+  m_deathParticle: {fileID: 0}
+  closestDistance: 1
+  shootRange: 1
+  chargeTimer: 2
 --- !u!114 &11415262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4397,6 +4482,32 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 45659f9034d6c02418fb5f75b96786bc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!212 &21277320
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143932}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300022, guid: 281f0d055a0d10e479aae00e53c9f0dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21279756
 SpriteRenderer:

@@ -27,14 +27,27 @@ public class Anubis : Enemy
 		RIGHT
 	}
 
+	enum BattleStage
+	{
+		FIRST,
+		SECOND,
+		THIRD
+	}
+
 	public State curState = State.IDLE;
 	Side curSide;
+	BattleStage curStage = BattleStage.FIRST;
 
 	Transform t;
 
 	[Header("Spawn Enemies Variables")]
+	public GameObject eyeOfHorusGO;
+	public List<GameObject> spawnPoints;
+	public float enemyWaitTime = 20.0f;
+	public float enemyWaitCounter = 0.0f;
 	List<GameObject> spawnedEnemies;
 	int enemiesCount;
+	bool hasSpawnedEnemies = false;
 
 	[Header("Projectile State Variables")]
 	public GameObject m_projectile;
@@ -110,6 +123,27 @@ public class Anubis : Enemy
 
 	void UpdateEnemies()
 	{
+		if (!hasSpawnedEnemies)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				spawnedEnemies.Add((GameObject)Instantiate(eyeOfHorusGO, spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position, Quaternion.identity));
+				enemiesCount++;
+			}
+			hasSpawnedEnemies = true;
+		}
+
+		for (int i = 0; i < spawnedEnemies.Count; i++)
+		{
+			if (spawnedEnemies[i].GetComponent<Eye>().hitPoints <= 0)
+				spawnedEnemies.RemoveAt(i);
+		}
+
+		enemyWaitCounter += Time.deltaTime;
+		if(enemyWaitCounter >= enemyWaitTime || spawnedEnemies.Count == 0)
+		{
+			curState = State.DASH;
+		}
 
 	}
 
@@ -124,11 +158,11 @@ public class Anubis : Enemy
 			dash = SideFloat(dashSpeed);
 		t.position = new Vector2(t.position.x + dash * Time.deltaTime, t.position.y);
 
-		RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, new Vector2(-SideFloat(1f), 0f), raycastLength);
+		RaycastHit2D[] hit = Physics2D.RaycastAll((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, new Vector2(-SideFloat(1f), 0f), raycastLength);
 		Debug.DrawRay((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, Vector2.left, Color.green);
-		if(hit.collider != null)
+		for (int i = 0; i < hit.Length; i++)
 		{
-			if(hit.collider.tag == "Solid")
+			if (hit[i].collider.tag == "Solid")
 			{
 				curState = State.PROJECTILE;
 				dash = 0;
