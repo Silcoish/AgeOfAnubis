@@ -63,8 +63,10 @@ public class Enemy : Damageable
 	{
 		if(m_room)
             m_room.EnemyDied(this);
-        Instantiate(m_deathParticle, transform.position, transform.rotation);
-        Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
+        if(m_deathParticle)
+            Instantiate(m_deathParticle, transform.position, transform.rotation);
+        if(GameManager.inst.coinPrefab)
+            Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
 		gameObject.SetActive(false);
 	}
 
