@@ -41,6 +41,11 @@ public class Anubis : Enemy
 	public float m_projectileCooldown;
 	float m_projectileCounter;
 
+	[Header("Dash State Variables")]
+	public float dashSpeed;
+	public float raycastLength = 1.0f;
+	float dash;
+
 	void Start()
 	{
 		t = transform;
@@ -110,7 +115,20 @@ public class Anubis : Enemy
 
 	void UpdateDash()
 	{
+		if (dash == 0)
+			dash = SideFloat(dashSpeed);
+		t.position = new Vector2(t.position.x + dash * Time.deltaTime, t.position.y);
 
+		RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, new Vector2(-SideFloat(1f), 0f), raycastLength);
+		Debug.DrawRay((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, Vector2.left, Color.green);
+		if(hit.collider != null)
+		{
+			if(hit.collider.tag == "Solid")
+			{
+				curState = State.PROJECTILE;
+				dash = 0;
+			}
+		}
 	}
 
 	void UpdateStuck()
