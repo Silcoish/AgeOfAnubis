@@ -172,9 +172,18 @@ public class Damageable : MonoBehaviour
 
 		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_takeDamage);
 
-        Vector2 kbForce = (transform.position - dam.fromGO.position).normalized * dam.knockback;
-        kbForce = new Vector2(kbForce.x, 0); // Remove Y axis calculations from knockback. NOTE: Consider halving y force to create a smaller "bounce" effect
-        m_rb.AddForce(kbForce, ForceMode2D.Impulse);
+        // Old Knockback calculations
+        //Vector2 kbForce = (transform.position - dam.fromGO.position).normalized * dam.knockback;
+        //kbForce = new Vector2(kbForce.x, 0); // Remove Y axis calculations from knockback. NOTE: Consider halving y force to create a smaller "bounce" effect
+        //m_rb.AddForce(kbForce, ForceMode2D.Impulse);
+
+        // New Knockback calculations
+        float kbDirCheck = transform.position.x - dam.fromGO.position.x;
+        Vector2 kbDir = new Vector2(1F, 0.5F); // Default knockback to right.
+        if (kbDirCheck < 0) // If my X minus source X is negative, then they are to my right.
+            kbDir = new Vector2(-1F, 0.5F); // Damage source is to my right, so knockback to left.
+        m_rb.velocity = kbDir * dam.knockback; // set velocity to direction times knockback strength.
+        Pause(0.3F); // Pause input briefly.
 
 		switch (dam.type)
 		{
@@ -228,7 +237,7 @@ public class Damageable : MonoBehaviour
 		return unitName;
 	}
 
-	public void PauseEnemy(float seconds)
+	public void Pause(float seconds)
 	{
 		m_timerPause = seconds;
 	}
