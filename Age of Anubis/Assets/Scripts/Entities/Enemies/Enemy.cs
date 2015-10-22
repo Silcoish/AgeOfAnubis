@@ -8,7 +8,7 @@ public class Enemy : Damageable
 	public Attack m_attack;
 	private BoxCollider2D m_colBox;
 	private CircleCollider2D m_colCircle;
-
+    public GameObject m_deathParticle;
 
 	private BoxCollider2D m_forwardCol;
 	private BoxCollider2D m_belowCol;
@@ -61,7 +61,9 @@ public class Enemy : Damageable
 
 	public override void OnDeath()
 	{
-		m_room.EnemyDied(this);
+		if(m_room)
+            m_room.EnemyDied(this);
+        Instantiate(m_deathParticle, transform.position, transform.rotation);
         Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
 		gameObject.SetActive(false);
 	}
