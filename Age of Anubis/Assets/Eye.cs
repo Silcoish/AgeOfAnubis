@@ -10,7 +10,12 @@ public class Eye : Enemy
 {
 	Animator anim;
 	Transform t;
-	public float closestDistance = 1;
+	public float closestDistance = 1.0f;
+	public float shootRange = 1.0f;
+
+	bool charging = false;
+	public float chargeTimer = 2.0f;
+	float chargeCounter = 0.0f;
 
 	void Start()
 	{
@@ -20,10 +25,34 @@ public class Eye : Enemy
 
 	public override void EnemyBehaviour()
 	{
+		if(!charging)
+		{
+			HorizontalMovement();
+			VerticalMovement();
+		}
+		else
+		{
+			anim.SetBool("charging", true);
+			Charging();
+		}
+	}
+
+	void VerticalMovement()
+	{
+		float dis = Mathf.Abs(t.position.y - GameManager.inst.player.transform.position.y);
+
+		if(dis < shootRange)
+		{
+			charging = true;
+		}
+	}
+
+	void HorizontalMovement()
+	{
 		float dis = Mathf.Abs(t.position.x - GameManager.inst.player.transform.position.x);
 		Vector2 moveVec = new Vector2(t.position.x, t.position.y);
 
-		if(dis > closestDistance)
+		if (dis > closestDistance)
 		{
 			//move towards player	
 			moveVec.x = Mathf.Lerp(t.position.x, GameManager.inst.player.transform.position.x, 0.05f);
@@ -31,9 +60,9 @@ public class Eye : Enemy
 		else
 		{
 			//move away from player
-			if(t.position.x > GameManager.inst.player.transform.position.x)
+			if (t.position.x > GameManager.inst.player.transform.position.x)
 			{
-				moveVec.x = Mathf.Lerp(t.position.x, GameManager.inst.player.transform.position.x + closestDistance, 0.005f);
+				moveVec.x = Mathf.Lerp(t.position.x, GameManager.inst.player.transform.position.x + closestDistance, 0.02f);
 			}
 			else
 			{
@@ -42,6 +71,18 @@ public class Eye : Enemy
 		}
 
 		transform.position = moveVec;
+	}
+
+	void Charging()
+	{
+		chargeCounter += Time.deltaTime;
+
+		if(chargeCounter >= chargeTimer)
+		{
+			charging = false;
+			anim.SetBool("charging", false);
+			chargeCounter = 0.0f;
+		}
 	}
 
 }

@@ -5,6 +5,7 @@
 */
  
 using UnityEngine;
+using System.Collections.Generic;
  
 public class Anubis : Enemy
 {
@@ -30,6 +31,10 @@ public class Anubis : Enemy
 	Side curSide;
 
 	Transform t;
+
+	[Header("Spawn Enemies Variables")]
+	List<GameObject> spawnedEnemies;
+	int enemiesCount;
 
 	[Header("Projectile State Variables")]
 	public GameObject m_projectile;
