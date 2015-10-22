@@ -128,6 +128,8 @@ public class DungeonLayoutLoader : MonoBehaviour
 								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
 
 								GameObject tempPlayer = (GameObject)Instantiate(player, rooms[lineNum * SIZE + i].gameObject.transform.position, Quaternion.identity);
+								GameManager.inst.player = tempPlayer;
+								Camera.main.GetComponent<CameraController>().SetRoom(tempRoom);
 							}
 						}
 					}

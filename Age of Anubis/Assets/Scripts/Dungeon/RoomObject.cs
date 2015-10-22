@@ -59,8 +59,9 @@ public class RoomObject : MonoBehaviour
 			en.gameObject.SetActive(true);
 		}
 
+		Camera.main.GetComponent<CameraController>().SetRoom(gameObject);
+
 		LockDoors();
-		//Camera.main.GetComponent<CameraSystem>().MoveRoom(transform);
 	}
 
 	void LockDoors()
