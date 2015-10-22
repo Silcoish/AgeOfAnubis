@@ -2,7 +2,11 @@ using UnityEngine;
  
 public class CameraController : MonoBehaviour
 {
-	GameObject room;
+	[Header("Shop Scene Variables")]
+	[Tooltip("Only set this in the shop scene")]
+	public GameObject room;
+	[Tooltip("Only set this in the shop scene")]
+	public GameObject shopPlayer;
 	Bounds roomBounds;
 
 	Transform t;
@@ -13,15 +17,25 @@ public class CameraController : MonoBehaviour
 	void Start()
 	{
 		t = transform;
-		vertical = Camera.main.orthographicSize * 2;
+		vertical = gameObject.GetComponent<Camera>().orthographicSize * 2;
 		horizontal = vertical * Screen.width / Screen.height;
+
+		if (room != null)
+			roomBounds = room.GetComponent<BoxCollider2D>().bounds;
 	}
 
 	void Update()
 	{
 		if(room != null)
 		{
-			t.position = new Vector3(GameManager.inst.player.transform.position.x, GameManager.inst.player.transform.position.y, t.position.z);
+			if(shopPlayer != null)
+			{
+				t.position = new Vector3(shopPlayer.transform.position.x, shopPlayer.transform.position.y, t.position.z);
+			}
+			else
+			{
+				t.position = new Vector3(GameManager.inst.player.transform.position.x, GameManager.inst.player.transform.position.y, t.position.z);
+			}
 
 			Vector2 pos = new Vector2(t.position.x, t.position.y);
 
