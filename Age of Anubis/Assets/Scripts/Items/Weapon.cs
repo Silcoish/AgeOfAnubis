@@ -13,9 +13,7 @@ public class Weapon : MonoBehaviour
 	public float m_colliderEnableDelay = 0.1f;
 	public float m_colliderEnableTime = 0.3f;
 
-	private float m_timer = 0;
 	private bool m_isAttacking = false;
-
 
     void Awake()
     {
@@ -25,25 +23,18 @@ public class Weapon : MonoBehaviour
 
 	void Update()
 	{
-		if (m_isAttacking)
-		{
-			m_timer += Time.deltaTime;
-
-			
-			if (m_timer >= m_colliderEnableDelay)
-			{
-				m_col.enabled = true;
-			}
-			if (m_timer >= m_colliderEnableTime)
-			{
-				m_col.enabled = false;
-			}
-			if (m_timer >= m_cooldown)
-			{
-				m_isAttacking = false;
-			}
-		}
-
+        if(transform.parent.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).IsName("Attack(Light)")
+            || transform.parent.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).IsName("Attack(Medium)")
+            || transform.parent.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).IsName("Attack(Heavy)"))
+        {
+            m_isAttacking = true;
+            m_col.enabled = true;
+        }
+        else
+        {
+            m_isAttacking = false;
+            m_col.enabled = false;
+        }
 	}
 
     public void Attack(Animator anim)
@@ -52,8 +43,6 @@ public class Weapon : MonoBehaviour
 		{
 			anim.SetInteger("AttackType", (int)m_swingType);
             anim.SetTrigger("Attack");
-			m_isAttacking = true;
-			m_timer = 0;
 		} 
     }
 
@@ -65,7 +54,5 @@ public class Weapon : MonoBehaviour
 		{
 			damagable.OnTakeDamage(m_attack.GetDamage(transform));
 		}
-	}
-
-    
+	}    
 }
