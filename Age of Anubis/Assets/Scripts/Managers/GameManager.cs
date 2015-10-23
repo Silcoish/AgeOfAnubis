@@ -41,18 +41,29 @@ public class GameManager : MonoBehaviour {
 		minimap.GetComponent<SpriteRenderer>().sprite = Sprite.Create(minimapTex, new Rect(0, 0, minimapTex.width, minimapTex.height), new Vector2(0, 0));
 	}
 
-	public void PlaceMinimapRoom(int i, Color col)
+	public void PlaceMinimapRoom(int i, Color solid, Color border)
 	{
-		PlaceMinimapRoom(minimapTex, i, col);
+		PlaceMinimapRoom(minimapTex, i, solid, border);
 	}
 
-	public void PlaceMinimapRoom(Texture2D t, int i, Color col)
+	public void PlaceMinimapRoom(Texture2D t, int i, Color solid, Color border)
 	{
+		Color showCol = solid;
 		for (int y = 0; y < 8; y++)
 		{
 			for (int x = 0; x < 16; x++)
 			{
-				t.SetPixel(((i % 15) * 16) + x, ((t.height - 1 - (int)i / 15) * 8) + y, col);
+				showCol = solid;
+				if (y == 0 || y == 7 || x == 0 || x == 15)
+				{
+					showCol = border;
+				}
+				if(((y == 0 || y == 7) && (x == 7 || x == 8)) || ((x == 0 || x == 15) && (y == 3 || y == 4))) 
+				{
+					showCol = Color.magenta;
+				}
+
+				t.SetPixel(((i % 15) * 16) + x, ((t.height - 1 - (int)i / 15) * 8) + y, showCol);
 			}
 		}
 
