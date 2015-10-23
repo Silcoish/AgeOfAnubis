@@ -1,7 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Audio;
 
+[System.Serializable]
+public struct AudioStruct
+{
+	public AudioClip clip;
+	public float volume;
+	public bool preview;
+};
 
 public class AudioManager : MonoBehaviour 
 {
@@ -21,25 +29,25 @@ public class AudioManager : MonoBehaviour
 
 	[Header("SoundFX")]
 	public int m_numberOfSources = 5;
-	private AudioSource[] m_sources;
+	public List<AudioSource> m_sources;
 	private int m_curSource = 0;
 
 	[Header("Tracks")]
-	public AudioClip a_coin;
-	public AudioClip a_poison;
-	public AudioClip a_burnt;
-	public AudioClip a_bleed;
-	public AudioClip a_cut;
-	public AudioClip a_doorOpen;
-	public AudioClip a_doorShut;
-	public AudioClip a_frozen;
-	public AudioClip a_giveDamage;
-	public AudioClip a_takeDamage;
-	public AudioClip a_lowHealth;
-	public AudioClip a_purchaseItem;
-	public AudioClip a_stab;
-	public AudioClip a_thump;
-	public AudioClip a_pickupWeapon;
+	public AudioStruct a_coin;
+	public AudioStruct a_poison;
+	public AudioStruct a_burnt;
+	public AudioStruct a_bleed;
+	public AudioStruct a_cut;
+	public AudioStruct a_doorOpen;
+	public AudioStruct a_doorShut;
+	public AudioStruct a_frozen;
+	public AudioStruct a_giveDamage;
+	public AudioStruct a_takeDamage;
+	public AudioStruct a_lowHealth;
+	public AudioStruct a_purchaseItem;
+	public AudioStruct a_stab;
+	public AudioStruct a_thump;
+	public AudioStruct a_pickupWeapon;
 
 	void Awake()
 	{
@@ -50,13 +58,15 @@ public class AudioManager : MonoBehaviour
 	}
 
 	// Use this for initialization
-	void Start () 
+	public void Start () 
 	{
-		m_sources = new AudioSource[m_numberOfSources];
+		if (m_sources.Count > 0)
+			ClearSources();
+		m_sources = new List<AudioSource>();
 
 		for (int i = 0; i < m_numberOfSources; i ++)
 		{
-			m_sources[i] = gameObject.AddComponent<AudioSource>();
+			m_sources.Add(gameObject.AddComponent<AudioSource>());
 		}
 
 		foreach (var s in m_sources)
@@ -65,21 +75,6 @@ public class AudioManager : MonoBehaviour
 			s.playOnAwake = false;
 			s.loop = false;
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		//Testing Hacks
-		if (Input.GetKeyDown(KeyCode.Z))
-			AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
-		if (Input.GetKeyDown(KeyCode.X))
-			AudioManager.Inst.FadeMusic(AudioManager.Inst.s_idle);
-
-		if (Input.GetKeyDown(KeyCode.C))
-			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_coin);
-		if (Input.GetKeyDown(KeyCode.V))
-			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_poison);
 	}
 
 	public void FadeMusic(AudioMixerSnapshot snap)
@@ -93,11 +88,50 @@ public class AudioManager : MonoBehaviour
 		snap.TransitionTo(duration);
 	}
 
-	public void PlaySFX(AudioClip au)
+	public void PlaySFX(AudioStruct au)
 	{
-		m_sources[m_curSource].clip = au;
+		m_sources[m_curSource].clip = au.clip;
+		m_sources[m_curSource].volume = au.volume;
 		m_sources[m_curSource].Play();
 		NextSource();
+	}
+
+	public void PreviewSounds()
+	{
+		List<AudioStruct> allStructs = new List<AudioStruct>();
+		allStructs.Add(a_coin);
+		allStructs.Add(a_poison);
+		allStructs.Add(a_burnt);
+		allStructs.Add(a_bleed);
+		allStructs.Add(a_cut);
+		allStructs.Add(a_doorOpen);
+		allStructs.Add(a_doorShut);
+		allStructs.Add(a_frozen);
+		allStructs.Add(a_giveDamage);
+		allStructs.Add(a_takeDamage);
+		allStructs.Add(a_lowHealth);
+		allStructs.Add(a_purchaseItem);
+		allStructs.Add(a_stab);
+		allStructs.Add(a_thump);
+		allStructs.Add(a_pickupWeapon);
+
+
+		foreach (var st in allStructs)
+		{
+			if (st.preview)
+				PlaySFX(st);
+		}
+	}
+
+	public void ClearSources()
+	{
+		for (int i = 0; i < m_sources.Count; i++)
+		{
+			AudioSource temp = m_sources[i];
+			m_sources.Remove(temp);
+			DestroyImmediate(temp);
+			i--;
+		}
 	}
 
 	void NextSource()
