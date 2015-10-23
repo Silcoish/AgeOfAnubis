@@ -12,6 +12,7 @@ GameObject:
   - 50: {fileID: 5061818}
   - 114: {fileID: 11498132}
   - 58: {fileID: 5897820}
+  - 114: {fileID: 11419670}
   m_Layer: 8
   m_Name: ENY_Scarab_001
   m_TagString: Enemy
@@ -60,6 +61,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .25
+--- !u!114 &11419670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 192918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727c23f35245bd449946a24506db285f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_prefab: {fileID: 192918}
 --- !u!114 &11498132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Scarab
-  hitPoints: 2
+  hitPoints: 200
   m_attack:
     m_attackStrength: 1
     m_effectType: 0
@@ -121,7 +134,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: hitPoints
-      value: 2
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_attack.m_knockbackForce
@@ -131,6 +144,10 @@ Prefab:
       propertyPath: m_deathParticle
       value: 
       objectReference: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_prefab
+      value: 
+      objectReference: {fileID: 192918}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 192918}
