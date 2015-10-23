@@ -149,7 +149,6 @@ public class Anubis : Enemy
 		{
 			curState = State.DASH;
 		}
-
 	}
 
 	void UpdateProjectileAndEnemies()
@@ -242,5 +241,10 @@ public class Anubis : Enemy
 			curState = State.CROUCH;
 		if (Input.GetKeyDown(KeyCode.Keypad9))
 			curState = State.BASH;
+	}
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+
 	}
 }

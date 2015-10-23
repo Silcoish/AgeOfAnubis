@@ -214,6 +214,7 @@ public class Player : Damageable
 
         m_currentWeapon = Instantiate(newWep, m_playerHand.transform.position, m_playerHand.transform.rotation) as GameObject;
         m_currentWeapon.transform.parent = m_playerHand.transform;
+        m_currentWeapon.transform.localScale = new Vector3(1, 1, 1);
     }
 
     // Flip the character object for left/right facing.
