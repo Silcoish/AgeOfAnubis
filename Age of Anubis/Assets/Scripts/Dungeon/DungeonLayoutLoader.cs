@@ -168,11 +168,11 @@ public class DungeonLayoutLoader : MonoBehaviour
 		{
 			if (rooms[i] != null)
 			{
-				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(0, 0, 0, 0.5f));
+				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(0, 0, 0, 0.5f), new Color(0.5f, 0.5f, 0.5f, 0.5f));
 			}
 			else
 			{
-				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(1, 1, 1, 0.5f));
+				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(1, 1, 1, 0.5f), new Color(1, 1, 1, 0.5f));
 			}
 		}
 

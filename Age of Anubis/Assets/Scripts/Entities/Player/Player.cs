@@ -42,10 +42,15 @@ public class Player : Damageable
             }
         }
 
-        // Get the players hand and equip current weapon
+        // Get the players hand
         m_playerHand = m_anim_arm.transform.FindChild("Player_Hand").gameObject;
-        //UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 	}
+
+    public override void StartOverride()
+    {
+        // Equip current weapon
+        UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
+    }
 
 	public override void UpdateOverride()
     {
@@ -126,8 +131,14 @@ public class Player : Damageable
 	{
 		if (m_jumpCounter > 0)
 		{
-			print("Conter > 0");
-			m_velocity.y = m_jumpHeight * m_globalMoveSpeed;
+            if(!m_anim.GetBool("Grounded"))
+            {
+                m_velocity.y = (m_jumpHeight * 0.8F) * m_globalMoveSpeed;
+            }
+            else
+            {
+                m_velocity.y = m_jumpHeight * m_globalMoveSpeed;
+            }
 			m_jumpCounter--;
 
             SetAnimGrounded(false); // Tell the animator we are airborne

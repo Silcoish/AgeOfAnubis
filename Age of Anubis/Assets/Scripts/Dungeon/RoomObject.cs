@@ -78,7 +78,7 @@ public class RoomObject : MonoBehaviour
 
 		Camera.main.GetComponent<CameraController>().SetRoom(gameObject);
 
-		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(1, 0, 0, 0.5f));
+		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(1, 0, 0, 0.5f), new Color(1, 0.5f, 0.5f, 0.5f));
 		GameManager.inst.RefreshMinimap();
 
 		LockDoors();
@@ -87,7 +87,7 @@ public class RoomObject : MonoBehaviour
 	public void LeaveRoom()
 	{
 		isActiveRoom = false;
-		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(0, 0, 0, 0.5f));
+		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(0, 0, 0, 0.5f), new Color(0.5f, 0.5f, 0.5f, 0.5f));
 		GameManager.inst.RefreshMinimap();
 	}
 
