@@ -6,6 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
 	public static PlayerInventory Inst;
 	public int m_gold;
+    public float m_multiplier = 1F;
 
 	public GameObject m_currentWeapon;
 	public GameObject m_secondaryWeapon;
