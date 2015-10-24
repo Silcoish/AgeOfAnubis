@@ -4,8 +4,9 @@ using System.Collections;
 public class Damageable : MonoBehaviour 
 {
 	[Header("DamageableStats")]
-	public string unitName;
-	public int hitPoints = 10;
+	public string m_unitName;
+	public int m_hitPoints = 10;
+	protected int m_maxHitpoints;
 
 	protected float m_effectFlashRate = 0.2f;
 
@@ -53,6 +54,8 @@ public class Damageable : MonoBehaviour
 			m_sp = gameObject.GetComponentInChildren<SpriteRenderer>();
 
 		m_startColor = m_sp.color;
+
+		m_maxHitpoints = m_hitPoints;
 
 		AwakeOverride();
 	}
@@ -123,7 +126,7 @@ public class Damageable : MonoBehaviour
 			}
 		}
 
-        if (hitPoints <= 0)
+        if (m_hitPoints <= 0)
         {
             OnDeath();
         }
@@ -166,9 +169,9 @@ public class Damageable : MonoBehaviour
 	/// Damge could be = to 0
 	/// </summary>
 	/// <param name="dam"></param>
-	public void OnTakeDamage(Damage dam)
+	public virtual void OnTakeDamage(Damage dam)
 	{
-		hitPoints -= dam.amount;
+		m_hitPoints -= dam.amount;
 
 		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_takeDamage);
 
@@ -221,7 +224,7 @@ public class Damageable : MonoBehaviour
 
 		m_damageTimer = 1;
 
-		if (hitPoints <= 0)
+		if (m_hitPoints <= 0)
 		{
 			OnDeath();
 		}
@@ -234,7 +237,7 @@ public class Damageable : MonoBehaviour
 
 	public string GetName()
 	{
-		return unitName;
+		return m_unitName;
 	}
 
 	public void Pause(float seconds)
@@ -255,7 +258,7 @@ public class Damageable : MonoBehaviour
 	void DamagePoison()
 	{
 		m_leftoverPoisonDamage += m_strengthPoison * m_poisonTime;
-		hitPoints -= (int)m_leftoverPoisonDamage;
+		m_hitPoints -= (int)m_leftoverPoisonDamage;
 		if ((int)m_leftoverPoisonDamage > 0)
 			SpawnText(Color.green, ((int)m_leftoverPoisonDamage).ToString());
 		m_leftoverPoisonDamage -= (int)m_leftoverPoisonDamage;
@@ -266,7 +269,7 @@ public class Damageable : MonoBehaviour
 	void DamageBurn()
 	{
 		m_leftoverBurnDamage += m_strengthBurn * Time.deltaTime;
-		hitPoints -= (int)m_leftoverBurnDamage;
+		m_hitPoints -= (int)m_leftoverBurnDamage;
 		if ((int)m_leftoverBurnDamage > 0)
 			SpawnText(Color.red, ((int)m_leftoverBurnDamage).ToString());
 		m_leftoverBurnDamage -= (int)m_leftoverBurnDamage;
@@ -276,7 +279,7 @@ public class Damageable : MonoBehaviour
 
 	void DamageBleed(int damIn)
 	{
-		hitPoints -= (int)(damIn * m_strengthBleed);
+		m_hitPoints -= (int)(damIn * m_strengthBleed);
 
 		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_bleed);
 	}

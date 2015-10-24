@@ -9,10 +9,8 @@ public class Gold : MonoBehaviour
     {
         if(col.tag == "Player")
         {
-            float value = coinValue * PlayerInventory.Inst.m_multiplier;
-            PlayerInventory.Inst.m_gold += (int)value;
-            PlayerInventory.Inst.m_multiplier += 0.01F;
-            Debug.Log("Multiplier = " + PlayerInventory.Inst.m_multiplier + " Gold = " + PlayerInventory.Inst.m_gold);
+			PlayerInventory.Inst.ChangeGold((int)coinValue);
+            PlayerInventory.Inst.ChangeMultiplier(0.01f);
             //AudioManager.Inst.PlaySFX(AudioManager.Inst.a_coin);
             Destroy(gameObject);
         }

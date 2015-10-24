@@ -52,6 +52,13 @@ public class Player : Damageable
         UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
     }
 
+	public override void OnTakeDamage(Damage dam)
+	{
+		base.OnTakeDamage(dam);
+
+		UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
+	}
+
 	public override void UpdateOverride()
     {
 		CheckIfGrounded();

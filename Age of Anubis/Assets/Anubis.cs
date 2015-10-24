@@ -137,7 +137,7 @@ public class Anubis : Enemy
 
 		for (int i = 0; i < enemiesCount; i++)
 		{
-			if (spawnedEnemies[i].GetComponent<Eye>().hitPoints <= 0)
+			if (spawnedEnemies[i].GetComponent<Eye>().m_hitPoints <= 0)
 			{
 				enemiesCount--;
 				spawnedEnemies.RemoveAt(i);

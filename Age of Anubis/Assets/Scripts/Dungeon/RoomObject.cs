@@ -62,7 +62,7 @@ public class RoomObject : MonoBehaviour
 		{
 			for(int i = 0; i < m_allEnemies.Count; i++)
 			{
-				m_allEnemies[i].GetComponent<Enemy>().hitPoints = 0;
+				m_allEnemies[i].GetComponent<Enemy>().m_hitPoints = 0;
 			}
 		}
 	}
