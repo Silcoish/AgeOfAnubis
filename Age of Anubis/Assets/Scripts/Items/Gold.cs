@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Gold : MonoBehaviour 
@@ -10,7 +10,7 @@ public class Gold : MonoBehaviour
         if(col.tag == "Player")
         {
 			PlayerInventory.Inst.ChangeGold((int)coinValue);
-            PlayerInventory.Inst.ChangeMultiplier(0.01f);
+            //PlayerInventory.Inst.ChangeMultiplier(0.01f);
             AudioManager.Inst.PlaySFX(AudioManager.Inst.a_coin);
             Destroy(gameObject);
         }

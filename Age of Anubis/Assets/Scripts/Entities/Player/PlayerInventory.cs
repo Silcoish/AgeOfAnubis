@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,6 +7,7 @@ public class PlayerInventory : MonoBehaviour
 	public static PlayerInventory Inst;
 	int m_coin;
     float m_multiplier = 1F;
+	public float m_multiplierIncrease = 0.1f;
 
 	public GameObject m_currentWeapon;
 	public GameObject m_secondaryWeapon;
@@ -47,6 +48,12 @@ public class PlayerInventory : MonoBehaviour
 	public void ChangeMultiplier(float amount)
 	{
 		m_multiplier += amount;
+	}
+
+	public void IncreaseMultiplier()
+	{
+		m_multiplier += m_multiplierIncrease;
+		UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
 	}
     
 }
