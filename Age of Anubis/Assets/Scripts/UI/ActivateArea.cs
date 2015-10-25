@@ -37,7 +37,6 @@ public class ActivateArea : MonoBehaviour
 	{
 		if (m_isActive)
 		{
-			print("Active");
 			m_timer += Time.deltaTime / m_iconFlashTime;
 			m_lerp = (Mathf.Sin(m_timer) + 1) / 2;
 
@@ -48,12 +47,8 @@ public class ActivateArea : MonoBehaviour
 			vert.y = Input.GetAxis("Vertical");
 			vert.x = Input.GetAxis("Horizontal");
 
-			print("vert.y" + vert.y);
-			print("vert.x" + vert.x);
-
 			if (vert.y > 0.7 && Mathf.Abs(vert.y) > Mathf.Abs(vert.x))
 			{
-				print("ButtonPressed");
 				OnActivate();
 				m_isActive = false;
 			}
@@ -98,7 +93,6 @@ public class ActivateArea : MonoBehaviour
 
 	public virtual void OnActivate()
 	{
-		print("activate");
 		//TODO play sound on activate.
 		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_pickupWeapon);
 

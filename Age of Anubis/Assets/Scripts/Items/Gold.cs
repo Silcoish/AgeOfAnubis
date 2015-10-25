@@ -11,7 +11,7 @@ public class Gold : MonoBehaviour
         {
 			PlayerInventory.Inst.ChangeGold((int)coinValue);
             PlayerInventory.Inst.ChangeMultiplier(0.01f);
-            //AudioManager.Inst.PlaySFX(AudioManager.Inst.a_coin);
+            AudioManager.Inst.PlaySFX(AudioManager.Inst.a_coin);
             Destroy(gameObject);
         }
     }
