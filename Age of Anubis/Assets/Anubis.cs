@@ -40,6 +40,7 @@ public class Anubis : Enemy
 	BattleStage curStage = BattleStage.FIRST;
 
 	Transform t;
+	Rigidbody2D rb;
 
 	public BoxCollider2D collider;
 
@@ -70,6 +71,7 @@ public class Anubis : Enemy
 	void Start()
 	{
 		t = transform;
+		rb = GetComponent<Rigidbody2D>();
 		spawnedEnemies = new List<GameObject>();
 	}
 
@@ -140,7 +142,7 @@ public class Anubis : Enemy
 
 		for (int i = 0; i < enemiesCount; i++)
 		{
-			if (spawnedEnemies[i].GetComponent<Enemy>().hitPoints <= 0)
+			if (spawnedEnemies[i].GetComponent<Enemy>().m_hitPoints <= 0)
 			{
 				enemiesCount--;
 				spawnedEnemies.RemoveAt(i);
@@ -163,7 +165,9 @@ public class Anubis : Enemy
 	{
 		if (dash == 0)
 			dash = SideFloat(dashSpeed);
-		t.position = new Vector2(t.position.x + dash * Time.deltaTime, t.position.y);
+		//t.position = new Vector2(t.position.x + dash * Time.deltaTime, t.position.y);
+
+		rb.velocity = new Vector2(dash * dashSpeed * Time.deltaTime, 0f);
 
 		RaycastHit2D[] hit = Physics2D.RaycastAll((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, new Vector2(-SideFloat(1f), 0f), raycastLength);
 		Debug.DrawRay((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, Vector2.left, Color.green);
