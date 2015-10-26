@@ -171,6 +171,7 @@ public class Damageable : MonoBehaviour
 	/// <param name="dam"></param>
 	public virtual void OnTakeDamage(Damage dam)
 	{
+		dam = UpdateDamage(dam);
 		m_hitPoints -= dam.amount;
 
 		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_takeDamage);
@@ -228,6 +229,13 @@ public class Damageable : MonoBehaviour
 		{
 			OnDeath();
 		}
+	}
+
+	//Use this to modify the damage if you need
+	//Main use to set kb to 0 on anubis
+	public virtual Damage UpdateDamage(Damage dam)
+	{
+		return dam;
 	}
 
 	public virtual void OnDeath()

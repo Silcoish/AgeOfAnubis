@@ -114,6 +114,13 @@ public class Anubis : Enemy
 		}
 	}
 
+	public override Damage UpdateDamage(Damage dam)
+	{
+		dam.knockback = 0;
+		return dam;
+	}
+
+
 	#region StateUpdates
 	void UpdateIdle()
 	{
@@ -155,6 +162,13 @@ public class Anubis : Enemy
 		enemyWaitCounter += Time.deltaTime;
 		if(enemyWaitCounter >= enemyWaitTime || spawnedEnemies.Count == 0)
 		{
+			for (int i = 0; i < enemiesCount; i++)
+			{
+				spawnedEnemies[i].GetComponent<Enemy>().m_hitPoints = 0;
+				Destroy(spawnedEnemies[i]);
+			}
+			spawnedEnemies.Clear();
+			enemiesCount = 0;
 			curState = State.DASH;
 		}
 	}
@@ -168,22 +182,8 @@ public class Anubis : Enemy
 	{
 		if (dash == 0)
 			dash = SideFloat(dashSpeed);
-		//t.position = new Vector2(t.position.x + dash * Time.deltaTime, t.position.y);
 
 		rb.velocity = new Vector2(dash, 0f);
-
-		/*RaycastHit2D[] hit = Physics2D.RaycastAll((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, new Vector2(SideFloat(1f), 0f), raycastLength);
-		Debug.DrawRay((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, SideFloat(1.0f) * Vector2.left, Color.green);
-		for (int i = 0; i < hit.Length; i++)
-		{
-			print(hit[i].collider.tag);
-			if (hit[i].collider.tag == "Solid")
-			{
-				curState = State.PROJECTILE;
-				dash = 0;
-				rb.velocity = Vector2.zero;
-			}
-		}*/
 	}
 
 	void UpdateStuck()

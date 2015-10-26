@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ENY_Scarab_001 : Enemy 
@@ -20,6 +20,7 @@ public class ENY_Scarab_001 : Enemy
 	public override void EnemyBehaviour()
 	{
 
+		/*
 		CheckReturn checkreturn = CheckEnemyLocation();
 
 		if (checkreturn.colBelow != null)
@@ -38,7 +39,7 @@ public class ENY_Scarab_001 : Enemy
 		if (checkreturn.type == CheckReturnEnum.ReachedWall || checkreturn.type == CheckReturnEnum.ReachedEdge)
 		{
 			transform.rotation = transform.rotation * Quaternion.FromToRotation(Vector2.left, Vector2.right);
-		}
+		}*/
 
 
 	}

@@ -42,7 +42,7 @@ public class Enemy : Damageable
 
 	public virtual void EnemyBehaviour()
 	{
-
+		
 		if (CheckEnemyLocation().type == CheckReturnEnum.None)
 		{
 			//print("Airborne");
@@ -55,7 +55,7 @@ public class Enemy : Damageable
 		{
 			//print("ReachedWall");
 		}
-
+		
 	}
 
 
@@ -124,9 +124,6 @@ public class Enemy : Damageable
 
 	protected CheckReturn CheckEnemyLocation()
 	{
-		
-		
-
 		CheckReturn tempReturn = new CheckReturn();
 		tempReturn.colBelow = null;
 		tempReturn.colFront = null;
@@ -135,7 +132,9 @@ public class Enemy : Damageable
 		Collider2D[] allColls;
 
 		//CheckBelow
+		
 		allColls = Physics2D.OverlapAreaAll(m_belowCol.bounds.min, m_belowCol.bounds.max);
+		
 
 		foreach (var col in allColls)
 		{
