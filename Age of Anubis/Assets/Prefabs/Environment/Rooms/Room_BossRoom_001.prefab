@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 408082}
   - 212: {fileID: 21289430}
   - 61: {fileID: 6127444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform Solid (4)
-  m_TagString: Solid
+  m_TagString: NotSolid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,24 +74,9 @@ GameObject:
   - 4: {fileID: 492090}
   - 212: {fileID: 21226352}
   - 61: {fileID: 6104726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform Solid
-  m_TagString: Solid
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &121594
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 498936}
-  m_Layer: 0
-  m_Name: SpawnPoint3
-  m_TagString: Untagged
+  m_TagString: NotSolid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +118,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &127378
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -641,11 +626,11 @@ GameObject:
   - 114: {fileID: 11427504}
   m_Layer: 0
   m_Name: South
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &176716
 GameObject:
   m_ObjectHideFlags: 1
@@ -824,21 +809,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &197384
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 438996}
-  m_Layer: 0
-  m_Name: SpawnPoint4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &198510
 GameObject:
   m_ObjectHideFlags: 1
@@ -978,7 +948,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 419106}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!4 &419106
 Transform:
   m_ObjectHideFlags: 1
@@ -986,17 +956,15 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -13.3800001, y: 4.5, z: 3.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 481672}
   - {fileID: 478738}
-  - {fileID: 498936}
-  - {fileID: 438996}
   - {fileID: 480244}
   - {fileID: 418692}
-  m_Father: {fileID: 473748}
-  m_RootOrder: 5
+  m_Father: {fileID: 458304}
+  m_RootOrder: 0
 --- !u!4 &424914
 Transform:
   m_ObjectHideFlags: 1
@@ -1099,18 +1067,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 484940}
   m_RootOrder: 1
---- !u!4 &438996
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 197384}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.07999992, y: 6.13000011, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 419106}
-  m_RootOrder: 3
 --- !u!4 &443358
 Transform:
   m_ObjectHideFlags: 1
@@ -1166,9 +1122,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.5499992, y: -4.5, z: 0}
+  m_LocalPosition: {x: 13.3800001, y: -4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 419106}
   m_Father: {fileID: 410756}
   m_RootOrder: 0
 --- !u!4 &458754
@@ -1317,7 +1274,6 @@ Transform:
   - {fileID: 465116}
   - {fileID: 410756}
   - {fileID: 484474}
-  - {fileID: 419106}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &477280
@@ -1377,7 +1333,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 419106}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!4 &481672
 Transform:
   m_ObjectHideFlags: 1
@@ -1520,18 +1476,6 @@ Transform:
   - {fileID: 484940}
   m_Father: {fileID: 473748}
   m_RootOrder: 1
---- !u!4 &498936
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121594}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.31999969, y: 6.13000011, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 419106}
-  m_RootOrder: 2
 --- !u!4 &499410
 Transform:
   m_ObjectHideFlags: 1
@@ -1949,8 +1893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b057659b10edcbe4a923ed44ef1230bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Anubis
-  hitPoints: 1000
+  m_unitName: 
+  m_hitPoints: 1000
   m_attack:
     m_attackStrength: 15
     m_effectType: 0
@@ -1960,12 +1904,11 @@ MonoBehaviour:
   m_deathParticle: {fileID: 0}
   curState: 0
   collider: {fileID: 6177076}
-  eyeOfHorusGO: {fileID: 192918, guid: d150720e69cbb7446bcc52a1f3ee8ab4, type: 2}
+  frontCollider: {fileID: 0}
+  spawnEnemy: {fileID: 192918, guid: d150720e69cbb7446bcc52a1f3ee8ab4, type: 2}
   spawnPoints:
   - {fileID: 150688}
   - {fileID: 113284}
-  - {fileID: 121594}
-  - {fileID: 197384}
   - {fileID: 135964}
   - {fileID: 167266}
   enemyWaitTime: 20
@@ -1979,6 +1922,10 @@ MonoBehaviour:
   m_projectileCooldown: 3
   dashSpeed: 15
   raycastLength: 1
+  crouchSpeed: 10
+  crouchDistanceDown: 10
+  crouchOffset: 10
+  crouchWaitTime: 2
 --- !u!114 &11441890
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -69,6 +69,15 @@ public class Anubis : Enemy
 	public float raycastLength = 1.0f;
 	float dash;
 
+	[Header("Crouch State Variables")]
+	public float crouchSpeed = 10.0f;
+	public float crouchDistanceDown = 10.0f;
+	public float crouchOffset = 10.0f;
+	public float crouchWaitTime = 2.0f;
+	float crouchWaitCounter = 0.0f;
+	bool isMovingDown = true;
+	Vector2 crouchStartPos = Vector2.zero;
+
 	bool isFacingRight = false;
 
 	void Start()
@@ -198,7 +207,45 @@ public class Anubis : Enemy
 
 	void UpdateCrouch()
 	{
+		if(crouchStartPos == Vector2.zero)
+		{
+			crouchStartPos = (Vector2)t.position;
+		}
 
+		if (isMovingDown)
+		{
+			t.position = new Vector2(t.position.x, t.position.y - crouchSpeed * Time.deltaTime);
+			if(Mathf.Abs(crouchStartPos.y - t.position.y) >= crouchDistanceDown )
+			{
+				isMovingDown = false;
+				if(curSide == Side.LEFT)
+				{
+					t.position = new Vector2(t.position.x + crouchOffset, t.position.y);
+				}
+				else
+				{
+					t.position = new Vector2(t.position.x - crouchOffset, t.position.y);
+				}
+				Flip();
+			}
+		}
+		else
+		{
+			crouchWaitCounter += Time.deltaTime;
+			if(crouchWaitCounter >= crouchWaitTime)
+			{
+				t.position = new Vector2(t.position.x, t.position.y + crouchSpeed * Time.deltaTime);
+
+				if(t.position.y >= crouchStartPos.y)
+				{
+					t.position = new Vector2(t.position.x, crouchStartPos.y);
+					isMovingDown = true;
+					crouchWaitCounter = 0.0f;
+					crouchStartPos = Vector2.zero;
+					curState = State.IDLE;
+				}
+			}
+		}
 	}
 	#endregion
 
