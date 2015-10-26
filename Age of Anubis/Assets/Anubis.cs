@@ -46,7 +46,7 @@ public class Anubis : Enemy
 	public BoxCollider2D frontCollider;
 
 	[Header("Spawn Enemies Variables")]
-	public GameObject eyeOfHorusGO;
+	public GameObject spawnEnemy;
 	public List<GameObject> spawnPoints;
 	public float enemyWaitTime = 20.0f;
 	public float enemyWaitCounter = 0.0f;
@@ -138,7 +138,7 @@ public class Anubis : Enemy
 			hasSpawnedEnemies = true;
 			for (int i = 0; i < 3; i++)
 			{
-				spawnedEnemies.Add((GameObject)Instantiate(eyeOfHorusGO, spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position, Quaternion.identity));
+				spawnedEnemies.Add((GameObject)Instantiate(spawnEnemy, spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position, Quaternion.identity));
 				enemiesCount++;
 			}
 		}
@@ -287,5 +287,18 @@ public class Anubis : Enemy
 	{
 		collider.isTrigger = false;
 		//frontCollider.isTrigger = false;
+	}
+
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col.gameObject.tag == "Solid")
+		{
+			if (curState == State.DASH)
+			{
+				curState = State.PROJECTILE;
+				dash = 0;
+				Flip();
+			}
+		}
 	}
 }
