@@ -43,6 +43,7 @@ public class Anubis : Enemy
 	Rigidbody2D rb;
 
 	public BoxCollider2D collider;
+	public BoxCollider2D frontCollider;
 
 	[Header("Spawn Enemies Variables")]
 	public GameObject eyeOfHorusGO;
@@ -67,6 +68,8 @@ public class Anubis : Enemy
 	public float dashSpeed;
 	public float raycastLength = 1.0f;
 	float dash;
+
+	bool isFacingRight = false;
 
 	void Start()
 	{
@@ -167,18 +170,20 @@ public class Anubis : Enemy
 			dash = SideFloat(dashSpeed);
 		//t.position = new Vector2(t.position.x + dash * Time.deltaTime, t.position.y);
 
-		rb.velocity = new Vector2(dash * dashSpeed * Time.deltaTime, 0f);
+		rb.velocity = new Vector2(dash, 0f);
 
-		RaycastHit2D[] hit = Physics2D.RaycastAll((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, new Vector2(-SideFloat(1f), 0f), raycastLength);
-		Debug.DrawRay((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, Vector2.left, Color.green);
+		/*RaycastHit2D[] hit = Physics2D.RaycastAll((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, new Vector2(SideFloat(1f), 0f), raycastLength);
+		Debug.DrawRay((Vector2)transform.position + new Vector2(-SideFloat(1f), 0) * 1.2f, SideFloat(1.0f) * Vector2.left, Color.green);
 		for (int i = 0; i < hit.Length; i++)
 		{
+			print(hit[i].collider.tag);
 			if (hit[i].collider.tag == "Solid")
 			{
 				curState = State.PROJECTILE;
 				dash = 0;
+				rb.velocity = Vector2.zero;
 			}
-		}
+		}*/
 	}
 
 	void UpdateStuck()
@@ -250,17 +255,37 @@ public class Anubis : Enemy
 			curState = State.BASH;
 	}
 
+	void Flip()
+	{
+		isFacingRight = !isFacingRight;
+		Vector3 scale = transform.localScale;
+		scale.x *= -1;
+		transform.localScale = scale;
+	}
+
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "Player")
 		{
 			col.gameObject.GetComponent<Damageable>().OnTakeDamage(m_attack.GetDamage(gameObject.transform));
 			collider.isTrigger = true;
+			//frontCollider.isTrigger = true;
+		}
+
+		if(col.gameObject.tag == "Solid")
+		{
+			if(curState == State.DASH)
+			{
+				curState = State.PROJECTILE;
+				dash = 0;
+				Flip();
+			}
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
 		collider.isTrigger = false;
+		//frontCollider.isTrigger = false;
 	}
 }

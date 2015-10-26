@@ -13,6 +13,7 @@ public class AnubisProjectile : Enemy
 	float yDest = 0;
 	public float lifeTime = 10.0f;
 	float lifeTimeCounter = 0.0f;
+	public CircleCollider2D collider;
 
 	public override void EnemyBehaviour()
 	{
@@ -31,5 +32,19 @@ public class AnubisProjectile : Enemy
 		hMoveSpeed = hSpeed;
 		vMoveSpeed = vSpeed;
 		yDest = transform.position.y + y;
+	}
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if (col.gameObject.tag == "Player")
+		{
+			col.gameObject.GetComponent<Damageable>().OnTakeDamage(m_attack.GetDamage(gameObject.transform));
+			collider.isTrigger = true;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D col)
+	{
+		collider.isTrigger = false;
 	}
 }
