@@ -41,6 +41,8 @@ public class Anubis : Enemy
 
 	Transform t;
 
+	public BoxCollider2D collider;
+
 	[Header("Spawn Enemies Variables")]
 	public GameObject eyeOfHorusGO;
 	public List<GameObject> spawnPoints;
@@ -68,6 +70,7 @@ public class Anubis : Enemy
 	void Start()
 	{
 		t = transform;
+		spawnedEnemies = new List<GameObject>();
 	}
 
 	public override void EnemyBehaviour()
@@ -137,7 +140,7 @@ public class Anubis : Enemy
 
 		for (int i = 0; i < enemiesCount; i++)
 		{
-			if (spawnedEnemies[i].GetComponent<Eye>().hitPoints <= 0)
+			if (spawnedEnemies[i].GetComponent<Enemy>().hitPoints <= 0)
 			{
 				enemiesCount--;
 				spawnedEnemies.RemoveAt(i);
@@ -245,6 +248,15 @@ public class Anubis : Enemy
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
+		if (col.gameObject.tag == "Player")
+		{
+			col.gameObject.GetComponent<Damageable>().OnTakeDamage(m_attack.GetDamage(gameObject.transform));
+			collider.isTrigger = true;
+		}
+	}
 
+	void OnTriggerExit2D(Collider2D col)
+	{
+		collider.isTrigger = false;
 	}
 }

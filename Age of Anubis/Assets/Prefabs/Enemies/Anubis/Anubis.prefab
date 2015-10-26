@@ -11,7 +11,8 @@ GameObject:
   - 212: {fileID: 21259610}
   - 114: {fileID: 11414790}
   - 61: {fileID: 6143466}
-  m_Layer: 0
+  - 50: {fileID: 5092048}
+  m_Layer: 10
   m_Name: Anubis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,6 +31,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5092048
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189202}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!61 &6143466
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -64,7 +81,8 @@ MonoBehaviour:
     m_knockbackForce: 0
   m_deathParticle: {fileID: 0}
   curState: 0
-  eyeOfHorusGO: {fileID: 0}
+  collider: {fileID: 6143466}
+  eyeOfHorusGO: {fileID: 192918, guid: d150720e69cbb7446bcc52a1f3ee8ab4, type: 2}
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}

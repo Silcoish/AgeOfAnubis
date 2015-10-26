@@ -31,7 +31,7 @@ public class Enemy : Damageable
 		m_colBox = GetComponent<BoxCollider2D>();
 		m_colCircle = GetComponent<CircleCollider2D>();
 
-		CreateDirectionColliders();
+		//CreateDirectionColliders();
 	}
 
 	// Update is called once per frame
