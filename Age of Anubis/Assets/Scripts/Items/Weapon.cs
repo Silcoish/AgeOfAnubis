@@ -53,6 +53,30 @@ public class Weapon : MonoBehaviour
 		if (damagable != null)
 		{
 			damagable.OnTakeDamage(m_attack.GetDamage(transform));
+
+
+			switch (m_swingType)
+			{
+				case WeaponSwing.LIGHT:
+					print("Light");
+					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_cut);
+					break;
+				case WeaponSwing.MEDIUM:
+					print("Medium");
+					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_giveDamage);
+					break;
+				case WeaponSwing.HEAVY:
+					print("Heavy");
+					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_thump);
+					break;
+			}
+
+			Enemy en = col.gameObject.GetComponent<Enemy>();
+			if (en != null)
+			{
+
+
+			}
 		}
 	}    
 }

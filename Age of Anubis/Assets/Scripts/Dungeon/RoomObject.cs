@@ -19,6 +19,7 @@ public class RoomObject : MonoBehaviour
 	public GameObject m_enemiesParent;
 
 	bool isActiveRoom = false;
+	bool cleared = false;
 
 	void Awake()
 	{
@@ -62,7 +63,7 @@ public class RoomObject : MonoBehaviour
 		{
 			for(int i = 0; i < m_allEnemies.Count; i++)
 			{
-				m_allEnemies[i].GetComponent<Enemy>().hitPoints = 0;
+				m_allEnemies[i].GetComponent<Enemy>().m_hitPoints = 0;
 			}
 		}
 	}
@@ -93,17 +94,20 @@ public class RoomObject : MonoBehaviour
 
 	void LockDoors()
 	{
-		if (m_doorNorth != null)
-			m_doorNorth.Lock();
-		if (m_doorSouth != null)
-			m_doorSouth.Lock();
-		if (m_doorEast != null)
-			m_doorEast.Lock();
-		if (m_doorWest != null)
-			m_doorWest.Lock();
+		if(!cleared)
+		{
+			if (m_doorNorth != null)
+				m_doorNorth.Lock();
+			if (m_doorSouth != null)
+				m_doorSouth.Lock();
+			if (m_doorEast != null)
+				m_doorEast.Lock();
+			if (m_doorWest != null)
+				m_doorWest.Lock();
 
-		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorShut);
-		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorShut);
+			AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
+		}
 	}
 
 	void UnlockDoors()
@@ -116,6 +120,10 @@ public class RoomObject : MonoBehaviour
 			m_doorEast.Unlock();
 		if (m_doorWest != null)
 			m_doorWest.Unlock();
+
+		cleared = true;
+
+		PlayerInventory.Inst.IncreaseMultiplier();
 
 		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorOpen);
 		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_idle);

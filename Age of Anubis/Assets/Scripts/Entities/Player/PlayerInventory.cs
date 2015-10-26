@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerInventory : MonoBehaviour 
 {
 	public static PlayerInventory Inst;
-	public int m_gold;
+	int m_coin;
+    float m_multiplier = 1F;
+	public float m_multiplierIncrease = 0.1f;
 
 	public GameObject m_currentWeapon;
 	public GameObject m_secondaryWeapon;
@@ -33,8 +35,25 @@ public class PlayerInventory : MonoBehaviour
     // Reset temporary values on player death.
     public void DeathReset()
     {
-        m_gold = 0;
+        m_coin = 0;
         m_secondaryWeapon = null;
     }
+
+	public void ChangeGold(int amount)
+	{
+		m_coin += (int)(amount * m_multiplier);
+		UIManager.Inst.UpdateCoinTotal(m_coin);
+	}
+
+	public void ChangeMultiplier(float amount)
+	{
+		m_multiplier += amount;
+	}
+
+	public void IncreaseMultiplier()
+	{
+		m_multiplier += m_multiplierIncrease;
+		UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
+	}
     
 }
