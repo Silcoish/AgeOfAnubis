@@ -12,7 +12,8 @@ public class DungeonLayoutWindow : EditorWindow
             EMPTY,
             ROOM,
             STARTROOM,
-            BOSSROOM
+            BOSSROOM,
+			SHRINEROOM
         }
         public States state = States.EMPTY;
 
@@ -20,14 +21,16 @@ public class DungeonLayoutWindow : EditorWindow
 
         public void NextState()
         {
-            if (state == States.EMPTY)
-                SwitchState(States.ROOM);
-            else if (state == States.ROOM)
-                SwitchState(States.STARTROOM);
-            else if (state == States.STARTROOM)
-                SwitchState(States.BOSSROOM);
-            else
-                SwitchState(States.EMPTY);
+			if (state == States.EMPTY)
+				SwitchState(States.ROOM);
+			else if (state == States.ROOM)
+				SwitchState(States.STARTROOM);
+			else if (state == States.STARTROOM)
+				SwitchState(States.BOSSROOM);
+			else if (state == States.BOSSROOM)
+				SwitchState(States.SHRINEROOM);
+			else
+				SwitchState(States.EMPTY);
         }
 
         public void SwitchState(States newState)
@@ -46,10 +49,14 @@ public class DungeonLayoutWindow : EditorWindow
                     state = States.STARTROOM;
                     color = Color.green;
                     break;
-                case States.BOSSROOM:
-                    state = States.BOSSROOM;
-                    color = Color.red;
-                    break;
+				case States.BOSSROOM:
+					state = States.BOSSROOM;
+					color = Color.red;
+					break;
+				case States.SHRINEROOM:
+					state = States.SHRINEROOM;
+					color = Color.yellow;
+					break;
                 default:
                     state = States.EMPTY;
                     color = Color.white;
@@ -103,7 +110,8 @@ public class DungeonLayoutWindow : EditorWindow
         EditorGUILayout.LabelField("White = Empty");
         EditorGUILayout.LabelField("Blue = Room");
         EditorGUILayout.LabelField("Green = Start Room");
-        EditorGUILayout.LabelField("Red = Boss Room");
+		EditorGUILayout.LabelField("Red = Boss Room");
+		EditorGUILayout.LabelField("Yellow = Shrine Room");
 		for (int i = 0; i < SIZE; i++)
 		{
 			Rect r = EditorGUILayout.BeginHorizontal("Button");
@@ -195,8 +203,10 @@ public class DungeonLayoutWindow : EditorWindow
 					{
 						for (int i = 0; i < entries.Length-1; i++)
 						{
-                            if (entries[i] == "3" || entries[i] == " 3")
-                                layout[lineNum * SIZE + i].SwitchState((RoomElement.States)3);
+							if (entries[i] == "4" || entries[i] == " 4")
+								layout[lineNum * SIZE + i].SwitchState((RoomElement.States)4);
+							else if (entries[i] == "3" || entries[i] == " 3")
+								layout[lineNum * SIZE + i].SwitchState((RoomElement.States)3);
                             else if (entries[i] == "2" || entries[i] == " 2")
                                 layout[lineNum * SIZE + i].SwitchState((RoomElement.States)2);
                             else if (entries[i] == "1" || entries[i] == " 1")
