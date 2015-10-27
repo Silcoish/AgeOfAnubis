@@ -23,9 +23,7 @@ public class Weapon : MonoBehaviour
 
 	void Update()
 	{
-        if(transform.parent.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).IsName("Attack(Light)")
-            || transform.parent.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).IsName("Attack(Medium)")
-            || transform.parent.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).IsName("Attack(Heavy)"))
+        if(transform.parent.parent.parent.GetComponent<Player>().isAttacking())
         {
             m_isAttacking = true;
             m_col.enabled = true;

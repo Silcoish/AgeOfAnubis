@@ -109,12 +109,13 @@ public class Player : Damageable
 
 		if (Input.GetButtonDown("Fire1"))
 		{
-			if (m_currentWeapon != null)
-				m_currentWeapon.GetComponent<Weapon>().Attack(m_anim_arm);
+            if (m_currentWeapon != null)
+                m_currentWeapon.GetComponent<Weapon>().Attack(m_anim_arm);
 		}
 		if (Input.GetButtonDown("Fire2"))
 		{
-			UpdateEquippedWeapon(PlayerInventory.Inst.SwitchWeapon());
+            if(!isAttacking())
+                UpdateEquippedWeapon(PlayerInventory.Inst.SwitchWeapon());
 		}
 
 		if (m_inputAxis.y < -0.7 && Mathf.Abs(m_inputAxis.y) > Mathf.Abs(m_inputAxis.x))
@@ -236,10 +237,13 @@ public class Player : Damageable
     // Update player animations based on Input.
     void UpdateAnimationState(float input)
     {
-        if (input > 0 && !isFacingRight)
-            Flip();
-        else if (input < 0 && isFacingRight)
-            Flip();
+        if(!isAttacking())
+        {
+            if (input > 0 && !isFacingRight)
+                Flip();
+            else if (input < 0 && isFacingRight)
+                Flip();
+        }
     }
     
     // Set the Speed value of the animators
@@ -261,5 +265,15 @@ public class Player : Damageable
     {
         m_anim.SetFloat("VSpeed", Mathf.Abs(vSpeed));
         m_anim_arm.SetFloat("VSpeed", Mathf.Abs(vSpeed));
+    }
+
+    public bool isAttacking()
+    {
+        if (m_anim_arm.GetCurrentAnimatorStateInfo(1).IsName("Attack(Light)")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(1).IsName("Attack(Medium)")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(1).IsName("Attack(Heavy)"))
+            return true;
+        else
+            return false;
     }
 }
