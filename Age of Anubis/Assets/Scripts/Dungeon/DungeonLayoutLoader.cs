@@ -10,6 +10,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 	public string fileName = "";
 	public GameObject startRoom;
 	public GameObject bossRoom;
+	public GameObject shrineroom;
 	public List<GameObject> templateRooms;
 
 	[SerializeField] RoomObject[] rooms;
@@ -139,6 +140,13 @@ public class DungeonLayoutLoader : MonoBehaviour
 							if (entries[i] == "3" || entries[i] == " 3")
 							{
 								GameObject tempRoom = (GameObject)Instantiate(bossRoom, new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
+								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
+								rooms[lineNum * SIZE + i].arrayIndex = lineNum * SIZE + i;
+							}
+
+							if (entries[i] == "4" || entries[i] == " 4")
+							{
+								GameObject tempRoom = (GameObject)Instantiate(shrineroom, new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
 								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
 								rooms[lineNum * SIZE + i].arrayIndex = lineNum * SIZE + i;
 							}
