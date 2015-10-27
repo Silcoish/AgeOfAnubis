@@ -9,6 +9,8 @@ public class Gold : MonoBehaviour
     {
         if(col.tag == "Player")
         {
+            Debug.Log("Collided with Player");
+
 			PlayerInventory.Inst.ChangeGold((int)coinValue);
             //PlayerInventory.Inst.ChangeMultiplier(0.01f);
             AudioManager.Inst.PlaySFX(AudioManager.Inst.a_coin);

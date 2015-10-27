@@ -171,7 +171,7 @@ public class Player : Damageable
 			{
 				if (hit.collider.CompareTag("NotSolid") || hit.collider.CompareTag("Solid") || hit.collider.CompareTag("Wall"))
 				{
-					//Check if Player is above obect
+					//Check if Player is above object
 					if (m_colFeet.bounds.min.y >= hit.collider.bounds.max.y)
 					{
 						m_jumpCounter = m_jumpMax;

@@ -171,64 +171,67 @@ public class Damageable : MonoBehaviour
 	/// <param name="dam"></param>
 	public virtual void OnTakeDamage(Damage dam)
 	{
-		dam = UpdateDamage(dam);
-		m_hitPoints -= dam.amount;
+        if(m_timerPause <= 0)
+        {
+            dam = UpdateDamage(dam);
+            m_hitPoints -= dam.amount;
 
-		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_takeDamage);
+            //AudioManager.Inst.PlaySFX(AudioManager.Inst.a_takeDamage);
 
-        // Old Knockback calculations
-        //Vector2 kbForce = (transform.position - dam.fromGO.position).normalized * dam.knockback;
-        //kbForce = new Vector2(kbForce.x, 0); // Remove Y axis calculations from knockback. NOTE: Consider halving y force to create a smaller "bounce" effect
-        //m_rb.AddForce(kbForce, ForceMode2D.Impulse);
+            // Old Knockback calculations
+            //Vector2 kbForce = (transform.position - dam.fromGO.position).normalized * dam.knockback;
+            //kbForce = new Vector2(kbForce.x, 0); // Remove Y axis calculations from knockback. NOTE: Consider halving y force to create a smaller "bounce" effect
+            //m_rb.AddForce(kbForce, ForceMode2D.Impulse);
 
-        // New Knockback calculations
-        float kbDirCheck = transform.position.x - dam.fromGO.position.x;
-        Vector2 kbDir = new Vector2(1F, 0.5F); // Default knockback to right.
-        if (kbDirCheck < 0) // If my X minus source X is negative, then they are to my right.
-            kbDir = new Vector2(-1F, 0.5F); // Damage source is to my right, so knockback to left.
-        m_rb.velocity = kbDir * dam.knockback; // set velocity to direction times knockback strength.
-        Pause(0.3F); // Pause input briefly.
+            // New Knockback calculations
+            float kbDirCheck = transform.position.x - dam.fromGO.position.x;
+            Vector2 kbDir = new Vector2(1F, 0.5F); // Default knockback to right.
+            if (kbDirCheck < 0) // If my X minus source X is negative, then they are to my right.
+                kbDir = new Vector2(-1F, 0.5F); // Damage source is to my right, so knockback to left.
+            m_rb.velocity = kbDir * dam.knockback; // set velocity to direction times knockback strength.
+            Pause(0.3F); // Pause input briefly.
 
-		switch (dam.type)
-		{
-			case DamageType.NONE:
-				break;
-			case DamageType.POISON:
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_poison);
-				m_timerPoison = dam.effectTime;
-				m_strengthPoison = dam.effectStrength;
-				break;
-			case DamageType.BURN:
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_burnt);
-				m_timerBurn = dam.effectTime;
-				m_strengthBurn = dam.effectStrength;
-				break;
-			case DamageType.FREEZE:
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_frozen);
-				m_timerFreeze = dam.effectTime;
-				m_strengthFreeze = dam.effectStrength;
-				break;
-			case DamageType.BLEED:
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_bleed);
-				m_timerBleed = dam.effectTime;
-				m_strengthBleed = dam.effectStrength;
-				break;
-			default:
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_stab);
-				break;
-		}
+            switch (dam.type)
+            {
+                case DamageType.NONE:
+                    break;
+                case DamageType.POISON:
+                    AudioManager.Inst.PlaySFX(AudioManager.Inst.a_poison);
+                    m_timerPoison = dam.effectTime;
+                    m_strengthPoison = dam.effectStrength;
+                    break;
+                case DamageType.BURN:
+                    AudioManager.Inst.PlaySFX(AudioManager.Inst.a_burnt);
+                    m_timerBurn = dam.effectTime;
+                    m_strengthBurn = dam.effectStrength;
+                    break;
+                case DamageType.FREEZE:
+                    AudioManager.Inst.PlaySFX(AudioManager.Inst.a_frozen);
+                    m_timerFreeze = dam.effectTime;
+                    m_strengthFreeze = dam.effectStrength;
+                    break;
+                case DamageType.BLEED:
+                    AudioManager.Inst.PlaySFX(AudioManager.Inst.a_bleed);
+                    m_timerBleed = dam.effectTime;
+                    m_strengthBleed = dam.effectStrength;
+                    break;
+                default:
+                    AudioManager.Inst.PlaySFX(AudioManager.Inst.a_stab);
+                    break;
+            }
 
-		if (m_timerBleed > 0)
-		{
-			DamageBleed(dam.amount);
-		}
+            if (m_timerBleed > 0)
+            {
+                DamageBleed(dam.amount);
+            }
 
-		m_damageTimer = 1;
+            m_damageTimer = 1;
 
-		if (m_hitPoints <= 0)
-		{
-			OnDeath();
-		}
+            if (m_hitPoints <= 0)
+            {
+                OnDeath();
+            }
+        }
 	}
 
 	//Use this to modify the damage if you need
