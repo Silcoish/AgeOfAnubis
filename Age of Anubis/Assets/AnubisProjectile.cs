@@ -1,5 +1,4 @@
-/* Copyright (c) Handsome Dragon Games
-*  http://www.handsomedragongames.com
+/* Copyright (c) Dungeon Crawlers
 *  Script Created by:
 *  Corey Underdown
 */
