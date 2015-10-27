@@ -77,6 +77,11 @@ public class Player : Damageable
         Application.LoadLevel("ShopScene");
     }
 
+	public void LeaveDungeon()
+	{
+		Application.LoadLevel("ShopScene");
+	}
+
     public override void RecoverHealth(int amount)
     {
         base.RecoverHealth(amount);
