@@ -256,7 +256,7 @@ public class Damageable : MonoBehaviour
 		m_timerPause = seconds;
 	}
 
-    public void RecoverHealth(int amount)
+    public virtual void RecoverHealth(int amount)
     {
         m_hitPoints += amount;
         if (m_hitPoints > m_maxHitpoints)
