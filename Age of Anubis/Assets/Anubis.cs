@@ -1,5 +1,4 @@
-/* Copyright (c) Handsome Dragon Games
-*  http://www.handsomedragongames.com
+/* Copyright (c) Dungeon Crawlers
 *  Script Created by:
 *  Corey Underdown
 */
@@ -325,7 +324,7 @@ public class Anubis : Enemy
 			{
 				curState = State.PROJECTILE;
 				dash = 0;
-				Flip();
+				//Flip();
 			}
 		}
 	}
@@ -344,7 +343,7 @@ public class Anubis : Enemy
 			{
 				curState = State.PROJECTILE;
 				dash = 0;
-				Flip();
+				//Flip();
 			}
 		}
 	}
