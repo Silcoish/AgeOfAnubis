@@ -67,6 +67,11 @@ public class Enemy : Damageable
             Instantiate(m_deathParticle, transform.position, transform.rotation);
         if(GameManager.inst.coinPrefab)
             Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
+        if(GameManager.inst.healthPotionPrefab)
+        {
+            if(Random.value <= GameManager.inst.hpDropChance)
+                Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
+        }
 		gameObject.SetActive(false);
 	}
 

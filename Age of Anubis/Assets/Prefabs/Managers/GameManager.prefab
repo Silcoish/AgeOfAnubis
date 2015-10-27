@@ -42,6 +42,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   m_saveManager: {fileID: 0}
+  coinPrefab: {fileID: 116776, guid: f30414f88aea2d1428209d86131f5eb0, type: 2}
+  healthPotionPrefab: {fileID: 158366, guid: 4d4dcfc1f2384ec49afa6fc8103893ef, type: 2}
+  hpDropChance: .300000012
+  minimap: {fileID: 0}
+  minimapTex: {fileID: 0}
 --- !u!114 &11472624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,9 +58,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfa750f68d0e0048a2669f82866b63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gold: 0
-  m_currentWeapon: {fileID: 173356, guid: 4cb1172e9c2d7144cb9f42ff618ff6af, type: 2}
-  m_secondaryWeapon: {fileID: 108578, guid: 48e0f23b675d84b4cbc8b9f384404ed4, type: 2}
+  m_multiplierIncrease: .100000001
+  m_currentWeapon: {fileID: 108578, guid: 48e0f23b675d84b4cbc8b9f384404ed4, type: 2}
+  m_secondaryWeapon: {fileID: 173356, guid: 4cb1172e9c2d7144cb9f42ff618ff6af, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

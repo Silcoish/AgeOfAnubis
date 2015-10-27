@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject player;
 	public SaveManager m_saveManager;
     public GameObject coinPrefab;
+    public GameObject healthPotionPrefab;
+    public float hpDropChance = 0.2F;
 	public GameObject minimap;
 	public Texture2D minimapTex;
 

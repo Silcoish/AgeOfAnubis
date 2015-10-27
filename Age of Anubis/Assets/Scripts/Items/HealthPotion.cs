@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class Gold : MonoBehaviour 
+public class HealthPotion : MonoBehaviour 
 {
-    public float m_coinValue = 10;
+    public int m_healthValue = 2;
     public float m_animationFrequency = 5F;
     private float m_curTimer = 0;
     private Animator m_anim;
@@ -26,11 +26,10 @@ public class Gold : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Player")
+        if (col.tag == "Player")
         {
-            PlayerInventory.Inst.ChangeGold((int)m_coinValue);
-            //PlayerInventory.Inst.ChangeMultiplier(0.01f);
-            AudioManager.Inst.PlaySFX(AudioManager.Inst.a_coin);
+            col.gameObject.GetComponent<Damageable>().RecoverHealth(m_healthValue);
+            AudioManager.Inst.PlaySFX(AudioManager.Inst.a_pickupWeapon);
             Destroy(gameObject);
         }
     }
