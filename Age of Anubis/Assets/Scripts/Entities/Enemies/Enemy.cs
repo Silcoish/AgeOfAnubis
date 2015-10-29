@@ -205,13 +205,13 @@ public class Enemy : Damageable
 	}
 
     // Performs a short range raycast from relativePos down to see if a platform exists.
-    protected bool CheckFloor(float relativePos, float distance)
+    protected bool CheckPlatformInRange(Vector2 position, Vector2 direction, float distance)
     {
-        RaycastHit2D floorCheck = Physics2D.Raycast(new Vector2(relativePos, transform.position.y), Vector2.down, distance, platformMask);
+        RaycastHit2D floorCheck = Physics2D.Raycast(position, direction, distance, platformMask);
         if (floorCheck.collider == null)
         {
             return false;
         }
-        return true; ;
+        return true;
     }
 }

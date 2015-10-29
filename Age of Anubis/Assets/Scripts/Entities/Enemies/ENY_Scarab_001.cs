@@ -29,25 +29,25 @@ public class ENY_Scarab_001 : Enemy
 
 	public override void EnemyBehaviour()
 	{
-        // Check if near edge of platfrom and reverse direction
+        // Check if near edge of platfrom or a wall and reverse direction
         if(m_dir > 0)
         {
-            if(!CheckFloor(transform.position.x + m_ledgeCheckDist, 1))
+            if (!CheckPlatformInRange(new Vector2(transform.position.x + m_ledgeCheckDist, transform.position.y), Vector2.down, 0.5F)
+                || CheckPlatformInRange(transform.position, Vector2.right, m_ledgeCheckDist))
             {
                 m_dir = -m_moveSpeed;
             }
         }
         else
         {
-            if (!CheckFloor(transform.position.x - m_ledgeCheckDist, 1))
+            if (!CheckPlatformInRange(new Vector2(transform.position.x - m_ledgeCheckDist, transform.position.y), Vector2.down, 0.5F)
+                || CheckPlatformInRange(transform.position, Vector2.left, m_ledgeCheckDist))
             {
                 m_dir = m_moveSpeed;
             }
         }
 
         m_rb.velocity = new Vector2(m_dir, m_rb.velocity.y);
-
-
 
 		/*
 		CheckReturn checkreturn = CheckEnemyLocation();
