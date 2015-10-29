@@ -16,6 +16,7 @@ public class PlayerInventory : MonoBehaviour
 
 	public GameObject m_currentWeapon;
 	public GameObject m_secondaryWeapon;
+    public GameObject m_defaultWeapon;
 
 	void Awake()
 	{
@@ -23,6 +24,8 @@ public class PlayerInventory : MonoBehaviour
 		{
 			Inst = this;
 		}
+
+        CheckWeaponValidity();
 	}
 
     void Start()
@@ -48,6 +51,7 @@ public class PlayerInventory : MonoBehaviour
         m_currentGold = 0;
         m_currentXP = 0;
         m_currentWeapon = null;
+        CheckWeaponValidity();
     }
 
 	public void ChangeGold(int amount)
@@ -103,6 +107,21 @@ public class PlayerInventory : MonoBehaviour
             m_playerLevel++;
             m_currentXP = 0;
             m_savedXP = 0;
+        }
+    }
+
+    void CheckWeaponValidity()
+    {
+        // Check for weapon in primary slot, move secondary or generate default if not.
+        if (!m_currentWeapon)
+        {
+            if (m_secondaryWeapon)
+            {
+                m_currentWeapon = m_secondaryWeapon;
+                m_secondaryWeapon = null;
+            }
+            else
+                m_currentWeapon = m_defaultWeapon;
         }
     }
 }
