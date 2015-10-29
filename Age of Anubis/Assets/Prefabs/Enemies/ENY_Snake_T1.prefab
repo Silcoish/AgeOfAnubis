@@ -75,19 +75,20 @@ MonoBehaviour:
   m_unitName: 
   m_hitPoints: 6
   m_attack:
-    m_attackStrength: 0
-    m_effectType: 0
-    m_effectDuration: 0
-    m_effectStrength: 0
-    m_knockbackForce: 0
+    m_attackStrength: 1
+    m_effectType: 2
+    m_effectDuration: 2
+    m_effectStrength: 1
+    m_knockbackForce: 5
   m_XP: 5
   m_deathParticle: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
   m_moveSpeed: 2
   m_ledgeCheckDist: 1
   m_attackTimer: 5
   m_venomProj: {fileID: 142830, guid: c06495a67c98b46459bb901760af3279, type: 2}
-  m_launchVec: {x: 1, y: .75}
-  m_launchForce: 500
+  m_launchVec: {x: 1, y: .5}
+  m_launchForce: 6
+  m_shootDelay: .5
 --- !u!114 &11421976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,7 +125,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300010, guid: 9976767c1b65b31499363688a24e061d, type: 3}
+  m_Sprite: {fileID: 21300016, guid: 9976767c1b65b31499363688a24e061d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

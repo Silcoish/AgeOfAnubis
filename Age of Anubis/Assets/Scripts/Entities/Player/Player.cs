@@ -65,8 +65,10 @@ public class Player : Damageable
 
 		Check2WayPlatforms();
 
-		PlayerInput();	
-		
+		PlayerInput();
+
+        // WARNING: Damage over time effects do not call OnTakeDamage() each tick, so health does not get updated.
+        UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
     }
 
     public override void OnDeath()

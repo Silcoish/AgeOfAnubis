@@ -275,9 +275,9 @@ public class Damageable : MonoBehaviour
 
 	void DamagePoison()
 	{
-		m_leftoverPoisonDamage += m_strengthPoison * m_poisonTime;
-		m_hitPoints -= (int)m_leftoverPoisonDamage;
-		if ((int)m_leftoverPoisonDamage > 0)
+        m_leftoverPoisonDamage += m_strengthPoison * m_poisonTime;
+		m_hitPoints -= (int)m_leftoverPoisonDamage;      
+        if ((int)m_leftoverPoisonDamage > 0)
 			SpawnText(Color.green, ((int)m_leftoverPoisonDamage).ToString());
 		m_leftoverPoisonDamage -= (int)m_leftoverPoisonDamage;
 

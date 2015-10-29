@@ -25,8 +25,10 @@ public class PROJ_VenomBall : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Damageable>().OnTakeDamage(m_attack.GetDamage(gameObject.transform));
+            Destroy(gameObject);
         }
-        if(col.gameObject.tag != "Enemy")
+
+        if(col.gameObject.tag == "Solid" || col.gameObject.tag == "NotSolid")
         {
             Destroy(gameObject);
         }

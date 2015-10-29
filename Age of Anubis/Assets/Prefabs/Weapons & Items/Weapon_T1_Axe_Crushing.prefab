@@ -66,7 +66,7 @@ MonoBehaviour:
     m_effectType: 0
     m_effectDuration: 0
     m_effectStrength: 0
-    m_knockbackForce: 40
+    m_knockbackForce: 20
   m_swingType: 2
   m_cooldown: 1.5
   m_colliderEnableDelay: .200000003
@@ -103,7 +103,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_attack.m_knockbackForce
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 108968}

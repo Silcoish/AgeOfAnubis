@@ -12,7 +12,7 @@ GameObject:
   - 50: {fileID: 5002212}
   - 58: {fileID: 5829030}
   - 114: {fileID: 11482156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PROJ_Poison_T1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_GravityScale: .100000001
   m_IsKinematic: 0
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -114,6 +114,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_GravityScale
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_attack.m_effectStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_attack.m_effectDuration
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
