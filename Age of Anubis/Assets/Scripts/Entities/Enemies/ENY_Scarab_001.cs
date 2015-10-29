@@ -8,17 +8,46 @@ public class ENY_Scarab_001 : Enemy
 	public float m_fakeGravity = 10f;
 
 	private float m_localGravityScale;
+    private float m_dir;
+    public float m_ledgeCheckDist = 1;
 
 	public override void AwakeOverride()
 	{
 		base.AwakeOverride();
 
-		m_localGravityScale = m_rb.gravityScale;
-	}
+        if (Random.value >= 0.5F)
+        {
+            m_dir = m_moveSpeed;
+        }
+        else
+        {
+            m_dir = -m_moveSpeed;
+        }
 
+		//m_localGravityScale = m_rb.gravityScale;
+	}
 
 	public override void EnemyBehaviour()
 	{
+        // Check if near edge of platfrom and reverse direction
+        if(m_dir > 0)
+        {
+            if(!CheckFloor(transform.position.x + m_ledgeCheckDist, 1))
+            {
+                m_dir = -m_moveSpeed;
+            }
+        }
+        else
+        {
+            if (!CheckFloor(transform.position.x - m_ledgeCheckDist, 1))
+            {
+                m_dir = m_moveSpeed;
+            }
+        }
+
+        m_rb.velocity = new Vector2(m_dir, m_rb.velocity.y);
+
+
 
 		/*
 		CheckReturn checkreturn = CheckEnemyLocation();
@@ -40,10 +69,5 @@ public class ENY_Scarab_001 : Enemy
 		{
 			transform.rotation = transform.rotation * Quaternion.FromToRotation(Vector2.left, Vector2.right);
 		}*/
-
-
 	}
-
-
-
 }

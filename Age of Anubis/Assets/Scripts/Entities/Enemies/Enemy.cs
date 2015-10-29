@@ -17,6 +17,8 @@ public class Enemy : Damageable
 
 	protected RoomObject m_room;
 
+    protected int platformMask;
+
 	protected enum CheckReturnEnum { None, Grounded, ReachedEdge, ReachedWall };
 
 	protected struct CheckReturn
@@ -31,6 +33,8 @@ public class Enemy : Damageable
 	{
 		m_colBox = GetComponent<BoxCollider2D>();
 		m_colCircle = GetComponent<CircleCollider2D>();
+
+        platformMask = 1 << LayerMask.NameToLayer("Platform");
 
 		//CreateDirectionColliders();
 	}
@@ -78,7 +82,7 @@ public class Enemy : Damageable
 	}
 
 
-	void OnCollisionEnter2D(Collision2D col)
+	void OnCollisionStay2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "Player")
 		{
@@ -200,4 +204,14 @@ public class Enemy : Damageable
 		m_room = r;
 	}
 
+    // Performs a short range raycast from relativePos down to see if a platform exists.
+    protected bool CheckFloor(float relativePos, float distance)
+    {
+        RaycastHit2D floorCheck = Physics2D.Raycast(new Vector2(relativePos, transform.position.y), Vector2.down, distance, platformMask);
+        if (floorCheck.collider == null)
+        {
+            return false;
+        }
+        return true; ;
+    }
 }
