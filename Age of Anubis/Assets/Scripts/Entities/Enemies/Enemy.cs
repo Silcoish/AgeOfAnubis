@@ -6,6 +6,7 @@ public class Enemy : Damageable
 {
 	[Header("EnemyStats")]
 	public Attack m_attack;
+    public int m_XP = 1;
 	private BoxCollider2D m_colBox;
 	private CircleCollider2D m_colCircle;
     public GameObject m_deathParticle;
@@ -72,6 +73,7 @@ public class Enemy : Damageable
             if(Random.value <= GameManager.inst.hpDropChance)
                 Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
         }
+        PlayerInventory.Inst.ChangeXP(m_XP);
 		gameObject.SetActive(false);
 	}
 

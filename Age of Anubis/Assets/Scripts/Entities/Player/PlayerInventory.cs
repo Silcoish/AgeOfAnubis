@@ -5,9 +5,14 @@ using System.Collections.Generic;
 public class PlayerInventory : MonoBehaviour 
 {
 	public static PlayerInventory Inst;
-	int m_coin;
-    float m_multiplier = 1F;
+    private int m_currentGold;
+    private int m_savedGold;
+    private float m_multiplier = 1F;
 	public float m_multiplierIncrease = 0.1f;
+    private int m_playerLevel = 1;
+    private int m_currentXP = 0;
+    private int m_savedXP = 0;
+    public int[] m_XPToLVL;
 
 	public GameObject m_currentWeapon;
 	public GameObject m_secondaryWeapon;
@@ -19,6 +24,11 @@ public class PlayerInventory : MonoBehaviour
 			Inst = this;
 		}
 	}
+
+    void Start()
+    {
+        UpdateUIElements();
+    }
 
 	public GameObject SwitchWeapon()
 	{
@@ -35,15 +45,23 @@ public class PlayerInventory : MonoBehaviour
     // Reset temporary values on player death.
     public void DeathReset()
     {
-        m_coin = 0;
-        m_secondaryWeapon = null;
+        m_currentGold = 0;
+        m_currentXP = 0;
+        m_currentWeapon = null;
     }
 
 	public void ChangeGold(int amount)
 	{
-		m_coin += (int)(amount * m_multiplier);
-		UIManager.Inst.UpdateCoinTotal(m_coin);
+		m_currentGold += (int)(amount * m_multiplier);
+        UpdateUIElements();
 	}
+
+    public void ChangeXP(int amount)
+    {
+        m_currentXP += amount;
+        CheckForLevelUp();
+        UpdateUIElements();
+    }
 
 	public void ChangeMultiplier(float amount)
 	{
@@ -53,7 +71,38 @@ public class PlayerInventory : MonoBehaviour
 	public void IncreaseMultiplier()
 	{
 		m_multiplier += m_multiplierIncrease;
-		UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
+        UpdateUIElements();
 	}
     
+    public void UpdateUIElements()
+    {
+        UIManager.Inst.UpdateCoinTotal(m_currentGold + m_savedGold);
+        UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
+        UIManager.Inst.UpdateXPBar(GetCurrentLevelPercent());
+    }
+
+    public float GetCurrentLevelPercent()
+    {
+        float pc = m_currentXP + m_savedXP;
+
+        if(m_playerLevel < 5)
+        {
+            pc = pc / m_XPToLVL[m_playerLevel - 1];
+        }
+        else
+        {
+            pc = 1;
+        }
+        return pc;
+    }
+
+    void CheckForLevelUp()
+    {
+        if((m_currentXP + m_savedXP) >= m_XPToLVL[m_playerLevel - 1])
+        {
+            m_playerLevel++;
+            m_currentXP = 0;
+            m_savedXP = 0;
+        }
+    }
 }
