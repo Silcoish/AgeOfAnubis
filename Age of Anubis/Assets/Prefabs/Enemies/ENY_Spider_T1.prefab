@@ -1,108 +1,113 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &192918
+--- !u!1 &152480
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 427514}
-  - 212: {fileID: 21212352}
-  - 50: {fileID: 5061818}
-  - 58: {fileID: 5897820}
-  - 114: {fileID: 11498132}
-  - 114: {fileID: 11419670}
-  m_Layer: 8
-  m_Name: ENY_Scarab_001
-  m_TagString: Enemy
+  - 4: {fileID: 496606}
+  - 212: {fileID: 21213460}
+  - 50: {fileID: 5049936}
+  - 58: {fileID: 5800026}
+  - 114: {fileID: 11410884}
+  - 114: {fileID: 11494230}
+  m_Layer: 0
+  m_Name: ENY_Spider_T1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &427514
+--- !u!4 &496606
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192918}
+  m_GameObject: {fileID: 152480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.1870003, y: 2.1099999, z: 0}
+  m_LocalPosition: {x: 15.4300003, y: 6.03999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5061818
+--- !u!50 &5049936
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192918}
+  m_GameObject: {fileID: 152480}
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &5897820
+--- !u!58 &5800026
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192918}
+  m_GameObject: {fileID: 152480}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .25
---- !u!114 &11419670
+  m_Radius: .319999993
+--- !u!114 &11410884
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192918}
+  m_GameObject: {fileID: 152480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80220c7b7f81f64ebb6943c139797c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_unitName: 
+  m_hitPoints: 4
+  m_attack:
+    m_attackStrength: 2
+    m_effectType: 0
+    m_effectDuration: 0
+    m_effectStrength: 0
+    m_knockbackForce: 0
+  m_XP: 2
+  m_deathParticle: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
+  m_moveSpeed: 2
+  m_gravityScale: 0
+  m_ledgeCheckDist: .5
+  m_facing: 3
+  m_forward: {x: 0, y: 0}
+  m_below: {x: 0, y: 0}
+  m_isInverted: 0
+  m_colState: 0
+--- !u!114 &11494230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152480}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 727c23f35245bd449946a24506db285f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_prefab: {fileID: 192918}
---- !u!114 &11498132
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dfb6d3f116aa7545bec624cf4d02477, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_unitName: 
-  m_hitPoints: 2
-  m_attack:
-    m_attackStrength: 1
-    m_effectType: 0
-    m_effectDuration: 0
-    m_effectStrength: 0
-    m_knockbackForce: 5
-  m_XP: 1
-  m_deathParticle: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
-  m_moveSpeed: 2
-  m_fakeGravity: 10
-  m_ledgeCheckDist: .5
---- !u!212 &21212352
+  m_prefab: {fileID: 152480}
+--- !u!212 &21213460
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192918}
+  m_GameObject: {fileID: 152480}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -131,34 +136,30 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: m_attack.m_attackStrength
-      value: 1
+      propertyPath: m_prefab
+      value: 
+      objectReference: {fileID: 152480}
+    - target: {fileID: 0}
+      propertyPath: m_ledgeCheckDist
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: hitPoints
+      propertyPath: m_attack.m_attackStrength
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: m_attack.m_knockbackForce
-      value: 5
+      propertyPath: m_XP
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_hitPoints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_deathParticle
       value: 
       objectReference: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
-    - target: {fileID: 0}
-      propertyPath: m_prefab
-      value: 
-      objectReference: {fileID: 192918}
-    - target: {fileID: 0}
-      propertyPath: m_hitPoints
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_XP
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 192918}
+  m_RootGameObject: {fileID: 152480}
   m_IsPrefabParent: 1
