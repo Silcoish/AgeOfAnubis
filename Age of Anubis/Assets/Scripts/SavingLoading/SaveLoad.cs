@@ -16,7 +16,8 @@ public class SaveData : ISerializable
 	// === Values ===
 	// Edit these during gameplay
 	public int currentLevel = 1;
-	public float exp = 0;
+	public int exp = 0;
+	public int gold = 0;
 	// === /Values ===
 
 	// The default constructor. Included for when we call it during Save() and Load()
@@ -29,7 +30,8 @@ public class SaveData : ISerializable
 		// Get the values from info and assign them to the appropriate properties. Make sure to cast each variable.
 		// Do this for each var defined in the Values section above
 		currentLevel = (int)info.GetValue("currentLevel", typeof(int));
-		exp = (float)info.GetValue("exp", typeof(float));
+		exp = (int)info.GetValue("exp", typeof(int));
+		gold = (int)info.GetValue("gold", typeof(int));
 
 		//levelReached = (int)info.GetValue("levelReached", typeof(int));
 	}
@@ -40,6 +42,7 @@ public class SaveData : ISerializable
 		// Repeat this for each var defined in the Values section
 		info.AddValue("currentLevel", (currentLevel));
 		info.AddValue("exp", exp);
+		info.AddValue("gold", gold);
 		//info.AddValue("levelReached", levelReached);
 	}
 }
@@ -48,7 +51,7 @@ public class SaveData : ISerializable
 public class SaveLoad
 {
 
-	public static string currentFilePath = "SaveData.dc";    // Edit this for different save files
+	public static string currentFilePath = Application.persistentDataPath + "Savegame.fiin";    // Edit this for different save files
 
 	// Call this to write data
 	public static void Save()  // Overloaded
@@ -62,12 +65,15 @@ public class SaveLoad
 
 		data.currentLevel = GameManager.inst.m_saveManager.m_currentLevel;
 		data.exp = GameManager.inst.m_saveManager.m_exp;
+		data.gold = GameManager.inst.m_saveManager.m_gold;
 
 		Stream stream = File.Open(filePath, FileMode.Create);
 		BinaryFormatter bformatter = new BinaryFormatter();
 		bformatter.Binder = new VersionDeserializationBinder();
 		bformatter.Serialize(stream, data);
 		stream.Close();
+
+		Debug.Log("Saving");
 	}
 
 	// Call this to load from a file into "data"
@@ -84,7 +90,10 @@ public class SaveLoad
 		// Now use "data" to access your Values
 		Debug.Log("Current Level: " + data.currentLevel);
 		Debug.Log("Exp: " + data.exp);
-		
+
+		GameManager.inst.m_saveManager.m_currentLevel = data.currentLevel;
+		GameManager.inst.m_saveManager.m_exp = data.exp;
+		GameManager.inst.m_saveManager.m_gold = data.gold;
 	}
 
 }

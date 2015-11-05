@@ -5,17 +5,49 @@
 */
  
 using UnityEngine;
+using System.IO;
  
 public class SaveManager : MonoBehaviour
 {
 	public int m_currentLevel;
-	public float m_exp;
+	public int m_exp;
+	public int m_gold;
+
+	void Start()
+	{
+		if (File.Exists(Application.persistentDataPath + "Savegame.fiin"))
+		{
+			print("LOADING");
+			Load();
+		}
+		else
+		{
+			Save();
+			Load();
+		}
+	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.L))
-			SaveLoad.Load();
-		if (Input.GetKeyDown(KeyCode.O))
-			SaveLoad.Save();
+		if(Input.GetKeyDown(KeyCode.O))
+		{
+			Save();
+		}
+		if(Input.GetKeyDown(KeyCode.P))
+		{
+			Load();
+		}
+	}
+
+	public void Save()
+	{
+		m_gold = PlayerInventory.Inst.m_currentGold;
+		m_exp = PlayerInventory.Inst.m_currentXP;
+		SaveLoad.Save();
+	}
+
+	public void Load()
+	{
+		SaveLoad.Load();
 	}
 }

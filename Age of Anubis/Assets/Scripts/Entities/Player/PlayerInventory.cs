@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class PlayerInventory : MonoBehaviour 
 {
 	public static PlayerInventory Inst;
-    private int m_currentGold;
+    public int m_currentGold;
     private int m_savedGold;
     private float m_multiplier = 1F;
 	public float m_multiplierIncrease = 0.1f;
     private int m_playerLevel = 1;
-    private int m_currentXP = 0;
+    public int m_currentXP = 0;
     private int m_savedXP = 0;
     public int[] m_XPToLVL;
 
@@ -30,6 +30,8 @@ public class PlayerInventory : MonoBehaviour
 
     void Start()
     {
+		m_currentGold = GameManager.inst.m_saveManager.m_gold;
+		m_currentXP = (int)GameManager.inst.m_saveManager.m_exp;
         UpdateUIElements();
     }
 

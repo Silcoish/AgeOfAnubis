@@ -10,6 +10,7 @@ public class EnterDungeon : ActivateArea
 
 
 		//TODO Load Dungeon
+		GameManager.inst.m_saveManager.Save();
 		LoadingManager.Inst.LoadLevel("DungeonGenTest",true);
 		
 	}
