@@ -24,6 +24,11 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
+	void Start()
+	{
+		PlayerInventory.Inst.UpdateUIElements();
+	}
+
 	public void UpdateHealthBar(float percentage)
 	{
 		m_healthBar.fillAmount = percentage;
