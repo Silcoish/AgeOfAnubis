@@ -35,6 +35,7 @@ public class Anubis : Enemy
 	}
 
 	public State curState = State.IDLE;
+	List<State> prevStates = new List<State>();
 	Side curSide;
 	BattleStage curStage = BattleStage.FIRST;
 
@@ -43,6 +44,12 @@ public class Anubis : Enemy
 
 	public BoxCollider2D collider;
 	public BoxCollider2D frontCollider;
+
+	private float m_hpPercentage = 100;
+
+	[Header("Battle Stage Health Percentages")]
+	float secondStateHPPercent = 60;
+	float thirdStateHPPercent = 30;
 
 	[Header("Spawn Enemies Variables")]
 	public GameObject spawnEnemy;
@@ -62,11 +69,20 @@ public class Anubis : Enemy
 	public float m_projectileBottomRow;
 	public float m_projectileCooldown;
 	float m_projectileCounter;
+	public int m_howManyShots = 5;
+	int m_shots = 0;
 
 	[Header("Dash State Variables")]
 	public float dashSpeed;
 	public float raycastLength = 1.0f;
 	float dash;
+
+	[Header("Stuck State Variables")]
+	public float m_stuckTime = 5f;
+	float m_stuckTimeCounter = 0.0f;
+	public float m_maxPercentageHPTakenStuck = 5f;
+	bool setStartHealth;
+	float stuckStartHPPercent;
 
 	[Header("Crouch State Variables")]
 	public float crouchSpeed = 10.0f;
@@ -128,11 +144,26 @@ public class Anubis : Enemy
 		return dam;
 	}
 
-
 	#region StateUpdates
 	void UpdateIdle()
 	{
+		CalculateHPPercentage();
+		if (m_hpPercentage <= secondStateHPPercent && m_hpPercentage > thirdStateHPPercent)
+		{
+			curStage = BattleStage.SECOND;
+		}
+		else if(m_hpPercentage <= thirdStateHPPercent)
+		{
+			curStage = BattleStage.THIRD;
+		}
 
+		if(prevStates.Count >= 1)
+		{
+			if (prevStates[prevStates.Count - 1] == State.DASH)
+			{
+				curState = State.STUCK;
+			}
+		}
 	}
 
 	void UpdateProjectile()
@@ -143,6 +174,14 @@ public class Anubis : Enemy
 			m_projectileCounter = 0.0f;
 			GameObject tempProjectile = (GameObject)Instantiate(m_projectile, transform.position, Quaternion.identity);
 			tempProjectile.GetComponent<AnubisProjectile>().Setup(SideFloat(m_projectileHorizSpeed), m_projectileVertSpeed, ChooseLayer());
+			m_shots++;
+
+		}
+
+		if (m_shots >= m_howManyShots)
+		{
+			FinishedState();
+			m_shots = 0;
 		}
 	}
 
@@ -177,7 +216,7 @@ public class Anubis : Enemy
 			}
 			spawnedEnemies.Clear();
 			enemiesCount = 0;
-			curState = State.DASH;
+			FinishedState();
 		}
 	}
 
@@ -196,7 +235,26 @@ public class Anubis : Enemy
 
 	void UpdateStuck()
 	{
+		CalculateHPPercentage();
+		if(!setStartHealth)
+		{
+			stuckStartHPPercent = m_hpPercentage;
+			setStartHealth = true;
+		}
 
+		if(stuckStartHPPercent - m_hpPercentage >= m_maxPercentageHPTakenStuck)
+		{
+			FinishedState();
+			return;
+		}
+
+		m_stuckTimeCounter += Time.deltaTime;
+
+		if(m_stuckTimeCounter > m_stuckTime)
+		{
+			setStartHealth = false;
+			FinishedState();
+		}
 	}
 
 	void UpdateEscape()
@@ -241,10 +299,21 @@ public class Anubis : Enemy
 					isMovingDown = true;
 					crouchWaitCounter = 0.0f;
 					crouchStartPos = Vector2.zero;
-					curState = State.IDLE;
+					FinishedState();
 				}
 			}
 		}
+	}
+
+	void FinishedState()
+	{
+		if(prevStates.Count >= 3)
+		{
+			prevStates.RemoveAt(0);
+		}
+		prevStates.Add(curState);
+
+		curState = State.IDLE;
 	}
 	#endregion
 
@@ -309,6 +378,11 @@ public class Anubis : Enemy
 		transform.localScale = scale;
 	}
 
+	void CalculateHPPercentage()
+	{
+		m_hpPercentage = ((float)m_hitPoints / (float)m_maxHitpoints) * 100;
+	}
+
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "Player")
@@ -322,7 +396,7 @@ public class Anubis : Enemy
 		{
 			if(curState == State.DASH)
 			{
-				curState = State.PROJECTILE;
+				FinishedState();
 				dash = 0;
 				//Flip();
 			}
@@ -341,7 +415,7 @@ public class Anubis : Enemy
 		{
 			if (curState == State.DASH)
 			{
-				curState = State.PROJECTILE;
+				FinishedState();
 				dash = 0;
 				//Flip();
 			}
