@@ -72,6 +72,8 @@ public class RoomObject : MonoBehaviour
 	{
 		isActiveRoom = true;
 
+		
+
 		foreach (var en in m_allEnemies)
 		{
 			en.gameObject.SetActive(true);
@@ -81,6 +83,9 @@ public class RoomObject : MonoBehaviour
 
 		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(1, 0, 0, 0.5f), new Color(1, 0.5f, 0.5f, 0.5f));
 		GameManager.inst.RefreshMinimap();
+
+		if (m_allEnemies.Count == 0)
+			return;
 
 		LockDoors();
 	}
