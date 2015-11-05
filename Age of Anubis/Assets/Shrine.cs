@@ -11,6 +11,9 @@ public class Shrine : ActivateArea
 	{
 		base.OnActivate();
 
+		if (GameManager.inst.m_saveManager != null)
+			GameManager.inst.m_saveManager.Save();
+
 		GameManager.inst.player.GetComponent<Player>().LeaveDungeon();		
 	}
     

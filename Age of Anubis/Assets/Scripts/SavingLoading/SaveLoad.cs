@@ -94,6 +94,8 @@ public class SaveLoad
 		GameManager.inst.m_saveManager.m_currentLevel = data.currentLevel;
 		GameManager.inst.m_saveManager.m_exp = data.exp;
 		GameManager.inst.m_saveManager.m_gold = data.gold;
+
+		Debug.Log(GameManager.inst.m_saveManager.m_gold);
 	}
 
 }

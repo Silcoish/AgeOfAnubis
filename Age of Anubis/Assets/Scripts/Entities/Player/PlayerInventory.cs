@@ -30,8 +30,11 @@ public class PlayerInventory : MonoBehaviour
 
     void Start()
     {
-		m_currentGold = GameManager.inst.m_saveManager.m_gold;
-		m_currentXP = (int)GameManager.inst.m_saveManager.m_exp;
+		if(GameManager.inst.m_saveManager != null)
+		{
+			m_currentGold = GameManager.inst.m_saveManager.m_gold;
+			m_currentXP = (int)GameManager.inst.m_saveManager.m_exp;
+		}
         UpdateUIElements();
     }
 
