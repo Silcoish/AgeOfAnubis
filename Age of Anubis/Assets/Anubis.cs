@@ -11,6 +11,7 @@ public class Anubis : Enemy
 	public enum State
 	{
 		IDLE,
+		INTRO,
 		PROJECTILE,
 		ENEMIES,
 		PROJECTILEANDENEMIES,
@@ -105,11 +106,13 @@ public class Anubis : Enemy
 	public override void EnemyBehaviour()
 	{
 		CheckSide();
-		DebugKeyboardCommands();
 		switch (curState)
 		{
 			case State.IDLE:
 				UpdateIdle();
+				break;
+			case State.INTRO:
+				UpdateIntro();
 				break;
 			case State.PROJECTILE:
 				UpdateProjectile();
@@ -159,11 +162,28 @@ public class Anubis : Enemy
 
 		if(prevStates.Count >= 1)
 		{
-			if (prevStates[prevStates.Count - 1] == State.DASH)
+			if(curStage == BattleStage.FIRST)
 			{
-				curState = State.STUCK;
+				ChooseNextState1();
+			}
+			else if (curStage == BattleStage.SECOND)
+			{
+				ChooseNextState2();
+			}
+			else
+			{
+				ChooseNextState3();
 			}
 		}
+		else
+		{
+			curState = State.INTRO;
+		}
+	}
+
+	void UpdateIntro()
+	{
+		FinishedState();
 	}
 
 	void UpdateProjectile()
@@ -253,6 +273,7 @@ public class Anubis : Enemy
 		if(m_stuckTimeCounter > m_stuckTime)
 		{
 			setStartHealth = false;
+			m_stuckTimeCounter = 0;
 			FinishedState();
 		}
 	}
@@ -315,6 +336,62 @@ public class Anubis : Enemy
 
 		curState = State.IDLE;
 	}
+
+	void ChooseNextState1()
+	{
+		if (prevStates[prevStates.Count - 1] == State.DASH)
+		{
+			curState = State.STUCK;
+		}
+
+		if (prevStates[prevStates.Count - 1] == State.STUCK || prevStates[prevStates.Count - 1] == State.INTRO)
+		{
+			if (prevStates[prevStates.Count - 1] == State.STUCK)
+				Flip();
+			if (Random.Range(0, 2) == 0)
+			{
+				curState = State.PROJECTILE;
+			}
+			else
+			{
+				curState = State.ENEMIES;
+			}
+		}
+
+		if (prevStates[prevStates.Count - 1] == State.ENEMIES)
+		{
+			if (Random.Range(0, 3) == 0)
+			{
+				curState = State.PROJECTILE;
+			}
+			else
+			{
+				curState = State.DASH;
+			}
+		}
+
+		if (prevStates[prevStates.Count - 1] == State.PROJECTILE)
+		{
+			if (Random.Range(0, 3) == 0)
+			{
+				curState = State.ENEMIES;
+			}
+			else
+			{
+				curState = State.DASH;
+			}
+		}
+	}
+
+	void ChooseNextState2()
+	{
+
+	}
+
+	void ChooseNextState3()
+	{
+
+	}
 	#endregion
 
 	void CheckSide()
@@ -346,28 +423,6 @@ public class Anubis : Enemy
 			return f;
 		else
 			return -f;
-	}
-
-	void DebugKeyboardCommands()
-	{
-		if (Input.GetKeyDown(KeyCode.Keypad1))
-			curState = State.IDLE;
-		if (Input.GetKeyDown(KeyCode.Keypad2))
-			curState = State.PROJECTILE;
-		if (Input.GetKeyDown(KeyCode.Keypad3))
-			curState = State.ENEMIES;
-		if (Input.GetKeyDown(KeyCode.Keypad4))
-			curState = State.PROJECTILEANDENEMIES;
-		if (Input.GetKeyDown(KeyCode.Keypad5))
-			curState = State.DASH;
-		if (Input.GetKeyDown(KeyCode.Keypad6))
-			curState = State.STUCK;
-		if (Input.GetKeyDown(KeyCode.Keypad7))
-			curState = State.ESCAPE;
-		if (Input.GetKeyDown(KeyCode.Keypad8))
-			curState = State.CROUCH;
-		if (Input.GetKeyDown(KeyCode.Keypad9))
-			curState = State.BASH;
 	}
 
 	void Flip()
