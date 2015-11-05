@@ -46,6 +46,9 @@ public class Anubis : Enemy
 	public BoxCollider2D collider;
 	public BoxCollider2D frontCollider;
 
+	public GameObject UIObject;
+	public UnityEngine.UI.Image UIImage;
+
 	private float m_hpPercentage = 100;
 
 	[Header("Battle Stage Health Percentages")]
@@ -101,10 +104,15 @@ public class Anubis : Enemy
 		t = transform;
 		rb = GetComponent<Rigidbody2D>();
 		spawnedEnemies = new List<GameObject>();
+		if(UIObject != null)
+		{
+			UIObject.SetActive(true);
+		}
 	}
 
 	public override void EnemyBehaviour()
 	{
+		CalculateHPPercentage();
 		CheckSide();
 		switch (curState)
 		{
@@ -150,7 +158,6 @@ public class Anubis : Enemy
 	#region StateUpdates
 	void UpdateIdle()
 	{
-		CalculateHPPercentage();
 		if (m_hpPercentage <= secondStateHPPercent && m_hpPercentage > thirdStateHPPercent)
 		{
 			curStage = BattleStage.SECOND;
@@ -242,7 +249,8 @@ public class Anubis : Enemy
 
 	void UpdateProjectileAndEnemies()
 	{
-
+		UpdateProjectile();
+		UpdateEnemies();
 	}
 
 	void UpdateDash()
@@ -436,6 +444,11 @@ public class Anubis : Enemy
 	void CalculateHPPercentage()
 	{
 		m_hpPercentage = ((float)m_hitPoints / (float)m_maxHitpoints) * 100;
+
+		if(UIImage != null)
+		{
+			UIImage.fillAmount = m_hpPercentage / 100;
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -474,6 +487,14 @@ public class Anubis : Enemy
 				dash = 0;
 				//Flip();
 			}
+		}
+	}
+
+	void OnDestroy()
+	{
+		if(UIObject != null)
+		{
+			UIObject.SetActive(false);
 		}
 	}
 }
