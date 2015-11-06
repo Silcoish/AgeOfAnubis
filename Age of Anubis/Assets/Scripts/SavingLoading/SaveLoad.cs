@@ -61,11 +61,16 @@ public class SaveLoad
 
 	public static void Save(string filePath)
 	{
+		Save(filePath, GameManager.inst.m_saveManager);
+	}
+
+	public static void Save(string filePath, SaveManager sm)
+	{
 		SaveData data = new SaveData();
 
-		data.currentLevel = GameManager.inst.m_saveManager.m_currentLevel;
-		data.exp = GameManager.inst.m_saveManager.m_exp;
-		data.gold = GameManager.inst.m_saveManager.m_gold;
+		data.currentLevel = sm.m_currentLevel;
+		data.exp = sm.m_exp;
+		data.gold = sm.m_gold;
 
 		Stream stream = File.Open(filePath, FileMode.Create);
 		BinaryFormatter bformatter = new BinaryFormatter();

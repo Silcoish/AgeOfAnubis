@@ -51,6 +51,14 @@ public class SaveManager : MonoBehaviour
 		SaveLoad.Save();
 	}
 
+	public void NewGame()
+	{
+		m_gold = 0;
+		m_exp = 0;
+		m_currentLevel = 1;
+		SaveLoad.Save(SaveLoad.currentFilePath, this);
+	}
+
 	public void Load()
 	{
 		SaveLoad.Load();

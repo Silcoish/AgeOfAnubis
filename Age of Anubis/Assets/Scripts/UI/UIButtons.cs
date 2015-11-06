@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,6 +8,8 @@ public class UIButtons : MonoBehaviour
 
 	List<GameObject> m_previousMenus;
 	public GameObject m_curMenu;
+
+	public SaveManager m_saveManager;
 
 	void Awake()
 	{
@@ -31,6 +33,12 @@ public class UIButtons : MonoBehaviour
 
 
 	public void NewGame()
+	{
+		m_saveManager.NewGame();
+		LoadingManager.Inst.LoadLevel("ShopScene", true);
+	}
+
+	public void Continue()
 	{
 		LoadingManager.Inst.LoadLevel("ShopScene", true);
 	}
