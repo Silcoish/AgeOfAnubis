@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
     public float hpDropChance = 0.2F;
 	public GameObject minimap;
 	public Texture2D minimapTex;
+	public GameObject visibleMap;
+	public Texture2D visibleMapTex;
 
 	void Awake()
 	{
@@ -34,6 +36,14 @@ public class GameManager : MonoBehaviour {
 		catch(Exception e)
 		{
 			print(e.Message);
+		}
+	}
+
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.M))
+		{
+			CreateVisibleMap(UnityEngine.Random.Range(0, 4), UnityEngine.Random.Range(0, 4));
 		}
 	}
 
@@ -62,7 +72,7 @@ public class GameManager : MonoBehaviour {
 				}
 				if(((y == 0 || y == 7) && (x == 7 || x == 8)) || ((x == 0 || x == 15) && (y == 3 || y == 4))) 
 				{
-					showCol = Color.magenta;
+					//showCol = Color.magenta;
 				}
 
 				t.SetPixel(((i % 15) * 16) + x, ((t.height - 1 - (int)i / 15) * 8) + y, showCol);
@@ -70,6 +80,28 @@ public class GameManager : MonoBehaviour {
 		}
 
 		t.Apply();
+
+		//CreateVisibleMap();
+	}
+
+	public void CreateVisibleMap(int xOffset, int yOffset)
+	{
+		SpriteRenderer sr = visibleMap.GetComponent<SpriteRenderer>();
+
+		Texture2D tex = new Texture2D(16 * 7, 8 * 9);
+		tex.filterMode = FilterMode.Point;
+
+		for (int y = 0; y < tex.height; y++)
+		{
+			for (int x = 0; x < tex.width; x++)
+			{
+				tex.SetPixel(x, tex.height - y, minimapTex.GetPixel(x + (xOffset * 16) - (3 * 16), minimapTex.height - y + (yOffset * 8) - (4 * 8)));
+			}
+		}
+
+		tex.Apply();
+
+		sr.sprite = Sprite.Create(tex, new Rect(Vector2.zero, new Vector2(tex.width, tex.height)), Vector2.zero);
 	}
 
 }
