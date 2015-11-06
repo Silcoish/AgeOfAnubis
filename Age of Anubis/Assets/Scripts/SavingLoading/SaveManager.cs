@@ -47,6 +47,7 @@ public class SaveManager : MonoBehaviour
 	{
 		m_gold = PlayerInventory.Inst.m_currentGold;
 		m_exp = PlayerInventory.Inst.m_currentXP;
+		m_currentLevel = PlayerInventory.Inst.m_playerLevel;
 		SaveLoad.Save();
 	}
 

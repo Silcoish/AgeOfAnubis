@@ -9,7 +9,8 @@ public class PlayerInventory : MonoBehaviour
     private int m_savedGold;
     private float m_multiplier = 1F;
 	public float m_multiplierIncrease = 0.1f;
-    private int m_playerLevel = 1;
+    public int m_playerLevel = 1;
+	public int m_savedPlayerLevel = 1;
     public int m_currentXP = 0;
     private int m_savedXP = 0;
     public int[] m_XPToLVL;
@@ -33,7 +34,11 @@ public class PlayerInventory : MonoBehaviour
 		if(GameManager.inst.m_saveManager != null)
 		{
 			m_currentGold = GameManager.inst.m_saveManager.m_gold;
+			m_savedGold = m_currentGold;
 			m_currentXP = (int)GameManager.inst.m_saveManager.m_exp;
+			m_savedXP = m_currentXP;
+			m_playerLevel = (int)GameManager.inst.m_saveManager.m_currentLevel;
+			m_savedPlayerLevel = m_playerLevel;
 		}
         UpdateUIElements();
     }
@@ -53,10 +58,17 @@ public class PlayerInventory : MonoBehaviour
     // Reset temporary values on player death.
     public void DeathReset()
     {
-        m_currentGold = 0;
-        m_currentXP = 0;
+
+        m_currentGold = m_savedGold;
+        m_currentXP = m_savedXP;
+		m_playerLevel = m_savedPlayerLevel;
         m_currentWeapon = null;
         CheckWeaponValidity();
+
+		if(GameManager.inst.m_saveManager != null)
+		{
+			GameManager.inst.m_saveManager.Save();
+		}
     }
 
 	public void ChangeGold(int amount)
@@ -85,7 +97,7 @@ public class PlayerInventory : MonoBehaviour
     
     public void UpdateUIElements()
     {
-        UIManager.Inst.UpdateCoinTotal(m_currentGold + m_savedGold);
+        UIManager.Inst.UpdateCoinTotal(m_currentGold);
         UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
         UIManager.Inst.UpdateXPBar(GetCurrentLevelPercent());
     }
@@ -107,11 +119,12 @@ public class PlayerInventory : MonoBehaviour
 
     void CheckForLevelUp()
     {
-        if((m_currentXP + m_savedXP) >= m_XPToLVL[m_playerLevel - 1])
+		if (m_playerLevel >= m_XPToLVL.Length)
+			return;
+        if((m_currentXP) >= m_XPToLVL[m_playerLevel - 1])
         {
             m_playerLevel++;
             m_currentXP = 0;
-            m_savedXP = 0;
         }
     }
 
