@@ -141,4 +141,20 @@ public class AudioManager : MonoBehaviour
 		if (m_curSource == m_numberOfSources)
 			m_curSource = 0;
 	}
+
+	public void SetSFXVolume(float level)
+	{
+		am.SetFloat("SFXVolume", level);
+		PlaySFX(a_coin);
+	}
+
+	public void SetMasterVolume(float level)
+	{
+		am.SetFloat("MasterVolume", level);
+	}
+
+	public void SetMusicVolume(float level)
+	{
+		am.SetFloat("MusicVolume", level);
+	}
 }

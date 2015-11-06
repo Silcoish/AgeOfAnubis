@@ -38,8 +38,9 @@ public class UIButtons : MonoBehaviour
 
 	public void ChangeMenus(GameObject targetMenu)
 	{
-		targetMenu.SetActive(true);
+		
 		m_curMenu.SetActive(false);
+		targetMenu.SetActive(true);
 		m_previousMenus.Add(m_curMenu);
 		m_curMenu = targetMenu;
 	}
@@ -59,6 +60,22 @@ public class UIButtons : MonoBehaviour
 			m_previousMenus.Remove(m_curMenu);
 		}
 
+	}
+
+	public void OnChangeSFXVolume(float value)
+	{
+		if (value == -40)
+			AudioManager.Inst.SetSFXVolume(-80);
+		else
+			AudioManager.Inst.SetSFXVolume(value);
+	}
+
+	public void OnChangeMusicVolume(float value)
+	{
+		if (value == -40)
+			AudioManager.Inst.SetMusicVolume(-80);
+		else
+			AudioManager.Inst.SetMusicVolume(value);
 	}
 
 
