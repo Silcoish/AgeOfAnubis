@@ -1,13 +1,92 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &113388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 412178}
+  - 114: {fileID: 11476542}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &412178
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11476542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1697e7bea168f7a4d96a984f4c1273b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allScarabs:
+  - {fileID: 192918, guid: d150720e69cbb7446bcc52a1f3ee8ab4, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allSpiders:
+  - {fileID: 152480, guid: a615cde4abdad15438ed23dc968c65f7, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allSnakes:
+  - {fileID: 149800, guid: 35454f7e941d7194ca18c9604de1d841, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allEyes:
+  - {fileID: 133804, guid: c45d41f4dfd845b4d8045719590a95db, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: allScarabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 192918, guid: d150720e69cbb7446bcc52a1f3ee8ab4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: allEyes.Array.data[0]
+      value: 
+      objectReference: {fileID: 133804, guid: c45d41f4dfd845b4d8045719590a95db, type: 2}
+    - target: {fileID: 0}
+      propertyPath: allSnakes.Array.data[0]
+      value: 
+      objectReference: {fileID: 149800, guid: 35454f7e941d7194ca18c9604de1d841, type: 2}
+    - target: {fileID: 0}
+      propertyPath: allSpiders.Array.data[0]
+      value: 
+      objectReference: {fileID: 152480, guid: a615cde4abdad15438ed23dc968c65f7, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 0}
+  m_RootGameObject: {fileID: 113388}
   m_IsPrefabParent: 1

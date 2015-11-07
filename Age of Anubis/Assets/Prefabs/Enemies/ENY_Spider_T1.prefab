@@ -101,7 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727c23f35245bd449946a24506db285f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_prefab: {fileID: 152480}
+  m_enemyType: 1
+  m_level: 1
 --- !u!212 &21213460
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -159,6 +160,14 @@ Prefab:
       propertyPath: m_deathParticle
       value: 
       objectReference: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_enemyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_level
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152480}

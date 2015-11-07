@@ -72,7 +72,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727c23f35245bd449946a24506db285f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_prefab: {fileID: 133804}
+  m_enemyType: 3
+  m_level: 1
 --- !u!114 &11488680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,12 +96,11 @@ MonoBehaviour:
   m_XP: 5
   m_deathParticle: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
   m_moveSpeed: 2
-  m_attackTimer: 5
-  m_laserProj: {fileID: 146612, guid: c43823c3a44597c4bacb11f450900f01, type: 2}
-  m_shootDelay: .5
-  m_recharge: 3
   m_trackingRange: 10
   m_xDist: 2
+  m_chargeTimer: .5
+  m_rechargeTimer: 3
+  m_laserProj: {fileID: 146612, guid: c43823c3a44597c4bacb11f450900f01, type: 2}
 --- !u!212 &21231346
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -133,7 +133,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_enemyType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 133804}
