@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &109722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 437458}
+  - 58: {fileID: 5877838}
+  m_Layer: 12
+  m_Name: PhysicsCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &149800
 GameObject:
   m_ObjectHideFlags: 0
@@ -20,6 +36,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &437458
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109722}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 492650}
+  m_RootOrder: 0
 --- !u!4 &492650
 Transform:
   m_ObjectHideFlags: 1
@@ -29,7 +57,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.0500002, y: 1.05999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 437458}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!50 &5098320
@@ -56,11 +85,24 @@ CircleCollider2D:
   m_GameObject: {fileID: 149800}
   m_Enabled: 1
   m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .5
+--- !u!58 &5877838
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109722}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .49333334
+  m_Radius: .5
 --- !u!114 &11409882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,7 +125,7 @@ MonoBehaviour:
   m_XP: 5
   m_deathParticle: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
   m_moveSpeed: 2
-  m_ledgeCheckDist: 1
+  m_ledgeCheckDist: .5
   m_attackTimer: 5
   m_venomProj: {fileID: 142830, guid: c06495a67c98b46459bb901760af3279, type: 2}
   m_launchVec: {x: 1, y: .5}
@@ -101,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyType: 2
-  m_level: 1
+  m_level: 0
 --- !u!212 &21268750
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -150,14 +192,6 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_hitPoints
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_level
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
