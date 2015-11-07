@@ -33,39 +33,7 @@ public class ENY_Spider_001 : Enemy
         m_botRight.localPosition = new Vector2(offset, -offset);
         m_botLeft.localPosition = new Vector2(-offset, -offset);
 
-        // There should always be 2 colliders active when we awake (ie the platform we are standing on)
-        // Pick one of those 2 as the ledge check, which also determines our initial direction and wall check.
-        List<Transform> ledges = new List<Transform>();
-
-        if (CheckPosition(m_topRight))
-            ledges.Add(m_topRight);
-        if (CheckPosition(m_topLeft))
-            ledges.Add(m_topLeft);
-        if (CheckPosition(m_botRight))
-            ledges.Add(m_botRight);
-        if (CheckPosition(m_botLeft))
-            ledges.Add(m_botLeft);
-
-        if(ledges.Count >= 2)
-        {
-            if (Random.value > 0.5)
-                m_ledgeCheck = ledges[0];
-            else
-                m_ledgeCheck = ledges[1];
-
-            if (ledges[0].position.x == ledges[1].position.x)
-                m_isVertical = true;
-            else
-                m_isVertical = false;
-
-            m_wallCheck = GetWallTransform(m_ledgeCheck);
-            EnableClimbing(true);
-        }
-        else
-        {
-            // No ledges were in range, we should fall
-            EnableClimbing(false);
-        }
+        GetLedgeTransform();
     }
 
     public override void OnTakeDamage(Damage dam)
@@ -84,11 +52,42 @@ public class ENY_Spider_001 : Enemy
             {
                 // Reenable climbing once we stop falling
                 EnableClimbing(true);
+                GetLedgeTransform();
             }
         }
         else
         {
-            // 
+            // Check if we hit a wall
+            if(CheckPosition(m_wallCheck))
+            {
+                m_isVertical = !m_isVertical;
+                m_ledgeCheck = m_wallCheck;
+                m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
+            }
+            // Check if we hit the end of a platform
+            else if(!CheckPosition(m_ledgeCheck))
+            {
+                // TODO: Spider will wrap around ledges when they run off the end
+
+                // Reverse Direction when we hit the end of our ledge
+                m_ledgeCheck = GetTransform(m_ledgeCheck, !m_isVertical);
+                m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
+            }
+            // Move forward
+            else
+            {
+                if(m_isVertical)
+                {
+                    m_dir = new Vector2(0, m_ledgeCheck.localPosition.y);
+                }
+                else
+                {
+                    m_dir = new Vector2(m_ledgeCheck.localPosition.x, 0);
+                }
+                m_dir.Normalize();
+
+                m_rb.velocity = m_dir * m_moveSpeed;
+            }
         }
     }
 
@@ -103,45 +102,87 @@ public class ENY_Spider_001 : Enemy
         {
             m_isClimbing = true;
             m_rb.gravityScale = 0;
-            Debug.Log("Climbing - true");
+            //Debug.Log("Climbing - true");
         }
         else
         {
             m_isClimbing = false;
             m_rb.gravityScale = 1;
-            Debug.Log("Climbing - false");
+            //Debug.Log("Climbing - false");
         }
     }
 
-    Transform GetWallTransform(Transform ledge)
+    // Useful function for getting the opposite transforms
+    // if you pass m_isVertical it will get the wall of your current ledge transform
+    // if you pass the opposite of m_isVertical it will get the reverse direction of your current ledge transform
+    Transform GetTransform(Transform ledge, bool isVertical)
     {
         if(ledge == m_topRight)
         {
-            if (m_isVertical)
+            if (isVertical)
                 return m_topLeft;
             else
                 return m_botRight;
         }
         else if(ledge == m_topLeft)
         {
-            if (m_isVertical)
+            if (isVertical)
                 return m_topRight;
             else
                 return m_botLeft;
         }
         else if(ledge == m_botRight)
         {
-            if (m_isVertical)
+            if (isVertical)
                 return m_botLeft;
             else
                 return m_topRight;
         }
         else
         {
-            if (m_isVertical)
+            if (isVertical)
                 return m_botRight;
             else
                 return m_topLeft;
+        }
+    }
+
+    void GetLedgeTransform()
+    {
+        // There should always be 2 colliders active when become active (ie the platform we are standing on)
+        // Pick one of those 2 as the ledge check, which also determines our initial direction and wall check.
+        List<Transform> ledges = new List<Transform>();
+
+        if (CheckPosition(m_topRight))
+            ledges.Add(m_topRight);
+        if (CheckPosition(m_topLeft))
+            ledges.Add(m_topLeft);
+        if (CheckPosition(m_botRight))
+            ledges.Add(m_botRight);
+        if (CheckPosition(m_botLeft))
+            ledges.Add(m_botLeft);
+
+        if (ledges.Count >= 2)
+        {
+            if (Random.value > 0.5)
+                m_ledgeCheck = ledges[0];
+            else
+                m_ledgeCheck = ledges[1];
+
+            if (ledges[0].position.x == ledges[1].position.x)
+                m_isVertical = true;
+            else
+                m_isVertical = false;
+
+            m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
+            EnableClimbing(true);
+            //Debug.Log("Ledges check: " + ledges[0] + ledges[1]);
+            //Debug.Log("Ledge: " + m_ledgeCheck + ", Wall: " + m_wallCheck + ", Vertical: " + m_isVertical);
+        }
+        else
+        {
+            // No ledges were in range, we should fall
+            EnableClimbing(false);
         }
     }
 }
