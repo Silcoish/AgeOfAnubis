@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457900}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TopRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,7 +23,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 456934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BotRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,8 +43,24 @@ GameObject:
   - 58: {fileID: 5800026}
   - 114: {fileID: 11410884}
   - 114: {fileID: 11494230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ENY_Spider_T1
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &158070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 498444}
+  - 58: {fileID: 5851758}
+  m_Layer: 12
+  m_Name: PhysicsCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +74,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +89,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 496900}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BotLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +107,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 496606}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &456934
 Transform:
   m_ObjectHideFlags: 1
@@ -103,7 +119,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 496606}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &457900
 Transform:
   m_ObjectHideFlags: 1
@@ -115,7 +131,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 496606}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &496606
 Transform:
   m_ObjectHideFlags: 1
@@ -123,9 +139,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.8400002, y: 9.71000004, z: 0}
+  m_LocalPosition: {x: 21.2399998, y: 8.34000015, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 498444}
   - {fileID: 457900}
   - {fileID: 400852}
   - {fileID: 456934}
@@ -143,7 +160,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 496606}
-  m_RootOrder: 3
+  m_RootOrder: 4
+--- !u!4 &498444
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158070}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 496606}
+  m_RootOrder: 0
 --- !u!50 &5049936
 Rigidbody2D:
   serializedVersion: 2
@@ -172,7 +201,20 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .319999993
+  m_Radius: .25
+--- !u!58 &5851758
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158070}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .25
 --- !u!114 &11410884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,7 +241,7 @@ MonoBehaviour:
   m_topLeft: {fileID: 400852}
   m_botRight: {fileID: 456934}
   m_botLeft: {fileID: 496900}
-  m_checkOffset: .100000001
+  m_checkOffset: 0
   m_checkRadius: .100000001
   m_platformMask:
     serializedVersion: 2

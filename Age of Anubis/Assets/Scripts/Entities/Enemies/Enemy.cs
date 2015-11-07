@@ -90,6 +90,14 @@ public class Enemy : Damageable
 		}
 	}
 
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            col.gameObject.GetComponent<Damageable>().OnTakeDamage(m_attack.GetDamage(gameObject.transform));
+        }
+    }
+
 	void CreateDirectionColliders()
 	{
 		float offset = 0.05f;

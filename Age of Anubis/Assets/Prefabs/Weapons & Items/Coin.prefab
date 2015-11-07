@@ -10,12 +10,27 @@ GameObject:
   - 4: {fileID: 447492}
   - 212: {fileID: 21280040}
   - 61: {fileID: 6178810}
-  - 61: {fileID: 6117618}
-  - 50: {fileID: 5075570}
+  - 50: {fileID: 5096074}
   - 114: {fileID: 11448702}
   - 95: {fileID: 9554744}
   m_Layer: 0
   m_Name: Coin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &193966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 490840}
+  - 61: {fileID: 6147082}
+  m_Layer: 12
+  m_Name: PhysicsCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,12 +43,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 116776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.41771507, y: .940552235, z: 0}
+  m_LocalPosition: {x: 17.4032154, y: 8.5237875, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 490840}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5075570
+--- !u!4 &490840
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 447492}
+  m_RootOrder: 0
+--- !u!50 &5096074
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
@@ -47,21 +75,21 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &6117618
+--- !u!61 &6147082
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 116776}
+  m_GameObject: {fileID: 193966}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -.180000007}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .100000001, y: .100000001}
+  m_Size: {x: .449999988, y: .449999988}
 --- !u!61 &6178810
 BoxCollider2D:
   m_ObjectHideFlags: 1

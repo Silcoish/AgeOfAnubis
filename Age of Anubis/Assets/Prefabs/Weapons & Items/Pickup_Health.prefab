@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &144200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 485746}
+  - 61: {fileID: 6144990}
+  m_Layer: 12
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &158366
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +26,6 @@ GameObject:
   - 4: {fileID: 489432}
   - 212: {fileID: 21203454}
   - 61: {fileID: 6165260}
-  - 61: {fileID: 6134344}
   - 50: {fileID: 5081382}
   - 114: {fileID: 11434316}
   - 95: {fileID: 9510584}
@@ -21,6 +36,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &485746
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144200}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 489432}
+  m_RootOrder: 0
 --- !u!4 &489432
 Transform:
   m_ObjectHideFlags: 1
@@ -28,9 +55,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.50971484, y: .530021906, z: 0}
+  m_LocalPosition: {x: 18.0382423, y: 8.28024292, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 485746}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!50 &5081382
@@ -49,19 +77,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6134344
+--- !u!61 &6144990
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158366}
+  m_GameObject: {fileID: 144200}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0299999993}
+  m_Offset: {x: 0, y: .680000007}
   serializedVersion: 2
-  m_Size: {x: .100000001, y: .100000001}
+  m_Size: {x: .800000012, y: 1.39999998}
 --- !u!61 &6165260
 BoxCollider2D:
   m_ObjectHideFlags: 1
