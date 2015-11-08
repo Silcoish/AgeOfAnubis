@@ -23,7 +23,7 @@ public class UIButtons : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetButtonDown("Fire2"))
+		if (Input.GetButtonDown("Cancel"))
 		{
 			print("Back");
 			Back();

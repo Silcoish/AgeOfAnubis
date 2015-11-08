@@ -37,6 +37,7 @@ public class Shop : MonoBehaviour
 	public EventSystem m_es;
 	public ShopIcon m_selected;
     public GameObject m_playersWeapon;
+    public GameObject m_activationArea;
 
 	[SerializeField]
 	WeaponPrefabHolder m_allWeaponPrefabs;
@@ -86,7 +87,8 @@ public class Shop : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
+        if (Input.GetButtonDown("Cancel"))
+            OnCloseShop();
 
 		if (m_selected == null)
 		{
@@ -109,10 +111,22 @@ public class Shop : MonoBehaviour
         }
 	}
 
+
+    void OnCloseShop()
+    {
+        gameObject.SetActive(false);
+        GameManager.inst.player.GetComponent<Player>().m_isShopOpen = false;
+        m_activationArea.SetActive(true);
+    }
+
     public void BuySelected()
     {
+        //PlayerInventory.Inst.m_currentGold -= m_selected.weapon.GetComponent<Weapon>().m_price;
 
+        PlayerInventory.Inst.m_currentWeapon = m_selected.weapon;
+        GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 
+        OnCloseShop();
     }
 
 	void UpdateCompareIcons()
