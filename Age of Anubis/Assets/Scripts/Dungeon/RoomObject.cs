@@ -8,13 +8,16 @@ using System.Collections.Generic;
 
 public class RoomObject : MonoBehaviour
 {
-	public List<Enemy> m_allEnemies;
-	public Door m_doorNorth;
-	public Door m_doorSouth;
-	public Door m_doorEast;
-	public Door m_doorWest;
 
-	public int arrayIndex;
+	public int roomLevel = 1;
+
+	[HideInInspector] public List<Enemy> m_allEnemies;
+	[HideInInspector] public Door m_doorNorth;
+	[HideInInspector] public Door m_doorSouth;
+	[HideInInspector] public Door m_doorEast;
+	[HideInInspector] public Door m_doorWest;
+
+	[HideInInspector] public int arrayIndex;
 
 	public GameObject m_enemiesParent;
 
