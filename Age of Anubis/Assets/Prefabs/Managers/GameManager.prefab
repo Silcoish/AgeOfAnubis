@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 451810}
   - 114: {fileID: 11466718}
   - 114: {fileID: 11472624}
+  - 114: {fileID: 11494614}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,6 +48,8 @@ MonoBehaviour:
   hpDropChance: .300000012
   minimap: {fileID: 0}
   minimapTex: {fileID: 0}
+  visibleMap: {fileID: 0}
+  visibleMapTex: {fileID: 0}
 --- !u!114 &11472624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -58,11 +61,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfa750f68d0e0048a2669f82866b63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_currentGold: 0
   m_multiplierIncrease: .100000001
+  m_playerLevel: 1
+  m_savedPlayerLevel: 1
+  m_currentXP: 0
   m_XPToLVL: 6400000096000000fa00000090010000
   m_currentWeapon: {fileID: 108578, guid: 48e0f23b675d84b4cbc8b9f384404ed4, type: 2}
   m_secondaryWeapon: {fileID: 173356, guid: 4cb1172e9c2d7144cb9f42ff618ff6af, type: 2}
   m_defaultWeapon: {fileID: 143282, guid: 884e72685771f4f40a5724043467b0dd, type: 2}
+--- !u!114 &11494614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a137277645433e848803a62f2ab2013b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_weaponList: {fileID: 4900000, guid: 2d51a9edb0b70b647a3cb96e790527ef, type: 3}
+  m_weaponData: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
