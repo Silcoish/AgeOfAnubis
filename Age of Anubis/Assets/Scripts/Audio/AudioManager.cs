@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
 	public AudioMixerSnapshot s_fight;
 	public AudioMixerSnapshot s_idle;
 	public AudioMixerSnapshot s_shop;
+    public AudioMixerSnapshot s_boss;
 	[Range(0f,10f)]
 	public float m_standardTransitionTime = 1.0f;
 
@@ -33,21 +34,39 @@ public class AudioManager : MonoBehaviour
 	private int m_curSource = 0;
 
 	[Header("Tracks")]
-	public AudioStruct a_coin;
-	public AudioStruct a_poison;
-	public AudioStruct a_burnt;
-	public AudioStruct a_bleed;
-	public AudioStruct a_cut;
-	public AudioStruct a_doorOpen;
-	public AudioStruct a_doorShut;
-	public AudioStruct a_frozen;
-	public AudioStruct a_giveDamage;
-	public AudioStruct a_takeDamage;
-	public AudioStruct a_lowHealth;
-	public AudioStruct a_purchaseItem;
-	public AudioStruct a_stab;
-	public AudioStruct a_thump;
-	public AudioStruct a_pickupWeapon;
+    [Header("Misc")]
+    public AudioStruct a_bleed;
+    public AudioStruct a_burnt;
+    public AudioStruct a_coin;
+    public AudioStruct a_cut;
+    public AudioStruct a_doorOpen;
+    public AudioStruct a_doorShut;
+    public AudioStruct a_frozen;
+    public AudioStruct a_poison;
+    public AudioStruct a_stab;
+    public AudioStruct a_thump;
+    [Header("Player")]
+    public AudioStruct a_player_death;
+    public AudioStruct a_player_jump;
+    public AudioStruct a_player_land;
+    public AudioStruct a_player_takeDamage;
+    [Header("Enemy")]
+    public AudioStruct a_eny_die;
+    public AudioStruct a_eny_spit;
+    public AudioStruct a_eny_takeDamage;
+    [Header("UI")]
+    public AudioStruct a_ui_purchase;
+    public AudioStruct a_ui_cancel;
+    public AudioStruct a_ui_confirm;
+    public AudioStruct a_ui_select;
+    [Header("Boss")]
+    public AudioStruct a_anubis_bash;
+    public AudioStruct a_anubis_dash;
+    public AudioStruct a_anubis_fireball;
+    public AudioStruct a_anubis_intro;
+    public AudioStruct a_anubis_takeDamage;
+
+
 
 	void Awake()
 	{
@@ -99,21 +118,37 @@ public class AudioManager : MonoBehaviour
 	public void PreviewSounds()
 	{
 		List<AudioStruct> allStructs = new List<AudioStruct>();
-		allStructs.Add(a_coin);
-		allStructs.Add(a_poison);
-		allStructs.Add(a_burnt);
-		allStructs.Add(a_bleed);
-		allStructs.Add(a_cut);
-		allStructs.Add(a_doorOpen);
-		allStructs.Add(a_doorShut);
-		allStructs.Add(a_frozen);
-		allStructs.Add(a_giveDamage);
-		allStructs.Add(a_takeDamage);
-		allStructs.Add(a_lowHealth);
-		allStructs.Add(a_purchaseItem);
-		allStructs.Add(a_stab);
-		allStructs.Add(a_thump);
-		allStructs.Add(a_pickupWeapon);
+        allStructs.Add(a_bleed);
+        allStructs.Add(a_burnt);
+        allStructs.Add(a_coin);
+        allStructs.Add(a_cut);
+        allStructs.Add(a_doorOpen);
+        allStructs.Add(a_doorShut);
+        allStructs.Add(a_frozen);
+        allStructs.Add(a_poison);
+        allStructs.Add(a_stab);
+        allStructs.Add(a_thump);
+
+        allStructs.Add(a_player_death);
+        allStructs.Add(a_player_jump);
+        allStructs.Add(a_player_land);
+        allStructs.Add(a_player_takeDamage);
+       
+        allStructs.Add(a_eny_die);
+        allStructs.Add(a_eny_spit);
+        allStructs.Add(a_eny_takeDamage);
+        
+        allStructs.Add(a_ui_purchase);
+        allStructs.Add(a_ui_cancel);
+        allStructs.Add(a_ui_confirm);
+        allStructs.Add(a_ui_select);
+        
+        allStructs.Add(a_anubis_bash);
+        allStructs.Add(a_anubis_dash);
+        allStructs.Add(a_anubis_fireball);
+        allStructs.Add(a_anubis_intro);
+        allStructs.Add(a_anubis_takeDamage);
+
 
 
 		foreach (var st in allStructs)

@@ -62,7 +62,7 @@ public class Weapon : MonoBehaviour
 					break;
 				case WeaponSwing.MEDIUM:
 					print("Medium");
-					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_giveDamage);
+					//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_giveDamage); TODO
 					break;
 				case WeaponSwing.HEAVY:
 					print("Heavy");

@@ -94,7 +94,7 @@ public class ActivateArea : MonoBehaviour
 	public virtual void OnActivate()
 	{
 		//TODO play sound on activate.
-		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_pickupWeapon);
+		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_pickupWeapon);
 
 	}
 }
