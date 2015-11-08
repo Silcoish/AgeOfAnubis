@@ -7,6 +7,7 @@ public class ShopIcon : MonoBehaviour
 		public Button button;
 		public GameObject weapon;
 		public Image image;
+        public Image effect;
 		public Text cost;
 
 }

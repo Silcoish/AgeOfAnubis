@@ -23,7 +23,8 @@ public struct StatUI
 [System.Serializable]
 public struct CompareIcon
 {
-	public Image image;
+	public Image imageWeapon;
+    public Image imageEffect;
 	public StatUI level;
 	public StatUI damage;
 	public Text effectType;
@@ -35,6 +36,7 @@ public class Shop : MonoBehaviour
 {
 	public EventSystem m_es;
 	public ShopIcon m_selected;
+    public GameObject m_playersWeapon;
 
 	[SerializeField]
 	WeaponPrefabHolder m_allWeaponPrefabs;
@@ -66,6 +68,12 @@ public class Shop : MonoBehaviour
 	public Sprite m_iconSword;
 	public Sprite m_iconAxe;
 
+    [Header("Effect Icons")]
+    public Sprite m_iconPoison;
+    public Sprite m_iconFire;
+    public Sprite m_iconFreeze;
+    public Sprite m_iconNone;
+
 
 
 
@@ -82,15 +90,7 @@ public class Shop : MonoBehaviour
 
 		if (m_selected == null)
 		{
-			if (m_es.currentSelectedGameObject == null)
-			{
-				m_selected = m_es.firstSelectedGameObject.GetComponent<ShopIcon>();
-
-			}
-			else
-			{
-				m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
-			}
+			m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
 		}
 
 		if (m_es.currentSelectedGameObject != m_selected.gameObject)
@@ -99,7 +99,21 @@ public class Shop : MonoBehaviour
 
 			UpdateCompareIcons();
 		}
+
+
+        if (m_playersWeapon != PlayerInventory.Inst.m_currentWeapon)
+        {
+            m_playersWeapon = PlayerInventory.Inst.m_currentWeapon;
+
+            UpdateCompareIcons();
+        }
 	}
+
+    public void BuySelected()
+    {
+
+
+    }
 
 	void UpdateCompareIcons()
 	{
@@ -120,13 +134,13 @@ public class Shop : MonoBehaviour
 			switch (wp.m_swingType)
 			{
 				case WeaponSwing.LIGHT:
-					ci.image.sprite = m_iconDagger;
+					ci.imageWeapon.sprite = m_iconDagger;
 					break;
 				case WeaponSwing.MEDIUM:
-					ci.image.sprite = m_iconSword;
+					ci.imageWeapon.sprite = m_iconSword;
 					break;
 				case WeaponSwing.HEAVY:
-					ci.image.sprite = m_iconAxe;
+					ci.imageWeapon.sprite = m_iconAxe;
 					break;
 			}
 
@@ -137,9 +151,25 @@ public class Shop : MonoBehaviour
 
 
 		ci.effectType.text = wp.m_attack.m_effectType.ToString();
+        ci.imageEffect.sprite = GetEffectSprite(wp.m_attack.m_effectType);
 		ci.effectDamage.current.text = wp.m_attack.m_effectStrength.ToString("0");
 		ci.effectDuration.current.text = wp.m_attack.m_effectDuration.ToString("0");
 	}
+
+    Sprite GetEffectSprite(DamageType dt)
+    {
+        switch (dt)
+        {
+            case DamageType.FREEZE:
+                return m_iconFreeze;
+            case DamageType.BURN:
+                return m_iconFire;
+            case DamageType.POISON:
+                return m_iconPoison;
+        }
+
+        return m_iconNone;
+    }
 
 	void UpdateCompareDifferences(Weapon wNew, Weapon wCur)
 	{
@@ -377,5 +407,7 @@ public class Shop : MonoBehaviour
 			}
 
 		}
+
+        sIcon.effect.sprite = GetEffectSprite(wp.m_attack.m_effectType);
 	}
 }
