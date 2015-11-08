@@ -25,6 +25,8 @@ public class Player : Damageable
     public GameObject m_playerHand;
 	public GameObject m_currentWeapon;
 
+    public bool m_isShopOpen = false;
+
 	public override void AwakeOverride() 
     {
 		m_colFeet = GetComponent<CircleCollider2D>();
@@ -100,8 +102,16 @@ public class Player : Damageable
 		//Set velocity to current to maintain any current velocity if not effected by the player.
 		m_velocity = m_rb.velocity;
 
-		m_inputAxis.x = Input.GetAxisRaw("Horizontal");
-		m_inputAxis.y = Input.GetAxisRaw("Vertical");
+        if(!m_isShopOpen)
+        {
+            m_inputAxis.x = Input.GetAxisRaw("Horizontal");
+            m_inputAxis.y = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            m_inputAxis.x = 0;
+            m_inputAxis.y = 0;
+        }
 
 		m_velocity.x = m_inputAxis.x * m_moveSpeed * m_globalMoveSpeed;
 
@@ -110,22 +120,25 @@ public class Player : Damageable
 		SetAnimSpeed(m_inputAxis.x);
         SetAnimVSpeed(m_velocity.y);
 
-		if (Input.GetButtonDown("Jump"))
-		{
-			Jump();
-		}
+        if(!m_isShopOpen)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                Jump();
+            }
 
+            if (Input.GetButtonUp("Jump"))
+            {
+                JumpStop();
+            }
 
-		if (Input.GetButtonUp("Jump"))
-		{
-			JumpStop();
-		}
-
-		if (Input.GetButtonDown("Fire1"))
-		{
-            if (m_currentWeapon != null)
-                m_currentWeapon.GetComponent<Weapon>().Attack(m_anim_arm);
-		}
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (m_currentWeapon != null)
+                    m_currentWeapon.GetComponent<Weapon>().Attack(m_anim_arm);
+            }
+        }
+		
 		if (Input.GetButtonDown("Fire2"))
 		{
             if(!isAttacking())
