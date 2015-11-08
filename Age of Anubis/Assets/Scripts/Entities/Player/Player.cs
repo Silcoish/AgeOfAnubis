@@ -26,6 +26,8 @@ public class Player : Damageable
 	public GameObject m_currentWeapon;
 
     public bool m_isShopOpen = false;
+    public float m_immunityTimer = 1;
+    private float m_curImmTimer = 0;
 
 	public override void AwakeOverride() 
     {
@@ -56,9 +58,13 @@ public class Player : Damageable
 
 	public override void OnTakeDamage(Damage dam)
 	{
-		base.OnTakeDamage(dam);
+        if(m_curImmTimer < 0)
+        {
+            base.OnTakeDamage(dam);
+            m_curImmTimer = m_immunityTimer;
 
-		UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
+            UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
+        }
 	}
 
 	public override void UpdateOverride()
@@ -68,6 +74,8 @@ public class Player : Damageable
 		Check2WayPlatforms();
 
 		PlayerInput();
+
+        m_curImmTimer -= Time.deltaTime;
 
         // WARNING: Damage over time effects do not call OnTakeDamage() each tick, so health does not get updated.
         UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
