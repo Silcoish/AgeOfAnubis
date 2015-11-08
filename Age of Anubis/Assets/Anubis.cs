@@ -2,6 +2,16 @@
 *  Script Created by:
 *  Corey Underdown
 */
+
+//TODO behaviour
+/*
+ * Platforms raise on dash
+ * Delay before Dashing
+ * Bashing wall
+ * Spawn Enemies and Projectiles at once
+ * Do stage 2 and 3 behaviour picks
+ * ANIMATIONS
+ */
  
 using UnityEngine;
 using System.Collections.Generic;
@@ -79,7 +89,10 @@ public class Anubis : Enemy
 	[Header("Dash State Variables")]
 	public float dashSpeed;
 	public float raycastLength = 1.0f;
+	public float dashBufferTime = 5.0f;
+	public float dashBufferCounter = 0.0f;
 	float dash;
+	public List<GameObject> dashPlatforms;
 
 	[Header("Stuck State Variables")]
 	public float m_stuckTime = 5f;
@@ -96,6 +109,13 @@ public class Anubis : Enemy
 	float crouchWaitCounter = 0.0f;
 	bool isMovingDown = true;
 	Vector2 crouchStartPos = Vector2.zero;
+
+	[Header("Bashing State Variables")]
+	public GameObject fallingRock;
+	public float rockStartHeight = 10.5f;
+	[Tooltip("x = left bound, y = right bounds")] public Vector2 rockBounds;
+	public int spawnFrequency = 60;
+	public Lava lava;
 
 	bool isFacingRight = false;
 
@@ -142,6 +162,9 @@ public class Anubis : Enemy
 				break;
 			case State.CROUCH:
 				UpdateCrouch();
+				break;
+			case State.BASH:
+				UpdateBash();
 				break;
 			default:
 				Debug.LogError("Invalid State for Anubis");
@@ -256,9 +279,21 @@ public class Anubis : Enemy
 	void UpdateDash()
 	{
 		if (dash == 0)
+		{
 			dash = SideFloat(dashSpeed);
+			for(int i = 0; i < dashPlatforms.Count; i++)
+			{
+				dashPlatforms[i].GetComponent<BoxCollider2D>().isTrigger = false;
+			}
+		}
 
-		rb.velocity = new Vector2(dash, 0f);
+		dashBufferCounter += Time.deltaTime;
+
+		if(dashBufferCounter >= dashBufferTime)
+		{
+			rb.velocity = new Vector2(dash, 0f);
+		}
+
 	}
 
 	void UpdateStuck()
@@ -334,6 +369,14 @@ public class Anubis : Enemy
 		}
 	}
 
+	void UpdateBash()
+	{
+		if(Random.Range(0, spawnFrequency) == 0)
+		{
+			Instantiate(fallingRock, new Vector2(Random.Range(rockBounds.x, rockBounds.y), rockStartHeight), Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360))));
+		}
+	}
+
 	void FinishedState()
 	{
 		if(prevStates.Count >= 3)
@@ -350,6 +393,12 @@ public class Anubis : Enemy
 		if (prevStates[prevStates.Count - 1] == State.DASH)
 		{
 			curState = State.STUCK;
+			for(int i = 0; i < dashPlatforms.Count; i++)
+			{
+				dashPlatforms[i].GetComponent<BoxCollider2D>().isTrigger = true;
+			}
+			dash = 0;
+			dashBufferCounter = 0;
 		}
 
 		if (prevStates[prevStates.Count - 1] == State.STUCK || prevStates[prevStates.Count - 1] == State.INTRO)
@@ -393,12 +442,18 @@ public class Anubis : Enemy
 
 	void ChooseNextState2()
 	{
-
+		ChooseNextState1();
 	}
 
 	void ChooseNextState3()
 	{
-
+		curState = State.BASH;
+		for(int i = 0; i < dashPlatforms.Count; i++)
+		{
+			dashPlatforms[i].GetComponent<BoxCollider2D>().isTrigger = false;
+		}
+		lava.gameObject.SetActive(true);
+		lava.isActive = true;
 	}
 	#endregion
 
@@ -465,8 +520,6 @@ public class Anubis : Enemy
 			if(curState == State.DASH)
 			{
 				FinishedState();
-				dash = 0;
-				//Flip();
 			}
 		}
 	}
@@ -484,8 +537,6 @@ public class Anubis : Enemy
 			if (curState == State.DASH)
 			{
 				FinishedState();
-				dash = 0;
-				//Flip();
 			}
 		}
 	}
