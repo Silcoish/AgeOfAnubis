@@ -41,10 +41,7 @@ public class GameManager : MonoBehaviour {
 
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.M))
-		{
-			CreateVisibleMap(UnityEngine.Random.Range(0, 4), UnityEngine.Random.Range(0, 4));
-		}
+		
 	}
 
 	public void RefreshMinimap()
@@ -84,7 +81,7 @@ public class GameManager : MonoBehaviour {
 		//CreateVisibleMap();
 	}
 
-	public void CreateVisibleMap(int xOffset, int yOffset)
+	public void CreateVisibleMap(int i)
 	{
 		SpriteRenderer sr = visibleMap.GetComponent<SpriteRenderer>();
 
@@ -95,7 +92,7 @@ public class GameManager : MonoBehaviour {
 		{
 			for (int x = 0; x < tex.width; x++)
 			{
-				tex.SetPixel(x, tex.height - y, minimapTex.GetPixel(x + (xOffset * 16) - (3 * 16), minimapTex.height - y + (yOffset * 8) - (4 * 8)));
+				tex.SetPixel(x, tex.height - y, minimapTex.GetPixel(x + ((int)(i % 15) * 16) - (3 * 16), minimapTex.height - y + ((int)(i / 15)* 8) + (2 * 8)));
 			}
 		}
 

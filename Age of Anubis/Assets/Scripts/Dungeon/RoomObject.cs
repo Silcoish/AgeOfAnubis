@@ -62,7 +62,7 @@ public class RoomObject : MonoBehaviour
 
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.P) && isActiveRoom)
+		if(Input.GetKeyDown(KeyCode.K) && isActiveRoom)
 		{
 			for(int i = 0; i < m_allEnemies.Count; i++)
 			{
@@ -75,6 +75,7 @@ public class RoomObject : MonoBehaviour
 	{
 		isActiveRoom = true;
 
+		GameManager.inst.CreateVisibleMap(arrayIndex);
 		
 
 		foreach (var en in m_allEnemies)
