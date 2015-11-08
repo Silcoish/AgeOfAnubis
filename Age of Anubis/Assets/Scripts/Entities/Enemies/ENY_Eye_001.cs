@@ -51,14 +51,14 @@ public class ENY_Eye_001 : Enemy
                 {
                     m_state = State.CHARGING;
                     m_curTimer = m_chargeTimer;
-                    Debug.Log("Enter Charge State");
+                    //Debug.Log("Enter Charge State");
                 }
                 break;
             case State.CHARGING:
                 if (m_curTimer <= 0)
                 {
                     m_state = State.ATTACKING;
-                    Debug.Log("Enter Attack State");
+                    //Debug.Log("Enter Attack State");
                 }
                 break;
             case State.ATTACKING:
@@ -68,13 +68,13 @@ public class ENY_Eye_001 : Enemy
 
                 m_state = State.RECHARGING;
                 m_curTimer = m_rechargeTimer;
-                Debug.Log("Enter Recharge State");
+                //Debug.Log("Enter Recharge State");
                 break;
             case State.RECHARGING:
                 if (m_curTimer <= 0)
                 {
                     m_state = State.SEARCHING;
-                    Debug.Log("Enter Searching State");
+                    //Debug.Log("Enter Searching State");
                 }
                 break;
             default:

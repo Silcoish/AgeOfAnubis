@@ -197,7 +197,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 152480}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -236,16 +236,17 @@ MonoBehaviour:
     m_knockbackForce: 0
   m_XP: 2
   m_deathParticle: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
-  m_moveSpeed: 2
   m_topRight: {fileID: 457900}
   m_topLeft: {fileID: 400852}
   m_botRight: {fileID: 456934}
   m_botLeft: {fileID: 496900}
+  m_canClimb: 1
   m_checkOffset: 0
   m_checkRadius: .100000001
   m_platformMask:
     serializedVersion: 2
     m_Bits: 512
+  m_moveSpeed: 2
 --- !u!114 &11494230
 MonoBehaviour:
   m_ObjectHideFlags: 1

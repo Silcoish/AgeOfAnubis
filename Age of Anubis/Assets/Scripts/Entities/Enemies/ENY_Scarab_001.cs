@@ -1,73 +1,59 @@
 using UnityEngine;
 using System.Collections;
 
-public class ENY_Scarab_001 : Enemy 
+public class ENY_Scarab_001 : PhysicsEnemy 
 {
 	[Header("ScarabStats")]
 	public float m_moveSpeed = 10f;
-	public float m_fakeGravity = 10f;
-
-	private float m_localGravityScale;
-    private float m_dir;
-    public float m_ledgeCheckDist = 1;
-
-	public override void AwakeOverride()
-	{
-		base.AwakeOverride();
-
-        if (Random.value >= 0.5F)
-        {
-            m_dir = m_moveSpeed;
-        }
-        else
-        {
-            m_dir = -m_moveSpeed;
-        }
-
-		//m_localGravityScale = m_rb.gravityScale;
-	}
 
 	public override void EnemyBehaviour()
 	{
-        // Check if near edge of platfrom or a wall and reverse direction
-        if(m_dir > 0)
+        if (m_isPathing)
+            m_rb.velocity = Vector2.zero;
+
+        if (!m_isPathing)
         {
-            if (!CheckPlatformInRange(new Vector2(transform.position.x + m_ledgeCheckDist, transform.position.y), Vector2.down, 0.5F)
-                || CheckPlatformInRange(transform.position, Vector2.right, m_ledgeCheckDist))
+            // Check if we have hit the ground
+            if (m_rb.velocity.y == 0)
             {
-                m_dir = -m_moveSpeed;
+                // Reenable climbing once we stop falling
+                EnablePathing(true);
+                GetLedgeTransform();
             }
         }
         else
         {
-            if (!CheckPlatformInRange(new Vector2(transform.position.x - m_ledgeCheckDist, transform.position.y), Vector2.down, 0.5F)
-                || CheckPlatformInRange(transform.position, Vector2.left, m_ledgeCheckDist))
+            // Check if we hit a wall
+            if (CheckPosition(m_wallCheck))
             {
-                m_dir = m_moveSpeed;
+                //Debug.Log("Hit Wall");
+                m_ledgeCheck = GetTransform(m_ledgeCheck, !m_isVertical);
+                m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
+            }
+            // Check if we hit the end of a platform
+            else if (!CheckPosition(m_ledgeCheck))
+            {
+                //Debug.Log("Hit Ledge");
+                // Reverse Direction when we hit the end of our ledge
+                m_ledgeCheck = GetTransform(m_ledgeCheck, !m_isVertical);
+                m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
+            }
+            // Move forward
+            else
+            {
+                //Debug.Log("Moving");
+                if (m_isVertical)
+                {
+                    m_dir = new Vector2(0, m_ledgeCheck.localPosition.y);
+                }
+                else
+                {
+                    m_dir = new Vector2(m_ledgeCheck.localPosition.x, 0);
+                }
+                m_dir.Normalize();
+
+                m_rb.velocity = m_dir * m_moveSpeed;
             }
         }
-
-        m_rb.velocity = new Vector2(m_dir, m_rb.velocity.y);
-
-		/*
-		CheckReturn checkreturn = CheckEnemyLocation();
-
-		if (checkreturn.colBelow != null)
-		{
-			m_rb.gravityScale = 0;
-
-			m_rb.velocity = transform.right * m_moveSpeed;
-
-			m_rb.AddRelativeForce(Vector3.down * m_fakeGravity);
-		}
-		else
-		{
-			m_rb.gravityScale = m_localGravityScale;
-		}
-
-		if (checkreturn.type == CheckReturnEnum.ReachedWall || checkreturn.type == CheckReturnEnum.ReachedEdge)
-		{
-			transform.rotation = transform.rotation * Quaternion.FromToRotation(Vector2.left, Vector2.right);
-		}*/
 	}
 }
