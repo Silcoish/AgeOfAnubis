@@ -116,7 +116,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 						{
 							if(entries[i] == "1" || entries[i] == " 1")
 							{
-								GameObject tempRoom = (GameObject)Instantiate(templateRooms[0], new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
+								GameObject tempRoom = (GameObject)Instantiate(GetRoomBasedOnLevel(), new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
 								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
 								rooms[lineNum * SIZE + i].m_enemiesParent = tempRoom.transform.FindChild("Enemies").gameObject;
 
@@ -160,6 +160,28 @@ public class DungeonLayoutLoader : MonoBehaviour
 
 			reader.Close();
 		}
+	}
+
+	GameObject GetRoomBasedOnLevel()
+	{
+		int level = 1;
+		if (PlayerInventory.Inst.m_playerLevel != null)
+		{
+			level = PlayerInventory.Inst.m_playerLevel;
+		}
+
+		int curRun = 0;
+		while(curRun < 100)
+		{
+			int randRoom = Random.Range(0, templateRooms.Count);
+			if(templateRooms[randRoom].GetComponent<RoomObject>().roomLevel == level)
+			{
+				return templateRooms[randRoom];
+			}
+			curRun++;
+		}
+
+		return templateRooms[0];
 	}
 
 	public void MakeMinimap()
