@@ -10,11 +10,14 @@ public class FallingRock : Enemy
 	Transform t;
 	float startYPos;
 	public float destroyDistance = 20;
+	public Vector2 minMaxSize = new Vector2(0.5f, 1.5f);
 
 	void Start()
 	{
 		t = transform;
 		startYPos = t.position.y;
+		float size = Random.Range(minMaxSize.x, minMaxSize.y);
+		t.localScale = new Vector2(size, size);
 	}
 
 	public override void EnemyBehaviour()

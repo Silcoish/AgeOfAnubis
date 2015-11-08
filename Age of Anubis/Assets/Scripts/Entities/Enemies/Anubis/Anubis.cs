@@ -61,6 +61,7 @@ public class Anubis : Enemy
 
 	private float m_hpPercentage = 100;
 
+	#region Battle State Variables
 	[Header("Battle Stage Health Percentages")]
 	float secondStateHPPercent = 60;
 	float thirdStateHPPercent = 30;
@@ -116,6 +117,7 @@ public class Anubis : Enemy
 	[Tooltip("x = left bound, y = right bounds")] public Vector2 rockBounds;
 	public int spawnFrequency = 60;
 	public Lava lava;
+	#endregion
 
 	bool isFacingRight = false;
 
@@ -373,7 +375,7 @@ public class Anubis : Enemy
 	{
 		if(Random.Range(0, spawnFrequency) == 0)
 		{
-			Instantiate(fallingRock, new Vector2(Random.Range(rockBounds.x, rockBounds.y), rockStartHeight), Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360))));
+			Instantiate(fallingRock, new Vector2(m_room.transform.position.x + Random.Range(rockBounds.x, rockBounds.y), m_room.transform.position.y + rockStartHeight), Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360))));
 		}
 	}
 
