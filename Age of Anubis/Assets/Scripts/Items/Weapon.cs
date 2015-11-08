@@ -10,9 +10,6 @@ public class Weapon : MonoBehaviour
 	private PolygonCollider2D m_col;
 
 	public WeaponSwing m_swingType;
-	public float m_cooldown = 0.5f;
-	public float m_colliderEnableDelay = 0.1f;
-	public float m_colliderEnableTime = 0.3f;
 
 	private bool m_isAttacking = false;
 

@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437768}
   - 212: {fileID: 21243914}
   - 95: {fileID: 9586928}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ GameObject:
   - 61: {fileID: 6104204}
   - 114: {fileID: 11457392}
   - 95: {fileID: 9512108}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 466488}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.79, y: 6.53999996, z: 0}
+  m_LocalPosition: {x: -11.9579716, y: -.25999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 437768}
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_unitName: 
-  m_hitPoints: 10
+  m_hitPoints: 1000
   m_moveSpeed: 7
   m_jumpHeight: 20
   m_jumpNumber: 0
@@ -190,6 +190,8 @@ MonoBehaviour:
   m_anim_arm: {fileID: 0}
   m_playerHand: {fileID: 0}
   m_currentWeapon: {fileID: 0}
+  m_isShopOpen: 0
+  m_immunityTimer: 1
 --- !u!212 &21243914
 SpriteRenderer:
   m_ObjectHideFlags: 1
