@@ -17,6 +17,8 @@ public struct WeaponData
     public DamageType effectType;
     public int effectStrength;
     public int effectDuration;
+    public float rarity;
+    public int goldCost;
 }
 
 public class WeaponManager : MonoBehaviour 
@@ -61,7 +63,7 @@ public class WeaponManager : MonoBehaviour
                 //Debug.Log(weapons[i]);
                 string[] fields = weapons[i].Split(';');
 
-                if(fields.Length != 8)
+                if(fields.Length != 10)
                 {
                     Debug.Log("Invalid number of fields. Weapon skipped!");
                 }
@@ -77,6 +79,8 @@ public class WeaponManager : MonoBehaviour
                     data.effectType = GetDamageType(fields[5]);
                     data.effectStrength = Int32.Parse(fields[6]);
                     data.effectDuration = Int32.Parse(fields[7]);
+                    data.rarity = float.Parse(fields[8]);
+                    data.goldCost = Int32.Parse(fields[9]);
 
                     m_weaponData.Add(data);
                 }

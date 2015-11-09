@@ -5,7 +5,9 @@ public enum WeaponSwing {LIGHT, MEDIUM, HEAVY}
 
 public class Weapon : MonoBehaviour 
 {
-	public int m_level;
+    public int m_level;
+    public string m_name;
+    public int m_goldCost;
 	public Attack m_attack;
 	private PolygonCollider2D m_col;
 
