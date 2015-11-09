@@ -19,10 +19,12 @@ public class AudioManager : MonoBehaviour
 	public AudioMixerGroup g_fx;
 	public AudioMixerGroup g_music;
 
+	public AudioMixerSnapshot s_none;
 	public AudioMixerSnapshot s_fight;
 	public AudioMixerSnapshot s_idle;
 	public AudioMixerSnapshot s_shop;
     public AudioMixerSnapshot s_boss;
+	public AudioMixerSnapshot s_temple;
 	[Range(0f,10f)]
 	public float m_standardTransitionTime = 1.0f;
 

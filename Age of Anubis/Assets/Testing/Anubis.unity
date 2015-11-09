@@ -158,12 +158,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 212861262}
---- !u!114 &582617372 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11438580, guid: bb754748c870d9e48b7cb570023d2afc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1987810913}
-  m_Script: {fileID: 11500000, guid: 8259947be077e844b9ebcf529512e3a2, type: 3}
 --- !u!1001 &669501604
 Prefab:
   m_ObjectHideFlags: 0
@@ -604,10 +598,14 @@ Prefab:
       propertyPath: UIImage
       value: 
       objectReference: {fileID: 975467780}
+    - target: {fileID: 6161714, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 11431736, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
-      propertyPath: lava
-      value: 
-      objectReference: {fileID: 582617372}
+      propertyPath: introTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
   m_IsPrefabParent: 0

@@ -9,10 +9,12 @@ AudioMixerController:
   m_OutputGroup: {fileID: 0}
   m_MasterGroup: {fileID: 24300001}
   m_Snapshots:
+  - {fileID: 24521032}
   - {fileID: 24514892}
   - {fileID: 24500003}
   - {fileID: 24506974}
   - {fileID: 24592724}
+  - {fileID: 24572806}
   m_StartSnapshot: {fileID: 24500003}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
@@ -33,9 +35,10 @@ AudioMixerController:
     - d2b8cdce70a5b6f40a1424252cfb4c71
     - a0961117e0968fa499463a55a97c78da
     - 17d6f313bdec8c24083ed0921754a0eb
+    - 4ba869ca5f85c5a40b4ad010ae872e73
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24592724}
+  m_TargetSnapshot: {fileID: 24572806}
 --- !u!243 &24300001
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -136,6 +139,7 @@ AudioMixerGroupController:
   - {fileID: 24302628}
   - {fileID: 24393698}
   - {fileID: 24344254}
+  - {fileID: 24366396}
   m_Volume: bcdc78f95f10b7f4899e24539c01cce7
   m_Pitch: cb435c2ccee2e3f4db12946a0258cb41
   m_Effects:
@@ -157,6 +161,23 @@ AudioMixerGroupController:
   m_Pitch: e6d9e659cd76fc749ba625b2d1deaa7d
   m_Effects:
   - {fileID: 24402724}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &24366396
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: TempleAtmosphere
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 4ba869ca5f85c5a40b4ad010ae872e73
+  m_Children: []
+  m_Volume: 77dcafb3a2f5c2740a2c4fe3a8248c9d
+  m_Pitch: e61ed071d6d6b074380797f64faf7461
+  m_Effects:
+  - {fileID: 24425108}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -201,6 +222,19 @@ AudioMixerEffectController:
   m_EffectID: eac5009c4bd9ce845a7e0012940a9c0b
   m_EffectName: Attenuation
   m_MixLevel: 086959037bfd77a4d8f82369dc958701
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24425108
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0939c95c861b72347bf795072e368fa4
+  m_EffectName: Attenuation
+  m_MixLevel: 40dded60d78f1b549be4aadce0f4420a
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
@@ -293,6 +327,7 @@ AudioMixerSnapshotController:
   m_SnapshotID: 8c9448092c48d0e49a021d4c8b2cb65e
   m_FloatValues:
     88e502000844b2c4a99f58b7e507e8fd: -80
+    77dcafb3a2f5c2740a2c4fe3a8248c9d: -80
     f20eaa07824b4f345b4f48db21b14dd2: -80
     4f2a44495fcb88c4b9de20d1185645de: -80
     bcdc78f95f10b7f4899e24539c01cce7: 0
@@ -311,6 +346,7 @@ AudioMixerSnapshotController:
   m_SnapshotID: fe1cf16a9632f1f46b46d634a30ec9b5
   m_FloatValues:
     88e502000844b2c4a99f58b7e507e8fd: -11.944499
+    77dcafb3a2f5c2740a2c4fe3a8248c9d: -80
     f20eaa07824b4f345b4f48db21b14dd2: -80
     4f2a44495fcb88c4b9de20d1185645de: -80
     bcdc78f95f10b7f4899e24539c01cce7: 0
@@ -330,10 +366,46 @@ AudioMixerSnapshotController:
   m_FloatValues:
     88e502000844b2c4a99f58b7e507e8fd: -80
     6f30f4b21a654714cac29e24d8a5339f: 1
+    77dcafb3a2f5c2740a2c4fe3a8248c9d: -80
     f20eaa07824b4f345b4f48db21b14dd2: -80
     4f2a44495fcb88c4b9de20d1185645de: -.0257765576
     bfea038a2e4035d419b282c5908a30ab: -.0257765595
     2fdd412b1e1ce064e8c99d5ace8aab7d: -.0257765576
+    d13ececbd35e17345aa5aab0bf3da984: -80
+  m_TransitionOverrides: {}
+--- !u!245 &24521032
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: None
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: dd21443ce553a174683e6d77a4945e07
+  m_FloatValues:
+    88e502000844b2c4a99f58b7e507e8fd: -80
+    6f30f4b21a654714cac29e24d8a5339f: 1
+    77dcafb3a2f5c2740a2c4fe3a8248c9d: -80
+    f20eaa07824b4f345b4f48db21b14dd2: -80
+    4f2a44495fcb88c4b9de20d1185645de: -80
+    bfea038a2e4035d419b282c5908a30ab: -.0257765595
+    2fdd412b1e1ce064e8c99d5ace8aab7d: -80
+    d13ececbd35e17345aa5aab0bf3da984: -80
+  m_TransitionOverrides: {}
+--- !u!245 &24572806
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: TempleAtmosphere
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: bd98837fe29af57479008bb65ab012c9
+  m_FloatValues:
+    88e502000844b2c4a99f58b7e507e8fd: -80
+    6f30f4b21a654714cac29e24d8a5339f: 1
+    f20eaa07824b4f345b4f48db21b14dd2: -80
+    4f2a44495fcb88c4b9de20d1185645de: -80
+    bfea038a2e4035d419b282c5908a30ab: -.0257765595
+    2fdd412b1e1ce064e8c99d5ace8aab7d: -80
     d13ececbd35e17345aa5aab0bf3da984: -80
   m_TransitionOverrides: {}
 --- !u!245 &24592724
@@ -347,6 +419,7 @@ AudioMixerSnapshotController:
   m_FloatValues:
     88e502000844b2c4a99f58b7e507e8fd: -80
     6f30f4b21a654714cac29e24d8a5339f: 1
+    77dcafb3a2f5c2740a2c4fe3a8248c9d: -80
     4f2a44495fcb88c4b9de20d1185645de: -80
     bfea038a2e4035d419b282c5908a30ab: -.0257765595
     2fdd412b1e1ce064e8c99d5ace8aab7d: .10800299

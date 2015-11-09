@@ -352,6 +352,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!1 &103544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 406980}
+  - 61: {fileID: 6161714}
+  - 114: {fileID: 11412330}
+  m_Layer: 0
+  m_Name: Event_MusicFade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &103922
 GameObject:
   m_ObjectHideFlags: 1
@@ -9551,6 +9568,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 415562}
   m_RootOrder: 36
+--- !u!4 &406980
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.5299997, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 17.7874985, z: 1}
+  m_Children: []
+  m_Father: {fileID: 473748}
+  m_RootOrder: 9
 --- !u!4 &407136
 Transform:
   m_ObjectHideFlags: 1
@@ -14561,7 +14590,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0467893481, y: 1.09090543, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 461128}
@@ -14573,6 +14602,7 @@ Transform:
   - {fileID: 498782}
   - {fileID: 486378}
   - {fileID: 458566}
+  - {fileID: 406980}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &473938
@@ -16690,6 +16720,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 32, y: 18}
+--- !u!61 &6161714
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103544}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
 --- !u!61 &6173940
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -16834,6 +16877,17 @@ MonoBehaviour:
   partnerDoor: {fileID: 0}
   parentRoom: {fileID: 0}
   dir: 2
+--- !u!114 &11412330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d672b3d84ee22c14ea1cd76f5f1669bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11427504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16874,6 +16928,8 @@ MonoBehaviour:
   frontCollider: {fileID: 0}
   UIObject: {fileID: 0}
   UIImage: {fileID: 0}
+  introTime: 2
+  introMusicFadeTime: 3
   spawnEnemy: {fileID: 133804, guid: c45d41f4dfd845b4d8045719590a95db, type: 2}
   spawnPoints:
   - {fileID: 150688}

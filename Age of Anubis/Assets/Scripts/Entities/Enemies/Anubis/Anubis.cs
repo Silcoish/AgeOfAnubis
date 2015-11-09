@@ -66,6 +66,12 @@ public class Anubis : Enemy
 	float secondStateHPPercent = 60;
 	float thirdStateHPPercent = 30;
 
+	[Header("Intro State Variables")]
+	public float introTime = 2.0f;
+	float introTimeCounter = 0.0f;
+	public float introMusicFadeTime = 3.0f;
+	bool introAudioPlayed = false;
+
 	[Header("Spawn Enemies Variables")]
 	public GameObject spawnEnemy;
 	public List<GameObject> spawnPoints;
@@ -93,6 +99,7 @@ public class Anubis : Enemy
 	public float dashBufferTime = 5.0f;
 	public float dashBufferCounter = 0.0f;
 	float dash;
+	bool dashPlayedAudio = false;
 	public List<GameObject> dashPlatforms;
 
 	[Header("Stuck State Variables")]
@@ -176,6 +183,7 @@ public class Anubis : Enemy
 
 	public override Damage UpdateDamage(Damage dam)
 	{
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_anubis_takeDamage);
 		dam.knockback = 0;
 		return dam;
 	}
@@ -215,7 +223,18 @@ public class Anubis : Enemy
 
 	void UpdateIntro()
 	{
-		FinishedState();
+		if(!introAudioPlayed)
+		{
+			introAudioPlayed = true;
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_anubis_intro);
+		}
+
+		introTimeCounter += Time.deltaTime;
+		if(introTimeCounter >= introTime)
+		{
+			AudioManager.Inst.FadeMusic(AudioManager.Inst.s_boss, introMusicFadeTime);
+			FinishedState();
+		}
 	}
 
 	void UpdateProjectile()
@@ -227,7 +246,7 @@ public class Anubis : Enemy
 			GameObject tempProjectile = (GameObject)Instantiate(m_projectile, transform.position, Quaternion.identity);
 			tempProjectile.GetComponent<AnubisProjectile>().Setup(SideFloat(m_projectileHorizSpeed), m_projectileVertSpeed, ChooseLayer());
 			m_shots++;
-
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_anubis_fireball);
 		}
 
 		if (m_shots >= m_howManyShots)
@@ -274,8 +293,7 @@ public class Anubis : Enemy
 
 	void UpdateProjectileAndEnemies()
 	{
-		UpdateProjectile();
-		UpdateEnemies();
+		
 	}
 
 	void UpdateDash()
@@ -293,6 +311,11 @@ public class Anubis : Enemy
 
 		if(dashBufferCounter >= dashBufferTime)
 		{
+			if(!dashPlayedAudio)
+			{
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_anubis_dash);
+				dashPlayedAudio = true;
+			}
 			rb.velocity = new Vector2(dash, 0f);
 		}
 
@@ -401,6 +424,7 @@ public class Anubis : Enemy
 			}
 			dash = 0;
 			dashBufferCounter = 0;
+			dashPlayedAudio = false;
 		}
 
 		if (prevStates[prevStates.Count - 1] == State.STUCK || prevStates[prevStates.Count - 1] == State.INTRO)
