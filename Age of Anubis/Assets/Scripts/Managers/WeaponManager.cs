@@ -27,6 +27,10 @@ public class WeaponManager : MonoBehaviour
 
     public TextAsset m_weaponList;
 
+    public GameObject m_baseDagger;
+    public GameObject m_baseSword;
+    public GameObject m_baseAxe;
+
     public List<WeaponData> m_weaponData;
 
 	void Awake()
@@ -125,5 +129,49 @@ public class WeaponManager : MonoBehaviour
             Debug.Log("Failed to match Base Prefab Name: " + s);
             return DamageType.NONE;
         }
+    }
+
+    GameObject GenerateWeapon(List<WeaponData> weaponDataShortlist)
+    {
+        int id = UnityEngine.Random.Range(1, weaponDataShortlist.Count);
+
+        WeaponData wepData = weaponDataShortlist[id];
+        GameObject weapon;
+
+        switch(wepData.basePrefab)
+        {
+            case BaseWeaponPrefab.AXE:
+                weapon = Instantiate(m_baseAxe);
+                break;
+            case BaseWeaponPrefab.SWORD:
+                weapon = Instantiate(m_baseSword);
+                break;
+            case BaseWeaponPrefab.DAGGER:
+                weapon = Instantiate(m_baseDagger);
+                break;
+            default:
+                weapon = Instantiate(m_baseDagger);
+                Debug.Log("Invalid BaseWeaponPrefab when generating weapon!");
+                return weapon;
+        }
+
+        weapon.GetComponent<Weapon>().ApplyWeaponData(wepData);
+
+        return weapon;
+    }
+
+    public GameObject GenerateWeapon(int level)
+    {
+        List<WeaponData> shortlist = new List<WeaponData>();
+
+        foreach(WeaponData data in m_weaponData)
+        {
+            if(data.level == level)
+            {
+                shortlist.Add(data);
+            }
+        }
+
+        return GenerateWeapon(shortlist);
     }
 }

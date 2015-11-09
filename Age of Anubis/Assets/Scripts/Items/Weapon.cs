@@ -76,5 +76,17 @@ public class Weapon : MonoBehaviour
 
 			}
 		}
-	}    
+	}
+
+    public void ApplyWeaponData(WeaponData data)
+    {
+        m_level = data.level;
+        m_name = data.name;
+        m_attack.m_attackStrength = data.attackStrength;
+        m_attack.m_knockbackForce = data.knockback;
+        m_attack.m_effectType = data.effectType;
+        m_attack.m_effectStrength = data.effectStrength;
+        m_attack.m_effectDuration = data.effectDuration;
+        m_goldCost = data.goldCost;
+    }
 }
