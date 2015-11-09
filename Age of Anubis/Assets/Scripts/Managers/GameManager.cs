@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject visibleMap;
 	public Texture2D visibleMapTex;
 
+	public bool destroyNextScene = false;
+
 	void Awake()
 	{
 		if (GameManager.inst == null)
@@ -41,7 +43,10 @@ public class GameManager : MonoBehaviour {
 
 	void Update()
 	{
-		
+		if(player == null)
+		{
+			player = FindObjectOfType<Player>().gameObject;
+		}
 	}
 
 	public void RefreshMinimap()

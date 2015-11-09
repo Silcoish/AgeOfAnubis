@@ -35,7 +35,7 @@ public class UIButtons : MonoBehaviour
 	public void NewGame()
 	{
 		m_saveManager.NewGame();
-		LoadingManager.Inst.LoadLevel("ShopScene", true);
+		LoadingManager.Inst.LoadLevel("Tutorial", true);
 	}
 
 	public void Continue()
