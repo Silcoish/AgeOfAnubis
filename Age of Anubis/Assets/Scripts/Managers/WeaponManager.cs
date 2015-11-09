@@ -141,16 +141,16 @@ public class WeaponManager : MonoBehaviour
         switch(wepData.basePrefab)
         {
             case BaseWeaponPrefab.AXE:
-                weapon = Instantiate(m_baseAxe);
+                weapon = m_baseAxe;
                 break;
             case BaseWeaponPrefab.SWORD:
-                weapon = Instantiate(m_baseSword);
+                weapon = m_baseSword;
                 break;
             case BaseWeaponPrefab.DAGGER:
-                weapon = Instantiate(m_baseDagger);
+                weapon = m_baseDagger;
                 break;
             default:
-                weapon = Instantiate(m_baseDagger);
+                weapon = m_baseDagger;
                 Debug.Log("Invalid BaseWeaponPrefab when generating weapon!");
                 return weapon;
         }

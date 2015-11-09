@@ -39,8 +39,8 @@ public class Shop : MonoBehaviour
     public GameObject m_playersWeapon;
     public GameObject m_activationArea;
 
-	[SerializeField]
-	WeaponPrefabHolder m_allWeaponPrefabs;
+	//[SerializeField]
+	//WeaponPrefabHolder m_allWeaponPrefabs;
 
 	[Header("New Item UI Objects")]
 	[SerializeField]
@@ -299,37 +299,39 @@ public class Shop : MonoBehaviour
 	GameObject GetRandomWeapon()
 	{
 		GameObject temp;
-		int rand = 0;
-		switch (PlayerInventory.Inst.m_playerLevel)
-		{ 
-			case 1:
-				rand = Random.Range(0, m_allWeaponPrefabs.level1.Length);
-				temp = m_allWeaponPrefabs.level1[rand];
-				break;
-			case 2:
-				rand = Random.Range(0, m_allWeaponPrefabs.level2.Length);
-				temp = m_allWeaponPrefabs.level2[rand];
-				break;
-			case 3:
-				rand = Random.Range(0, m_allWeaponPrefabs.level3.Length);
-				temp = m_allWeaponPrefabs.level3[rand];
-				break;
-			case 4:
-				rand = Random.Range(0, m_allWeaponPrefabs.level4.Length);
-				temp = m_allWeaponPrefabs.level4[rand];
-				break;
-			case 5:
-				rand = Random.Range(0, m_allWeaponPrefabs.level5.Length);
-				temp = m_allWeaponPrefabs.level5[rand];
-				break;
-			default:
-				rand = Random.Range(0, m_allWeaponPrefabs.level1.Length);
-				temp = m_allWeaponPrefabs.level1[rand];
-				Debug.LogError("Random Weapon: Player Level Not within range");
-				break;
-		}
-		
 
+        temp = WeaponManager.inst.GenerateWeapon(PlayerInventory.Inst.m_playerLevel);
+
+        //int rand = 0;
+        //switch (PlayerInventory.Inst.m_playerLevel)
+        //{ 
+        //    case 1:
+        //        rand = Random.Range(0, m_allWeaponPrefabs.level1.Length);
+        //        temp = m_allWeaponPrefabs.level1[rand];
+        //        break;
+        //    case 2:
+        //        rand = Random.Range(0, m_allWeaponPrefabs.level2.Length);
+        //        temp = m_allWeaponPrefabs.level2[rand];
+        //        break;
+        //    case 3:
+        //        rand = Random.Range(0, m_allWeaponPrefabs.level3.Length);
+        //        temp = m_allWeaponPrefabs.level3[rand];
+        //        break;
+        //    case 4:
+        //        rand = Random.Range(0, m_allWeaponPrefabs.level4.Length);
+        //        temp = m_allWeaponPrefabs.level4[rand];
+        //        break;
+        //    case 5:
+        //        rand = Random.Range(0, m_allWeaponPrefabs.level5.Length);
+        //        temp = m_allWeaponPrefabs.level5[rand];
+        //        break;
+        //    default:
+        //        rand = Random.Range(0, m_allWeaponPrefabs.level1.Length);
+        //        temp = m_allWeaponPrefabs.level1[rand];
+        //        Debug.LogError("Random Weapon: Player Level Not within range");
+        //        break;
+        //}
+		
 		return temp;
 
 	}
