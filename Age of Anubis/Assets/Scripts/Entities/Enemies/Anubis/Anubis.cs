@@ -126,6 +126,8 @@ public class Anubis : Enemy
 	[Tooltip("x = left bound, y = right bounds")] public Vector2 rockBounds;
 	public int spawnFrequency = 60;
 	public Lava lava;
+	public float bashTime = 8f;
+	float bashCounter = 0.0f;
 	#endregion
 
 	bool isFacingRight = false;
@@ -145,6 +147,7 @@ public class Anubis : Enemy
 	{
 		CalculateHPPercentage();
 		CheckSide();
+		CheckForOutOfBounds();
 		switch (curState)
 		{
 			case State.IDLE:
@@ -321,6 +324,23 @@ public class Anubis : Enemy
 				dashPlayedAudio = true;
 			}
 			rb.velocity = new Vector2(dash, 0f);
+
+			if(dash == -1)
+			{
+				if(t.position.x <= leftPos.transform.position.x)
+				{
+					t.position = new Vector2(leftPos.transform.position.x, t.position.y);
+					FinishedState();
+				}
+			}
+			else
+			{
+				if (t.position.x >= rightPos.transform.position.x)
+				{
+					t.position = new Vector2(rightPos.transform.position.x, t.position.y);
+					FinishedState();
+				}
+			}
 		}
 
 	}
@@ -357,6 +377,7 @@ public class Anubis : Enemy
 
 	void UpdateCrouch()
 	{
+		FallingRocks();
 		if(crouchStartPos == Vector2.zero)
 		{
 			crouchStartPos = (Vector2)t.position;
@@ -400,7 +421,19 @@ public class Anubis : Enemy
 
 	void UpdateBash()
 	{
-		if(Random.Range(0, spawnFrequency) == 0)
+		FallingRocks();
+		//do animation here
+		bashCounter += Time.deltaTime;
+		if(bashCounter >= bashTime)
+		{
+			bashCounter = 0;
+			FinishedState();
+		}
+	}
+
+	void FallingRocks()
+	{
+		if (Random.Range(0, spawnFrequency) == 0)
 		{
 			Instantiate(fallingRock, new Vector2(m_room.transform.position.x + Random.Range(rockBounds.x, rockBounds.y), m_room.transform.position.y + rockStartHeight), Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360))));
 		}
@@ -477,13 +510,20 @@ public class Anubis : Enemy
 
 	void ChooseNextState3()
 	{
-		curState = State.BASH;
+		lava.gameObject.SetActive(true);
+		lava.isActive = true;
+
 		for(int i = 0; i < dashPlatforms.Count; i++)
 		{
 			dashPlatforms[i].GetComponent<BoxCollider2D>().isTrigger = false;
 		}
-		lava.gameObject.SetActive(true);
-		lava.isActive = true;
+
+		if (prevStates[prevStates.Count - 1] == State.BASH)
+		{
+			curState = State.CROUCH;
+		}
+		else
+			curState = State.BASH;
 	}
 	#endregion
 
@@ -526,6 +566,18 @@ public class Anubis : Enemy
 		transform.localScale = scale;
 	}
 
+	void CheckForOutOfBounds()
+	{
+		if(t.position.x <= leftPos.transform.position.x)
+		{
+			t.position = new Vector2(leftPos.transform.position.x, t.position.y);
+		}
+		else if(t.position.x >= rightPos.transform.position.x)
+		{
+			t.position = new Vector2(rightPos.transform.position.x, t.position.y);
+		}
+	}
+
 	void CalculateHPPercentage()
 	{
 		m_hpPercentage = ((float)m_hitPoints / (float)m_maxHitpoints) * 100;
@@ -547,10 +599,10 @@ public class Anubis : Enemy
 
 		if(col.gameObject.tag == "Solid")
 		{
-			if(curState == State.DASH)
-			{
-				FinishedState();
-			}
+			//if(curState == State.DASH)
+			//{
+			//	FinishedState();
+			//}/
 		}
 	}
 
@@ -564,10 +616,10 @@ public class Anubis : Enemy
 	{
 		if (col.gameObject.tag == "Solid")
 		{
-			if (curState == State.DASH)
-			{
-				FinishedState();
-			}
+			//if (curState == State.DASH)
+			//{
+			//	FinishedState();
+			//}
 		}
 	}
 

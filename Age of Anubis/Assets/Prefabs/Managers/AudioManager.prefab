@@ -29,6 +29,7 @@ GameObject:
   - 82: {fileID: 8297314}
   - 82: {fileID: 8265284}
   - 82: {fileID: 8240580}
+  - 82: {fileID: 8209752}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -61,6 +62,76 @@ Transform:
   - {fileID: 475808}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!82 &8209752
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179834}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24389182, guid: ceb3cd11db6c80a418528e18d385e50c,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: a71a4bb33b295334192f9f8751ad3b3f, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!82 &8228598
 AudioSource:
   m_ObjectHideFlags: 1
@@ -431,9 +502,15 @@ MonoBehaviour:
   s_shop: {fileID: 24506974, guid: ceb3cd11db6c80a418528e18d385e50c, type: 2}
   s_boss: {fileID: 24592724, guid: ceb3cd11db6c80a418528e18d385e50c, type: 2}
   s_temple: {fileID: 24572806, guid: ceb3cd11db6c80a418528e18d385e50c, type: 2}
+  s_rumble: {fileID: 24538784, guid: ceb3cd11db6c80a418528e18d385e50c, type: 2}
   m_standardTransitionTime: 1
   m_numberOfSources: 5
-  m_sources: []
+  m_sources:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   a_bleed:
     clip: {fileID: 8300000, guid: 75df37f1f05780b4c932678477e88905, type: 3}
     volume: .600000024
@@ -477,7 +554,7 @@ MonoBehaviour:
   a_player_death:
     clip: {fileID: 8300000, guid: 8c760837c19d7e449961a675ad989301, type: 3}
     volume: .200000003
-    preview: 1
+    preview: 0
   a_player_jump:
     clip: {fileID: 8300000, guid: 4c14a56aa2463d34e9a9331e12b1eaff, type: 3}
     volume: .200000003
@@ -493,7 +570,7 @@ MonoBehaviour:
   a_eny_die:
     clip: {fileID: 8300000, guid: 71c5d89fde63b2c489a41a8a0ffd00e7, type: 3}
     volume: .200000003
-    preview: 1
+    preview: 0
   a_eny_spit:
     clip: {fileID: 8300000, guid: c4d96f7a50cf9ed4ba2558d151205b04, type: 3}
     volume: .200000003
@@ -522,13 +599,17 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 00f7b335dec6821468f632d6460017fc, type: 3}
     volume: .800000012
     preview: 0
+  a_anubis_dashCharge:
+    clip: {fileID: 8300000, guid: f87879fe81719be46b8e9d245414fc4e, type: 3}
+    volume: .5
+    preview: 0
   a_anubis_dash:
     clip: {fileID: 8300000, guid: 88db2acb623f28c4f9458edb828d826c, type: 3}
     volume: .5
     preview: 0
   a_anubis_fireball:
     clip: {fileID: 8300000, guid: 542d9f709ae30514f92081f3709e63d6, type: 3}
-    volume: .200000003
+    volume: .400000006
     preview: 0
   a_anubis_intro:
     clip: {fileID: 8300000, guid: c5fe95b6eab8f88429f41243ead86ffd, type: 3}
