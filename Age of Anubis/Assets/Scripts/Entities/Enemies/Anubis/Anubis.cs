@@ -100,6 +100,8 @@ public class Anubis : Enemy
 	public float dashBufferCounter = 0.0f;
 	float dash;
 	bool dashPlayedAudio = false;
+	public GameObject leftPos;
+	public GameObject rightPos;
 	public List<GameObject> dashPlatforms;
 
 	[Header("Stuck State Variables")]
@@ -198,6 +200,7 @@ public class Anubis : Enemy
 		else if(m_hpPercentage <= thirdStateHPPercent)
 		{
 			curStage = BattleStage.THIRD;
+			AudioManager.Inst.FadeMusic(AudioManager.Inst.s_rumble);
 		}
 
 		if(prevStates.Count >= 1)
@@ -305,6 +308,7 @@ public class Anubis : Enemy
 			{
 				dashPlatforms[i].GetComponent<BoxCollider2D>().isTrigger = false;
 			}
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_anubis_dashCharge);
 		}
 
 		dashBufferCounter += Time.deltaTime;

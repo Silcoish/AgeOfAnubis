@@ -14,6 +14,7 @@ public class Event_MusicFade : MonoBehaviour
 		if(col.tag == "Player")
 		{
 			AudioManager.Inst.FadeMusic(AudioManager.Inst.s_temple, 2.0f);
+			Destroy(gameObject);
 		}
 	}
 }
