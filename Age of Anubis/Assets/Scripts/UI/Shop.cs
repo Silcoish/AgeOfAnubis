@@ -425,5 +425,6 @@ public class Shop : MonoBehaviour
 		}
 
         sIcon.effect.sprite = GetEffectSprite(wp.m_attack.m_effectType);
+        sIcon.cost.text = wp.m_goldCost.ToString();
 	}
 }
