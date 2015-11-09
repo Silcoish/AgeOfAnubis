@@ -131,9 +131,24 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    int GetItemID(List<WeaponData> weaponDataShortlist)
+    {
+        List<int> idList = new List<int>();
+
+        for(int i = 0; i < weaponDataShortlist.Count; i++)
+        {
+            for(float j = 0; j < weaponDataShortlist[i].rarity; j += 0.01F)
+            {
+                idList.Add(i);
+            }
+        }
+
+        return idList[UnityEngine.Random.Range(0, idList.Count)];
+    }
+
     GameObject GenerateWeapon(List<WeaponData> weaponDataShortlist)
     {
-        int id = UnityEngine.Random.Range(1, weaponDataShortlist.Count);
+        int id = GetItemID(weaponDataShortlist);
 
         WeaponData wepData = weaponDataShortlist[id];
         GameObject weapon;
