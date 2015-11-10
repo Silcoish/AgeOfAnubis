@@ -72,10 +72,10 @@ public class GameManager : MonoBehaviour {
 				{
 					showCol = border;
 				}
-				if(((y == 0 || y == 7) && (x == 7 || x == 8)) || ((x == 0 || x == 15) && (y == 3 || y == 4))) 
-				{
+				//if(((y == 0 || y == 7) && (x == 7 || x == 8)) || ((x == 0 || x == 15) && (y == 3 || y == 4))) 
+				//{
 					//showCol = Color.magenta;
-				}
+				//}
 
 				t.SetPixel(((i % 15) * 16) + x, ((t.height - 1 - (int)i / 15) * 8) + y, showCol);
 			}
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour {
 		{
 			for (int x = 0; x < tex.width; x++)
 			{
-				tex.SetPixel(x, tex.height - y, minimapTex.GetPixel(x + ((int)(i % 15) * 16) - (3 * 16), minimapTex.height - y + ((int)(i / 15)* 8) + (2 * 8)));
+				tex.SetPixel(x, tex.height - y, minimapTex.GetPixel(x + ((int)(i % 15) * 16) - (3 * 16), minimapTex.height - y - ((int)(i / 15)* 8) + (4 * 8)));
 			}
 		}
 

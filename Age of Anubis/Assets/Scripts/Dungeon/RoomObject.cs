@@ -74,8 +74,6 @@ public class RoomObject : MonoBehaviour
 	public void EnteredRoom()
 	{
 		isActiveRoom = true;
-
-		GameManager.inst.CreateVisibleMap(arrayIndex);
 		
 
 		foreach (var en in m_allEnemies)
@@ -86,6 +84,7 @@ public class RoomObject : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetRoom(gameObject);
 
 		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(1, 0, 0, 0.5f), new Color(1, 0.5f, 0.5f, 0.5f));
+		GameManager.inst.CreateVisibleMap(arrayIndex);
 		GameManager.inst.RefreshMinimap();
 
 		if (m_allEnemies.Count == 0)
