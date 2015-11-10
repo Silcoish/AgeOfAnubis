@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -89,6 +89,11 @@ public class Shop : MonoBehaviour
 	{
         if (Input.GetButtonDown("Cancel"))
             OnCloseShop();
+
+		if (m_es.currentSelectedGameObject == null)
+		{
+			m_es.SetSelectedGameObject(m_newItem1.gameObject);
+		}
 
 		if (m_selected == null)
 		{

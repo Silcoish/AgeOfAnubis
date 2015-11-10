@@ -39,6 +39,11 @@ public class GameManager : MonoBehaviour {
 		{
 			print(e.Message);
 		}
+
+		if(GameObject.FindGameObjectWithTag("Minimap") != null)
+		{
+			visibleMap = GameObject.FindGameObjectWithTag("Minimap");
+		}
 	}
 
 	void Update()

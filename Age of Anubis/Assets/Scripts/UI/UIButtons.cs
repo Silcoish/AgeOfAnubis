@@ -8,6 +8,7 @@ public class UIButtons : MonoBehaviour
 
 	List<GameObject> m_previousMenus;
 	public GameObject m_curMenu;
+	public UnityEngine.EventSystems.EventSystem m_es;
 
 	public UnityEngine.UI.Button continueButton;
 	public SaveManager m_saveManager;
@@ -33,6 +34,9 @@ public class UIButtons : MonoBehaviour
 
 	void Update()
 	{
+		if(m_es.currentSelectedGameObject == null)
+			m_es.SetSelectedGameObject(continueButton.gameObject);
+
 		if (Input.GetButtonDown("Cancel"))
 		{
 			print("Back");
