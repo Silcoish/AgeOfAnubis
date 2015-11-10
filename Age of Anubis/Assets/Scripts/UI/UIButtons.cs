@@ -9,6 +9,7 @@ public class UIButtons : MonoBehaviour
 	List<GameObject> m_previousMenus;
 	public GameObject m_curMenu;
 
+	public UnityEngine.UI.Button continueButton;
 	public SaveManager m_saveManager;
 
 	void Awake()
@@ -19,6 +20,15 @@ public class UIButtons : MonoBehaviour
 			Destroy(this);
 
 		m_previousMenus = new List<GameObject>();
+	}
+
+	void Start()
+	{
+		//Disable continue if no savefile
+		if(!m_saveManager.saveExists)
+		{
+			continueButton.interactable = false;
+		}
 	}
 
 	void Update()
@@ -36,11 +46,13 @@ public class UIButtons : MonoBehaviour
 	{
 		m_saveManager.NewGame();
 		LoadingManager.Inst.LoadLevel("Tutorial", true);
+		gameObject.SetActive(false);
 	}
 
 	public void Continue()
 	{
 		LoadingManager.Inst.LoadLevel("ShopScene", true);
+		gameObject.SetActive(false);
 	}
 
 
