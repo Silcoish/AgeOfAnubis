@@ -5,7 +5,9 @@ public enum WeaponSwing {LIGHT, MEDIUM, HEAVY}
 
 public class Weapon : MonoBehaviour 
 {
-	public int m_level;
+    public int m_level;
+    public string m_name;
+    public int m_goldCost;
 	public Attack m_attack;
 	private PolygonCollider2D m_col;
 
@@ -74,5 +76,17 @@ public class Weapon : MonoBehaviour
 
 			}
 		}
-	}    
+	}
+
+    public void ApplyWeaponData(WeaponData data)
+    {
+        m_level = data.level;
+        m_name = data.name;
+        m_attack.m_attackStrength = data.attackStrength;
+        m_attack.m_knockbackForce = data.knockback;
+        m_attack.m_effectType = data.effectType;
+        m_attack.m_effectStrength = data.effectStrength;
+        m_attack.m_effectDuration = data.effectDuration;
+        m_goldCost = data.goldCost;
+    }
 }

@@ -17,6 +17,8 @@ public struct WeaponData
     public DamageType effectType;
     public int effectStrength;
     public int effectDuration;
+    public float rarity;
+    public int goldCost;
 }
 
 public class WeaponManager : MonoBehaviour 
@@ -24,6 +26,10 @@ public class WeaponManager : MonoBehaviour
     public static WeaponManager inst;
 
     public TextAsset m_weaponList;
+
+    public GameObject m_baseDagger;
+    public GameObject m_baseSword;
+    public GameObject m_baseAxe;
 
     public List<WeaponData> m_weaponData;
 
@@ -61,7 +67,7 @@ public class WeaponManager : MonoBehaviour
                 //Debug.Log(weapons[i]);
                 string[] fields = weapons[i].Split(';');
 
-                if(fields.Length != 8)
+                if(fields.Length != 10)
                 {
                     Debug.Log("Invalid number of fields. Weapon skipped!");
                 }
@@ -77,6 +83,8 @@ public class WeaponManager : MonoBehaviour
                     data.effectType = GetDamageType(fields[5]);
                     data.effectStrength = Int32.Parse(fields[6]);
                     data.effectDuration = Int32.Parse(fields[7]);
+                    data.rarity = float.Parse(fields[8]);
+                    data.goldCost = Int32.Parse(fields[9]);
 
                     m_weaponData.Add(data);
                 }
@@ -121,5 +129,64 @@ public class WeaponManager : MonoBehaviour
             Debug.Log("Failed to match Base Prefab Name: " + s);
             return DamageType.NONE;
         }
+    }
+
+    int GetItemID(List<WeaponData> weaponDataShortlist)
+    {
+        List<int> idList = new List<int>();
+
+        for(int i = 0; i < weaponDataShortlist.Count; i++)
+        {
+            for(float j = 0; j < weaponDataShortlist[i].rarity; j += 0.01F)
+            {
+                idList.Add(i);
+            }
+        }
+
+        return idList[UnityEngine.Random.Range(0, idList.Count)];
+    }
+
+    GameObject GenerateWeapon(List<WeaponData> weaponDataShortlist)
+    {
+        int id = GetItemID(weaponDataShortlist);
+
+        WeaponData wepData = weaponDataShortlist[id];
+        GameObject weapon;
+
+        switch(wepData.basePrefab)
+        {
+            case BaseWeaponPrefab.AXE:
+                weapon = m_baseAxe;
+                break;
+            case BaseWeaponPrefab.SWORD:
+                weapon = m_baseSword;
+                break;
+            case BaseWeaponPrefab.DAGGER:
+                weapon = m_baseDagger;
+                break;
+            default:
+                weapon = m_baseDagger;
+                Debug.Log("Invalid BaseWeaponPrefab when generating weapon!");
+                return weapon;
+        }
+
+        weapon.GetComponent<Weapon>().ApplyWeaponData(wepData);
+
+        return weapon;
+    }
+
+    public GameObject GenerateWeapon(int level)
+    {
+        List<WeaponData> shortlist = new List<WeaponData>();
+
+        foreach(WeaponData data in m_weaponData)
+        {
+            if(data.level == level)
+            {
+                shortlist.Add(data);
+            }
+        }
+
+        return GenerateWeapon(shortlist);
     }
 }

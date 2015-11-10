@@ -58,7 +58,6 @@ public class PlayerInventory : MonoBehaviour
     // Reset temporary values on player death.
     public void DeathReset()
     {
-
         m_currentGold = m_savedGold;
         m_currentXP = m_savedXP;
 		m_playerLevel = m_savedPlayerLevel;
@@ -68,6 +67,11 @@ public class PlayerInventory : MonoBehaviour
 		if(GameManager.inst.m_saveManager != null)
 		{
 			GameManager.inst.m_saveManager.Save();
+		}
+
+		if(GameManager.inst.destroyNextScene)
+		{
+			Destroy(GameManager.inst.gameObject);
 		}
     }
 

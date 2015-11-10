@@ -19,10 +19,13 @@ public class AudioManager : MonoBehaviour
 	public AudioMixerGroup g_fx;
 	public AudioMixerGroup g_music;
 
+	public AudioMixerSnapshot s_none;
 	public AudioMixerSnapshot s_fight;
 	public AudioMixerSnapshot s_idle;
 	public AudioMixerSnapshot s_shop;
     public AudioMixerSnapshot s_boss;
+	public AudioMixerSnapshot s_temple;
+	public AudioMixerSnapshot s_rumble;
 	[Range(0f,10f)]
 	public float m_standardTransitionTime = 1.0f;
 
@@ -61,6 +64,7 @@ public class AudioManager : MonoBehaviour
     public AudioStruct a_ui_select;
     [Header("Boss")]
     public AudioStruct a_anubis_bash;
+	public AudioStruct a_anubis_dashCharge;
     public AudioStruct a_anubis_dash;
     public AudioStruct a_anubis_fireball;
     public AudioStruct a_anubis_intro;

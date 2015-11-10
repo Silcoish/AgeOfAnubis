@@ -1,5 +1,4 @@
-/* Copyright (c) Handsome Dragon Games
-*  http://www.handsomedragongames.com
+/* Copyright (c) Dungeon Crawlers
 *  Script Created by:
 *  Corey Underdown
 */
@@ -13,16 +12,13 @@ public class SaveManager : MonoBehaviour
 	public int m_exp;
 	public int m_gold;
 
+	public bool saveExists = false;
+
 	void Start()
 	{
 		if (File.Exists(Application.persistentDataPath + "Savegame.fiin"))
 		{
-			print("LOADING");
-			Load();
-		}
-		else
-		{
-			Save();
+			saveExists = true;
 			Load();
 		}
 	}
