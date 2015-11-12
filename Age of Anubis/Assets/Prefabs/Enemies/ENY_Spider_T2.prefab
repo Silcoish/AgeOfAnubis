@@ -242,12 +242,12 @@ MonoBehaviour:
   m_unitName: 
   m_hitPoints: 4
   m_attack:
-    m_attackStrength: 2
+    m_attackStrength: 3
     m_effectType: 0
     m_effectDuration: 0
     m_effectStrength: 0
     m_knockbackForce: 0
-  m_XP: 2
+  m_XP: 6
   m_deathParticle: {fileID: 154686, guid: 3304dccff5d4a864f8a8a4bb6fac24cf, type: 2}
   m_topRight: {fileID: 415126}
   m_topLeft: {fileID: 484286}
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_platformMask:
     serializedVersion: 2
     m_Bits: 512
-  m_moveSpeed: 2
+  m_moveSpeed: 3
 --- !u!212 &21288192
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -292,7 +292,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_attack.m_attackStrength
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_XP
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 132390}
