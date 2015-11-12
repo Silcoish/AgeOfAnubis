@@ -30,6 +30,10 @@ public class Player : Damageable
     public float m_immunityTimer = 1;
     private float m_curImmTimer = 0;
 
+    private bool m_isDying = false;
+    public float m_deathDelay = 5;
+    private float m_deathDelayTimer = 0;
+
 	public override void AwakeOverride() 
     {
 		m_colFeet = GetComponent<CircleCollider2D>();
@@ -63,9 +67,12 @@ public class Player : Damageable
 
 	public override void OnTakeDamage(Damage dam)
 	{
-        if(m_curImmTimer < 0)
+        if(m_curImmTimer < 0 && !m_isDying)
         {
             base.OnTakeDamage(dam);
+
+            SetAnimTrigger("TakeDamage");
+            
             m_curImmTimer = m_immunityTimer;
 
             UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
@@ -74,19 +81,40 @@ public class Player : Damageable
 
 	public override void UpdateOverride()
     {
-		CheckIfGrounded();
+        if(m_isDying)
+        {
+            if(m_deathDelayTimer <= 0)
+                DeathReset();
+            else
+                m_deathDelayTimer -= Time.deltaTime;
+        }
+        else
+        {
+            CheckIfGrounded();
 
-		Check2WayPlatforms();
+            Check2WayPlatforms();
 
-		PlayerInput();
+            PlayerInput();
 
-        m_curImmTimer -= Time.deltaTime;
+            m_curImmTimer -= Time.deltaTime;
 
-        // WARNING: Damage over time effects do not call OnTakeDamage() each tick, so health does not get updated.
-        UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
+            // WARNING: Damage over time effects do not call OnTakeDamage() each tick, so health does not get updated.
+            UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
+        }
     }
 
     public override void OnDeath()
+    {
+        if(!m_isDying)
+        {
+            Debug.Log("OnDeath Called");
+            SetAnimTrigger("Death");
+            m_isDying = true;
+            m_deathDelayTimer = m_deathDelay;
+        } 
+    }
+
+    void DeathReset()
     {
         PlayerInventory.Inst.DeathReset();
 
@@ -132,6 +160,11 @@ public class Player : Damageable
 		UpdateAnimationState(m_inputAxis.x);
 		SetAnimSpeed(m_inputAxis.x);
         SetAnimVSpeed(m_velocity.y);
+
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            RecoverHealth(-1000000);
+        }
 
         if(!m_isShopOpen)
         {
@@ -312,6 +345,14 @@ public class Player : Damageable
         m_anim.SetFloat("VSpeed", Mathf.Abs(vSpeed));
         m_anim_arm.SetFloat("VSpeed", Mathf.Abs(vSpeed));
         m_anim_legs.SetFloat("VSpeed", Mathf.Abs(vSpeed));
+    }
+
+    // Set off an animation trigger with name triggerName
+    void SetAnimTrigger(string triggerName)
+    {
+        m_anim.SetTrigger(triggerName);
+        m_anim_arm.SetTrigger(triggerName);
+        m_anim_legs.SetTrigger(triggerName);
     }
 
     public bool isAttacking()
