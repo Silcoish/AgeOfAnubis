@@ -34,6 +34,9 @@ public class Player : Damageable
     public float m_deathDelay = 5;
     private float m_deathDelayTimer = 0;
 
+    //public float jumpMaxSpeed;
+    //public float jumpMinSpeed;
+
 	public override void AwakeOverride() 
     {
 		m_colFeet = GetComponent<CircleCollider2D>();
@@ -160,6 +163,11 @@ public class Player : Damageable
 		UpdateAnimationState(m_inputAxis.x);
 		SetAnimSpeed(m_inputAxis.x);
         SetAnimVSpeed(m_velocity.y);
+        //if (m_velocity.y > jumpMaxSpeed)
+        //    jumpMaxSpeed = m_velocity.y;
+        //if (m_velocity.y < jumpMinSpeed)
+        //    jumpMinSpeed = m_velocity.y;
+
 
         if(Input.GetKeyDown(KeyCode.K))
         {
