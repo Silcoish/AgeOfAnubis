@@ -18,6 +18,7 @@ public class Player : Damageable
 
 	public Animator m_anim;
     public Animator m_anim_arm;
+    public Animator m_anim_legs;
     private bool isFacingRight = true;
 
 	private Vector2 m_inputAxis = Vector2.zero;
@@ -43,6 +44,10 @@ public class Player : Damageable
             if(d.name == "Player_Arm")
             {
                 m_anim_arm = d;
+            }
+            else if(d.name == "Player_Legs")
+            {
+                m_anim_legs = d;
             }
         }
 
@@ -143,7 +148,11 @@ public class Player : Damageable
             if (Input.GetButtonDown("Fire1"))
             {
                 if (m_currentWeapon != null)
+                {
+                    m_currentWeapon.GetComponent<Weapon>().Attack(m_anim);
                     m_currentWeapon.GetComponent<Weapon>().Attack(m_anim_arm);
+                    m_currentWeapon.GetComponent<Weapon>().Attack(m_anim_legs);
+                }
             }
         }
 		
@@ -286,6 +295,7 @@ public class Player : Damageable
     {
         m_anim.SetFloat("Speed", Mathf.Abs(speed));
         m_anim_arm.SetFloat("Speed", Mathf.Abs(speed));
+        m_anim_legs.SetFloat("Speed", Mathf.Abs(speed));
     }
 
     // Set the Grounded value of the animators
@@ -293,6 +303,7 @@ public class Player : Damageable
     {
         m_anim.SetBool("Grounded", isGrounded);
         m_anim_arm.SetBool("Grounded", isGrounded);
+        m_anim_legs.SetBool("Grounded", isGrounded);
     }
 
     // Set the vertical speed value of the animators
@@ -300,6 +311,7 @@ public class Player : Damageable
     {
         m_anim.SetFloat("VSpeed", Mathf.Abs(vSpeed));
         m_anim_arm.SetFloat("VSpeed", Mathf.Abs(vSpeed));
+        m_anim_legs.SetFloat("VSpeed", Mathf.Abs(vSpeed));
     }
 
     public bool isAttacking()
