@@ -23,6 +23,9 @@ public class PhysicsEnemy : Enemy
     {
         base.AwakeOverride();
 
+        // Reset rotation NOTE: Enemies inheriting from PhysicsEnemy will NOT work once rotated
+        transform.rotation = Quaternion.Euler(Vector3.zero);
+
         // Set up check transforms
         float offset = GetComponent<CircleCollider2D>().radius + m_checkOffset;
         m_topRight.localPosition = new Vector2(offset, offset);
