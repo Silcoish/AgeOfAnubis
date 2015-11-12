@@ -18,6 +18,8 @@ public class SaveData : ISerializable
 	public int currentLevel = 1;
 	public int exp = 0;
 	public int gold = 0;
+	public string weapon1 = "";
+	public string weapon2 = "";
 	// === /Values ===
 
 	// The default constructor. Included for when we call it during Save() and Load()
@@ -32,6 +34,8 @@ public class SaveData : ISerializable
 		currentLevel = (int)info.GetValue("currentLevel", typeof(int));
 		exp = (int)info.GetValue("exp", typeof(int));
 		gold = (int)info.GetValue("gold", typeof(int));
+		weapon1 = (string)info.GetValue("weapon1", typeof(string));
+		weapon2 = (string)info.GetValue("weapon2", typeof(string));
 
 		//levelReached = (int)info.GetValue("levelReached", typeof(int));
 	}
@@ -43,7 +47,8 @@ public class SaveData : ISerializable
 		info.AddValue("currentLevel", (currentLevel));
 		info.AddValue("exp", exp);
 		info.AddValue("gold", gold);
-		//info.AddValue("levelReached", levelReached);
+		info.AddValue("weapon1", weapon1);
+		info.AddValue("weapon2", weapon2);
 	}
 }
 
@@ -71,6 +76,8 @@ public class SaveLoad
 		data.currentLevel = sm.m_currentLevel;
 		data.exp = sm.m_exp;
 		data.gold = sm.m_gold;
+		data.weapon1 = sm.m_weapon1;
+		data.weapon2 = sm.m_weapon2;
 
 		Stream stream = File.Open(filePath, FileMode.Create);
 		BinaryFormatter bformatter = new BinaryFormatter();
@@ -95,8 +102,8 @@ public class SaveLoad
 		GameManager.inst.m_saveManager.m_currentLevel = data.currentLevel;
 		GameManager.inst.m_saveManager.m_exp = data.exp;
 		GameManager.inst.m_saveManager.m_gold = data.gold;
-
-		Debug.Log(GameManager.inst.m_saveManager.m_gold);
+		GameManager.inst.m_saveManager.m_weapon1 = data.weapon1;
+		GameManager.inst.m_saveManager.m_weapon2 = data.weapon2;
 	}
 
 }

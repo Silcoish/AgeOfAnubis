@@ -56,6 +56,8 @@ public class Anubis : Enemy
 	public BoxCollider2D collider;
 	public BoxCollider2D frontCollider;
 
+	private Animator anim;
+
 	public GameObject UIObject;
 	public UnityEngine.UI.Image UIImage;
 
@@ -135,6 +137,7 @@ public class Anubis : Enemy
 	void Start()
 	{
 		t = transform;
+		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		spawnedEnemies = new List<GameObject>();
 		if(UIObject != null)
