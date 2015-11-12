@@ -29,6 +29,11 @@ public class ENY_Scarab_001 : PhysicsEnemy
                 //Debug.Log("Hit Wall");
                 m_ledgeCheck = GetTransform(m_ledgeCheck, !m_isVertical);
                 m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
+
+                if (!CheckPosition(m_ledgeCheck))
+                {
+                    EnablePathing(false);
+                }
             }
             // Check if we hit the end of a platform
             else if (!CheckPosition(m_ledgeCheck))
@@ -37,6 +42,12 @@ public class ENY_Scarab_001 : PhysicsEnemy
                 // Reverse Direction when we hit the end of our ledge
                 m_ledgeCheck = GetTransform(m_ledgeCheck, !m_isVertical);
                 m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
+
+                // If our new ledge choice is also over a ledge then enable gravity
+                if(!CheckPosition(m_ledgeCheck))
+                {
+                    EnablePathing(false);
+                }
             }
             // Move forward
             else
