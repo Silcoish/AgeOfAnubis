@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11414790}
   - 61: {fileID: 6143466}
   - 50: {fileID: 5092048}
+  - 95: {fileID: 9562946}
   m_Layer: 10
   m_Name: Anubis
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.5499992, y: -4.5, z: 0}
+  m_LocalPosition: {x: 37.8249741, y: -26.6087036, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,6 +61,23 @@ BoxCollider2D:
   m_Offset: {x: .431395531, y: -.431395531}
   serializedVersion: 2
   m_Size: {x: 3.10710835, y: 7.98495102}
+--- !u!95 &9562946
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189202}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: edfd68c9dd1f50149846b1714c45dd7b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11414790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,18 +89,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b057659b10edcbe4a923ed44ef1230bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Anubis
-  hitPoints: 1000
+  m_unitName: 
+  m_hitPoints: 10
   m_attack:
     m_attackStrength: 15
     m_effectType: 0
     m_effectDuration: 0
     m_effectStrength: 0
     m_knockbackForce: 0
+  m_XP: 1
   m_deathParticle: {fileID: 0}
   curState: 0
   collider: {fileID: 6143466}
-  eyeOfHorusGO: {fileID: 192918, guid: d150720e69cbb7446bcc52a1f3ee8ab4, type: 2}
+  frontCollider: {fileID: 0}
+  UIObject: {fileID: 0}
+  UIImage: {fileID: 0}
+  introTime: 2
+  introMusicFadeTime: 3
+  spawnEnemy: {fileID: 0}
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -99,8 +123,26 @@ MonoBehaviour:
   m_projectileMiddleRow: 0
   m_projectileBottomRow: -3.5
   m_projectileCooldown: 3
+  m_howManyShots: 5
   dashSpeed: 15
   raycastLength: 1
+  dashBufferTime: 5
+  dashBufferCounter: 0
+  leftPos: {fileID: 0}
+  rightPos: {fileID: 0}
+  dashPlatforms: []
+  m_stuckTime: 5
+  m_maxPercentageHPTakenStuck: 5
+  crouchSpeed: 10
+  crouchDistanceDown: 10
+  crouchOffset: 10
+  crouchWaitTime: 2
+  fallingRock: {fileID: 0}
+  rockStartHeight: 10.5
+  rockBounds: {x: 0, y: 0}
+  spawnFrequency: 60
+  lava: {fileID: 0}
+  bashTime: 8
 --- !u!212 &21259610
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -125,7 +167,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 63de1053b1599e04f97588835e75d2f4, type: 3}
+  m_Sprite: {fileID: 21300002, guid: c7a60ed3bd43f7e4094bf397f8abd841, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
