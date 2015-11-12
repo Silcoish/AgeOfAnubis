@@ -175,6 +175,32 @@ public class WeaponManager : MonoBehaviour
         return weapon;
     }
 
+    GameObject GenerateWeapon(WeaponData data)
+    {
+        GameObject weapon;
+
+        switch (data.basePrefab)
+        {
+            case BaseWeaponPrefab.AXE:
+                weapon = m_baseAxe;
+                break;
+            case BaseWeaponPrefab.SWORD:
+                weapon = m_baseSword;
+                break;
+            case BaseWeaponPrefab.DAGGER:
+                weapon = m_baseDagger;
+                break;
+            default:
+                weapon = m_baseDagger;
+                Debug.Log("Invalid BaseWeaponPrefab when generating weapon!");
+                return weapon;
+        }
+
+        weapon.GetComponent<Weapon>().ApplyWeaponData(data);
+
+        return weapon;
+    }
+
     public GameObject GenerateWeapon(int level)
     {
         List<WeaponData> shortlist = new List<WeaponData>();
@@ -188,5 +214,18 @@ public class WeaponManager : MonoBehaviour
         }
 
         return GenerateWeapon(shortlist);
+    }
+
+    public GameObject GenerateWeapon(string name, int level)
+    {
+        foreach (WeaponData data in m_weaponData)
+        {
+            if (data.level == level && data.name == name)
+            {
+                return GenerateWeapon(data);
+            }
+        }
+        Debug.Log("WeaponManager: Failed to generate wepaon with name: " + name +" , and level: " + level);
+        return null;
     }
 }
