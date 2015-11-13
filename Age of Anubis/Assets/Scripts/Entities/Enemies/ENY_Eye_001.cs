@@ -16,7 +16,9 @@ public class ENY_Eye_001 : Enemy
     
     private bool m_isFacingRight = true;
     private Transform m_player;
-    
+
+    private Animator m_anim;
+
     enum State { SEARCHING, CHARGING, ATTACKING, RECHARGING };
     private State m_state = State.SEARCHING;
 
@@ -27,6 +29,8 @@ public class ENY_Eye_001 : Enemy
         m_player = GameObject.FindGameObjectWithTag("Player").transform;
         if (!m_player)
             Debug.Log("Eye - Failed to find GameObject with 'Player' tag");
+
+        m_anim = GetComponent<Animator>();
     }
 
     public override void EnemyBehaviour()
@@ -50,6 +54,7 @@ public class ENY_Eye_001 : Enemy
                 if (Mathf.Abs(dir.x) < (m_xDist + 0.5) && Mathf.Abs(dir.y) < 1)
                 {
                     m_state = State.CHARGING;
+                    m_anim.SetTrigger("Blink");
                     m_curTimer = m_chargeTimer;
                     //Debug.Log("Enter Charge State");
                 }

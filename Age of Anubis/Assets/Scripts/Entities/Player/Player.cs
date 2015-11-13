@@ -122,12 +122,12 @@ public class Player : Damageable
         PlayerInventory.Inst.DeathReset();
 
         // Load shop level.
-        Application.LoadLevel("ShopScene");
+        LoadingManager.Inst.LoadLevel("ShopScene", false);
     }
 
 	public void LeaveDungeon()
 	{
-		Application.LoadLevel("ShopScene");
+        LoadingManager.Inst.LoadLevel("ShopScene", false);
 	}
 
     public override void RecoverHealth(int amount)

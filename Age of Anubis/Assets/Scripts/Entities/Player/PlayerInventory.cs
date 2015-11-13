@@ -62,6 +62,7 @@ public class PlayerInventory : MonoBehaviour
         m_currentXP = m_savedXP;
 		m_playerLevel = m_savedPlayerLevel;
         m_currentWeapon = null;
+        m_multiplier = 1;
         CheckWeaponValidity();
 
 		if(GameManager.inst.m_saveManager != null)
