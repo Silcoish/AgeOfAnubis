@@ -16,6 +16,10 @@ public class ENY_Snake_001 : PhysicsEnemy
     private float m_launchX;
     public float m_launchForce;
 
+    private GameObject m_animObject;
+    private Animator m_anim;
+    private bool m_isFacingRight = true;
+
     enum State { SEARCHING, CHARGING, ATTACKING, RECHARGING };
     private State m_state = State.SEARCHING;
 
@@ -26,6 +30,16 @@ public class ENY_Snake_001 : PhysicsEnemy
         m_curTimer = m_attackTimer + (Random.value * 2); // Add between 0.1-2 seconds to make the shooting less uniform
 
         m_launchX = m_launchVec.x;
+
+        Animator[] tempAnims = gameObject.GetComponentsInChildren<Animator>();
+        foreach (var d in tempAnims)
+        {
+            if (d.name == "Sprite")
+            {
+                m_anim = d;
+                m_animObject = m_anim.gameObject;
+            }
+        }
     }
 
     public override void EnemyBehaviour()
@@ -110,7 +124,11 @@ public class ENY_Snake_001 : PhysicsEnemy
                 GameObject tempProj;
                 tempProj = Instantiate(m_venomProj, transform.position, transform.rotation) as GameObject;
                 Physics2D.IgnoreCollision(tempProj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-                tempProj.GetComponent<Rigidbody2D>().AddForce(m_launchVec * m_launchForce, ForceMode2D.Impulse);
+                Vector2 tempVec = m_launchVec;
+                if (!m_isFacingRight)
+                    tempVec.x = -m_launchVec.x;
+
+                tempProj.GetComponent<Rigidbody2D>().AddForce(tempVec * m_launchForce, ForceMode2D.Impulse);
 
                 m_state = State.RECHARGING;
                 m_curTimer = m_rechargeTimer;
@@ -131,6 +149,25 @@ public class ENY_Snake_001 : PhysicsEnemy
         m_curTimer -= Time.deltaTime;
 
         // Animation
-        //UpdateAnimationState(m_rb.velocity.x);
+        UpdateAnimationState(m_rb.velocity.x);
+        m_anim.SetFloat("Speed", Mathf.Abs(m_rb.velocity.x));
+    }
+
+    // Flip the character object for left/right facing.
+    void Flip()
+    {
+        m_isFacingRight = !m_isFacingRight;
+        Vector3 scale = m_animObject.transform.localScale;
+        scale.x *= -1;
+        m_animObject.transform.localScale = scale;
+    }
+
+    // Update player animations based on Input.
+    void UpdateAnimationState(float input)
+    {
+        if (input > 0 && !m_isFacingRight)
+            Flip();
+        else if (input < 0 && m_isFacingRight)
+            Flip();
     }
 }
