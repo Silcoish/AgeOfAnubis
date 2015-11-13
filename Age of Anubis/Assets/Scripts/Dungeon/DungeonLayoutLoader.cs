@@ -77,9 +77,10 @@ public class DungeonLayoutLoader : MonoBehaviour
 		}
 	}
 
+	//watch venture brothers
 	void ChooseLayout()
 	{
-		DirectoryInfo info = new DirectoryInfo(Application.dataPath + "/Layouts/");
+		DirectoryInfo info = new DirectoryInfo(Application.streamingAssetsPath + "/Layouts/");
 		FileInfo[] fileInfo = info.GetFiles();
 		List<string> fileNames = new List<string>();
 
@@ -96,7 +97,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 
 	void SetupLayout()
 	{
-		string filePath = Application.dataPath + "/Layouts/" + fileName;
+		string filePath = Application.streamingAssetsPath + "/Layouts/" + fileName;
 
 		string line;
 		int lineNum = 0;
