@@ -102,21 +102,30 @@ public class AudioManager : MonoBehaviour
 
 	public void FadeMusic(AudioMixerSnapshot snap)
 	{
-		FadeMusic(snap, m_standardTransitionTime);
+		if (snap != null)
+		{
+			FadeMusic(snap, m_standardTransitionTime);
+		}
 	}
 
 
 	public void FadeMusic(AudioMixerSnapshot snap, float duration)
 	{
-		snap.TransitionTo(duration);
+		if (snap != null)
+		{
+			snap.TransitionTo(duration);
+		}
 	}
 
 	public void PlaySFX(AudioStruct au)
 	{
-		m_sources[m_curSource].clip = au.clip;
-		m_sources[m_curSource].volume = au.volume;
-		m_sources[m_curSource].Play();
-		NextSource();
+		if (au != null)
+		{
+			m_sources[m_curSource].clip = au.clip;
+			m_sources[m_curSource].volume = au.volume;
+			m_sources[m_curSource].Play();
+			NextSource();
+		}
 	}
 
 	public void PreviewSounds()
