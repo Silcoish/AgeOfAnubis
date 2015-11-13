@@ -92,10 +92,6 @@ public class SaveLoad
 		data = (SaveData)bformatter.Deserialize(stream);
 		stream.Close();
 
-		// Now use "data" to access your Values
-		Debug.Log("Current Level: " + data.currentLevel);
-		Debug.Log("Exp: " + data.exp);
-
 		GameManager.inst.m_saveManager.m_currentLevel = data.currentLevel;
 		GameManager.inst.m_saveManager.m_exp = data.exp;
 		GameManager.inst.m_saveManager.m_gold = data.gold;
