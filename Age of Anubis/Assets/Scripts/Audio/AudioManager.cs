@@ -119,7 +119,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlaySFX(AudioStruct au)
 	{
-		if (au != null)
+		if (au.clip != null)
 		{
 			m_sources[m_curSource].clip = au.clip;
 			m_sources[m_curSource].volume = au.volume;
