@@ -34,10 +34,15 @@ public struct CompareIcon
 
 public class Shop : MonoBehaviour 
 {
+    public static Shop Inst;
+
 	public EventSystem m_es;
 	public ShopIcon m_selected;
     public GameObject m_playersWeapon;
     public GameObject m_activationArea;
+    public Sprite m_spriteNone;
+
+    public bool m_needsUpdateing = true;
 
 	//[SerializeField]
 	//WeaponPrefabHolder m_allWeaponPrefabs;
@@ -75,20 +80,59 @@ public class Shop : MonoBehaviour
     public Sprite m_iconFreeze;
     public Sprite m_iconNone;
 
+    private Button[] m_allButtons;
+    private Animator m_anim;
 
 
+    private GameObject m_shopData;
 
+    void Awake()
+    {
+        if (Inst == null)
+            Inst = this;
+        m_anim = gameObject.GetComponent<Animator>();
+        m_allButtons = gameObject.GetComponentsInChildren<Button>();
+        m_shopData = Instantiate(new GameObject());
+        m_shopData.SetActive(false);
+
+    }
 	// Use this for initialization
 	void Start () 
 	{
 		InitializeShop();
 	}
+
+    void OnEnable()
+    {
+        UpdateShop();
+    }
 	
 	// Update is called once per frame
 	void Update () 
 	{
-        if (Input.GetButtonDown("Cancel"))
-            OnCloseShop();
+        if (m_es.currentSelectedGameObject != null)
+        {
+            if (Input.GetButtonDown("Cancel"))
+                OnCloseShop();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ProgressIcons();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            ActivateShop();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            m_needsUpdateing = true;
+            OnEnable();
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            UpdateAllIcons();
+        }
 
 		if (m_es.currentSelectedGameObject == null)
 		{
@@ -114,6 +158,9 @@ public class Shop : MonoBehaviour
 
             UpdateCompareIcons();
         }
+
+
+
 	}
 
 
@@ -132,7 +179,7 @@ public class Shop : MonoBehaviour
         PlayerInventory.Inst.m_currentWeapon = m_selected.weapon;
         GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 
-        OnCloseShop();
+        //OnCloseShop();
     }
 
 	void UpdateCompareIcons()
@@ -300,8 +347,6 @@ public class Shop : MonoBehaviour
 
 	}
 
-
-
 	GameObject GetRandomWeapon()
 	{
 		GameObject temp;
@@ -363,20 +408,72 @@ public class Shop : MonoBehaviour
 				break;
 		} while (m_newItem3.weapon == m_newItem1.weapon || m_newItem3.weapon == m_newItem2.weapon);
 
-		ProgressShopItems();
+        m_needsUpdateing = true;
+        UpdateAllIcons();
+		//ProgressShopItems();
 	}
 
-	public void ProgressShopItems()
+    void DeactivateShop()
+    {
+        foreach (var b in m_allButtons)
+        {
+            b.interactable = false;
+        }
+        m_es.SetSelectedGameObject(null);
+    }
+
+    void ActivateShop()
+    {
+        foreach (var b in m_allButtons)
+        {
+            b.interactable = true;
+        }
+        m_es.SetSelectedGameObject(m_es.firstSelectedGameObject);
+    }
+
+
+    public void ForceProgressShop()
+    {
+        if (m_needsUpdateing)
+            ProgressIcons();
+
+    }
+
+    public void FlagToPrograssItems()
+    {
+        m_needsUpdateing = true;
+    }
+
+    void UpdateShop()
+    {
+        if (m_needsUpdateing)
+        {
+            DeactivateShop();
+            m_anim.SetTrigger("ProgressShop");
+        }
+    }
+
+	public void ProgressIcons()
 	{
-		m_lastChanceItem1.weapon = m_newItem1.weapon;
-		m_lastChanceItem2.weapon = m_newItem2.weapon;
-		m_lastChanceItem3.weapon = m_newItem3.weapon;
+
+
+
+		m_lastChanceItem1.weapon = Instantiate(m_newItem1.weapon);
+        m_lastChanceItem2.weapon = Instantiate(m_newItem2.weapon);
+        m_lastChanceItem3.weapon = Instantiate(m_newItem3.weapon);
+
+        m_lastChanceItem1.weapon.transform.SetParent(m_shopData.transform);
+        m_lastChanceItem2.weapon.transform.SetParent(m_shopData.transform);
+        m_lastChanceItem3.weapon.transform.SetParent(m_shopData.transform);
+
+        UpdateAllIcons();
 
 		int count = 0;
 
 		m_newItem1.weapon = GetRandomWeapon();
 		do
 		{
+            
 			m_newItem2.weapon = GetRandomWeapon();
 			count++;
 			if (count > 200)
@@ -385,6 +482,7 @@ public class Shop : MonoBehaviour
 
 		do
 		{
+            
 			m_newItem3.weapon = GetRandomWeapon();
 			count++;
 			if (count > 200)
@@ -393,6 +491,8 @@ public class Shop : MonoBehaviour
 
 		UpdateAllIcons();
 
+        m_anim.SetTrigger("FinishedUpdate");
+        m_needsUpdateing = false;
 	}
 
 	void UpdateAllIcons()
@@ -409,28 +509,40 @@ public class Shop : MonoBehaviour
 
 	void UpdateIcon(ShopIcon sIcon)
 	{
-		Weapon wp = sIcon.weapon.GetComponent<Weapon>();
+        Weapon wp = null;
+        if (sIcon.weapon == null)
+        {
+            sIcon.image.sprite = m_spriteNone;
+            sIcon.effect.sprite = m_spriteNone;
+            sIcon.cost.text = "";
+        }
+        else
+        {
+            wp  = sIcon.weapon.GetComponent<Weapon>();
 
-		if (wp == null)
-			Debug.LogError("Weapon prefab is not added.", sIcon.weapon);
-		else
-		{
-			switch (wp.m_swingType)
-			{
-				case WeaponSwing.LIGHT:
-					sIcon.image.sprite = m_iconDagger;
-					break;
-				case WeaponSwing.MEDIUM:
-					sIcon.image.sprite = m_iconSword;
-					break;
-				case WeaponSwing.HEAVY:
-					sIcon.image.sprite = m_iconAxe;
-					break;
-			}
+            if (wp == null)
+            {
+                Debug.LogError("Weapon prefab is not added.", sIcon.weapon);
+            }
+            else
+            {
+                switch (wp.m_swingType)
+                {
+                    case WeaponSwing.LIGHT:
+                        sIcon.image.sprite = m_iconDagger;
+                        break;
+                    case WeaponSwing.MEDIUM:
+                        sIcon.image.sprite = m_iconSword;
+                        break;
+                    case WeaponSwing.HEAVY:
+                        sIcon.image.sprite = m_iconAxe;
+                        break;
+                }
 
-		}
+            }
+            sIcon.effect.sprite = GetEffectSprite(wp.m_attack.m_effectType);
+            sIcon.cost.text = wp.m_goldCost.ToString();
+        }
 
-        sIcon.effect.sprite = GetEffectSprite(wp.m_attack.m_effectType);
-        sIcon.cost.text = wp.m_goldCost.ToString();
 	}
 }

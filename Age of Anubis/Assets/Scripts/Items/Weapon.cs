@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public enum WeaponSwing {LIGHT, MEDIUM, HEAVY}
-
+[System.Serializable]
 public class Weapon : MonoBehaviour 
 {
     public int m_level;

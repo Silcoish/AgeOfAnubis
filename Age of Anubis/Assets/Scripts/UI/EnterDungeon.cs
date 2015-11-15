@@ -8,6 +8,8 @@ public class EnterDungeon : ActivateArea
 	{
 		base.OnActivate();
 
+        Shop.Inst.ForceProgressShop();
+        Shop.Inst.FlagToPrograssItems();
 
 		//TODO Load Dungeon
 		GameManager.inst.m_saveManager.Save();
