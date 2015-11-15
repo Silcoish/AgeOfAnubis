@@ -6,7 +6,8 @@ public enum EnemyType
 	Scarab,
 	Spider,
 	Snake,
-	Eye
+	Eye,
+    Door
 }
 
 public class NestedPrefabs : MonoBehaviour 

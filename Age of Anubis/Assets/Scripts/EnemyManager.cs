@@ -8,7 +8,9 @@ public class EnemyManager : MonoBehaviour
 	public GameObject[] allScarabs = new GameObject[5];
 	public GameObject[] allSpiders = new GameObject[5];
 	public GameObject[] allSnakes = new GameObject[5];
-	public GameObject[] allEyes = new GameObject[5]; 
+	public GameObject[] allEyes = new GameObject[5];
+
+    public GameObject m_doors;
 
 #if UNITY_EDITOR
 
@@ -22,6 +24,8 @@ public class EnemyManager : MonoBehaviour
 
 	public GameObject GetPrefab(EnemyType en, int level)
 	{
+        if (en != EnemyType.Door && level == 0)
+            return null;
 		switch (en)
 		{
 			case EnemyType.Scarab:
@@ -40,6 +44,8 @@ public class EnemyManager : MonoBehaviour
 				if (allEyes[level - 1] == null)
 					Debug.LogError("Prefab Missing from EnmeyManager", allEyes[level - 1]);
 				return allEyes[level - 1];
+            case EnemyType.Door:
+                return m_doors;
 			default:
 				Debug.LogError("Prefab Unknown to EnemyManager");
 				return null;

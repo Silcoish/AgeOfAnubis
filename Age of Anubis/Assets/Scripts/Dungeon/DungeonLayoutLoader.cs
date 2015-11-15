@@ -38,6 +38,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 
 	void PlaceDoors()
 	{
+        print("Place Doors");
 		for(int i = 0; i < SIZE * SIZE; i++)
 		{
 			//check for room on the left
@@ -47,13 +48,19 @@ public class DungeonLayoutLoader : MonoBehaviour
 				{
 					Door tempEastDoor = rooms[i].m_doorEast;
 					Door tempWestDoor = rooms[i + 1].m_doorWest;
-					tempEastDoor.partnerDoor = tempWestDoor;
-                    tempWestDoor.partnerDoor = tempEastDoor;
-					//tempEastDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
-					//tempWestDoor.parentRoom = rooms[i + 1].gameObject.transform.FindChild("Doors");
 
-					tempEastDoor.Unlock();
-					tempWestDoor.Unlock();
+
+                        tempEastDoor.partnerDoor = tempWestDoor;
+                        tempWestDoor.partnerDoor = tempEastDoor;
+                        //tempEastDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
+                        //tempWestDoor.parentRoom = rooms[i + 1].gameObject.transform.FindChild("Doors");
+
+                        //tempEastDoor.Unlock();
+                        //tempWestDoor.Unlock();
+
+                        //tempEastDoor.InitDoor();
+                        //tempWestDoor.InitDoor();
+
 
 				}
 			}
@@ -65,16 +72,52 @@ public class DungeonLayoutLoader : MonoBehaviour
 				{
 					Door tempSouthDoor = rooms[i].m_doorSouth;
                     Door tempNorthDoor = rooms[i + SIZE].m_doorNorth;
-					tempSouthDoor.partnerDoor = tempNorthDoor;
-					tempNorthDoor.partnerDoor = tempSouthDoor;
-					//tempSouthDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
-					//tempNorthDoor.parentRoom = rooms[i + SIZE].gameObject.transform.FindChild("Doors");
 
-					tempSouthDoor.Unlock();
-					tempNorthDoor.Unlock();
+
+                        tempSouthDoor.partnerDoor = tempNorthDoor;
+                        tempNorthDoor.partnerDoor = tempSouthDoor;
+                        //tempSouthDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
+                        //tempNorthDoor.parentRoom = rooms[i + SIZE].gameObject.transform.FindChild("Doors");
+
+                        //tempSouthDoor.Unlock();
+                        //tempNorthDoor.Unlock();
+
+                        //tempSouthDoor.InitDoor();
+                        //tempNorthDoor.InitDoor();
+
                 }
 			}
+
+            if (rooms[i] != null)
+            {
+                if (rooms[i].m_doorEast != null)
+                    rooms[i].m_doorEast.InitDoor();
+                else
+                    Debug.LogError("Door is null East", rooms[i].gameObject);
+
+                if (rooms[i].m_doorWest != null)
+                    rooms[i].m_doorWest.InitDoor();
+                else
+                    Debug.LogError("Door is null West", rooms[i].gameObject);
+
+                if (rooms[i].m_doorNorth != null)
+                    rooms[i].m_doorNorth.InitDoor();
+                else
+                    Debug.LogError("Door is null North", rooms[i].gameObject);
+
+                if (rooms[i].m_doorSouth != null)
+                    rooms[i].m_doorSouth.InitDoor();
+                else
+                    Debug.LogError("Door is null South", rooms[i].gameObject);
+            }
+
+
 		}
+
+
+      
+
+
 	}
 
 	//watch venture brothers

@@ -16,20 +16,18 @@ public class Door : MonoBehaviour {
     public Door partnerDoor;
     public Transform parentRoom;
 
-	BoxCollider2D doorCol;
 
-	Vector2 m_startPos;
-	Vector2 m_endPos;
-	Transform m_t;
+    public Sprite m_hideSprite;
+    public GameObject m_door;
+    public bool m_isLocked = true;
+    Animation m_anim;
 
 	public Direction dir;
 
 	void Awake()
 	{
-		m_t = transform;
-		m_startPos = m_t.position;
-		m_sr = m_t.GetChild(1).GetComponent<SpriteRenderer>();
-		doorCol = GetComponent<BoxCollider2D>();
+        m_sr = m_door.GetComponent<SpriteRenderer>();
+        m_anim = gameObject.GetComponentInChildren<Animation>();
 		parentRoom = gameObject.transform.parent.parent;
 		Lock();
 	}
@@ -44,11 +42,32 @@ public class Door : MonoBehaviour {
 		}
 	}
 
+    public void InitDoor()
+    {
+        print("InitDoor");
+        Debug.Log("Room Init", gameObject);
+        if (partnerDoor == null)
+        {
+            m_sr.sprite = m_hideSprite;
+            return;
+        }
+
+        RoomObject r = parentRoom.GetComponent<RoomObject>();
+
+        if (r != null)
+        {
+            if (r.m_allEnemies.Count <= 0)
+            {
+                m_anim.Play();
+                m_isLocked = false;
+            }
+        }
+
+    }
+
 	public void Lock()
 	{
-		doorCol.isTrigger = false;
-		m_sr.enabled = true;
-		//m_t.position = Vector2.Lerp(m_t.position, m_startPos, 0.1f);
+        m_isLocked = true;
 		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorShut);
 	}
 
@@ -57,8 +76,11 @@ public class Door : MonoBehaviour {
 		//If partner doesn't exist, don't actually unlock the door. 
 		if (partnerDoor == null)
 			return;
-		doorCol.isTrigger = true;
-		m_sr.enabled = false;
+        if (m_isLocked)
+        {
+            m_anim.Play();
+            m_isLocked = false;
+        }
 		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorOpen);
 	}
 }
