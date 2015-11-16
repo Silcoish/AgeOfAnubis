@@ -451,6 +451,7 @@ public class Anubis : Enemy
 		prevStates.Add(curState);
 
 		curState = State.IDLE;
+		anim.SetTrigger("idle");
 	}
 
 	void ChooseNextState1()
@@ -458,6 +459,7 @@ public class Anubis : Enemy
 		if (prevStates[prevStates.Count - 1] == State.DASH)
 		{
 			curState = State.STUCK;
+			anim.SetTrigger("stuck");
 			for(int i = 0; i < dashPlatforms.Count; i++)
 			{
 				dashPlatforms[i].GetComponent<BoxCollider2D>().isTrigger = true;
@@ -474,10 +476,12 @@ public class Anubis : Enemy
 			if (Random.Range(0, 2) == 0)
 			{
 				curState = State.PROJECTILE;
+				anim.SetTrigger("idle");
 			}
 			else
 			{
 				curState = State.ENEMIES;
+				anim.SetTrigger("idle");
 			}
 		}
 
@@ -486,10 +490,12 @@ public class Anubis : Enemy
 			if (Random.Range(0, 3) == 0)
 			{
 				curState = State.PROJECTILE;
+				anim.SetTrigger("idle");
 			}
 			else
 			{
 				curState = State.DASH;
+				anim.SetTrigger("dash");
 			}
 		}
 
@@ -498,10 +504,12 @@ public class Anubis : Enemy
 			if (Random.Range(0, 3) == 0)
 			{
 				curState = State.ENEMIES;
+				anim.SetTrigger("idle");
 			}
 			else
 			{
 				curState = State.DASH;
+				anim.SetTrigger("dash");
 			}
 		}
 	}
@@ -524,9 +532,14 @@ public class Anubis : Enemy
 		if (prevStates[prevStates.Count - 1] == State.BASH)
 		{
 			curState = State.CROUCH;
+			anim.SetTrigger("crouch");
 		}
 		else
+		{
 			curState = State.BASH;
+			anim.SetTrigger("bash");
+		}
+
 	}
 	#endregion
 
