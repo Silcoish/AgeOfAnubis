@@ -324,6 +324,7 @@ public class Anubis : Enemy
 			if(!dashPlayedAudio)
 			{
 				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_anubis_dash);
+				anim.SetTrigger("dash");
 				dashPlayedAudio = true;
 			}
 			rb.velocity = new Vector2(dash, 0f);
@@ -495,7 +496,6 @@ public class Anubis : Enemy
 			else
 			{
 				curState = State.DASH;
-				anim.SetTrigger("dash");
 			}
 		}
 
@@ -509,7 +509,6 @@ public class Anubis : Enemy
 			else
 			{
 				curState = State.DASH;
-				anim.SetTrigger("dash");
 			}
 		}
 	}
