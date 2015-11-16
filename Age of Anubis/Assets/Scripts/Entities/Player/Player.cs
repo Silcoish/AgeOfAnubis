@@ -169,10 +169,15 @@ public class Player : Damageable
         //    jumpMinSpeed = m_velocity.y;
 
 
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            RecoverHealth(-1000000);
-        }
+		if (Input.GetKeyDown(KeyCode.K))
+		{
+			RecoverHealth(-1000000);
+		}
+
+		if (Input.GetKeyDown(KeyCode.L))
+		{
+			UpdateEquippedWeapon(WeaponManager.inst.GenerateWeapon(5));
+		}
 
         if(!m_isShopOpen)
         {
