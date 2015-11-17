@@ -11,8 +11,8 @@ public class SaveManager : MonoBehaviour
 	public int m_currentLevel;
 	public int m_exp;
 	public int m_gold;
-	public string m_weapon1;
-	public string m_weapon2;
+	//public string m_weapon1;
+	//public string m_weapon2;
 
 	public bool saveExists = false;
 
@@ -50,8 +50,8 @@ public class SaveManager : MonoBehaviour
 		m_gold = 0;
 		m_exp = 0;
 		m_currentLevel = 1;
-		m_weapon1 = "";
-		m_weapon2 = "";
+		//m_weapon1 = "";
+		//m_weapon2 = "";
 		SaveLoad.Save(SaveLoad.currentFilePath, this);
 	}
 
