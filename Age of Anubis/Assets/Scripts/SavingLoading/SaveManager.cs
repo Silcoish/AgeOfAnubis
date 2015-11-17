@@ -35,10 +35,6 @@ public class SaveManager : MonoBehaviour
 		{
 			Load();
 		}
-		if(Input.GetKeyDown(KeyCode.L))
-		{
-			print(m_exp);
-		}
 	}
 
 	public void Save()
