@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 using System.Collections;
 
 public enum EnemyType
@@ -47,3 +49,5 @@ public class NestedPrefabs : MonoBehaviour
 	}
 
 }
+
+#endif

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 using System.Collections;
 
 [ExecuteInEditMode]
@@ -12,7 +14,7 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject m_doors;
 
-#if UNITY_EDITOR
+
 
 
 	// Update is called once per frame
@@ -56,5 +58,8 @@ public class EnemyManager : MonoBehaviour
 
 	}
 
-#endif
 }
+
+
+
+#endif
