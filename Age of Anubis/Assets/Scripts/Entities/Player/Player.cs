@@ -111,6 +111,7 @@ public class Player : Damageable
         if(!m_isDying)
         {
             Debug.Log("OnDeath Called");
+
             SetAnimTrigger("Death");
             m_isDying = true;
             m_deathDelayTimer = m_deathDelay;
