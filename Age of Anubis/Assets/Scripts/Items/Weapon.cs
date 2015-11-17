@@ -82,6 +82,7 @@ public class Weapon : MonoBehaviour
     public void ApplyWeaponData(WeaponData data)
     {
         m_level = data.level;
+        m_itemID = data.itemID;
         m_name = data.name;
         m_attack.m_attackStrength = data.attackStrength;
         m_attack.m_knockbackForce = data.knockback;

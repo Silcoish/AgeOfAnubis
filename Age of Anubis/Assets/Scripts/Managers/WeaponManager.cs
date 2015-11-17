@@ -34,12 +34,15 @@ public class WeaponManager : MonoBehaviour
 
     public List<WeaponData> m_weaponData;
 
+
+    public GameObject m_weaponParent;
+
 	void Awake()
     {
         if (WeaponManager.inst == null)
         {
             WeaponManager.inst = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
             Destroy(gameObject);
@@ -48,6 +51,9 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         m_weaponData = new List<WeaponData>();
+
+        m_weaponParent = Instantiate(new GameObject());
+        m_weaponParent.SetActive(false);
 
         if(!m_weaponList)
         {
@@ -172,6 +178,7 @@ public class WeaponManager : MonoBehaviour
                 return weapon;
         }
 
+        weapon.transform.SetParent(m_weaponParent.transform);
         weapon.GetComponent<Weapon>().ApplyWeaponData(wepData);
 
         return weapon;
@@ -198,6 +205,7 @@ public class WeaponManager : MonoBehaviour
                 return weapon;
         }
 
+        weapon.transform.SetParent(m_weaponParent.transform);
         weapon.GetComponent<Weapon>().ApplyWeaponData(data);
 
         return weapon;

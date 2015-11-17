@@ -6,73 +6,73 @@ using UnityEngine.EventSystems;
 [System.Serializable]
 public struct WeaponPrefabHolder
 {
-	public GameObject[] level1;
-	public GameObject[] level2;
-	public GameObject[] level3;
-	public GameObject[] level4;
-	public GameObject[] level5;
+    public GameObject[] level1;
+    public GameObject[] level2;
+    public GameObject[] level3;
+    public GameObject[] level4;
+    public GameObject[] level5;
 }
 
 [System.Serializable]
 public struct StatUI
 {
-	public Text current;
-	public Text difference;
+    public Text current;
+    public Text difference;
 }
 
 [System.Serializable]
 public struct CompareIcon
 {
-	public Image imageWeapon;
+    public Image imageWeapon;
     public Image imageEffect;
-	public StatUI level;
-	public StatUI damage;
-	public Text effectType;
-	public StatUI effectDamage;
-	public StatUI effectDuration;
+    public StatUI level;
+    public StatUI damage;
+    public Text effectType;
+    public StatUI effectDamage;
+    public StatUI effectDuration;
 }
 
-public class Shop : MonoBehaviour 
+public class Shop : MonoBehaviour
 {
     public static Shop Inst;
 
-	public EventSystem m_es;
-	public ShopIcon m_selected;
+    public EventSystem m_es;
+    public ShopIcon m_selected;
     public GameObject m_playersWeapon;
     public GameObject m_activationArea;
     public Sprite m_spriteNone;
 
     public bool m_needsUpdateing = true;
 
-	//[SerializeField]
-	//WeaponPrefabHolder m_allWeaponPrefabs;
+    //[SerializeField]
+    //WeaponPrefabHolder m_allWeaponPrefabs;
 
-	[Header("New Item UI Objects")]
-	[SerializeField]
-	public ShopIcon m_newItem1;
-	[SerializeField]
-	public ShopIcon m_newItem2;
-	[SerializeField]
-	public ShopIcon m_newItem3;
+    [Header("New Item UI Objects")]
+    [SerializeField]
+    public ShopIcon m_newItem1;
+    [SerializeField]
+    public ShopIcon m_newItem2;
+    [SerializeField]
+    public ShopIcon m_newItem3;
 
-	[Header("Last Chance Item UI Objects")]
-	[SerializeField]
-	public ShopIcon m_lastChanceItem1;
-	[SerializeField]
-	public ShopIcon m_lastChanceItem2;
-	[SerializeField]
-	public ShopIcon m_lastChanceItem3;
+    [Header("Last Chance Item UI Objects")]
+    [SerializeField]
+    public ShopIcon m_lastChanceItem1;
+    [SerializeField]
+    public ShopIcon m_lastChanceItem2;
+    [SerializeField]
+    public ShopIcon m_lastChanceItem3;
 
-	[Header("Comparison Weapon UI Objects")]
-	[SerializeField]
-	public CompareIcon m_CompareNewWeapon;
-	[SerializeField]
-	public CompareIcon m_CompareCurWeapon;
+    [Header("Comparison Weapon UI Objects")]
+    [SerializeField]
+    public CompareIcon m_CompareNewWeapon;
+    [SerializeField]
+    public CompareIcon m_CompareCurWeapon;
 
-	[Header("Weapon Icons")]
-	public Sprite m_iconDagger;
-	public Sprite m_iconSword;
-	public Sprite m_iconAxe;
+    [Header("Weapon Icons")]
+    public Sprite m_iconDagger;
+    public Sprite m_iconSword;
+    public Sprite m_iconAxe;
 
     [Header("Effect Icons")]
     public Sprite m_iconPoison;
@@ -84,32 +84,29 @@ public class Shop : MonoBehaviour
     private Animator m_anim;
 
 
-    private GameObject m_shopData;
-
     void Awake()
     {
         if (Inst == null)
             Inst = this;
         m_anim = gameObject.GetComponent<Animator>();
         m_allButtons = gameObject.GetComponentsInChildren<Button>();
-        m_shopData = Instantiate(new GameObject());
-        m_shopData.SetActive(false);
+
 
     }
-	// Use this for initialization
-	void Start () 
-	{
-		InitializeShop();
-	}
+    // Use this for initialization
+    void Start()
+    {
+        InitializeShop();
+    }
 
     void OnEnable()
     {
         UpdateShop();
     }
-	
-	// Update is called once per frame
-	void Update () 
-	{
+
+    // Update is called once per frame
+    void Update()
+    {
         if (m_es.currentSelectedGameObject != null)
         {
             if (Input.GetButtonDown("Cancel"))
@@ -134,22 +131,22 @@ public class Shop : MonoBehaviour
             UpdateAllIcons();
         }
 
-		if (m_es.currentSelectedGameObject == null)
-		{
-			m_es.SetSelectedGameObject(m_newItem1.gameObject);
-		}
+        if (m_es.currentSelectedGameObject == null)
+        {
+            m_es.SetSelectedGameObject(m_newItem1.gameObject);
+        }
 
-		if (m_selected == null)
-		{
-			m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
-		}
+        if (m_selected == null)
+        {
+            m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
+        }
 
-		if (m_es.currentSelectedGameObject != m_selected.gameObject)
-		{
-			m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
+        if (m_es.currentSelectedGameObject != m_selected.gameObject)
+        {
+            m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
 
-			UpdateCompareIcons();
-		}
+            UpdateCompareIcons();
+        }
 
 
         if (m_playersWeapon != PlayerInventory.Inst.m_currentWeapon)
@@ -161,7 +158,7 @@ public class Shop : MonoBehaviour
 
 
 
-	}
+    }
 
 
     void OnCloseShop()
@@ -182,46 +179,46 @@ public class Shop : MonoBehaviour
         //OnCloseShop();
     }
 
-	void UpdateCompareIcons()
-	{
-		UpdateCompareStats(m_CompareNewWeapon, m_selected.weapon);
-		UpdateCompareStats(m_CompareCurWeapon, PlayerInventory.Inst.m_currentWeapon);
+    void UpdateCompareIcons()
+    {
+        UpdateCompareStats(m_CompareNewWeapon, m_selected.weapon);
+        UpdateCompareStats(m_CompareCurWeapon, PlayerInventory.Inst.m_currentWeapon);
 
-		UpdateCompareDifferences(m_selected.weapon.GetComponent<Weapon>(), PlayerInventory.Inst.m_currentWeapon.GetComponent<Weapon>());
-	}
+        UpdateCompareDifferences(m_selected.weapon.GetComponent<Weapon>(), PlayerInventory.Inst.m_currentWeapon.GetComponent<Weapon>());
+    }
 
-	void UpdateCompareStats(CompareIcon ci, GameObject weaponObject)
-	{
-		Weapon wp = weaponObject.GetComponent<Weapon>();
+    void UpdateCompareStats(CompareIcon ci, GameObject weaponObject)
+    {
+        Weapon wp = weaponObject.GetComponent<Weapon>();
 
-		if (wp == null)
-			Debug.LogError("Weapon prefab is not added.", weaponObject);
-		else
-		{
-			switch (wp.m_swingType)
-			{
-				case WeaponSwing.LIGHT:
-					ci.imageWeapon.sprite = m_iconDagger;
-					break;
-				case WeaponSwing.MEDIUM:
-					ci.imageWeapon.sprite = m_iconSword;
-					break;
-				case WeaponSwing.HEAVY:
-					ci.imageWeapon.sprite = m_iconAxe;
-					break;
-			}
+        if (wp == null)
+            Debug.LogError("Weapon prefab is not added.", weaponObject);
+        else
+        {
+            switch (wp.m_swingType)
+            {
+                case WeaponSwing.LIGHT:
+                    ci.imageWeapon.sprite = m_iconDagger;
+                    break;
+                case WeaponSwing.MEDIUM:
+                    ci.imageWeapon.sprite = m_iconSword;
+                    break;
+                case WeaponSwing.HEAVY:
+                    ci.imageWeapon.sprite = m_iconAxe;
+                    break;
+            }
 
-		}
+        }
 
-		ci.level.current.text = wp.m_level.ToString("0");
-		ci.damage.current.text = wp.m_attack.m_attackStrength.ToString("0");
+        ci.level.current.text = wp.m_level.ToString("0");
+        ci.damage.current.text = wp.m_attack.m_attackStrength.ToString("0");
 
 
-		ci.effectType.text = wp.m_attack.m_effectType.ToString();
+        ci.effectType.text = wp.m_attack.m_effectType.ToString();
         ci.imageEffect.sprite = GetEffectSprite(wp.m_attack.m_effectType);
-		ci.effectDamage.current.text = wp.m_attack.m_effectStrength.ToString("0");
-		ci.effectDuration.current.text = wp.m_attack.m_effectDuration.ToString("0");
-	}
+        ci.effectDamage.current.text = wp.m_attack.m_effectStrength.ToString("0");
+        ci.effectDuration.current.text = wp.m_attack.m_effectDuration.ToString("0");
+    }
 
     Sprite GetEffectSprite(DamageType dt)
     {
@@ -238,118 +235,118 @@ public class Shop : MonoBehaviour
         return m_iconNone;
     }
 
-	void UpdateCompareDifferences(Weapon wNew, Weapon wCur)
-	{
-		int difLevel = wNew.m_level - wCur.m_level;
-		int difDam = wNew.m_attack.m_attackStrength - wCur.m_attack.m_attackStrength;
+    void UpdateCompareDifferences(Weapon wNew, Weapon wCur)
+    {
+        int difLevel = wNew.m_level - wCur.m_level;
+        int difDam = wNew.m_attack.m_attackStrength - wCur.m_attack.m_attackStrength;
 
-		int difEffectDam = (int)(wNew.m_attack.m_effectStrength - wCur.m_attack.m_effectStrength);
-		float difEffectDur = wNew.m_attack.m_effectDuration - wCur.m_attack.m_effectDuration;
+        int difEffectDam = (int)(wNew.m_attack.m_effectStrength - wCur.m_attack.m_effectStrength);
+        float difEffectDur = wNew.m_attack.m_effectDuration - wCur.m_attack.m_effectDuration;
 
-		if (difLevel == 0)
-		{
-			m_CompareNewWeapon.level.difference.text = "";
+        if (difLevel == 0)
+        {
+            m_CompareNewWeapon.level.difference.text = "";
 
-			m_CompareCurWeapon.level.difference.text = "";
-		}
-		else if (difLevel > 0)
-		{
-			m_CompareNewWeapon.level.difference.text = "+" + Mathf.Abs(difLevel);
-			m_CompareNewWeapon.level.difference.color = Color.green;
+            m_CompareCurWeapon.level.difference.text = "";
+        }
+        else if (difLevel > 0)
+        {
+            m_CompareNewWeapon.level.difference.text = "+" + Mathf.Abs(difLevel);
+            m_CompareNewWeapon.level.difference.color = Color.green;
 
-			m_CompareCurWeapon.level.difference.text = "-" + Mathf.Abs(difLevel);
-			m_CompareCurWeapon.level.difference.color = Color.red;
-		}
-		else
-		{
-			m_CompareNewWeapon.level.difference.text = "-" + Mathf.Abs(difLevel);
-			m_CompareNewWeapon.level.difference.color = Color.red;
+            m_CompareCurWeapon.level.difference.text = "-" + Mathf.Abs(difLevel);
+            m_CompareCurWeapon.level.difference.color = Color.red;
+        }
+        else
+        {
+            m_CompareNewWeapon.level.difference.text = "-" + Mathf.Abs(difLevel);
+            m_CompareNewWeapon.level.difference.color = Color.red;
 
-			m_CompareCurWeapon.level.difference.text = "+" + Mathf.Abs(difLevel);
-			m_CompareCurWeapon.level.difference.color = Color.green;
-		}
-		///////////////////////////////////////////////////////////////////////////
-		//DAMAGE
-		///////////////////////////////////////////////////////////////////////////
-		if (difDam == 0)
-		{
-			m_CompareNewWeapon.damage.difference.text = "";
+            m_CompareCurWeapon.level.difference.text = "+" + Mathf.Abs(difLevel);
+            m_CompareCurWeapon.level.difference.color = Color.green;
+        }
+        ///////////////////////////////////////////////////////////////////////////
+        //DAMAGE
+        ///////////////////////////////////////////////////////////////////////////
+        if (difDam == 0)
+        {
+            m_CompareNewWeapon.damage.difference.text = "";
 
-			m_CompareCurWeapon.damage.difference.text = "";
-		}
-		else if (difDam > 0)
-		{
-			m_CompareNewWeapon.damage.difference.text = "+" + Mathf.Abs(difDam);
-			m_CompareNewWeapon.damage.difference.color = Color.green;
+            m_CompareCurWeapon.damage.difference.text = "";
+        }
+        else if (difDam > 0)
+        {
+            m_CompareNewWeapon.damage.difference.text = "+" + Mathf.Abs(difDam);
+            m_CompareNewWeapon.damage.difference.color = Color.green;
 
-			m_CompareCurWeapon.damage.difference.text = "-" + Mathf.Abs(difDam);
-			m_CompareCurWeapon.damage.difference.color = Color.red;
-		}
-		else
-		{
-			m_CompareNewWeapon.damage.difference.text = "-" + Mathf.Abs(difDam);
-			m_CompareNewWeapon.damage.difference.color = Color.red;
+            m_CompareCurWeapon.damage.difference.text = "-" + Mathf.Abs(difDam);
+            m_CompareCurWeapon.damage.difference.color = Color.red;
+        }
+        else
+        {
+            m_CompareNewWeapon.damage.difference.text = "-" + Mathf.Abs(difDam);
+            m_CompareNewWeapon.damage.difference.color = Color.red;
 
-			m_CompareCurWeapon.damage.difference.text = "+" + Mathf.Abs(difDam);
-			m_CompareCurWeapon.damage.difference.color = Color.green;
-		}
-		///////////////////////////////////////////////////////////////////////////
-		//difEffectDam
-		///////////////////////////////////////////////////////////////////////////
-		if (difEffectDam == 0)
-		{
-			m_CompareNewWeapon.effectDamage.difference.text = "";
+            m_CompareCurWeapon.damage.difference.text = "+" + Mathf.Abs(difDam);
+            m_CompareCurWeapon.damage.difference.color = Color.green;
+        }
+        ///////////////////////////////////////////////////////////////////////////
+        //difEffectDam
+        ///////////////////////////////////////////////////////////////////////////
+        if (difEffectDam == 0)
+        {
+            m_CompareNewWeapon.effectDamage.difference.text = "";
 
-			m_CompareCurWeapon.effectDamage.difference.text = "";
-		}
-		else if (difEffectDam > 0)
-		{
-			m_CompareNewWeapon.effectDamage.difference.text = "+" + Mathf.Abs(difEffectDam);
-			m_CompareNewWeapon.effectDamage.difference.color = Color.green;
+            m_CompareCurWeapon.effectDamage.difference.text = "";
+        }
+        else if (difEffectDam > 0)
+        {
+            m_CompareNewWeapon.effectDamage.difference.text = "+" + Mathf.Abs(difEffectDam);
+            m_CompareNewWeapon.effectDamage.difference.color = Color.green;
 
-			m_CompareCurWeapon.effectDamage.difference.text = "-" + Mathf.Abs(difEffectDam);
-			m_CompareCurWeapon.effectDamage.difference.color = Color.red;
-		}
-		else
-		{
-			m_CompareNewWeapon.effectDamage.difference.text = "-" + Mathf.Abs(difEffectDam);
-			m_CompareNewWeapon.effectDamage.difference.color = Color.red;
+            m_CompareCurWeapon.effectDamage.difference.text = "-" + Mathf.Abs(difEffectDam);
+            m_CompareCurWeapon.effectDamage.difference.color = Color.red;
+        }
+        else
+        {
+            m_CompareNewWeapon.effectDamage.difference.text = "-" + Mathf.Abs(difEffectDam);
+            m_CompareNewWeapon.effectDamage.difference.color = Color.red;
 
-			m_CompareCurWeapon.effectDamage.difference.text = "+" + Mathf.Abs(difEffectDam);
-			m_CompareCurWeapon.effectDamage.difference.color = Color.green;
-		}
-		///////////////////////////////////////////////////////////////////////////
-		//effectDuration
-		///////////////////////////////////////////////////////////////////////////
-		if (difEffectDur == 0)
-		{
-			m_CompareNewWeapon.effectDuration.difference.text = "";
+            m_CompareCurWeapon.effectDamage.difference.text = "+" + Mathf.Abs(difEffectDam);
+            m_CompareCurWeapon.effectDamage.difference.color = Color.green;
+        }
+        ///////////////////////////////////////////////////////////////////////////
+        //effectDuration
+        ///////////////////////////////////////////////////////////////////////////
+        if (difEffectDur == 0)
+        {
+            m_CompareNewWeapon.effectDuration.difference.text = "";
 
-			m_CompareCurWeapon.effectDuration.difference.text = "";
-		}
-		else if (difEffectDur > 0)
-		{
-			m_CompareNewWeapon.effectDuration.difference.text = "+" + Mathf.Abs(difEffectDur).ToString("0.0");
-			m_CompareNewWeapon.effectDuration.difference.color = Color.green;
+            m_CompareCurWeapon.effectDuration.difference.text = "";
+        }
+        else if (difEffectDur > 0)
+        {
+            m_CompareNewWeapon.effectDuration.difference.text = "+" + Mathf.Abs(difEffectDur).ToString("0.0");
+            m_CompareNewWeapon.effectDuration.difference.color = Color.green;
 
-			m_CompareCurWeapon.effectDuration.difference.text = "-" + Mathf.Abs(difEffectDur).ToString("0.0");
-			m_CompareCurWeapon.effectDuration.difference.color = Color.red;
-		}
-		else
-		{
-			m_CompareNewWeapon.effectDuration.difference.text = "-" + Mathf.Abs(difEffectDur).ToString("0.0");
-			m_CompareNewWeapon.effectDuration.difference.color = Color.red;
+            m_CompareCurWeapon.effectDuration.difference.text = "-" + Mathf.Abs(difEffectDur).ToString("0.0");
+            m_CompareCurWeapon.effectDuration.difference.color = Color.red;
+        }
+        else
+        {
+            m_CompareNewWeapon.effectDuration.difference.text = "-" + Mathf.Abs(difEffectDur).ToString("0.0");
+            m_CompareNewWeapon.effectDuration.difference.color = Color.red;
 
-			m_CompareCurWeapon.effectDuration.difference.text = "+" + Mathf.Abs(difEffectDur).ToString("0.0");
-			m_CompareCurWeapon.effectDuration.difference.color = Color.green;
-		}
+            m_CompareCurWeapon.effectDuration.difference.text = "+" + Mathf.Abs(difEffectDur).ToString("0.0");
+            m_CompareCurWeapon.effectDuration.difference.color = Color.green;
+        }
 
 
-	}
+    }
 
-	GameObject GetRandomWeapon()
-	{
-		GameObject temp;
+    GameObject GetRandomWeapon()
+    {
+        GameObject temp;
 
         temp = WeaponManager.inst.GenerateWeapon(PlayerInventory.Inst.m_playerLevel);
 
@@ -382,36 +379,77 @@ public class Shop : MonoBehaviour
         //        Debug.LogError("Random Weapon: Player Level Not within range");
         //        break;
         //}
-		
-		return temp;
 
-	}
+        return temp;
 
-	public void InitializeShop()
-	{
-		int count = 0;
+    }
 
-		m_newItem1.weapon = GetRandomWeapon();
-		do
-		{
-			m_newItem2.weapon = GetRandomWeapon();
-			count++;
-			if (count > 200)
-				break;
-		} while (m_newItem2.weapon == m_newItem1.weapon);
+    public void InitializeShop()
+    {
 
-		do
-		{
-			m_newItem3.weapon = GetRandomWeapon();
-			count++;
-			if (count > 200)
-				break;
-		} while (m_newItem3.weapon == m_newItem1.weapon || m_newItem3.weapon == m_newItem2.weapon);
+
+
+        bool f = PlayerPrefs.HasKey("Shop_Weapon_new_1");
+        bool g = PlayerPrefs.HasKey("Shop_Weapon_new_2");
+        bool h = PlayerPrefs.HasKey("Shop_Weapon_new_3");
+
+
+
+         if (PlayerPrefs.HasKey("Shop_Weapon_new_1") && PlayerPrefs.HasKey("Shop_Weapon_new_2") && PlayerPrefs.HasKey("Shop_Weapon_new_3"))
+        {
+            int n = PlayerPrefs.GetInt("Shop_Weapon_new_1");
+            int r = PlayerPrefs.GetInt("Shop_Weapon_new_2");
+            int t = PlayerPrefs.GetInt("Shop_Weapon_new_3");
+
+            m_newItem1.weapon = WeaponManager.inst.GenerateWeaponFromID(PlayerPrefs.GetInt("Shop_Weapon_new_1"));
+            m_newItem2.weapon = WeaponManager.inst.GenerateWeaponFromID(PlayerPrefs.GetInt("Shop_Weapon_new_2"));
+            m_newItem3.weapon = WeaponManager.inst.GenerateWeaponFromID(PlayerPrefs.GetInt("Shop_Weapon_new_3"));
+
+            if (PlayerPrefs.HasKey("Shop_Weapon_last_1") && PlayerPrefs.HasKey("Shop_Weapon_last_2") && PlayerPrefs.HasKey("Shop_Weapon_last_3"))
+            {
+                m_lastChanceItem1.weapon = WeaponManager.inst.GenerateWeaponFromID(PlayerPrefs.GetInt("Shop_Weapon_last_1"));
+                m_lastChanceItem2.weapon = WeaponManager.inst.GenerateWeaponFromID(PlayerPrefs.GetInt("Shop_Weapon_last_2"));
+                m_lastChanceItem3.weapon = WeaponManager.inst.GenerateWeaponFromID(PlayerPrefs.GetInt("Shop_Weapon_last_3"));
+            }
+        }
+        else
+        {
+            int count = 0;
+
+            m_newItem1.weapon = GetRandomWeapon();
+            do
+            {
+                m_newItem2.weapon = GetRandomWeapon();
+                count++;
+                if (count > 200)
+                    break;
+            } while (m_newItem2.weapon == m_newItem1.weapon);
+
+            do
+            {
+                m_newItem3.weapon = GetRandomWeapon();
+                count++;
+                if (count > 200)
+                    break;
+            } while (m_newItem3.weapon == m_newItem1.weapon || m_newItem3.weapon == m_newItem2.weapon);
+
+            Weapon wpz = m_newItem1.weapon.GetComponent<Weapon>();
+            Weapon wpc = m_newItem2.weapon.GetComponent<Weapon>();
+            Weapon wpv = m_newItem3.weapon.GetComponent<Weapon>();
+
+            PlayerPrefs.SetInt("Shop_Weapon_new_1", m_newItem1.weapon.GetComponent<Weapon>().m_itemID);
+            PlayerPrefs.SetInt("Shop_Weapon_new_2", m_newItem2.weapon.GetComponent<Weapon>().m_itemID);
+            PlayerPrefs.SetInt("Shop_Weapon_new_3", m_newItem3.weapon.GetComponent<Weapon>().m_itemID);
+
+            int n = PlayerPrefs.GetInt("Shop_Weapon_new_1");
+            int r = PlayerPrefs.GetInt("Shop_Weapon_new_2");
+            int t = PlayerPrefs.GetInt("Shop_Weapon_new_3");
+        }
 
         m_needsUpdateing = true;
         UpdateAllIcons();
-		//ProgressShopItems();
-	}
+        //ProgressShopItems();
+    }
 
     void DeactivateShop()
     {
@@ -453,62 +491,75 @@ public class Shop : MonoBehaviour
         }
     }
 
-	public void ProgressIcons()
-	{
+    public void ProgressIcons()
+    {
+        Destroy(m_lastChanceItem1.weapon);
+        Destroy(m_lastChanceItem2.weapon);
+        Destroy(m_lastChanceItem3.weapon);
 
+        m_lastChanceItem1.weapon = WeaponManager.inst.GenerateWeaponFromID(m_newItem1.weapon.GetComponent<Weapon>().m_itemID);
+        m_lastChanceItem2.weapon = WeaponManager.inst.GenerateWeaponFromID(m_newItem2.weapon.GetComponent<Weapon>().m_itemID);
+        m_lastChanceItem3.weapon = WeaponManager.inst.GenerateWeaponFromID(m_newItem3.weapon.GetComponent<Weapon>().m_itemID);
 
+        int ccc = m_lastChanceItem1.weapon.GetComponent<Weapon>().m_itemID;
+        int vvv = m_lastChanceItem2.weapon.GetComponent<Weapon>().m_itemID;
+        int bbb = m_lastChanceItem3.weapon.GetComponent<Weapon>().m_itemID;
 
-		m_lastChanceItem1.weapon = Instantiate(m_newItem1.weapon);
-        m_lastChanceItem2.weapon = Instantiate(m_newItem2.weapon);
-        m_lastChanceItem3.weapon = Instantiate(m_newItem3.weapon);
+        PlayerPrefs.SetInt("Shop_Weapon_last_1", m_lastChanceItem1.weapon.GetComponent<Weapon>().m_itemID);
+        PlayerPrefs.SetInt("Shop_Weapon_last_2", m_lastChanceItem2.weapon.GetComponent<Weapon>().m_itemID);
+        PlayerPrefs.SetInt("Shop_Weapon_last_3", m_lastChanceItem3.weapon.GetComponent<Weapon>().m_itemID);
 
-        m_lastChanceItem1.weapon.transform.SetParent(m_shopData.transform);
-        m_lastChanceItem2.weapon.transform.SetParent(m_shopData.transform);
-        m_lastChanceItem3.weapon.transform.SetParent(m_shopData.transform);
+        ccc = PlayerPrefs.GetInt("Shop_Weapon_last_1");
+        vvv = PlayerPrefs.GetInt("Shop_Weapon_last_2");
+        bbb = PlayerPrefs.GetInt("Shop_Weapon_last_3");
 
         UpdateAllIcons();
 
-		int count = 0;
+        int count = 0;
 
-		m_newItem1.weapon = GetRandomWeapon();
-		do
-		{
-            
-			m_newItem2.weapon = GetRandomWeapon();
-			count++;
-			if (count > 200)
-				break;
-		} while (m_newItem2.weapon == m_newItem1.weapon);
+        m_newItem1.weapon = GetRandomWeapon();
+        do
+        {
 
-		do
-		{
-            
-			m_newItem3.weapon = GetRandomWeapon();
-			count++;
-			if (count > 200)
-				break;
-		} while (m_newItem3.weapon == m_newItem1.weapon || m_newItem3.weapon == m_newItem2.weapon);
+            m_newItem2.weapon = GetRandomWeapon();
+            count++;
+            if (count > 200)
+                break;
+        } while (m_newItem2.weapon == m_newItem1.weapon);
 
-		UpdateAllIcons();
+        do
+        {
+
+            m_newItem3.weapon = GetRandomWeapon();
+            count++;
+            if (count > 200)
+                break;
+        } while (m_newItem3.weapon == m_newItem1.weapon || m_newItem3.weapon == m_newItem2.weapon);
+
+        PlayerPrefs.SetInt("Shop_Weapon_new_1", m_newItem1.weapon.GetComponent<Weapon>().m_itemID);
+        PlayerPrefs.SetInt("Shop_Weapon_new_2", m_newItem2.weapon.GetComponent<Weapon>().m_itemID);
+        PlayerPrefs.SetInt("Shop_Weapon_new_3", m_newItem3.weapon.GetComponent<Weapon>().m_itemID);
+
+        UpdateAllIcons();
 
         m_anim.SetTrigger("FinishedUpdate");
         m_needsUpdateing = false;
-	}
+    }
 
-	void UpdateAllIcons()
-	{
-		UpdateIcon(m_newItem1);
-		UpdateIcon(m_newItem2);
-		UpdateIcon(m_newItem3);
+    void UpdateAllIcons()
+    {
+        UpdateIcon(m_newItem1);
+        UpdateIcon(m_newItem2);
+        UpdateIcon(m_newItem3);
 
-		UpdateIcon(m_lastChanceItem1);
-		UpdateIcon(m_lastChanceItem2);
-		UpdateIcon(m_lastChanceItem3);
-	}
+        UpdateIcon(m_lastChanceItem1);
+        UpdateIcon(m_lastChanceItem2);
+        UpdateIcon(m_lastChanceItem3);
+    }
 
 
-	void UpdateIcon(ShopIcon sIcon)
-	{
+    void UpdateIcon(ShopIcon sIcon)
+    {
         Weapon wp = null;
         if (sIcon.weapon == null)
         {
@@ -518,7 +569,7 @@ public class Shop : MonoBehaviour
         }
         else
         {
-            wp  = sIcon.weapon.GetComponent<Weapon>();
+            wp = sIcon.weapon.GetComponent<Weapon>();
 
             if (wp == null)
             {
@@ -544,5 +595,5 @@ public class Shop : MonoBehaviour
             sIcon.cost.text = wp.m_goldCost.ToString();
         }
 
-	}
+    }
 }

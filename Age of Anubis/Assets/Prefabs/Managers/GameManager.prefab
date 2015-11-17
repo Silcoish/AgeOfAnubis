@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 452584}
+  - 114: {fileID: 11405082}
+  m_Layer: 0
+  m_Name: SaveData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &149562
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +26,6 @@ GameObject:
   - 4: {fileID: 451810}
   - 114: {fileID: 11466718}
   - 114: {fileID: 11472624}
-  - 114: {fileID: 11494614}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -27,9 +42,37 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.9991922, y: 6.47682619, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 452584}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &452584
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.9991922, y: -6.47682619, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 451810}
+  m_RootOrder: 0
+--- !u!114 &11405082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 209cd8011f3d06e4983b0bd0eccac7b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_currentLevel: 0
+  m_exp: 0
+  m_gold: 0
+  saveExists: 0
 --- !u!114 &11466718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  m_saveManager: {fileID: 0}
+  m_saveManager: {fileID: 11405082}
   coinPrefab: {fileID: 116776, guid: f30414f88aea2d1428209d86131f5eb0, type: 2}
   healthPotionPrefab: {fileID: 158366, guid: 4d4dcfc1f2384ec49afa6fc8103893ef, type: 2}
   hpDropChance: .100000001
@@ -68,25 +111,10 @@ MonoBehaviour:
   m_savedPlayerLevel: 1
   m_currentXP: 0
   m_XPToLVL: 6400000096000000fa00000090010000
+  m_hpGainPerLVL: 50
   m_currentWeapon: {fileID: 143282, guid: 884e72685771f4f40a5724043467b0dd, type: 2}
   m_secondaryWeapon: {fileID: 108578, guid: 48e0f23b675d84b4cbc8b9f384404ed4, type: 2}
   m_defaultWeapon: {fileID: 143282, guid: 884e72685771f4f40a5724043467b0dd, type: 2}
---- !u!114 &11494614
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 149562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a137277645433e848803a62f2ab2013b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_weaponList: {fileID: 4900000, guid: 2d51a9edb0b70b647a3cb96e790527ef, type: 3}
-  m_baseDagger: {fileID: 169758, guid: 112504acb0880ca4d9694d5c86137814, type: 2}
-  m_baseSword: {fileID: 169052, guid: 3da2b54ea19ee4743b9d05cb4d1930db, type: 2}
-  m_baseAxe: {fileID: 187506, guid: d09ea1815524f634bbdc2a4ab287781d, type: 2}
-  m_weaponData: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
