@@ -5,6 +5,7 @@ public enum WeaponSwing {LIGHT, MEDIUM, HEAVY}
 [System.Serializable]
 public class Weapon : MonoBehaviour 
 {
+    public int m_itemID;
     public int m_level;
     public string m_name;
     public int m_goldCost;

@@ -9,6 +9,7 @@ public enum BaseWeaponPrefab { NONE, SWORD, AXE, DAGGER };
 [System.Serializable]
 public struct WeaponData
 {
+    public int itemID;
     public int level;
     public string name;
     public BaseWeaponPrefab basePrefab;
@@ -67,7 +68,7 @@ public class WeaponManager : MonoBehaviour
                 //Debug.Log(weapons[i]);
                 string[] fields = weapons[i].Split(';');
 
-                if(fields.Length != 10)
+                if(fields.Length != 11)
                 {
                     Debug.Log("Invalid number of fields. Weapon skipped!");
                 }
@@ -75,16 +76,17 @@ public class WeaponManager : MonoBehaviour
                 {
                     //Debug.Log("Level: " + fields[0] + ", Name: " + fields[1] + ", Damage: " + fields[3]);
                     WeaponData data = new WeaponData();
-                    data.level = Int32.Parse(fields[0]);
-                    data.name = fields[1];
-                    data.basePrefab = GetPrefabType(fields[2]);
-                    data.attackStrength = Int32.Parse(fields[3]);
-                    data.knockback = Int32.Parse(fields[4]);
-                    data.effectType = GetDamageType(fields[5]);
-                    data.effectStrength = Int32.Parse(fields[6]);
-                    data.effectDuration = Int32.Parse(fields[7]);
-                    data.rarity = float.Parse(fields[8]);
-                    data.goldCost = Int32.Parse(fields[9]);
+                    data.itemID = Int32.Parse(fields[0]);
+                    data.level = Int32.Parse(fields[1]);
+                    data.name = fields[2];
+                    data.basePrefab = GetPrefabType(fields[3]);
+                    data.attackStrength = Int32.Parse(fields[4]);
+                    data.knockback = Int32.Parse(fields[5]);
+                    data.effectType = GetDamageType(fields[6]);
+                    data.effectStrength = Int32.Parse(fields[7]);
+                    data.effectDuration = Int32.Parse(fields[8]);
+                    data.rarity = float.Parse(fields[9]);
+                    data.goldCost = Int32.Parse(fields[10]);
 
                     m_weaponData.Add(data);
                 }
@@ -226,6 +228,19 @@ public class WeaponManager : MonoBehaviour
             }
         }
         Debug.Log("WeaponManager: Failed to generate wepaon with name: " + name +" , and level: " + level);
+        return null;
+    }
+
+    public GameObject GenerateWeaponFromID(int id)
+    {
+        foreach (WeaponData data in m_weaponData)
+        {
+            if(data.itemID == id)
+            {
+                return GenerateWeapon(data);
+            }
+        }
+        Debug.Log("WeaponManager: Failed to generate wepaon with itemID: " + id);
         return null;
     }
 }
