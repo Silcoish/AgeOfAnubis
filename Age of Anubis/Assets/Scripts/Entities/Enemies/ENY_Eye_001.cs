@@ -51,7 +51,7 @@ public class ENY_Eye_001 : Enemy
                     m_rb.velocity = dir.normalized * m_moveSpeed;
                 }
 
-                if (Mathf.Abs(dir.x) < (m_xDist + 0.5) && Mathf.Abs(dir.y) < 1)
+                if (Mathf.Abs(dir.x) < (m_xDist + 0.5) && Mathf.Abs(dir.y) < 0.2)
                 {
                     m_state = State.CHARGING;
                     m_anim.SetTrigger("Blink");
