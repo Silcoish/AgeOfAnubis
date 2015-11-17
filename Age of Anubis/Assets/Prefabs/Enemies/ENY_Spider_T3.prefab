@@ -240,11 +240,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_unitName: 
-  m_hitPoints: 4
+  m_hitPoints: 200
   m_attack:
-    m_attackStrength: 3
-    m_effectType: 4
-    m_effectDuration: 2
+    m_attackStrength: 30
+    m_effectType: 0
+    m_effectDuration: 0
     m_effectStrength: 0
     m_knockbackForce: 0
   m_XP: 10
@@ -295,11 +295,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_attack.m_effectType
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_attack.m_effectDuration
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_XP
@@ -307,13 +307,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_attack.m_attackStrength
-      value: 3
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9cbe70016925a6a409c331388fc3bb22,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_hitPoints
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 176594}

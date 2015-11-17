@@ -14,6 +14,7 @@ public class PlayerInventory : MonoBehaviour
     public int m_currentXP = 0;
     private int m_savedXP = 0;
     public int[] m_XPToLVL;
+    public int m_hpGainPerLVL = 50;
 
 	public GameObject m_currentWeapon;
 	public GameObject m_secondaryWeapon;
@@ -130,6 +131,12 @@ public class PlayerInventory : MonoBehaviour
         {
             m_playerLevel++;
             m_currentXP = 0;
+
+            Damageable player = GameObject.FindGameObjectWithTag("Player").GetComponent<Damageable>();
+            if (player)
+                player.m_hitPoints += m_hpGainPerLVL;
+            else
+                Debug.Log("PlayerInventory - Failed to find GameObject with 'Player' tag");
         }
     }
 
