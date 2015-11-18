@@ -180,7 +180,8 @@ public class Player : Damageable
 
 		if (Input.GetKeyDown(KeyCode.L))
 		{
-			UpdateEquippedWeapon(WeaponManager.inst.GenerateWeapon(5));
+			PlayerInventory.Inst.m_currentWeapon = WeaponManager.inst.GenerateWeapon(5);
+			UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 			m_hitPoints = 250;
 			RecoverHealth(10000);
 		}

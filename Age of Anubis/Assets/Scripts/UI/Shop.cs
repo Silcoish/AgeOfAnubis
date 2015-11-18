@@ -86,17 +86,21 @@ public class Shop : MonoBehaviour
 
     void Awake()
     {
-        if (Inst == null)
-            Inst = this;
+		if (Inst == null)
+			Inst = this;
+		else
+			Destroy(gameObject);
+
         m_anim = gameObject.GetComponent<Animator>();
         m_allButtons = gameObject.GetComponentsInChildren<Button>();
 
-
+		
     }
     // Use this for initialization
     void Start()
     {
         InitializeShop();
+		gameObject.SetActive(false);
     }
 
     void OnEnable()

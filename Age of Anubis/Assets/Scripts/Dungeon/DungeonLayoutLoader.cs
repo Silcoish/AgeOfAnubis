@@ -25,6 +25,11 @@ public class DungeonLayoutLoader : MonoBehaviour
 
 	private int SIZE = 15;
 
+	void Awake()
+	{
+		GameManager.inst.player = player;
+	}
+
 	void Start()
 	{
 		rooms = new RoomObject[SIZE * SIZE];
@@ -38,7 +43,6 @@ public class DungeonLayoutLoader : MonoBehaviour
 
 	void PlaceDoors()
 	{
-        print("Place Doors");
 		for(int i = 0; i < SIZE * SIZE; i++)
 		{
 			//check for room on the left
@@ -176,8 +180,9 @@ public class DungeonLayoutLoader : MonoBehaviour
 								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
 								rooms[lineNum * SIZE + i].arrayIndex = lineNum * SIZE + i;
 
-								GameObject tempPlayer = (GameObject)Instantiate(player, rooms[lineNum * SIZE + i].gameObject.transform.position, Quaternion.identity);
-								GameManager.inst.player = tempPlayer;
+								//GameObject tempPlayer = (GameObject)Instantiate(player, rooms[lineNum * SIZE + i].gameObject.transform.position, Quaternion.identity);
+								//GameManager.inst.player = tempPlayer;
+								GameManager.inst.player.transform.position = rooms[lineNum * SIZE + i].gameObject.transform.position;
 								Camera.main.GetComponent<CameraController>().SetRoom(tempRoom);
 							}
 

@@ -18,6 +18,7 @@ public class SaveManager : MonoBehaviour
 
 	void Start()
 	{
+		print("Start Save");
 		if (File.Exists(Application.persistentDataPath + "Savegame.fiin"))
 		{
 			saveExists = true;
@@ -43,14 +44,20 @@ public class SaveManager : MonoBehaviour
 		m_exp = PlayerInventory.Inst.m_currentXP;
 		m_currentLevel = PlayerInventory.Inst.m_playerLevel;
 
-		/*if (PlayerInventory.Inst.m_currentWeapon != null)
+		if (PlayerInventory.Inst.m_currentWeapon != null)
+		{
 			m_weapon1 = PlayerInventory.Inst.m_currentWeapon.GetComponent<Weapon>().m_itemID;
+			print(PlayerInventory.Inst.m_currentWeapon.GetComponent<Weapon>().m_name);
+		}
 		else
 			m_weapon1 = 0;
+
 		if (PlayerInventory.Inst.m_secondaryWeapon != null)
+		{
 			m_weapon2 = PlayerInventory.Inst.m_secondaryWeapon.GetComponent<Weapon>().m_itemID;
+		}
 		else
-			m_weapon2 = 0;*/
+			m_weapon2 = 0;
 
 		SaveLoad.Save();
 	}
@@ -69,6 +76,8 @@ public class SaveManager : MonoBehaviour
 	{
 		SaveLoad.Load();
 		PlayerInventory.Inst.UpdateUIElements();
+
+		print(WeaponManager.inst != null);
 
 		PlayerInventory.Inst.m_currentWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon1);
 		PlayerInventory.Inst.m_secondaryWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon2);

@@ -44,8 +44,8 @@ public class Door : MonoBehaviour {
 
     public void InitDoor()
     {
-        print("InitDoor");
-        Debug.Log("Room Init", gameObject);
+       // print("InitDoor");
+        //Debug.Log("Room Init", gameObject);
         if (partnerDoor == null)
         {
             m_sr.sprite = m_hideSprite;

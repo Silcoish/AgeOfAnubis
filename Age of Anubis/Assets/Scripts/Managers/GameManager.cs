@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
 
 	void Start()
 	{
+		print("Start GM");
 		try
 		{
 			player = FindObjectOfType<Player>().gameObject;
@@ -40,16 +41,27 @@ public class GameManager : MonoBehaviour {
 			print(e.Message);
 		}
 
+
+		CheckForObjects();
 	}
 
 	void OnLevelWasLoaded(int level){
+		CheckForObjects();
+	}
 
-		if(GameObject.FindGameObjectWithTag("Minimap") != null)
+	void CheckForObjects()
+	{
+		if (GameObject.FindGameObjectWithTag("Minimap") != null)
 		{
 			visibleMap = GameObject.FindGameObjectWithTag("Minimap");
 		}
 
+		if (GameObject.FindGameObjectWithTag("Save") != null)
+		{
+			m_saveManager = GameObject.FindGameObjectWithTag("Save").GetComponent<SaveManager>();
+		}
 	}
+
 	void Update()
 	{
 		if(player == null)
