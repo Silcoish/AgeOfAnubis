@@ -9,12 +9,18 @@ public class ENY_Spider_001 : PhysicsEnemy
 
     public override void EnemyBehaviour()
     {
-        if(!m_isPathing)
+        if(m_isDead)
         {
+        }
+        else if(!m_isPathing)
+        {
+            m_anim.SetBool("isFalling", true);
+
             // Check if we have hit the ground
             if(m_rb.velocity.y == 0)
             {
                 // Reenable climbing once we stop falling
+                m_anim.SetBool("isFalling", false);
                 EnablePathing(true);
                 GetLedgeTransform();
             }
@@ -43,15 +49,18 @@ public class ENY_Spider_001 : PhysicsEnemy
                 if(m_isVertical)
                 {
                     m_dir = new Vector2(0, m_ledgeCheck.localPosition.y);
+                    m_anim.SetFloat("Speed", Mathf.Abs(m_dir.y));
                 }
                 else
                 {
                     m_dir = new Vector2(m_ledgeCheck.localPosition.x, 0);
+                    m_anim.SetFloat("Speed", Mathf.Abs(m_dir.x));
                 }
                 m_dir.Normalize();
 
                 m_rb.velocity = m_dir * m_moveSpeed;
             }
         }
+        UpdateAnimationState();
     }
 }

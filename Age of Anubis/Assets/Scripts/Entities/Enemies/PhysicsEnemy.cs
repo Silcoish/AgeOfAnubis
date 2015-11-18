@@ -19,6 +19,13 @@ public class PhysicsEnemy : Enemy
     public float m_checkRadius = 0.1F;
     public LayerMask m_platformMask;
 
+    private CircleCollider2D m_physCol;
+
+    protected GameObject m_spriteObject;
+    protected Animator m_anim;
+    protected bool m_isDead = false;
+    public bool m_spriteFaceRight = true;
+
     public override void AwakeOverride()
     {
         base.AwakeOverride();
@@ -26,12 +33,30 @@ public class PhysicsEnemy : Enemy
         // Reset rotation NOTE: Enemies inheriting from PhysicsEnemy will NOT work once rotated
         transform.rotation = Quaternion.Euler(Vector3.zero);
 
+        Animator[] tempAnims = gameObject.GetComponentsInChildren<Animator>();
+        if(tempAnims.Length > 0)
+        {
+            m_anim = tempAnims[0];
+            m_spriteObject = m_anim.transform.parent.gameObject;
+        }
+        else
+            Debug.Log("PhysicsEnemy - " + gameObject.name + " failed to find Animator on child object.");
+
+        CircleCollider2D[] tempCols = gameObject.GetComponentsInChildren<CircleCollider2D>();
+        if(tempCols.Length > 0)
+        {
+            m_physCol = tempCols[0];
+        }
+        else
+            Debug.Log("PhysicsEnemy - " + gameObject.name + " failed to find CircleCollider2D on child object.");
+
         // Set up check transforms
-        float offset = GetComponent<CircleCollider2D>().radius + m_checkOffset;
-        m_topRight.localPosition = new Vector2(offset, offset);
-        m_topLeft.localPosition = new Vector2(-offset, offset);
-        m_botRight.localPosition = new Vector2(offset, -offset);
-        m_botLeft.localPosition = new Vector2(-offset, -offset);
+        Vector2 pos = m_physCol.transform.localPosition;
+        float offset = m_physCol.radius + m_checkOffset;
+        m_topRight.localPosition = new Vector2(pos.x + offset, pos.y + offset);
+        m_topLeft.localPosition = new Vector2(pos.x + -offset, pos.y + offset);
+        m_botRight.localPosition = new Vector2(pos.x + offset, pos.y + -offset);
+        m_botLeft.localPosition = new Vector2(pos.x + -offset, pos.y + -offset);
 
         GetLedgeTransform();
     }
@@ -40,12 +65,39 @@ public class PhysicsEnemy : Enemy
     {
         base.OnTakeDamage(dam);
 
+        m_anim.SetTrigger("TakeDamage");
         EnablePathing(false);
     }
 
     protected bool CheckPosition(Transform pos)
     {
         return Physics2D.OverlapCircle(pos.position, m_checkRadius, m_platformMask);
+    }
+
+    public override void OnDeath()
+    {
+        if (m_room)
+            m_room.EnemyDied(this);
+        if (m_deathParticle)
+            Instantiate(m_deathParticle, transform.position, transform.rotation);
+        if (GameManager.inst.coinPrefab)
+            Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
+        if (GameManager.inst.healthPotionPrefab)
+        {
+            if (Random.value <= GameManager.inst.hpDropChance)
+                Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
+        }
+        PlayerInventory.Inst.ChangeXP(m_XP);
+
+        //Disable colliders and activate timer so death animation can play before turning off
+        m_anim.SetTrigger("Death");
+        m_col.enabled = false;
+        m_isDead = true;
+    }
+
+    protected void AfterDeath()
+    {
+        gameObject.SetActive(false);
     }
 
     protected void EnablePathing(bool state)
@@ -128,8 +180,8 @@ public class PhysicsEnemy : Enemy
 
             m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
             EnablePathing(true);
-            //Debug.Log("Ledges check: " + ledges[0] + ledges[1]);
-            //Debug.Log("Ledge: " + m_ledgeCheck + ", Wall: " + m_wallCheck + ", Vertical: " + m_isVertical);
+            Debug.Log("Ledges check: " + ledges[0] + ledges[1]);
+            Debug.Log("Ledge: " + m_ledgeCheck + ", Wall: " + m_wallCheck + ", Vertical: " + m_isVertical);
         }
         else if(!m_canClimb)
         {
@@ -147,6 +199,72 @@ public class PhysicsEnemy : Enemy
         {
             // No ledges were in range, we should fall
             EnablePathing(false);
+        }
+    }
+
+    // Fixes the facing in sprite manipulation if the sprite sheet faces the wrong direction
+    bool FacingRight(bool isFacingRight)
+    {
+        if (isFacingRight && m_spriteFaceRight || !isFacingRight && !m_spriteFaceRight)
+            return true;
+        else
+            return false;
+    }
+
+    // Flip the character object for left/right facing.
+    void SetSpriteTransform(Quaternion direction, bool isFacingRight)
+    {
+        m_spriteObject.transform.rotation = direction;
+
+        if(FacingRight(isFacingRight))
+        {
+            Vector3 scale = m_spriteObject.transform.localScale;
+            scale.x = 1;
+            m_spriteObject.transform.localScale = scale;
+        }
+        else
+        {
+            Vector3 scale = m_spriteObject.transform.localScale;
+            scale.x = -1;
+            m_spriteObject.transform.localScale = scale;
+        }
+    }
+
+    // Update player animations based on Input.
+    protected void UpdateAnimationState()
+    {
+        Quaternion up = Quaternion.Euler(0, 0, 180);
+        Quaternion down = Quaternion.Euler(0, 0, 0);
+        Quaternion right = Quaternion.Euler(0, 0, 90);
+        Quaternion left = Quaternion.Euler(0, 0, -90);
+
+        if (m_ledgeCheck == m_topRight)
+        {
+            if (m_isVertical)
+                SetSpriteTransform(right, true);
+            else
+                SetSpriteTransform(up, false);
+        }
+        else if (m_ledgeCheck == m_topLeft)
+        {
+            if (m_isVertical)
+                SetSpriteTransform(left, false);
+            else
+                SetSpriteTransform(up, true);
+        }
+        else if (m_ledgeCheck == m_botRight)
+        {
+            if (m_isVertical)
+                SetSpriteTransform(right, false);
+            else
+                SetSpriteTransform(down, true);
+        }
+        else
+        {
+            if (m_isVertical)
+                SetSpriteTransform(left, true);
+            else
+                SetSpriteTransform(down, false);
         }
     }
 }

@@ -7,8 +7,10 @@ public class Enemy : Damageable
 	[Header("EnemyStats")]
 	public Attack m_attack;
     public int m_XP = 1;
-	private BoxCollider2D m_colBox;
-	private CircleCollider2D m_colCircle;
+    //protected BoxCollider2D m_colBox;
+    //protected CircleCollider2D m_colCircle;
+    protected Collider2D m_col;
+
     public GameObject m_deathParticle;
 
 	private BoxCollider2D m_forwardCol;
@@ -31,8 +33,9 @@ public class Enemy : Damageable
 
 	public override void AwakeOverride()
 	{
-		m_colBox = GetComponent<BoxCollider2D>();
-		m_colCircle = GetComponent<CircleCollider2D>();
+        m_col = GetComponent<Collider2D>();
+        //m_colBox = GetComponent<BoxCollider2D>();
+        //m_colCircle = GetComponent<CircleCollider2D>();
 
         platformMask = 1 << LayerMask.NameToLayer("Platform");
 
@@ -98,48 +101,48 @@ public class Enemy : Damageable
         }
     }
 
-	void CreateDirectionColliders()
-	{
-		float offset = 0.05f;
-		float depth = 0.4f;
+    //void CreateDirectionColliders()
+    //{
+    //    float offset = 0.05f;
+    //    float depth = 0.4f;
 
-		m_forwardCol = gameObject.AddComponent<BoxCollider2D>();
-		m_belowCol = gameObject.AddComponent<BoxCollider2D>();
-		m_cornerCol = gameObject.AddComponent<BoxCollider2D>();
+    //    m_forwardCol = gameObject.AddComponent<BoxCollider2D>();
+    //    m_belowCol = gameObject.AddComponent<BoxCollider2D>();
+    //    m_cornerCol = gameObject.AddComponent<BoxCollider2D>();
 
-		m_forwardCol.isTrigger = true;
-		m_belowCol.isTrigger = true;
-		m_cornerCol.isTrigger = true;
+    //    m_forwardCol.isTrigger = true;
+    //    m_belowCol.isTrigger = true;
+    //    m_cornerCol.isTrigger = true;
 
-		if (m_colBox != null)
-		{
-			//print("Created From Box");
-			m_forwardCol.size = new Vector2(offset * 2, m_colBox.size.y - offset);
-			m_belowCol.size = new Vector2(m_colBox.size.x - offset, depth);
-			m_cornerCol.size = new Vector2(depth,depth);
+    //    if (m_colBox != null)
+    //    {
+    //        //print("Created From Box");
+    //        m_forwardCol.size = new Vector2(offset * 2, m_colBox.size.y - offset);
+    //        m_belowCol.size = new Vector2(m_colBox.size.x - offset, depth);
+    //        m_cornerCol.size = new Vector2(depth,depth);
 
-			m_forwardCol.offset = new Vector2(m_colBox.offset.x + (m_colBox.size.x / 2) + (offset), m_colBox.offset.y);
-			m_belowCol.offset = new Vector2(m_colBox.offset.x, m_colBox.offset.y - (m_colBox.size.y / 2) - offset - (depth / 2));
-			m_cornerCol.offset = new Vector2(m_colBox.offset.x + (m_colBox.size.x / 2) + offset + (depth / 2), m_colBox.offset.y - (m_colBox.size.y / 2) - offset - (depth / 2));
+    //        m_forwardCol.offset = new Vector2(m_colBox.offset.x + (m_colBox.size.x / 2) + (offset), m_colBox.offset.y);
+    //        m_belowCol.offset = new Vector2(m_colBox.offset.x, m_colBox.offset.y - (m_colBox.size.y / 2) - offset - (depth / 2));
+    //        m_cornerCol.offset = new Vector2(m_colBox.offset.x + (m_colBox.size.x / 2) + offset + (depth / 2), m_colBox.offset.y - (m_colBox.size.y / 2) - offset - (depth / 2));
 
-		}
-		else if (m_colCircle != null)
-		{
-			//print("Created From Circle");
-			m_forwardCol.size = new Vector2(depth, m_colCircle.radius * 2 - offset);
-			m_belowCol.size = new Vector2(m_colCircle.radius * 2 - offset, depth);
-			m_cornerCol.size = new Vector2(depth, depth);
+    //    }
+    //    else if (m_colCircle != null)
+    //    {
+    //        //print("Created From Circle");
+    //        m_forwardCol.size = new Vector2(depth, m_colCircle.radius * 2 - offset);
+    //        m_belowCol.size = new Vector2(m_colCircle.radius * 2 - offset, depth);
+    //        m_cornerCol.size = new Vector2(depth, depth);
 
-			m_forwardCol.offset = new Vector2(m_colCircle.offset.x + m_colCircle.radius + offset + (depth / 2), m_colCircle.offset.y);
-			m_belowCol.offset = new Vector2(m_colCircle.offset.x, m_colCircle.offset.y - m_colCircle.radius - offset - (depth / 2));
-			m_cornerCol.offset = new Vector2(m_colCircle.offset.x + m_colCircle.radius + offset + (depth / 2), m_colCircle.offset.y - m_colCircle.radius - offset - (depth / 2));
-		}
-		else
-		{
-			Debug.LogError("Broken no collider on Enemy: BOX or CIRCLE only");
-		}
+    //        m_forwardCol.offset = new Vector2(m_colCircle.offset.x + m_colCircle.radius + offset + (depth / 2), m_colCircle.offset.y);
+    //        m_belowCol.offset = new Vector2(m_colCircle.offset.x, m_colCircle.offset.y - m_colCircle.radius - offset - (depth / 2));
+    //        m_cornerCol.offset = new Vector2(m_colCircle.offset.x + m_colCircle.radius + offset + (depth / 2), m_colCircle.offset.y - m_colCircle.radius - offset - (depth / 2));
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Broken no collider on Enemy: BOX or CIRCLE only");
+    //    }
 
-	}
+    //}
 
 	protected CheckReturn CheckEnemyLocation()
 	{

@@ -240,12 +240,13 @@ MonoBehaviour:
   m_topLeft: {fileID: 423362}
   m_botRight: {fileID: 439236}
   m_botLeft: {fileID: 450456}
-  m_canClimb: 1
+  m_canClimb: 0
   m_checkOffset: 0
   m_checkRadius: .100000001
   m_platformMask:
     serializedVersion: 2
     m_Bits: 512
+  m_spriteFaceRight: 1
   m_moveSpeed: 2
 --- !u!114 &11465924
 MonoBehaviour:
@@ -312,6 +313,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_hitPoints
       value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_canClimb
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

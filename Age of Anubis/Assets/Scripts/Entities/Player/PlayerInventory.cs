@@ -125,7 +125,7 @@ public class PlayerInventory : MonoBehaviour
 
     void CheckForLevelUp()
     {
-		if (m_playerLevel >= m_XPToLVL.Length)
+        if (m_playerLevel >= m_XPToLVL.Length)
 			return;
         if((m_currentXP) >= m_XPToLVL[m_playerLevel - 1])
         {

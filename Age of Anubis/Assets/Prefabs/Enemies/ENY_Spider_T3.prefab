@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyType: 1
-  m_level: 1
+  m_level: 3
 --- !u!114 &11442164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_platformMask:
     serializedVersion: 2
     m_Bits: 512
+  m_spriteFaceRight: 1
   m_moveSpeed: 2
 --- !u!212 &21207950
 SpriteRenderer:
@@ -317,6 +318,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_hitPoints
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_level
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
