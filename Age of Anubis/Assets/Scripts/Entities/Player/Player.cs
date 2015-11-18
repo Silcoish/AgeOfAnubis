@@ -358,9 +358,9 @@ public class Player : Damageable
     // Set the vertical speed value of the animators
     void SetAnimVSpeed(float vSpeed)
     {
-        m_anim.SetFloat("VSpeed", Mathf.Abs(vSpeed));
-        m_anim_arm.SetFloat("VSpeed", Mathf.Abs(vSpeed));
-        m_anim_legs.SetFloat("VSpeed", Mathf.Abs(vSpeed));
+        m_anim.SetFloat("VSpeed", vSpeed);
+        m_anim_arm.SetFloat("VSpeed", vSpeed);
+        m_anim_legs.SetFloat("VSpeed", vSpeed);
     }
 
     // Set off an animation trigger with name triggerName
