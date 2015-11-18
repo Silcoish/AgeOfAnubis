@@ -43,62 +43,66 @@ public class WeaponManager : MonoBehaviour
         {
             WeaponManager.inst = this;
             //DontDestroyOnLoad(gameObject);
+
+            m_weaponData = new List<WeaponData>();
+
+            m_weaponParent = Instantiate(new GameObject());
+            m_weaponParent.SetActive(false);
+
+            if (!m_weaponList)
+            {
+                Debug.Log("Missing Weapon List CSV - Cannot generate weapons!");
+            }
+            else
+            {
+                // Split csv into lines
+                string[] weapons = m_weaponList.text.Split('\n');
+
+                //Debug.Log("Weapons Found: " + weapons.Length);
+
+                Debug.Log("Loading Weapons Data");
+                // First entry in array is the column titles
+                // Last entry is a single whitespace, skipping last entry
+                for (int i = 1; i < weapons.Length - 1; i++)
+                {
+                    //Debug.Log(weapons[i]);
+                    string[] fields = weapons[i].Split(';');
+
+                    if (fields.Length != 11)
+                    {
+                        Debug.Log("Invalid number of fields. Weapon skipped!");
+                    }
+                    else
+                    {
+                        //Debug.Log("Level: " + fields[0] + ", Name: " + fields[1] + ", Damage: " + fields[3]);
+                        WeaponData data = new WeaponData();
+                        data.itemID = Int32.Parse(fields[0]);
+                        data.level = Int32.Parse(fields[1]);
+                        data.name = fields[2];
+                        data.basePrefab = GetPrefabType(fields[3]);
+                        data.attackStrength = Int32.Parse(fields[4]);
+                        data.knockback = Int32.Parse(fields[5]);
+                        data.effectType = GetDamageType(fields[6]);
+                        data.effectStrength = Int32.Parse(fields[7]);
+                        data.effectDuration = Int32.Parse(fields[8]);
+                        data.rarity = float.Parse(fields[9]);
+                        data.goldCost = Int32.Parse(fields[10]);
+
+                        m_weaponData.Add(data);
+                    }
+                }
+                Debug.Log("Weapons Loaded: " + m_weaponData.Count);
+            }
         }
         else
             Destroy(gameObject);
+
+
     }
 
     void Start()
     {
-        m_weaponData = new List<WeaponData>();
-
-        m_weaponParent = Instantiate(new GameObject());
-        m_weaponParent.SetActive(false);
-
-        if(!m_weaponList)
-        {
-            Debug.Log("Missing Weapon List CSV - Cannot generate weapons!");
-        }
-        else
-        {
-            // Split csv into lines
-            string[] weapons = m_weaponList.text.Split('\n');
-
-            //Debug.Log("Weapons Found: " + weapons.Length);
-
-            Debug.Log("Loading Weapons Data");
-            // First entry in array is the column titles
-            // Last entry is a single whitespace, skipping last entry
-            for(int i = 1; i < weapons.Length - 1; i++)
-            {
-                //Debug.Log(weapons[i]);
-                string[] fields = weapons[i].Split(';');
-
-                if(fields.Length != 11)
-                {
-                    Debug.Log("Invalid number of fields. Weapon skipped!");
-                }
-                else
-                {
-                    //Debug.Log("Level: " + fields[0] + ", Name: " + fields[1] + ", Damage: " + fields[3]);
-                    WeaponData data = new WeaponData();
-                    data.itemID = Int32.Parse(fields[0]);
-                    data.level = Int32.Parse(fields[1]);
-                    data.name = fields[2];
-                    data.basePrefab = GetPrefabType(fields[3]);
-                    data.attackStrength = Int32.Parse(fields[4]);
-                    data.knockback = Int32.Parse(fields[5]);
-                    data.effectType = GetDamageType(fields[6]);
-                    data.effectStrength = Int32.Parse(fields[7]);
-                    data.effectDuration = Int32.Parse(fields[8]);
-                    data.rarity = float.Parse(fields[9]);
-                    data.goldCost = Int32.Parse(fields[10]);
-
-                    m_weaponData.Add(data);
-                }
-            }
-            Debug.Log("Weapons Loaded: " + m_weaponData.Count);
-        }
+        
     }
 
     BaseWeaponPrefab GetPrefabType(string s)

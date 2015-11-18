@@ -60,8 +60,8 @@ public class SaveManager : MonoBehaviour
 		m_gold = 0;
 		m_exp = 0;
 		m_currentLevel = 1;
-		m_weapon1 = 0;
-		m_weapon2 = 0;
+		m_weapon1 = 1;
+		m_weapon2 = 1;
 		SaveLoad.Save(SaveLoad.currentFilePath, this);
 	}
 
