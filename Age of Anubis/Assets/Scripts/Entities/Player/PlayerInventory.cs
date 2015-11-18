@@ -140,7 +140,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    void CheckWeaponValidity()
+    public void CheckWeaponValidity()
     {
         // Check for weapon in primary slot, move secondary or generate default if not.
         if (!m_currentWeapon)
