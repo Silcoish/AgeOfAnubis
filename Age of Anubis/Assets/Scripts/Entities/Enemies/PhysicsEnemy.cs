@@ -21,8 +21,8 @@ public class PhysicsEnemy : Enemy
 
     private CircleCollider2D m_physCol;
 
-    protected GameObject m_spriteObject;
-    protected Animator m_anim;
+    public GameObject m_spriteObject;
+    public Animator m_anim;
     protected bool m_isDead = false;
     public bool m_spriteFaceRight = true;
 
@@ -45,7 +45,13 @@ public class PhysicsEnemy : Enemy
         CircleCollider2D[] tempCols = gameObject.GetComponentsInChildren<CircleCollider2D>();
         if(tempCols.Length > 0)
         {
-            m_physCol = tempCols[0];
+            foreach(var c in tempCols)
+            {
+                if(c.name == "PhysicsCollider")
+                {
+                    m_physCol = c;
+                }
+            }
         }
         else
             Debug.Log("PhysicsEnemy - " + gameObject.name + " failed to find CircleCollider2D on child object.");
@@ -53,6 +59,7 @@ public class PhysicsEnemy : Enemy
         // Set up check transforms
         Vector2 pos = m_physCol.transform.localPosition;
         float offset = m_physCol.radius + m_checkOffset;
+        //Debug.Log(gameObject.name + " pos = " + pos + " offset = " + offset);
         m_topRight.localPosition = new Vector2(pos.x + offset, pos.y + offset);
         m_topLeft.localPosition = new Vector2(pos.x + -offset, pos.y + offset);
         m_botRight.localPosition = new Vector2(pos.x + offset, pos.y + -offset);
@@ -180,10 +187,10 @@ public class PhysicsEnemy : Enemy
 
             m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
             EnablePathing(true);
-            Debug.Log("Ledges check: " + ledges[0] + ledges[1]);
-            Debug.Log("Ledge: " + m_ledgeCheck + ", Wall: " + m_wallCheck + ", Vertical: " + m_isVertical);
+            //Debug.Log("Ledges check: " + ledges[0] + ledges[1]);
+            //Debug.Log("Ledge: " + m_ledgeCheck + ", Wall: " + m_wallCheck + ", Vertical: " + m_isVertical);
         }
-        else if(!m_canClimb)
+        else if (!m_canClimb && ledges.Count >= 2)
         {
             if (Random.value > 0.5F)
                 m_ledgeCheck = m_botRight;

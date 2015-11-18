@@ -33,7 +33,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &121698
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -112,6 +112,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &195538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 409780}
+  m_Layer: 8
+  m_Name: SpriteRotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &409780
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 452130}
+  m_Father: {fileID: 492650}
+  m_RootOrder: 0
 --- !u!4 &414332
 Transform:
   m_ObjectHideFlags: 1
@@ -182,7 +210,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 492650}
+  m_Father: {fileID: 409780}
   m_RootOrder: 0
 --- !u!4 &492650
 Transform:
@@ -194,7 +222,7 @@ Transform:
   m_LocalPosition: {x: 7.96999979, y: 3.57999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 452130}
+  - {fileID: 409780}
   - {fileID: 437458}
   - {fileID: 422796}
   - {fileID: 414984}
@@ -288,10 +316,13 @@ MonoBehaviour:
   m_botLeft: {fileID: 422796}
   m_canClimb: 0
   m_checkOffset: 0
-  m_checkRadius: .100000001
+  m_checkRadius: .00999999978
   m_platformMask:
     serializedVersion: 2
     m_Bits: 512
+  m_spriteObject: {fileID: 0}
+  m_anim: {fileID: 0}
+  m_spriteFaceRight: 1
   m_moveSpeed: 2
   m_attackTimer: 5
   m_chargeTimer: .5
@@ -368,6 +399,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_attack.m_effectStrength
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_checkRadius
+      value: .00999999978
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
