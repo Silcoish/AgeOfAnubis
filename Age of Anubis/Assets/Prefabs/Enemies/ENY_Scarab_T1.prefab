@@ -329,7 +329,7 @@ MonoBehaviour:
   m_botLeft: {fileID: 442890}
   m_canClimb: 0
   m_checkOffset: 0
-  m_checkRadius: .100000001
+  m_checkRadius: .00999999978
   m_platformMask:
     serializedVersion: 2
     m_Bits: 512
@@ -397,6 +397,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_XP
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_checkRadius
+      value: .00999999978
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
