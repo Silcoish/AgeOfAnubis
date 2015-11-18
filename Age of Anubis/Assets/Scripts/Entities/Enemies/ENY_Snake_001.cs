@@ -17,7 +17,6 @@ public class ENY_Snake_001 : PhysicsEnemy
     public float m_launchForce;
 
     private GameObject m_animObject;
-    private Animator m_anim;
     private bool m_isFacingRight = true;
 
     enum State { SEARCHING, CHARGING, ATTACKING, RECHARGING };
@@ -31,15 +30,7 @@ public class ENY_Snake_001 : PhysicsEnemy
 
         m_launchX = m_launchVec.x;
 
-        Animator[] tempAnims = gameObject.GetComponentsInChildren<Animator>();
-        foreach (var d in tempAnims)
-        {
-            if (d.name == "Sprite")
-            {
-                m_anim = d;
-                m_animObject = m_anim.gameObject;
-            }
-        }
+        m_animObject = m_anim.gameObject;
     }
 
     public override void EnemyBehaviour()

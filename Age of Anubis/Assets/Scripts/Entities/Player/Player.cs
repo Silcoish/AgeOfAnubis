@@ -14,6 +14,9 @@ public class Player : Damageable
 	private BoxCollider2D m_colBody;
     private bool m_isJumping;
 	public int m_jumpCounter;
+    public float m_minJumpHeight = 1;
+    private float m_jumpStart;
+    private bool m_stopJump = false;
 	private Vector2 m_velocity = Vector2.zero;
 
 	public Animator m_anim;
@@ -186,12 +189,21 @@ public class Player : Damageable
         {
             if (Input.GetButtonDown("Jump"))
             {
+                //Debug.Log("Jump key down");
                 Jump();
             }
 
             if (Input.GetButtonUp("Jump"))
             {
+                //Debug.Log("Jump key up");
+                m_stopJump = true;
+            }
+
+            if (m_stopJump && transform.position.y > m_jumpStart + m_minJumpHeight)
+            {
+                //Debug.Log("jumpstop called");
                 JumpStop();
+                m_stopJump = false;
             }
 
             if (Input.GetButtonDown("Fire1"))
@@ -235,10 +247,12 @@ public class Player : Damageable
             if(!m_anim.GetBool("Grounded"))
             {
                 m_velocity.y = (m_jumpHeight * 0.8F) * m_globalMoveSpeed;
+                m_stopJump = false;
             }
             else
             {
                 m_velocity.y = m_jumpHeight * m_globalMoveSpeed;
+                m_jumpStart = transform.position.y;
             }
 			m_jumpCounter--;
 
@@ -270,6 +284,7 @@ public class Player : Damageable
 					{
 						m_jumpCounter = m_jumpMax;
                         SetAnimGrounded(true); // Tell the animator we have landed
+                        m_stopJump = false;
 					}
 				}
                 else
@@ -373,9 +388,9 @@ public class Player : Damageable
 
     public bool isAttacking()
     {
-        if (m_anim_arm.GetCurrentAnimatorStateInfo(1).IsName("Attack(Light)")
-            || m_anim_arm.GetCurrentAnimatorStateInfo(1).IsName("Attack(Medium)")
-            || m_anim_arm.GetCurrentAnimatorStateInfo(1).IsName("Attack(Heavy)"))
+        if (m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Light)")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Heavy)"))
             return true;
         else
             return false;
