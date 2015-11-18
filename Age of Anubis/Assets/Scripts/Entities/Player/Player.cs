@@ -219,7 +219,7 @@ public class Player : Damageable
 		
 		if (Input.GetButtonDown("Fire2"))
 		{
-            if(!isAttacking())
+            if(!isInAttackAnimation())
                 UpdateEquippedWeapon(PlayerInventory.Inst.SwitchWeapon());
 		}
 
@@ -297,7 +297,7 @@ public class Player : Damageable
 
 	void Check2WayPlatforms()
 	{
-		Vector2 offsetDistance = new Vector2(2, 2);
+		Vector2 offsetDistance = new Vector2(2, 2F);
 
 		Collider2D[] allCols = Physics2D.OverlapAreaAll((Vector2)m_colFeet.bounds.min - offsetDistance, (Vector2)m_colFeet.bounds.max + offsetDistance);
 
@@ -305,7 +305,7 @@ public class Player : Damageable
 		{
 			if (col.CompareTag("NotSolid"))
 			{
-				if (m_colFeet.bounds.min.y < col.bounds.max.y)
+				if (m_colFeet.bounds.min.y < col.bounds.max.y - 0.05F)
 				{
 					Physics2D.IgnoreCollision(m_colFeet, col, true);
 					Physics2D.IgnoreCollision(m_colBody, col, true);
@@ -389,8 +389,22 @@ public class Player : Damageable
     public bool isAttacking()
     {
         if (m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Light)")
-            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)")
-            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Heavy)"))
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)2")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Heavy)2"))
+            return true;
+        else
+            return false;
+    }
+
+    public bool isInAttackAnimation()
+    {
+        if (m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Light)")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)1")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)2")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)3")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Heavy)1")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Heavy)2")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Heavy)3"))
             return true;
         else
             return false;

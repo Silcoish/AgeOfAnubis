@@ -26,13 +26,20 @@ public class Weapon : MonoBehaviour
 	{
         if(transform.parent.parent.parent.GetComponent<Player>().isAttacking())
         {
-            m_isAttacking = true;
             m_col.enabled = true;
         }
         else
         {
-            m_isAttacking = false;
             m_col.enabled = false;
+        }
+
+        if(transform.parent.parent.parent.GetComponent<Player>().isInAttackAnimation())
+        {
+            m_isAttacking = true;
+        }
+        else
+        {
+            m_isAttacking = false;
         }
 	}
 
