@@ -59,16 +59,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473fe75bc7b026645a0f4acc54bb0bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_itemID: 0
+  m_level: 0
+  m_name: 
+  m_goldCost: 0
   m_attack:
-    m_attackStrength: 1
+    m_attackStrength: 10
     m_effectType: 0
     m_effectDuration: 0
     m_effectStrength: 0
     m_knockbackForce: 5
   m_swingType: 0
-  m_cooldown: .5
-  m_colliderEnableDelay: .0500000007
-  m_colliderEnableTime: .200000003
 --- !u!212 &21287448
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -108,7 +109,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_attack.m_attackStrength
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_attack.m_knockbackForce
