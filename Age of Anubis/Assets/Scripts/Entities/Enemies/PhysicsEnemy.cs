@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -72,8 +72,8 @@ public class PhysicsEnemy : Enemy
     {
         base.OnTakeDamage(dam);
 
-        m_anim.SetTrigger("TakeDamage");
         EnablePathing(false);
+        m_anim.SetTrigger("TakeDamage");
     }
 
     protected bool CheckPosition(Transform pos)
@@ -83,23 +83,29 @@ public class PhysicsEnemy : Enemy
 
     public override void OnDeath()
     {
-        if (m_room)
-            m_room.EnemyDied(this);
-        if (m_deathParticle)
-            Instantiate(m_deathParticle, transform.position, transform.rotation);
-        if (GameManager.inst.coinPrefab)
-            Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
-        if (GameManager.inst.healthPotionPrefab)
-        {
-            if (Random.value <= GameManager.inst.hpDropChance)
-                Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
-        }
-        PlayerInventory.Inst.ChangeXP(m_XP);
+		if (m_room)
+			m_room.EnemyDied(this);
+		if (m_deathParticle)
+			Instantiate(m_deathParticle, transform.position, transform.rotation);
+		if (GameManager.inst.coinPrefab)
+			Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
+		if (GameManager.inst.healthPotionPrefab)
+		{
+			if (Random.value <= GameManager.inst.hpDropChance)
+				Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
+		}
+		PlayerInventory.Inst.ChangeXP(m_XP);
 
-        //Disable colliders and activate timer so death animation can play before turning off
-        m_anim.SetTrigger("Death");
-        m_col.enabled = false;
-        m_isDead = true;
+		//Disable colliders and activate timer so death animation can play before turning off
+		m_col.enabled = false;
+		m_isDead = true;
+		foreach(AnimatorControllerParameter p in m_anim.parameters)
+		{
+			if(p.type == AnimatorControllerParameterType.Trigger && p.name == "Death")
+			{
+				m_anim.SetTrigger("Death");
+			}
+		}
     }
 
     protected void AfterDeath()
