@@ -70,11 +70,6 @@ public class PlayerInventory : MonoBehaviour
 		{
 			GameManager.inst.m_saveManager.Save();
 		}
-
-		if(GameManager.inst.destroyNextScene)
-		{
-			Destroy(GameManager.inst.gameObject);
-		}
     }
 
 	public void ChangeGold(int amount)

@@ -34,6 +34,7 @@ public class Player : Damageable
     private float m_curImmTimer = 0;
 
     private bool m_isDying = false;
+	private bool m_isDead = false;
     public float m_deathDelay = 5;
     private float m_deathDelayTimer = 0;
 
@@ -123,10 +124,14 @@ public class Player : Damageable
 
     void DeathReset()
     {
-        PlayerInventory.Inst.DeathReset();
+		if(!m_isDead)
+		{
+			m_isDead = true;
+			PlayerInventory.Inst.DeathReset();
+			// Load shop level.
+			LoadingManager.Inst.LoadLevel("ShopScene", false);
+		}
 
-        // Load shop level.
-        LoadingManager.Inst.LoadLevel("ShopScene", false);
     }
 
 	public void LeaveDungeon()

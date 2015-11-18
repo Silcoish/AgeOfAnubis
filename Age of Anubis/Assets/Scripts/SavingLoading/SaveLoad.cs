@@ -18,8 +18,8 @@ public class SaveData : ISerializable
 	public int currentLevel = 1;
 	public int exp = 0;
 	public int gold = 0;
-	public int weapon1 = 0;
-	public int weapon2 = 0;
+	public int weapon1 = 1;
+	public int weapon2 = 1;
 	// === /Values ===
 
 	// The default constructor. Included for when we call it during Save() and Load()
@@ -104,6 +104,8 @@ public class SaveLoad
 		GameManager.inst.m_saveManager.m_gold = data.gold;
 		GameManager.inst.m_saveManager.m_weapon1 = data.weapon1;
 		GameManager.inst.m_saveManager.m_weapon2 = data.weapon2;
+
+		Debug.Log("Weapon 1: " + data.weapon1);
 	}
 
 }
