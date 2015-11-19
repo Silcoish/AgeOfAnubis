@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour {
 			PlaceMinimapRoom(shrineLocation[j], Color.yellow, Color.black);
 		}
 		PlaceMinimapRoom(endLocation, Color.red, Color.black);
-		PlaceMinimapRoom(startLocation, Color.gray, Color.black);
+		PlaceMinimapRoom(startLocation, Color.green, Color.black);
 		PlaceMinimapRoom(currentRoom, Color.blue, Color.black);
 		CreateVisibleMap(currentRoom);
 		minimapTex.Apply();
