@@ -164,7 +164,6 @@ public class Shop : MonoBehaviour
 
     }
 
-
     void OnCloseShop()
     {
         gameObject.SetActive(false);
@@ -457,6 +456,7 @@ public class Shop : MonoBehaviour
 
     void DeactivateShop()
     {
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_cancel);
         foreach (var b in m_allButtons)
         {
             b.interactable = false;
@@ -466,13 +466,13 @@ public class Shop : MonoBehaviour
 
     void ActivateShop()
     {
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_confirm);
         foreach (var b in m_allButtons)
         {
             b.interactable = true;
         }
         m_es.SetSelectedGameObject(m_es.firstSelectedGameObject);
     }
-
 
     public void ForceProgressShop()
     {

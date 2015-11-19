@@ -100,6 +100,12 @@ public class AudioManager : MonoBehaviour
 		}
 	}
 
+	public void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Q))
+			PlaySFX(a_coin);
+	}
+
 	public void FadeMusic(AudioMixerSnapshot snap)
 	{
 		if (snap != null)

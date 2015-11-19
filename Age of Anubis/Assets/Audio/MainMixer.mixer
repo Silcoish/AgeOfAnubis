@@ -40,7 +40,7 @@ AudioMixerController:
     - 87fe2fbcdafe01649a12702e792f298d
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24538784}
+  m_TargetSnapshot: {fileID: 24500003}
 --- !u!243 &24300001
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -147,6 +147,7 @@ AudioMixerGroupController:
   m_Pitch: cb435c2ccee2e3f4db12946a0258cb41
   m_Effects:
   - {fileID: 24427734}
+  - {fileID: 24463662}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -164,6 +165,7 @@ AudioMixerGroupController:
   m_Pitch: e6d9e659cd76fc749ba625b2d1deaa7d
   m_Effects:
   - {fileID: 24402724}
+  - {fileID: 24426514}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -272,6 +274,19 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24426514
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 7477e9859f658ec4185eb0e66c1c7490
+  m_EffectName: Send
+  m_MixLevel: 7dfab51d68a5d95488cffb289f2efbf7
+  m_Parameters: []
+  m_SendTarget: {fileID: 24463662}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &24427734
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -324,6 +339,33 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24463662
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 8e53e04d134d2bf4c8eacd55f59213e2
+  m_EffectName: Duck Volume
+  m_MixLevel: eb0eb5e0d964ca040a41b1b5d15bbcb7
+  m_Parameters:
+  - m_ParameterName: Threshold
+    m_GUID: d4f76696cadf123448a04d480a899152
+  - m_ParameterName: Ratio
+    m_GUID: 239a07394cb32e741878af8a2c124e6e
+  - m_ParameterName: Attack Time
+    m_GUID: 12a3db87fea8e124184a4a8e6ef42cd0
+  - m_ParameterName: Release Time
+    m_GUID: d3a9f1aaca2d19a4db95c5256e925e2c
+  - m_ParameterName: Make-up Gain
+    m_GUID: 9637a8a8e247c734e8e2163418bfacc1
+  - m_ParameterName: Knee
+    m_GUID: 94af1aa178b196241829bddecc240ec6
+  - m_ParameterName: Sidechain Mix
+    m_GUID: 569bfe2341dedff418b8628167c26057
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &24464416
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -360,15 +402,21 @@ AudioMixerSnapshotController:
   m_SnapshotID: 8c9448092c48d0e49a021d4c8b2cb65e
   m_FloatValues:
     88e502000844b2c4a99f58b7e507e8fd: -80
+    569bfe2341dedff418b8628167c26057: 1
     af01f453aa99410479d68582805c7208: -80
     77dcafb3a2f5c2740a2c4fe3a8248c9d: -80
+    d4f76696cadf123448a04d480a899152: -50.2999992
     f20eaa07824b4f345b4f48db21b14dd2: -80
+    12a3db87fea8e124184a4a8e6ef42cd0: .00899999961
+    239a07394cb32e741878af8a2c124e6e: 2
     4f2a44495fcb88c4b9de20d1185645de: -80
     bcdc78f95f10b7f4899e24539c01cce7: 0
     bfea038a2e4035d419b282c5908a30ab: .00380812585
+    d3a9f1aaca2d19a4db95c5256e925e2c: .217999995
     2fdd412b1e1ce064e8c99d5ace8aab7d: .0255785119
     bf4e2bcb8dda9ab4c95ea64b6a3a4ac4: .0417129695
     d13ececbd35e17345aa5aab0bf3da984: -80
+    7dfab51d68a5d95488cffb289f2efbf7: 0
   m_TransitionOverrides: {}
 --- !u!245 &24506974
 AudioMixerSnapshotController:
@@ -384,11 +432,11 @@ AudioMixerSnapshotController:
     77dcafb3a2f5c2740a2c4fe3a8248c9d: -80
     f20eaa07824b4f345b4f48db21b14dd2: -80
     4f2a44495fcb88c4b9de20d1185645de: -80
-    bcdc78f95f10b7f4899e24539c01cce7: 0
+    bcdc78f95f10b7f4899e24539c01cce7: -.0837482885
     bfea038a2e4035d419b282c5908a30ab: .135525838
     2fdd412b1e1ce064e8c99d5ace8aab7d: -80
     bf4e2bcb8dda9ab4c95ea64b6a3a4ac4: .0417129695
-    d13ececbd35e17345aa5aab0bf3da984: -.0837482885
+    d13ececbd35e17345aa5aab0bf3da984: -.0257765576
   m_TransitionOverrides: {}
 --- !u!245 &24514892
 AudioMixerSnapshotController:
@@ -440,10 +488,10 @@ AudioMixerSnapshotController:
     88e502000844b2c4a99f58b7e507e8fd: -80
     6f30f4b21a654714cac29e24d8a5339f: 1
     77dcafb3a2f5c2740a2c4fe3a8248c9d: -80
-    f20eaa07824b4f345b4f48db21b14dd2: -80
+    f20eaa07824b4f345b4f48db21b14dd2: -.00244187191
     4f2a44495fcb88c4b9de20d1185645de: -80
     bfea038a2e4035d419b282c5908a30ab: -.0257765595
-    2fdd412b1e1ce064e8c99d5ace8aab7d: -80
+    2fdd412b1e1ce064e8c99d5ace8aab7d: -.00244187191
     d13ececbd35e17345aa5aab0bf3da984: -80
   m_TransitionOverrides: {}
 --- !u!245 &24572806

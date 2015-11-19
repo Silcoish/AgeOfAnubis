@@ -40,6 +40,7 @@ public class UIButtons : MonoBehaviour
 		if (Input.GetButtonDown("Cancel"))
 		{
 			print("Back");
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_cancel);
 			Back();
 		}
 
@@ -48,13 +49,18 @@ public class UIButtons : MonoBehaviour
 
 	public void NewGame()
 	{
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_confirm);
+
 		m_saveManager.NewGame();
 		LoadingManager.Inst.LoadLevel("Tutorial", true);
 		gameObject.SetActive(false);
+
 	}
 
 	public void Continue()
 	{
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_confirm);
+
 		LoadingManager.Inst.LoadLevel("ShopScene", true);
 		gameObject.SetActive(false);
 	}
@@ -62,7 +68,8 @@ public class UIButtons : MonoBehaviour
 
 	public void ChangeMenus(GameObject targetMenu)
 	{
-		
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_confirm);
+
 		m_curMenu.SetActive(false);
 		targetMenu.SetActive(true);
 		m_previousMenus.Add(m_curMenu);
@@ -71,6 +78,8 @@ public class UIButtons : MonoBehaviour
 
 	public void Quit()
 	{
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_confirm);
+
 		Application.Quit();
 	}
 
@@ -82,6 +91,8 @@ public class UIButtons : MonoBehaviour
 			m_curMenu.SetActive(false);
 			m_curMenu = m_previousMenus[m_previousMenus.Count - 1];
 			m_previousMenus.Remove(m_curMenu);
+
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_cancel);
 		}
 
 	}
@@ -100,6 +111,11 @@ public class UIButtons : MonoBehaviour
 			AudioManager.Inst.SetMusicVolume(-80);
 		else
 			AudioManager.Inst.SetMusicVolume(value);
+	}
+
+	public void OnSelected()
+	{
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_select);
 	}
 
 

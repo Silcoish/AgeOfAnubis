@@ -102,6 +102,7 @@ public class RoomObject : MonoBehaviour
 
 	void LockDoors()
 	{
+		print("Lock Doors");
 		if(!cleared)
 		{
 			if (m_doorNorth != null)
@@ -120,6 +121,7 @@ public class RoomObject : MonoBehaviour
 
 	void UnlockDoors()
 	{
+		print("Unlock Doors");
 		if (m_doorNorth != null)
 			m_doorNorth.Unlock();
 		if (m_doorSouth != null)
