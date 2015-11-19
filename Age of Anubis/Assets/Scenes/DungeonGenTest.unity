@@ -130,6 +130,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 644943894}
+    - target: {fileID: 11448484, guid: a077ec76dfecb944a9c38d1e15911e20, type: 2}
+      propertyPath: fileName
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a077ec76dfecb944a9c38d1e15911e20, type: 2}
   m_IsPrefabParent: 0
@@ -306,53 +310,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
---- !u!1001 &639400998
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 441046, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: .966079712
-      objectReference: {fileID: 0}
-    - target: {fileID: 441046, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -6.20385647
-      objectReference: {fileID: 0}
-    - target: {fileID: 441046, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 441046, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 441046, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 441046, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 441046, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 441046, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 102450, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 13edf21d4a025394caf920a0cf417a58, type: 2}
-  m_IsPrefabParent: 0
+  m_RootOrder: 6
 --- !u!1 &644943894 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 118678, guid: fb13bc690afc35d47ba84b4b24f1688e, type: 2}
@@ -396,7 +354,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!1001 &1088747940
 Prefab:
   m_ObjectHideFlags: 0
@@ -647,7 +605,7 @@ Transform:
   m_Children:
   - {fileID: 1810680550}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1 &1810680548
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +688,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!114 &2100488988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,3 +733,9 @@ MonoBehaviour:
   visibleMap: {fileID: 1810680548}
   visibleMapTex: {fileID: 0}
   destroyNextScene: 0
+  dungeonLayout: {fileID: 0}
+  currentRoom: 0
+  clearedRooms: 
+  shrineLocation: 
+  startLocation: 0
+  endLocation: 0
