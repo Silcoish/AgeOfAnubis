@@ -24,6 +24,7 @@ public class PhysicsEnemy : Enemy
     public GameObject m_spriteObject;
     public Animator m_anim;
     protected bool m_isDead = false;
+    private float m_deathTimer;
     public bool m_spriteFaceRight = true;
 
     public override void AwakeOverride()
@@ -83,34 +84,56 @@ public class PhysicsEnemy : Enemy
 
     public override void OnDeath()
     {
-		if (m_room)
-			m_room.EnemyDied(this);
-		if (m_deathParticle)
-			Instantiate(m_deathParticle, transform.position, transform.rotation);
-		if (GameManager.inst.coinPrefab)
-			Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
-		if (GameManager.inst.healthPotionPrefab)
-		{
-			if (Random.value <= GameManager.inst.hpDropChance)
-				Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
-		}
-		PlayerInventory.Inst.ChangeXP(m_XP);
-
-		//Disable colliders and activate timer so death animation can play before turning off
-		m_col.enabled = false;
-		m_isDead = true;
-		foreach(AnimatorControllerParameter p in m_anim.parameters)
-		{
-			if(p.type == AnimatorControllerParameterType.Trigger && p.name == "Death")
-			{
-				m_anim.SetTrigger("Death");
-			}
-		}
+        if(!m_isDead)
+        {
+            //Disable colliders and activate timer so death animation can play before turning off
+            m_col.enabled = false;
+            m_isDead = true;
+            foreach (AnimatorControllerParameter p in m_anim.parameters)
+            {
+                if (p.type == AnimatorControllerParameterType.Trigger && p.name == "Death")
+                {
+                    m_anim.SetTrigger("Death");
+                }
+            }
+            m_deathTimer = 0.5F;
+        }	
     }
 
     protected void AfterDeath()
     {
+        Debug.Log("After Death Called");
+        if (m_room)
+            m_room.EnemyDied(this);
+        if (m_deathParticle)
+            Instantiate(m_deathParticle, transform.position, transform.rotation);
+        if (GameManager.inst.coinPrefab)
+            Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
+        if (GameManager.inst.healthPotionPrefab)
+        {
+            if (Random.value <= GameManager.inst.hpDropChance)
+                Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
+        }
+        PlayerInventory.Inst.ChangeXP(m_XP);
+
         gameObject.SetActive(false);
+    }
+
+    public override void UpdateOverride()
+    {
+        base.UpdateOverride();
+
+        if(m_isDead)
+        {
+            
+            if(m_deathTimer < 0)
+            {
+                Debug.Log("After death called");
+                AfterDeath();
+            }
+            m_deathTimer -= Time.deltaTime;
+            Debug.Log(m_deathTimer);
+        }
     }
 
     protected void EnablePathing(bool state)

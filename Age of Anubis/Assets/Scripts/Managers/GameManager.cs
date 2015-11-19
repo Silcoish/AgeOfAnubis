@@ -40,14 +40,14 @@ public class GameManager : MonoBehaviour {
 	void Start()
 	{
 		print("Start GM");
-		try
-		{
-			player = FindObjectOfType<Player>().gameObject;
-		}
-		catch(Exception e)
-		{
-			print(e.Message);
-		}
+        try
+        {
+            player = FindObjectOfType<Player>().gameObject;
+        }
+        catch (Exception e)
+        {
+            print(e.Message);
+        }
 
 		clearedRooms = new List<int>();
 		shrineLocation = new List<int>();
