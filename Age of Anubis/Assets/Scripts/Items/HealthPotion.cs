@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class HealthPotion : MonoBehaviour 
@@ -29,7 +29,7 @@ public class HealthPotion : MonoBehaviour
         if (col.tag == "Player")
         {
             col.gameObject.GetComponent<Damageable>().RecoverHealth(m_healthValue);
-            //AudioManager.Inst.PlaySFX(AudioManager.Inst.a_pickupWeapon);
+            AudioManager.Inst.PlaySFX(AudioManager.Inst.a_healthPot);
             Destroy(gameObject);
         }
     }
