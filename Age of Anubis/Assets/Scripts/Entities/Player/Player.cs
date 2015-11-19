@@ -83,6 +83,8 @@ public class Player : Damageable
             m_curImmTimer = m_immunityTimer;
 
             UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
+
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_takeDamage);
         }
 	}
 
@@ -119,6 +121,8 @@ public class Player : Damageable
             SetAnimTrigger("Death");
             m_isDying = true;
             m_deathDelayTimer = m_deathDelay;
+
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_death);
         } 
     }
 
@@ -196,6 +200,7 @@ public class Player : Damageable
             if (Input.GetButtonDown("Jump"))
             {
                 //Debug.Log("Jump key down");
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_jump);
                 Jump();
             }
 
@@ -291,6 +296,8 @@ public class Player : Damageable
 						m_jumpCounter = m_jumpMax;
                         SetAnimGrounded(true); // Tell the animator we have landed
                         m_stopJump = false;
+
+						//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_land);
 					}
 				}
                 else

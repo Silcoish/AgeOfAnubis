@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ENY_Snake_001 : PhysicsEnemy
@@ -101,6 +101,7 @@ public class ENY_Snake_001 : PhysicsEnemy
                 {
                     m_state = State.CHARGING;
                     m_curTimer = m_chargeTimer;
+					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_snake_charge);
                     //Debug.Log("Enter Charge State");
                 }
                 break;

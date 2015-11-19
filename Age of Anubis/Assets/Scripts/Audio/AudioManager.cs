@@ -52,10 +52,12 @@ public class AudioManager : MonoBehaviour
     public AudioStruct a_player_death;
     public AudioStruct a_player_jump;
     public AudioStruct a_player_land;
-    public AudioStruct a_player_takeDamage;
+	public AudioStruct a_player_takeDamage;
+	public AudioStruct a_player_step;
     [Header("Enemy")]
     public AudioStruct a_eny_die;
     public AudioStruct a_eny_spit;
+	public AudioStruct a_eny_snake_charge;
     public AudioStruct a_eny_takeDamage;
     [Header("UI")]
     public AudioStruct a_ui_purchase;

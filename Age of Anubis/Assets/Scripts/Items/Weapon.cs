@@ -47,6 +47,7 @@ public class Weapon : MonoBehaviour
     {
         if (!m_isAttacking)
 		{
+			//PlaySFX();
 			anim.SetInteger("AttackType", (int)m_swingType);
             anim.SetTrigger("Attack");
 		} 
@@ -61,21 +62,7 @@ public class Weapon : MonoBehaviour
 			damagable.OnTakeDamage(m_attack.GetDamage(transform));
 
 
-			switch (m_swingType)
-			{
-				case WeaponSwing.LIGHT:
-					print("Light");
-					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_cut);
-					break;
-				case WeaponSwing.MEDIUM:
-					print("Medium");
-					//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_giveDamage); TODO
-					break;
-				case WeaponSwing.HEAVY:
-					print("Heavy");
-					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_thump);
-					break;
-			}
+			PlaySFX();
 
 			Enemy en = col.gameObject.GetComponent<Enemy>();
 			if (en != null)
@@ -98,4 +85,23 @@ public class Weapon : MonoBehaviour
         m_attack.m_effectDuration = data.effectDuration;
         m_goldCost = data.goldCost;
     }
+
+	void PlaySFX()
+	{
+		switch (m_swingType)
+		{
+			case WeaponSwing.LIGHT:
+				print("Light");
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_cut);
+				break;
+			case WeaponSwing.MEDIUM:
+				print("Medium");
+				//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_giveDamage); TODO
+				break;
+			case WeaponSwing.HEAVY:
+				print("Heavy");
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_thump);
+				break;
+		}
+	}
 }
