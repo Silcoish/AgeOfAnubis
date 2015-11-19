@@ -25,13 +25,16 @@ public class CameraController : MonoBehaviour
 		if (room != null)
 			roomBounds = room.GetComponent<BoxCollider2D>().bounds;
 
-		shopPlayer = GameManager.inst.player;
+		if(shopPlayer == null)
+			shopPlayer = GameManager.inst.player;
 	}
 
 	void Update()
 	{
 		if(room != null)
 		{
+			if (shopPlayer == null)
+				shopPlayer = GameManager.inst.player;
 			//set the position to the player position, then move it later to adjust for walls
 			//t.position = new Vector3(shopPlayer.transform.position.x, shopPlayer.transform.position.y, t.position.z);
 			t.position = Vector2.Lerp(t.position, shopPlayer.transform.position, lerpTime);

@@ -2518,6 +2518,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb13bc690afc35d47ba84b4b24f1688e, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &740716740 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 118678, guid: fb13bc690afc35d47ba84b4b24f1688e, type: 2}
+  m_PrefabInternal: {fileID: 740716739}
 --- !u!1 &741022131
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,7 +3464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 1839173950}
-  shopPlayer: {fileID: 0}
+  shopPlayer: {fileID: 740716740}
   lerpTime: .100000001
 --- !u!1 &937900173
 GameObject:
@@ -3736,7 +3740,7 @@ GameObject:
   - 114: {fileID: 1043121828}
   m_Layer: 0
   m_Name: SaveData
-  m_TagString: Untagged
+  m_TagString: Save
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5466,6 +5470,12 @@ MonoBehaviour:
   visibleMap: {fileID: 0}
   visibleMapTex: {fileID: 0}
   destroyNextScene: 0
+  dungeonLayout: {fileID: 0}
+  currentRoom: 0
+  clearedRooms: 
+  shrineLocation: 
+  startLocation: 0
+  endLocation: 0
 --- !u!4 &1405123445
 Transform:
   m_ObjectHideFlags: 0
