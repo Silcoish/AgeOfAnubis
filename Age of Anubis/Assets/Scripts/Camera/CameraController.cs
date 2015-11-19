@@ -14,6 +14,8 @@ public class CameraController : MonoBehaviour
 	float vertical;
 	float horizontal;
 
+	public float lerpTime = 0.1f;
+
 	void Start()
 	{
 		t = transform;
@@ -22,20 +24,18 @@ public class CameraController : MonoBehaviour
 
 		if (room != null)
 			roomBounds = room.GetComponent<BoxCollider2D>().bounds;
+
+		shopPlayer = GameManager.inst.player;
 	}
 
 	void Update()
 	{
 		if(room != null)
 		{
-			if(shopPlayer != null)
-			{
-				t.position = new Vector3(shopPlayer.transform.position.x, shopPlayer.transform.position.y, t.position.z);
-			}
-			else
-			{
-				t.position = new Vector3(GameManager.inst.player.transform.position.x, GameManager.inst.player.transform.position.y, t.position.z);
-			}
+			//set the position to the player position, then move it later to adjust for walls
+			//t.position = new Vector3(shopPlayer.transform.position.x, shopPlayer.transform.position.y, t.position.z);
+			t.position = Vector2.Lerp(t.position, shopPlayer.transform.position, lerpTime);
+			t.position = new Vector3(t.position.x, t.position.y, -10f);
 
 			Vector2 pos = new Vector2(t.position.x, t.position.y);
 
