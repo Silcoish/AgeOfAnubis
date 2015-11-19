@@ -83,8 +83,9 @@ public class RoomObject : MonoBehaviour
 
 		Camera.main.GetComponent<CameraController>().SetRoom(gameObject);
 
-		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(1, 0, 0, 0.5f), new Color(1, 0.5f, 0.5f, 0.5f));
-		GameManager.inst.CreateVisibleMap(arrayIndex);
+		//GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(1, 0, 0, 0.5f), new Color(1, 0.5f, 0.5f, 0.5f));
+		//GameManager.inst.CreateVisibleMap(arrayIndex);
+		GameManager.inst.currentRoom = arrayIndex;
 		GameManager.inst.RefreshMinimap();
 
 		if (m_allEnemies.Count == 0)
@@ -96,7 +97,8 @@ public class RoomObject : MonoBehaviour
 	public void LeaveRoom()
 	{
 		isActiveRoom = false;
-		GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(0, 0, 0, 0.5f), new Color(0.5f, 0.5f, 0.5f, 0.5f));
+		GameManager.inst.ClearedRoom(arrayIndex);
+		//GameManager.inst.PlaceMinimapRoom(arrayIndex, new Color(0, 0, 0, 0.5f), new Color(0.5f, 0.5f, 0.5f, 0.5f));
 		GameManager.inst.RefreshMinimap();
 	}
 

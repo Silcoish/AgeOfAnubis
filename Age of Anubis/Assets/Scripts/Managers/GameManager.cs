@@ -18,6 +18,14 @@ public class GameManager : MonoBehaviour {
 
 	public bool destroyNextScene = false;
 
+	
+	[HideInInspector] public DungeonLayoutLoader dungeonLayout;
+	[HideInInspector] public int currentRoom;
+	[HideInInspector] public List<int> clearedRooms;
+	[HideInInspector] public List<int> shrineLocation;
+	[HideInInspector] public int startLocation;
+	[HideInInspector] public int endLocation;
+
 	void Awake()
 	{
 		if (GameManager.inst == null)
@@ -41,7 +49,8 @@ public class GameManager : MonoBehaviour {
 			print(e.Message);
 		}
 
-
+		clearedRooms = new List<int>();
+		shrineLocation = new List<int>();
 		CheckForObjects();
 	}
 
@@ -70,8 +79,36 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void ClearedRoom(int i)
+	{
+		if(!clearedRooms.Contains(i))
+		{
+			clearedRooms.Add(i);
+		}
+	}
+
+	public void AddShrine(int i)
+	{
+		if(!shrineLocation.Contains(i))
+		{
+			shrineLocation.Add(i);
+		}
+	}
+
 	public void RefreshMinimap()
 	{
+		for (int i = 0; i < clearedRooms.Count; i++)
+		{
+			PlaceMinimapRoom(clearedRooms[i], Color.gray, Color.black);
+		}
+		for (int j = 0; j < shrineLocation.Count; j++)
+		{
+			PlaceMinimapRoom(shrineLocation[j], Color.yellow, Color.black);
+		}
+		PlaceMinimapRoom(endLocation, Color.red, Color.black);
+		PlaceMinimapRoom(startLocation, Color.gray, Color.black);
+		PlaceMinimapRoom(currentRoom, Color.blue, Color.black);
+		CreateVisibleMap(currentRoom);
 		minimapTex.Apply();
 		minimap.GetComponent<SpriteRenderer>().sprite = Sprite.Create(minimapTex, new Rect(0, 0, minimapTex.width, minimapTex.height), new Vector2(0, 0));
 	}

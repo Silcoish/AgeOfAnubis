@@ -13,7 +13,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 	public GameObject shrineroom;
 	public List<GameObject> templateRooms;
 
-	[SerializeField] RoomObject[] rooms;
+	[SerializeField] public RoomObject[] rooms;
 	public GameObject player;
 	public GameObject doorNorth;
 	public GameObject doorSouth;
@@ -33,6 +33,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 	void Start()
 	{
 		rooms = new RoomObject[SIZE * SIZE];
+		GameManager.inst.dungeonLayout = this;
 
 		if(fileName == "")
 			ChooseLayout();
@@ -54,16 +55,8 @@ public class DungeonLayoutLoader : MonoBehaviour
 					Door tempWestDoor = rooms[i + 1].m_doorWest;
 
 
-                        tempEastDoor.partnerDoor = tempWestDoor;
-                        tempWestDoor.partnerDoor = tempEastDoor;
-                        //tempEastDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
-                        //tempWestDoor.parentRoom = rooms[i + 1].gameObject.transform.FindChild("Doors");
-
-                        //tempEastDoor.Unlock();
-                        //tempWestDoor.Unlock();
-
-                        //tempEastDoor.InitDoor();
-                        //tempWestDoor.InitDoor();
+                    tempEastDoor.partnerDoor = tempWestDoor;
+                    tempWestDoor.partnerDoor = tempEastDoor;
 
 
 				}
@@ -78,16 +71,8 @@ public class DungeonLayoutLoader : MonoBehaviour
                     Door tempNorthDoor = rooms[i + SIZE].m_doorNorth;
 
 
-                        tempSouthDoor.partnerDoor = tempNorthDoor;
-                        tempNorthDoor.partnerDoor = tempSouthDoor;
-                        //tempSouthDoor.parentRoom = rooms[i].gameObject.transform.FindChild("Doors");
-                        //tempNorthDoor.parentRoom = rooms[i + SIZE].gameObject.transform.FindChild("Doors");
-
-                        //tempSouthDoor.Unlock();
-                        //tempNorthDoor.Unlock();
-
-                        //tempSouthDoor.InitDoor();
-                        //tempNorthDoor.InitDoor();
+                    tempSouthDoor.partnerDoor = tempNorthDoor;
+                    tempNorthDoor.partnerDoor = tempSouthDoor;
 
                 }
 			}
@@ -184,6 +169,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 								//GameManager.inst.player = tempPlayer;
 								GameManager.inst.player.transform.position = rooms[lineNum * SIZE + i].gameObject.transform.position;
 								Camera.main.GetComponent<CameraController>().SetRoom(tempRoom);
+								GameManager.inst.startLocation = lineNum * SIZE + i;
 							}
 
 							if (entries[i] == "3" || entries[i] == " 3")
@@ -191,6 +177,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 								GameObject tempRoom = (GameObject)Instantiate(bossRoom, new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
 								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
 								rooms[lineNum * SIZE + i].arrayIndex = lineNum * SIZE + i;
+								GameManager.inst.endLocation = lineNum * SIZE + i;
 							}
 
 							if (entries[i] == "4" || entries[i] == " 4")
@@ -198,6 +185,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 								GameObject tempRoom = (GameObject)Instantiate(shrineroom, new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
 								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
 								rooms[lineNum * SIZE + i].arrayIndex = lineNum * SIZE + i;
+								GameManager.inst.AddShrine(lineNum * SIZE + i);
 							}
 						}
 					}
@@ -247,7 +235,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 		{
 			if (rooms[i] != null)
 			{
-				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(0, 0, 0, 0.5f), new Color(0.5f, 0.5f, 0.5f, 0.5f));
+				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(1, 1, 1, 0.5f), new Color(0f, 0f, 0f, 0.5f));
 			}
 			else
 			{
