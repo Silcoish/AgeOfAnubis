@@ -603,6 +603,13 @@ public class Anubis : Enemy
 		}
 	}
 
+	public override void OnDeath()
+	{
+		LoadingManager.Inst.LoadLevel("Credits", false);
+		Destroy(GameManager.inst.player);
+		Destroy(gameObject);
+	}
+
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "Player")
