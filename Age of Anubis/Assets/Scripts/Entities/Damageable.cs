@@ -6,7 +6,7 @@ public class Damageable : MonoBehaviour
 	[Header("DamageableStats")]
 	public string m_unitName;
 	public int m_hitPoints = 10;
-	protected int m_maxHitpoints;
+	public int m_maxHitpoints;
 
 	protected float m_effectFlashRate = 0.2f;
 
