@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 427514}
   - 50: {fileID: 5061818}
-  - 58: {fileID: 5897820}
+  - 61: {fileID: 6104466}
   - 114: {fileID: 11498132}
   - 114: {fileID: 11419670}
   m_Layer: 8
@@ -159,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192918}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.57999992, y: 9.07999992, z: 0}
+  m_LocalPosition: {x: 7.57999992, y: 8.25899982, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 415548}
@@ -177,7 +177,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -.305000007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 415548}
@@ -259,8 +259,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .25
---- !u!58 &5897820
-CircleCollider2D:
+--- !u!61 &6104466
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -269,9 +269,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: .0238265991, y: .00595664978}
   serializedVersion: 2
-  m_Radius: .25
+  m_Size: {x: 1.22635126, y: .571127892}
 --- !u!95 &9587814
 Animator:
   serializedVersion: 3
@@ -335,7 +335,7 @@ MonoBehaviour:
     m_Bits: 512
   m_spriteObject: {fileID: 0}
   m_anim: {fileID: 0}
-  m_spriteFaceRight: 1
+  m_spriteFaceRight: 0
   m_moveSpeed: 2
 --- !u!212 &21238512
 SpriteRenderer:
