@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour {
 	public SaveManager m_saveManager;
     public GameObject coinPrefab;
     public GameObject healthPotionPrefab;
-    public float hpDropChance = 0.2F;
+	private float hpStartChance;
+	public float hpDropChance = 0.2F;
+	public int maxEnemiesBeforeHPDrop = 10;
 	public GameObject minimap;
 	public Texture2D minimapTex;
 	public GameObject visibleMap;
@@ -38,8 +40,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start()
-	{
-		print("Start GM");
+	{		
         try
         {
             player = FindObjectOfType<Player>().gameObject;
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour {
             print(e.Message);
         }
 
+		hpStartChance = hpDropChance;
 		clearedRooms = new List<int>();
 		shrineLocation = new List<int>();
 		CheckForObjects();
@@ -146,7 +148,7 @@ public class GameManager : MonoBehaviour {
 
 	public void CreateVisibleMap(int i)
 	{
-		SpriteRenderer sr = visibleMap.GetComponent<SpriteRenderer>();
+		UnityEngine.UI.Image img = visibleMap.GetComponent<UnityEngine.UI.Image>();
 
 		Texture2D tex = new Texture2D(16 * 7, 8 * 9);
 		tex.filterMode = FilterMode.Point;
@@ -161,7 +163,21 @@ public class GameManager : MonoBehaviour {
 
 		tex.Apply();
 
-		sr.sprite = Sprite.Create(tex, new Rect(Vector2.zero, new Vector2(tex.width, tex.height)), Vector2.zero);
+		img.sprite = Sprite.Create(tex, new Rect(Vector2.zero, new Vector2(tex.width, tex.height)), Vector2.zero);
+	}
+
+	public bool CheckForHPDrop()
+	{
+		float increment = (1.0f - hpStartChance) / maxEnemiesBeforeHPDrop;
+		if(UnityEngine.Random.Range(0.0f, 1.0f) <= hpDropChance)
+		{
+			hpDropChance = hpStartChance;
+			return true;
+		}
+
+		hpDropChance += increment;
+
+		return false;
 	}
 
 }
