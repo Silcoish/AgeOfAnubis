@@ -93,8 +93,6 @@ public class Shop : MonoBehaviour
 
         m_anim = gameObject.GetComponent<Animator>();
         m_allButtons = gameObject.GetComponentsInChildren<Button>();
-
-		
     }
     // Use this for initialization
     void Start()
@@ -548,6 +546,12 @@ public class Shop : MonoBehaviour
 
         m_anim.SetTrigger("FinishedUpdate");
         m_needsUpdateing = false;
+    }
+
+    public void ReturnToIdle()
+    {
+        ActivateShop();
+        m_anim.SetTrigger("Idle");
     }
 
     void UpdateAllIcons()
