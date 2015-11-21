@@ -17,17 +17,19 @@ public class EffectManager : MonoBehaviour
 
     }
 
-    public void CreateDamageableEffect(Vector3 pos, DamageType type, int amount)
+    public void CreateDamageableEffect(Transform trans, DamageType type, int amount)
     {
         GameObject temp;
 
         switch (type)
         {
-            case DamageType.POISON: temp = Instantiate(m_damageEffect_Poison, pos, m_damageEffect_Poison.transform.rotation) as GameObject; break;
-            case DamageType.NONE: temp = Instantiate(m_damageEffect_None, pos, m_damageEffect_None.transform.rotation) as GameObject; break;
-            default: temp = Instantiate(m_damageEffect_None, pos, m_damageEffect_None.transform.rotation) as GameObject; break;
+            case DamageType.POISON: temp = Instantiate(m_damageEffect_Poison, trans.position, m_damageEffect_Poison.transform.rotation) as GameObject; break;
+            case DamageType.NONE: temp = Instantiate(m_damageEffect_None, trans.position, m_damageEffect_None.transform.rotation) as GameObject; break;
+            default: temp = Instantiate(m_damageEffect_None, trans.position, m_damageEffect_None.transform.rotation) as GameObject; break;
             
         }
+
+        temp.transform.SetParent(trans);
 
         temp.GetComponentInChildren<Text>().text = "-" + amount.ToString();
 

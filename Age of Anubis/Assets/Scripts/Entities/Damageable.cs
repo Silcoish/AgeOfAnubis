@@ -184,7 +184,7 @@ public class Damageable : MonoBehaviour
             //m_rb.AddForce(kbForce, ForceMode2D.Impulse);
 
             if (EffectManager.Inst != null)
-                EffectManager.Inst.CreateDamageableEffect(gameObject.transform.position, DamageType.NONE, dam.amount);
+                EffectManager.Inst.CreateDamageableEffect(gameObject.transform, DamageType.NONE, dam.amount);
 
             // New Knockback calculations
             float kbDirCheck = transform.position.x - dam.fromGO.position.x;
@@ -283,7 +283,7 @@ public class Damageable : MonoBehaviour
         if ((int)m_leftoverPoisonDamage > 0)
         {
             if (EffectManager.Inst != null)
-                EffectManager.Inst.CreateDamageableEffect(gameObject.transform.position, DamageType.POISON, (int)m_leftoverPoisonDamage);
+                EffectManager.Inst.CreateDamageableEffect(gameObject.transform, DamageType.POISON, (int)m_leftoverPoisonDamage);
         }
 		m_leftoverPoisonDamage -= (int)m_leftoverPoisonDamage;
 
