@@ -292,7 +292,7 @@ public class Damageable : MonoBehaviour
 			SpawnText(Color.red, ((int)m_leftoverBurnDamage).ToString());
 		m_leftoverBurnDamage -= (int)m_leftoverBurnDamage;
 
-		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_burnt);
+		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_burnt);
 	}
 
 	void DamageBleed(int damIn)
