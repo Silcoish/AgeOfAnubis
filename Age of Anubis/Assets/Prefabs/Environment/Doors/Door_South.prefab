@@ -44,7 +44,7 @@ GameObject:
   - 111: {fileID: 11190906}
   m_Layer: 9
   m_Name: Door_South
-  m_TagString: Untagged
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   parentRoom: {fileID: 0}
   m_hideSprite: {fileID: 21300000, guid: 2766c38b1f8cd324591a9a4d6d68aee9, type: 3}
   m_door: {fileID: 169376}
+  m_isLocked: 1
   dir: 0
 --- !u!212 &21256826
 SpriteRenderer:
@@ -183,6 +184,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Solid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

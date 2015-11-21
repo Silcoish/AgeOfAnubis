@@ -77,8 +77,9 @@ public class Enemy : Damageable
             Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
         if(GameManager.inst.healthPotionPrefab)
         {
-            if(Random.value <= GameManager.inst.hpDropChance)
-                Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
+            //if(Random.value <= GameManager.inst.hpDropChance)
+			if(GameManager.inst.CheckForHPDrop())
+				Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
         }
         PlayerInventory.Inst.ChangeXP(m_XP);
 		gameObject.SetActive(false);

@@ -158,6 +158,7 @@ public class AudioManager : MonoBehaviour
        
         allStructs.Add(a_eny_die);
         allStructs.Add(a_eny_spit);
+		allStructs.Add(a_eny_snake_charge);
         allStructs.Add(a_eny_takeDamage);
         
         allStructs.Add(a_ui_purchase);

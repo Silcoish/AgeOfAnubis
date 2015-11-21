@@ -178,14 +178,14 @@ public class DungeonLayoutWindow : EditorWindow
 
 	FileInfo[] GetFileInfo()
 	{
-		DirectoryInfo info = new DirectoryInfo(Application.dataPath + "/Layouts/");
+		DirectoryInfo info = new DirectoryInfo(Application.streamingAssetsPath + "/Layouts/");
 		FileInfo[] fileInfo = info.GetFiles();
 		return fileInfo;
 	}
 
 	void LoadData()
 	{
-		string filePath = Application.dataPath + "/Layouts/" + selectedFileName;
+		string filePath = Application.streamingAssetsPath + "/Layouts/" + selectedFileName;
 
 		string line;
 		int lineNum = 0;

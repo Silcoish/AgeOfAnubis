@@ -16,6 +16,8 @@ public class PlayerInventory : MonoBehaviour
     public int[] m_XPToLVL;
     public int m_hpGainPerLVL = 50;
 
+	public int m_healthDrop;
+
 	public GameObject m_currentWeapon;
 	public GameObject m_secondaryWeapon;
     public GameObject m_defaultWeapon;
