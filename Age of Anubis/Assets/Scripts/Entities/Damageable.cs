@@ -183,6 +183,9 @@ public class Damageable : MonoBehaviour
             //kbForce = new Vector2(kbForce.x, 0); // Remove Y axis calculations from knockback. NOTE: Consider halving y force to create a smaller "bounce" effect
             //m_rb.AddForce(kbForce, ForceMode2D.Impulse);
 
+            if (EffectManager.Inst != null)
+                EffectManager.Inst.CreateDamageableEffect(gameObject.transform.position, DamageType.NONE, dam.amount);
+
             // New Knockback calculations
             float kbDirCheck = transform.position.x - dam.fromGO.position.x;
             Vector2 kbDir = new Vector2(1F, 0.5F); // Default knockback to right.
@@ -278,7 +281,10 @@ public class Damageable : MonoBehaviour
         m_leftoverPoisonDamage += m_strengthPoison * m_poisonTime;
 		m_hitPoints -= (int)m_leftoverPoisonDamage;      
         if ((int)m_leftoverPoisonDamage > 0)
-			SpawnText(Color.green, ((int)m_leftoverPoisonDamage).ToString());
+        {
+            if (EffectManager.Inst != null)
+                EffectManager.Inst.CreateDamageableEffect(gameObject.transform.position, DamageType.POISON, (int)m_leftoverPoisonDamage);
+        }
 		m_leftoverPoisonDamage -= (int)m_leftoverPoisonDamage;
 
 		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_poison);
@@ -310,5 +316,7 @@ public class Damageable : MonoBehaviour
 
 		//tempText.SetParams(col, amt);
 	}
+
+
 
 }
