@@ -294,8 +294,11 @@ public class Damageable : MonoBehaviour
 	{
 		m_leftoverBurnDamage += m_strengthBurn * Time.deltaTime;
 		m_hitPoints -= (int)m_leftoverBurnDamage;
-		if ((int)m_leftoverBurnDamage > 0)
-			SpawnText(Color.red, ((int)m_leftoverBurnDamage).ToString());
+        if ((int)m_leftoverBurnDamage > 0)
+        {
+            if (EffectManager.Inst != null)
+                EffectManager.Inst.CreateDamageableEffect(gameObject.transform, DamageType.BURN, (int)m_leftoverBurnDamage);
+        }
 		m_leftoverBurnDamage -= (int)m_leftoverBurnDamage;
 
 		//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_burnt);

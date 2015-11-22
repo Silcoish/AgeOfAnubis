@@ -7,8 +7,10 @@ public class EffectManager : MonoBehaviour
     public static EffectManager Inst;
 
 
-    public GameObject m_damageEffect_Poison;
+    
     public GameObject m_damageEffect_None;
+    public GameObject m_damageEffect_Poison;
+    public GameObject m_damageEffect_Burn;
 
     void Awake()
     {
@@ -25,6 +27,7 @@ public class EffectManager : MonoBehaviour
         {
             case DamageType.POISON: temp = Instantiate(m_damageEffect_Poison, trans.position, m_damageEffect_Poison.transform.rotation) as GameObject; break;
             case DamageType.NONE: temp = Instantiate(m_damageEffect_None, trans.position, m_damageEffect_None.transform.rotation) as GameObject; break;
+            case DamageType.BURN: temp = Instantiate(m_damageEffect_Burn, trans.position, m_damageEffect_Burn.transform.rotation) as GameObject; break;
             default: temp = Instantiate(m_damageEffect_None, trans.position, m_damageEffect_None.transform.rotation) as GameObject; break;
             
         }
