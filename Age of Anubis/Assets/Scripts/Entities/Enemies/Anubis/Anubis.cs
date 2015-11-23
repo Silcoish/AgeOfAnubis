@@ -193,6 +193,10 @@ public class Anubis : Enemy
 	{
 		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_anubis_takeDamage);
 		dam.knockback = 0;
+		if(m_hpPercentage <= thirdStateHPPercent)
+		{
+			curState = State.IDLE;
+		}
 		return dam;
 	}
 
@@ -331,17 +335,17 @@ public class Anubis : Enemy
 
 			if(dash == -1)
 			{
-				if(t.position.x <= leftPos.transform.position.x)
+				if (t.position.x >= rightPos.transform.position.x)
 				{
-					t.position = new Vector2(leftPos.transform.position.x, t.position.y);
+					t.position = new Vector2(rightPos.transform.position.x, t.position.y);
 					FinishedState();
 				}
 			}
 			else
 			{
-				if (t.position.x >= rightPos.transform.position.x)
+				if (t.position.x <= leftPos.transform.position.x)
 				{
-					t.position = new Vector2(rightPos.transform.position.x, t.position.y);
+					t.position = new Vector2(leftPos.transform.position.x, t.position.y);
 					FinishedState();
 				}
 			}
