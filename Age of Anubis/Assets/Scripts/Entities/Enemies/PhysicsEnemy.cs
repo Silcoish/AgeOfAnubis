@@ -130,11 +130,9 @@ public class PhysicsEnemy : Enemy
             
             if(m_deathTimer < 0)
             {
-                Debug.Log("After death called");
                 AfterDeath();
             }
             m_deathTimer -= Time.deltaTime;
-            Debug.Log(m_deathTimer);
         }
     }
 

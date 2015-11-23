@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 	public int maxEnemiesBeforeHPDrop = 10;
 	public GameObject minimap;
 	public Texture2D minimapTex;
+	Vector2 minimapStartPos;
 	public GameObject visibleMap;
 	public Texture2D visibleMapTex;
 
@@ -54,6 +55,8 @@ public class GameManager : MonoBehaviour {
 		clearedRooms = new List<int>();
 		shrineLocation = new List<int>();
 		CheckForObjects();
+
+		minimapStartPos = visibleMap.transform.position;
 	}
 
 	void OnLevelWasLoaded(int level){
@@ -150,7 +153,7 @@ public class GameManager : MonoBehaviour {
 	{
 		UnityEngine.UI.Image img = visibleMap.GetComponent<UnityEngine.UI.Image>();
 
-		Texture2D tex = new Texture2D(16 * 7, 8 * 9);
+		/*Texture2D tex = new Texture2D(16 * 7, 8 * 9);
 		tex.filterMode = FilterMode.Point;
 
 		for (int y = 0; y < tex.height; y++)
@@ -161,9 +164,16 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
-		tex.Apply();
+		tex.Apply();*/
 
-		img.sprite = Sprite.Create(tex, new Rect(Vector2.zero, new Vector2(tex.width, tex.height)), Vector2.zero);
+		int xOffset = i % 15 - 1;
+		int yOffset = i / 15 - 1;
+
+		print("xOffset: " + xOffset);
+		print("YOffset: " + yOffset);
+
+		img.sprite = Sprite.Create(minimapTex, new Rect(Vector2.zero, new Vector2(minimapTex.width, minimapTex.height)), Vector2.zero);
+		visibleMap.transform.position = new Vector2(minimapStartPos.x - (xOffset * (270 / 16)), minimapStartPos.y + (yOffset * (270 / 16)));
 	}
 
 	public bool CheckForHPDrop()

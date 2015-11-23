@@ -228,7 +228,7 @@ public class DungeonLayoutWindow : EditorWindow
 
 	void SaveLayout()
 	{
-		string path = Application.dataPath + "/Layouts/";
+		string path = Application.streamingAssetsPath + "/Layouts/";
         
 		if(index == 0)
 		{
