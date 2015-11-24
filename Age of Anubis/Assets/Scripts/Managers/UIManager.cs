@@ -13,6 +13,10 @@ public class UIManager : MonoBehaviour {
     public Image m_xPBarSecondary;
 
     public float m_fillSpeed = 10.0f;
+    public float m_coinSpeed = 30.0f;
+
+    float m_playerGold = 0;
+    float m_displayGold = -10;
 
 	public Text m_coins;
 	public Text m_multiplier;
@@ -55,6 +59,18 @@ public class UIManager : MonoBehaviour {
                 m_healthBarSecondary.fillAmount = m_healthBar.fillAmount;
             }
         }
+
+        if (m_displayGold != m_playerGold)
+        {
+            m_displayGold += m_coinSpeed * Time.deltaTime;
+
+            if (m_displayGold > m_playerGold)
+            {
+                m_displayGold = m_playerGold;
+            }
+
+            m_coins.text = ((int)m_displayGold).ToString();
+        }
     }
 
 	public void UpdateHealthBar(float percentage)
@@ -69,7 +85,7 @@ public class UIManager : MonoBehaviour {
 
 	public void UpdateCoinTotal(int amount)
 	{
-		m_coins.text = amount.ToString();
+        m_playerGold = (float)amount;
 	}
 
 	public void UpdateCoinMultiplier(float amount)

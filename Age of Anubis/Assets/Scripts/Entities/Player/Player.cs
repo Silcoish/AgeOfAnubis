@@ -125,6 +125,9 @@ public class Player : Damageable
 
         if (Input.GetKeyDown(KeyCode.F))
             PlayerInventory.Inst.ChangeXP(20);
+
+        if (Input.GetKeyDown(KeyCode.C))
+            PlayerInventory.Inst.ChangeGold(20);
     }
 
     public override void OnDeath()
