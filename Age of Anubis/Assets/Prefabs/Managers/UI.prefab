@@ -46,7 +46,7 @@ GameObject:
   - 114: {fileID: 11402678}
   - 114: {fileID: 11489674}
   m_Layer: 5
-  m_Name: Gold (2)
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ GameObject:
   - 114: {fileID: 11481310}
   - 114: {fileID: 11486646}
   m_Layer: 5
-  m_Name: Gold (1)
+  m_Name: lvl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -764,9 +764,12 @@ MonoBehaviour:
   m_xPBar: {fileID: 11446426}
   m_healthBarSecondary: {fileID: 11478258}
   m_xPBarSecondary: {fileID: 11454704}
-  m_fillSpeed: .0799999982
+  m_fillSpeed: .100000001
+  m_coinSpeed: 30
   m_coins: {fileID: 11462384}
   m_multiplier: {fileID: 11479996}
+  m_playerLevel: {fileID: 11402678}
+  m_prefabCoin: {fileID: 114146, guid: 95301835c85761743b4d25432ef093e7, type: 2}
 --- !u!114 &11499024
 MonoBehaviour:
   m_ObjectHideFlags: 1
