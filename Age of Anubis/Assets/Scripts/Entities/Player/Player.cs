@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Player : Damageable 
 {
+
+    public static Player Inst;
 	[Header("PlayerStats")]
     public float m_moveSpeed;
     public float m_jumpHeight;
@@ -43,6 +45,7 @@ public class Player : Damageable
 
 	public override void AwakeOverride() 
     {
+        Inst = this;
 		m_colFeet = GetComponent<CircleCollider2D>();
 		m_colBody = GetComponent<BoxCollider2D>();
 

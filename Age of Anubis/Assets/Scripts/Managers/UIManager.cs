@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour {
 	public Text m_coins;
 	public Text m_multiplier;
 
+    public GameObject m_prefabCoin;
+
 	void Awake()
 	{
 		if (Inst == null)
@@ -86,6 +88,18 @@ public class UIManager : MonoBehaviour {
 	public void UpdateCoinTotal(int amount)
 	{
         m_playerGold = (float)amount;
+
+        Vector2 pos = Player.Inst.gameObject.transform.position;
+
+        pos = Camera.main.WorldToScreenPoint(pos);
+
+        GameObject temp =  Instantiate(m_prefabCoin, pos, m_prefabCoin.transform.rotation) as GameObject;
+
+        temp.transform.SetParent(gameObject.transform);
+
+        temp.transform.position = pos;
+        temp.transform.localScale = Vector3.one;
+
 	}
 
 	public void UpdateCoinMultiplier(float amount)
