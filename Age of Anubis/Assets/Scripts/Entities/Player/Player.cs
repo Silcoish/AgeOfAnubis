@@ -144,6 +144,7 @@ public class Player : Damageable
 			}
 
 			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_death);
+			RecoverHealth(0);
         } 
     }
 
