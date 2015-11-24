@@ -77,32 +77,36 @@ public class PlayerInventory : MonoBehaviour
 	public void ChangeGold(int amount)
 	{
 		m_currentGold += (int)(amount * m_multiplier);
-        UpdateUIElements();
+        //UpdateUIElements();
+        UIManager.Inst.UpdateCoinTotal(m_currentGold);
 	}
 
     public void ChangeXP(int amount)
     {
         m_currentXP += amount;
         CheckForLevelUp();
-        UpdateUIElements();
+        UIManager.Inst.UpdateXPBar(GetCurrentLevelPercent());
+        //UpdateUIElements();
     }
 
 	public void ChangeMultiplier(float amount)
 	{
 		m_multiplier += amount;
+        UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
 	}
 
 	public void IncreaseMultiplier()
 	{
 		m_multiplier += m_multiplierIncrease;
-        UpdateUIElements();
+        UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
+        //UpdateUIElements();
 	}
     
     public void UpdateUIElements()
     {
-        UIManager.Inst.UpdateCoinTotal(m_currentGold);
-        UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
-        UIManager.Inst.UpdateXPBar(GetCurrentLevelPercent());
+        
+        
+        
     }
 
     public float GetCurrentLevelPercent()

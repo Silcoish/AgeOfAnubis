@@ -28,10 +28,13 @@ public class UI_coin : MonoBehaviour
 
         Vector3 tt = m_endPos;
 
-        tt.y = Screen.height - tt.y;
+        tt.x = (tt.x / 100) * Screen.width;
+        tt.y = Screen.height - ((tt.y / 100) * Screen.height);
+        tt.z = 0;
 
         m_rt.position = Vector3.Lerp(m_startPos, tt, m_lerp);
 
-
+        if (m_lerp >= 1)
+            Destroy(gameObject);
 	}
 }
