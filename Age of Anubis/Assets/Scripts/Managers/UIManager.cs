@@ -17,9 +17,11 @@ public class UIManager : MonoBehaviour {
 
     float m_playerGold = 0;
     float m_displayGold = -10;
+    int m_displayLevel = -10;
 
 	public Text m_coins;
 	public Text m_multiplier;
+    public Text m_playerLevel;
 
     public GameObject m_prefabCoin;
 
@@ -72,6 +74,14 @@ public class UIManager : MonoBehaviour {
             }
 
             m_coins.text = ((int)m_displayGold).ToString();
+        }
+
+
+        if (m_displayLevel != PlayerInventory.Inst.m_playerLevel)
+        {
+            m_displayLevel = PlayerInventory.Inst.m_playerLevel;
+            m_playerLevel.text = m_displayLevel.ToString();
+
         }
     }
 
