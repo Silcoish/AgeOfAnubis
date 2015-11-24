@@ -41,7 +41,8 @@ public class DungeonLayoutLoader : MonoBehaviour
 		PlaceDoors();
 		MakeMinimap();
 
-		Instantiate(GameManager.inst.m_lastRunStats);
+		GameObject lrs = new GameObject("Last Run Stats");
+		lrs.AddComponent<LastRunStats>();
 	}
 
 	void PlaceDoors()
