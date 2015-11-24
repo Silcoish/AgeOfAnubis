@@ -30,6 +30,10 @@ public class HealthPotion : MonoBehaviour
         {
             col.gameObject.GetComponent<Damageable>().RecoverHealth(GameManager.inst.player.GetComponent<Player>().m_maxHitpoints / 100 * m_healthValue);
             AudioManager.Inst.PlaySFX(AudioManager.Inst.a_healthPot);
+			if(LastRunStats.inst != null)
+			{
+				LastRunStats.inst.hpPickups++;
+			}
             Destroy(gameObject);
         }
     }

@@ -99,6 +99,11 @@ public class PhysicsEnemy : Enemy
             m_deathTimer = 0.5F;
 
             m_rb.velocity = new Vector2(0, 0);
+
+			if(LastRunStats.inst != null)
+			{
+				LastRunStats.inst.enemiesKilled++;
+			}
         }	
     }
 
