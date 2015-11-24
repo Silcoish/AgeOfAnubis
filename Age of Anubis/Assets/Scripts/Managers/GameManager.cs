@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager inst;
 	public GameObject player;
 	public SaveManager m_saveManager;
+	public GameObject m_lastRunStats;
     public GameObject coinPrefab;
     public GameObject healthPotionPrefab;
 	private float hpStartChance;
@@ -57,6 +58,8 @@ public class GameManager : MonoBehaviour {
 		CheckForObjects();
 
 		minimapStartPos = visibleMap.transform.position;
+
+		
 	}
 
 	void OnLevelWasLoaded(int level){

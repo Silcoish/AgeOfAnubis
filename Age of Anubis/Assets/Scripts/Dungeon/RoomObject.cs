@@ -134,6 +134,7 @@ public class RoomObject : MonoBehaviour
 			m_doorWest.Unlock();
 
 		cleared = true;
+		LastRunStats.inst.roomsCleared++;
 
 		PlayerInventory.Inst.IncreaseMultiplier();
 

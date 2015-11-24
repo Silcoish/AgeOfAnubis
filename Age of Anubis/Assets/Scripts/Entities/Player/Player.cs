@@ -70,6 +70,11 @@ public class Player : Damageable
     {
         // Equip current weapon
         UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
+
+		if (LastRunStats.inst != null)
+		{
+			LastRunStats.inst.startGold = PlayerInventory.Inst.m_currentGold;
+		}
     }
 
 	public override void OnTakeDamage(Damage dam)
@@ -121,6 +126,12 @@ public class Player : Damageable
             SetAnimTrigger("Death");
             m_isDying = true;
             m_deathDelayTimer = m_deathDelay;
+
+			if (LastRunStats.inst != null)
+			{
+				LastRunStats.inst.startGold = PlayerInventory.Inst.m_currentGold;
+				LastRunStats.inst.died = true;
+			}
 
 			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_death);
         } 

@@ -40,6 +40,8 @@ public class DungeonLayoutLoader : MonoBehaviour
 		SetupLayout();
 		PlaceDoors();
 		MakeMinimap();
+
+		Instantiate(GameManager.inst.m_lastRunStats);
 	}
 
 	void PlaceDoors()

@@ -11,6 +11,12 @@ public class Shrine : ActivateArea
 	{
 		base.OnActivate();
 
+		if (LastRunStats.inst != null)
+		{
+			LastRunStats.inst.startGold = PlayerInventory.Inst.m_currentGold;
+			LastRunStats.inst.died = true;
+		}
+
 		if (GameManager.inst.m_saveManager != null)
 			GameManager.inst.m_saveManager.Save();
 
