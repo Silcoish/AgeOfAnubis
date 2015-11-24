@@ -110,6 +110,16 @@ public class Player : Damageable
             // WARNING: Damage over time effects do not call OnTakeDamage() each tick, so health does not get updated.
             UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
         }
+
+        Damage d = new Damage();
+        d.amount = 20;
+        d.type = DamageType.NONE;
+
+        if (Input.GetKeyDown(KeyCode.G))
+            OnTakeDamage(d);
+
+        if (Input.GetKeyDown(KeyCode.F))
+            PlayerInventory.Inst.ChangeXP(20);
     }
 
     public override void OnDeath()

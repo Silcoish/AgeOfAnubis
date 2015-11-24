@@ -9,6 +9,11 @@ public class UIManager : MonoBehaviour {
 	public Image m_healthBar;
 	public Image m_xPBar;
 
+    public Image m_healthBarSecondary;
+    public Image m_xPBarSecondary;
+
+    public float m_fillSpeed = 10.0f;
+
 	public Text m_coins;
 	public Text m_multiplier;
 
@@ -29,6 +34,29 @@ public class UIManager : MonoBehaviour {
 		PlayerInventory.Inst.UpdateUIElements();
 	}
 
+    void Update()
+    {
+        if (m_xPBar.fillAmount != m_xPBarSecondary.fillAmount)
+        {
+            m_xPBar.fillAmount += m_fillSpeed * Time.deltaTime;
+
+            if (m_xPBar.fillAmount > m_xPBarSecondary.fillAmount)
+            {
+                m_xPBar.fillAmount = m_xPBarSecondary.fillAmount;
+            }
+        }
+
+        if (m_healthBar.fillAmount != m_healthBarSecondary.fillAmount)
+        {
+            m_healthBarSecondary.fillAmount -= m_fillSpeed * Time.deltaTime;
+
+            if (m_healthBarSecondary.fillAmount < m_healthBar.fillAmount)
+            {
+                m_healthBarSecondary.fillAmount = m_healthBar.fillAmount;
+            }
+        }
+    }
+
 	public void UpdateHealthBar(float percentage)
 	{
 		m_healthBar.fillAmount = percentage;
@@ -36,7 +64,7 @@ public class UIManager : MonoBehaviour {
 
 	public void UpdateXPBar(float percentage)
 	{
-		m_xPBar.fillAmount = percentage;
+		m_xPBarSecondary.fillAmount = percentage;
 	}
 
 	public void UpdateCoinTotal(int amount)
