@@ -100,6 +100,7 @@ public class Player : Damageable
     {
         if(m_isDying)
         {
+            m_rb.velocity = new Vector2(0, 0);
             if(m_deathDelayTimer <= 0)
                 DeathReset();
             else

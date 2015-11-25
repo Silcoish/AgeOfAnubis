@@ -27,6 +27,15 @@ public class Weapon : MonoBehaviour
 
 	void Update()
 	{
+        if (transform.parent.parent.parent.GetComponent<Player>().isInAttackAnimation())
+        {
+            m_isAttacking = true;
+        }
+        else
+        {
+            m_isAttacking = false;
+        }
+
         if(transform.parent.parent.parent.GetComponent<Player>().isAttacking())
         {
             m_col.enabled = true;
@@ -36,15 +45,6 @@ public class Weapon : MonoBehaviour
         {
             m_col.enabled = false;
             m_trail.SetActive(false);
-        }
-
-        if(transform.parent.parent.parent.GetComponent<Player>().isInAttackAnimation())
-        {
-            m_isAttacking = true;
-        }
-        else
-        {
-            m_isAttacking = false;
         }
 	}
 
