@@ -223,6 +223,11 @@ public class Player : Damageable
 			RecoverHealth(10000);
 		}
 
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            PlayerInventory.Inst.ChangeGold(1000000);
+        }
+
         if(!m_isShopOpen)
         {
             if (Input.GetButtonDown("Jump"))
