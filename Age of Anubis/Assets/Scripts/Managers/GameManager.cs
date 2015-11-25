@@ -57,7 +57,8 @@ public class GameManager : MonoBehaviour {
 		shrineLocation = new List<int>();
 		CheckForObjects();
 
-		minimapStartPos = visibleMap.GetComponent<RectTransform>().localPosition;
+		if(visibleMap != null)
+			minimapStartPos = visibleMap.GetComponent<RectTransform>().localPosition;
 
 	}
 
