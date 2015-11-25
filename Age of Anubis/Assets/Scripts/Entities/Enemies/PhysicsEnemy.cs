@@ -98,6 +98,9 @@ public class PhysicsEnemy : Enemy
             }
             m_deathTimer = 0.5F;
 
+            if (m_deathParticle)
+                Instantiate(m_deathParticle, transform.position, transform.rotation);
+
             m_rb.velocity = new Vector2(0, 0);
 
 			if(LastRunStats.inst != null)
@@ -112,15 +115,17 @@ public class PhysicsEnemy : Enemy
         Debug.Log("After Death Called");
         if (m_room)
             m_room.EnemyDied(this);
-        if (m_deathParticle)
-            Instantiate(m_deathParticle, transform.position, transform.rotation);
-        if (GameManager.inst.coinPrefab)
-            Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
+        bool spawnedPotion = false;
         if (GameManager.inst.healthPotionPrefab)
         {
-            if (Random.value <= GameManager.inst.hpDropChance)
+            if (GameManager.inst.CheckForHPDrop())
+            {
                 Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
+                spawnedPotion = true;
+            }
         }
+        if (GameManager.inst.coinPrefab && !spawnedPotion)
+            Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
         PlayerInventory.Inst.ChangeXP(m_XP);
 
         gameObject.SetActive(false);

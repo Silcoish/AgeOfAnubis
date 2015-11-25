@@ -71,7 +71,7 @@ public class Enemy : Damageable
 	{
 		if(m_room)
             m_room.EnemyDied(this);
-        if(m_deathParticle)
+        if (m_deathParticle)
             Instantiate(m_deathParticle, transform.position, transform.rotation);
         bool spawnedPotion = false;
         if(GameManager.inst.healthPotionPrefab)
