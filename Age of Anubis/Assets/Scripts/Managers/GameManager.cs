@@ -57,9 +57,8 @@ public class GameManager : MonoBehaviour {
 		shrineLocation = new List<int>();
 		CheckForObjects();
 
-		minimapStartPos = visibleMap.transform.position;
+		minimapStartPos = visibleMap.GetComponent<RectTransform>().localPosition;
 
-		
 	}
 
 	void OnLevelWasLoaded(int level){
@@ -169,14 +168,16 @@ public class GameManager : MonoBehaviour {
 
 		tex.Apply();*/
 
-		int xOffset = i % 15 - 1;
-		int yOffset = i / 15 - 1;
+		int xOffset = i % 15;
+		int yOffset = i / 15;
 
 		print("xOffset: " + xOffset);
 		print("YOffset: " + yOffset);
 
 		img.sprite = Sprite.Create(minimapTex, new Rect(Vector2.zero, new Vector2(minimapTex.width, minimapTex.height)), Vector2.zero);
-		visibleMap.transform.position = new Vector2(minimapStartPos.x - (xOffset * (270 / 16)), minimapStartPos.y + (yOffset * (270 / 16)));
+		print("Moving to: " + new Vector2(minimapStartPos.x - (xOffset * (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15))));
+		visibleMap.GetComponent<RectTransform>().localPosition = new Vector2(minimapStartPos.x - (xOffset * (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15)));
+
 	}
 
 	public bool CheckForHPDrop()
