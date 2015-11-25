@@ -12,6 +12,15 @@ public class UIManager : MonoBehaviour {
     public Image m_healthBarSecondary;
     public Image m_xPBarSecondary;
 
+    public Image m_weaponMain;
+    public Image m_weaponSecondary;
+
+    public Image m_weaponMainEffect;
+    public Image m_weaponSecondaryEffect;
+
+    //public Text m_weaponMainLevel;
+    //public Text m_weaponSecondaryLevel;
+
     public float m_fillSpeed = 10.0f;
     public float m_coinSpeed = 30.0f;
 
@@ -24,6 +33,19 @@ public class UIManager : MonoBehaviour {
     public Text m_playerLevel;
 
     public GameObject m_prefabCoin;
+
+    public Sprite m_iconAxe;
+    public Sprite m_iconDagger;
+    public Sprite m_iconSword;
+
+    public Sprite m_iconEffectPoison;
+    public Sprite m_iconEffectBurn;
+    public Sprite m_iconEffectBleed;
+
+    public Sprite m_iconNone;
+
+    private GameObject m_displayMain;
+    private GameObject m_displaySecondary;
 
 	void Awake()
 	{
@@ -82,6 +104,94 @@ public class UIManager : MonoBehaviour {
             m_displayLevel = PlayerInventory.Inst.m_playerLevel;
             m_playerLevel.text = m_displayLevel.ToString();
 
+        }
+
+       // if (m_displayMain != PlayerInventory.Inst.m_currentWeapon)
+        {
+            m_displayMain = PlayerInventory.Inst.m_currentWeapon;
+
+            Weapon wp = null;
+
+            if (m_displayMain != null)
+                wp = m_displayMain.GetComponent<Weapon>();
+
+            if (wp != null)
+            {
+                SetWeaponIcon(m_weaponMain, wp.m_swingType);
+                SetEffectIcon(m_weaponMainEffect, wp.m_attack.m_effectType);
+                //m_weaponMainLevel.text = "lvl" + wp.m_level;
+            }
+            else
+            {
+                m_weaponMain.sprite = m_iconNone;
+                m_weaponMainEffect.sprite = m_iconNone;
+                //m_weaponMainLevel.text = "";
+            }
+
+
+        }
+
+        //if (m_displaySecondary != PlayerInventory.Inst.m_secondaryWeapon)
+        {
+            m_displaySecondary = PlayerInventory.Inst.m_secondaryWeapon;
+
+            Weapon wp = null;
+
+            if (m_displaySecondary != null)
+                wp = m_displaySecondary.GetComponent<Weapon>();
+
+            if (wp != null)
+            {
+                SetWeaponIcon(m_weaponSecondary, wp.m_swingType);
+                SetEffectIcon(m_weaponSecondaryEffect, wp.m_attack.m_effectType);
+                //m_weaponSecondaryLevel.text = "lvl" + wp.m_level;
+            }
+            else
+            {
+                m_weaponSecondary.sprite = m_iconNone;
+                m_weaponSecondaryEffect.sprite = m_iconNone;
+               // m_weaponSecondaryLevel.text = "";
+            }
+        }
+
+    }
+
+    void SetWeaponIcon(Image im, WeaponSwing ws)
+    {
+        switch (ws)
+        {
+            case WeaponSwing.LIGHT:
+                im.sprite = m_iconDagger;
+                break;
+            case WeaponSwing.MEDIUM:
+                im.sprite = m_iconSword;
+                break;
+            case WeaponSwing.HEAVY:
+                im.sprite = m_iconAxe;
+                break;
+            default:
+                break;
+        }
+    }
+
+    void SetEffectIcon(Image im, DamageType dt)
+    {
+        switch (dt)
+        {
+            case DamageType.NONE:
+                im.sprite = m_iconNone;
+                break;
+            case DamageType.POISON:
+                im.sprite = m_iconEffectPoison;
+                break;
+            case DamageType.BURN:
+                im.sprite = m_iconEffectBurn;
+                break;
+            case DamageType.BLEED:
+                im.sprite = m_iconEffectBleed;
+                break;
+            default:
+                break;
         }
     }
 
