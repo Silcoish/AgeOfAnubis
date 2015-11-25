@@ -40,6 +40,8 @@ public class Player : Damageable
     public float m_deathDelay = 5;
     private float m_deathDelayTimer = 0;
 
+    public GameObject m_jumpCloud;
+
     //public float jumpMaxSpeed;
     //public float jumpMinSpeed;
 
@@ -293,6 +295,11 @@ public class Player : Damageable
             {
                 m_velocity.y = (m_jumpHeight * 0.8F) * m_globalMoveSpeed;
                 m_stopJump = false;
+
+                if (m_jumpCloud != null)
+                {
+                    Instantiate(m_jumpCloud, new Vector3(transform.position.x, transform.position.y - 0.8F, 0), transform.rotation);
+                }
             }
             else
             {
