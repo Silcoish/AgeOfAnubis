@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     public int m_goldCost;
 	public Attack m_attack;
 	private PolygonCollider2D m_col;
+    public GameObject m_trail;
 
 	public WeaponSwing m_swingType;
 
@@ -20,6 +21,8 @@ public class Weapon : MonoBehaviour
     {
 		m_col = gameObject.GetComponent<PolygonCollider2D>();
         m_col.enabled = false;
+
+        m_trail.SetActive(false);
     }
 
 	void Update()
@@ -27,10 +30,12 @@ public class Weapon : MonoBehaviour
         if(transform.parent.parent.parent.GetComponent<Player>().isAttacking())
         {
             m_col.enabled = true;
+            m_trail.SetActive(true);
         }
         else
         {
             m_col.enabled = false;
+            m_trail.SetActive(false);
         }
 
         if(transform.parent.parent.parent.GetComponent<Player>().isInAttackAnimation())
