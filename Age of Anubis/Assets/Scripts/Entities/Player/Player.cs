@@ -223,6 +223,11 @@ public class Player : Damageable
 			RecoverHealth(10000);
 		}
 
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            PlayerInventory.Inst.ChangeGold(1000000);
+        }
+
         if(!m_isShopOpen)
         {
             if (Input.GetButtonDown("Jump"))
@@ -429,7 +434,7 @@ public class Player : Damageable
 
     public bool isAttacking()
     {
-        if (m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Light)")
+        if (m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Light)2")
             || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)2")
             || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Heavy)2"))
             return true;
@@ -439,7 +444,8 @@ public class Player : Damageable
 
     public bool isInAttackAnimation()
     {
-        if (m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Light)")
+        if (m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Light)1")
+            || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Light)2")
             || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)1")
             || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)2")
             || m_anim_arm.GetCurrentAnimatorStateInfo(2).IsName("Attack(Medium)3")

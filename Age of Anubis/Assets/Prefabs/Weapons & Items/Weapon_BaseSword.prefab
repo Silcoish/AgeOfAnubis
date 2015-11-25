@@ -18,6 +18,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &174348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 491050}
+  - 212: {fileID: 21202142}
+  m_Layer: 0
+  m_Name: SwordTrail
+  m_TagString: WeaponTrail
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!4 &450030
 Transform:
   m_ObjectHideFlags: 1
@@ -25,10 +41,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10.4639997, y: -2.03800011, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 491050}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &491050
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174348}
+  m_LocalRotation: {x: 0, y: 0, z: .777146041, w: .629320323}
+  m_LocalPosition: {x: -.699999988, y: .800000012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 450030}
   m_RootOrder: 0
 --- !u!60 &6051098
 PolygonCollider2D:
@@ -43,11 +72,14 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: -.101528645, y: 1.37082434}
-      - {x: .217291355, y: 1.26078701}
+    - - {x: -.497092247, y: 1.46149397}
+      - {x: .144123077, y: 1.30699968}
+      - {x: .349146843, y: .828109264}
       - {x: .0773198307, y: .0773023516}
       - {x: -.0825242251, y: .0950102657}
-      - {x: -.367263794, y: .891803741}
+      - {x: -.469161034, y: .562235594}
+      - {x: -1.16835117, y: .524804354}
+      - {x: -1.33716583, y: 1.17792988}
 --- !u!114 &11462194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473fe75bc7b026645a0f4acc54bb0bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_itemID: 0
   m_level: 0
   m_name: 
   m_goldCost: 0
@@ -68,7 +101,34 @@ MonoBehaviour:
     m_effectDuration: 0
     m_effectStrength: 0
     m_knockbackForce: 0
+  m_trail: {fileID: 174348}
   m_swingType: 1
+--- !u!212 &21202142
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174348}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300002, guid: 712f4c24172b89d49bcd8d91330ee215, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21205042
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -101,7 +161,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_trail
+      value: 
+      objectReference: {fileID: 174348}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 169052}
