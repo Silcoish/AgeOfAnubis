@@ -42,6 +42,10 @@ public class Player : Damageable
 
     public GameObject m_jumpCloud;
 
+	//Low health variables
+	public float lowHealthTimer = 4.0f;
+	public float lowHealthCounter;
+
     //public float jumpMaxSpeed;
     //public float jumpMinSpeed;
 
@@ -110,6 +114,8 @@ public class Player : Damageable
         }
         else
         {
+			CheckHealth();
+
             CheckIfGrounded();
 
             Check2WayPlatforms();
@@ -148,7 +154,7 @@ public class Player : Damageable
 
 			if (LastRunStats.inst != null)
 			{
-				LastRunStats.inst.startGold = PlayerInventory.Inst.m_currentGold;
+				LastRunStats.inst.endGold = PlayerInventory.Inst.m_currentGold;
 				LastRunStats.inst.died = true;
 			}
 
@@ -185,6 +191,23 @@ public class Player : Damageable
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	void CheckHealth()
+	{
+		if(m_hitPoints / m_maxHitpoints * 100 <= 20.0f)
+		{
+			lowHealthCounter += Time.deltaTime;
+			if(lowHealthCounter >= lowHealthTimer)
+			{
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_low_health);
+				lowHealthCounter = 0.0f;
+			}
+		}
+		else
+		{
+			lowHealthCounter = 0.0f;
+		}
+	}
+
 	void PlayerInput()
 	{
 		//Set velocity to current to maintain any current velocity if not effected by the player.
@@ -236,7 +259,7 @@ public class Player : Damageable
             if (Input.GetButtonDown("Jump"))
             {
                 //Debug.Log("Jump key down");
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_jump);
+				
                 Jump();
             }
 
@@ -309,6 +332,12 @@ public class Player : Damageable
 			m_jumpCounter--;
 
             SetAnimGrounded(false); // Tell the animator we are airborne
+
+			if (Random.Range(0, 2) == 0)
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_jump1);
+			else
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_jump2);
+
 		}
 	}
 

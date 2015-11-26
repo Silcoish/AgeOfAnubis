@@ -56,10 +56,6 @@ public class GameManager : MonoBehaviour {
 		clearedRooms = new List<int>();
 		shrineLocation = new List<int>();
 		CheckForObjects();
-
-		if(visibleMap != null)
-			minimapStartPos = visibleMap.GetComponent<RectTransform>().localPosition;
-
 	}
 
 	void OnLevelWasLoaded(int level){
@@ -72,6 +68,9 @@ public class GameManager : MonoBehaviour {
 		{
 			visibleMap = GameObject.FindGameObjectWithTag("Minimap");
 		}
+
+		if (visibleMap != null)
+			minimapStartPos = visibleMap.GetComponent<RectTransform>().localPosition;
 
 		if (GameObject.FindGameObjectWithTag("Save") != null)
 		{
