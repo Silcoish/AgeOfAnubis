@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
 	
 	[HideInInspector] public DungeonLayoutLoader dungeonLayout;
 	[HideInInspector] public int currentRoom;
+	[HideInInspector] public List<int> seenRooms;
 	[HideInInspector] public List<int> clearedRooms;
 	[HideInInspector] public List<int> shrineLocation;
 	[HideInInspector] public int startLocation;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour {
         }
 
 		hpStartChance = hpDropChance;
+		seenRooms = new List<int>();
 		clearedRooms = new List<int>();
 		shrineLocation = new List<int>();
 		CheckForObjects();
@@ -102,6 +104,14 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void AddSeenRoom(int i)
+	{
+		if(!seenRooms.Contains(i))
+		{
+			seenRooms.Add(i);
+		}
+	}
+
 	public void RefreshMinimap()
 	{
 		for (int i = 0; i < 15 * 15; i++)
@@ -111,32 +121,38 @@ public class GameManager : MonoBehaviour {
 		//Place left room if it exists
 		if (currentRoom % 15 != 0)
 		{
-			if(dungeonLayout.rooms[currentRoom - 1] != null)
-				PlaceMinimapRoom(currentRoom - 1, Color.white, Color.black);
+			if (dungeonLayout.rooms[currentRoom - 1] != null)
+				AddSeenRoom(currentRoom - 1);
 		}
 		//Place right room if it exists
 		if(currentRoom != ((15 * 15) - 1) && (currentRoom + 1) % 15 != 0)
 		{
 			if (dungeonLayout.rooms[currentRoom + 1] != null)
-				PlaceMinimapRoom(currentRoom + 1, Color.white, Color.black);
+				AddSeenRoom(currentRoom + 1);
 		}
 		//top
 		if(currentRoom >= 15)
 		{
 			if (dungeonLayout.rooms[currentRoom - 15] != null)
-				PlaceMinimapRoom(currentRoom - 15, Color.white, Color.black);
+				AddSeenRoom(currentRoom - 15);
 		}
 		//bottom
 		if(currentRoom <= ((15 * 15) - 1) - 15)
 		{
 			if (dungeonLayout.rooms[currentRoom + 15] != null)
-				PlaceMinimapRoom(currentRoom + 15, Color.white, Color.black);
+				AddSeenRoom(currentRoom + 15);
 		}
-		
+
+		for (int k = 0; k < seenRooms.Count; k++)
+		{
+			PlaceMinimapRoom(seenRooms[k], Color.white, Color.black);
+		}
+
 		for (int i = 0; i < clearedRooms.Count; i++)
 		{
 			PlaceMinimapRoom(clearedRooms[i], Color.gray, Color.black);
 		}
+
 		for (int j = 0; j < shrineLocation.Count; j++)
 		{
 			PlaceMinimapRoom(shrineLocation[j], Color.yellow, Color.black);
