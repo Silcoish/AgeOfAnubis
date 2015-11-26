@@ -63,7 +63,8 @@ public class ENY_Eye_001 : Enemy
                 if (m_curTimer <= 0)
                 {
                     m_state = State.ATTACKING;
-					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_eye_fire);
+					if (Vector2.Distance(GameManager.inst.player.transform.position, transform.position) <= 10.0f)
+						AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_eye_fire);
                     //Debug.Log("Enter Attack State");
                 }
                 break;

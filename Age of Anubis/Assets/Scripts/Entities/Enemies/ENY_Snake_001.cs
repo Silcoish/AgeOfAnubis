@@ -107,7 +107,8 @@ public class ENY_Snake_001 : PhysicsEnemy
                         m_state = State.CHARGING;
                         m_anim.SetTrigger("Charge");
                         m_curTimer = m_chargeTimer;
-                        AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_snake_charge);
+						if (Vector2.Distance(GameManager.inst.player.transform.position, transform.position) <= 10.0f)
+							AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_snake_charge);
                         //Debug.Log("Enter Charge State");
                     }
                     break;
