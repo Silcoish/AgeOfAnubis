@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class ShowDeathStats : MonoBehaviour
 {
 
+	public bool isActive = false;
 	public UnityEngine.UI.Image img;
 	public Text title;
 	public Text startGold;
@@ -24,15 +25,12 @@ public class ShowDeathStats : MonoBehaviour
 		{
 			Init();
 		}
-		else
-		{
-			Destroy(this);
-		}
 
 	}
 
 	void Init()
 	{
+		isActive = true;
 		img.gameObject.SetActive(true);
 		title.text =  LastRunStats.inst.died ? "You passed out!" : "You escaped!";
 		startGold.text = LastRunStats.inst.startGold.ToString();
@@ -44,6 +42,14 @@ public class ShowDeathStats : MonoBehaviour
 
 	void Update()
 	{
-		img.color = new Color(img.color.r, img.color.g, img.color.b, Mathf.Lerp(img.color.a, 1.0f, 0.02f));
+		if(isActive)
+			img.color = new Color(img.color.r, img.color.g, img.color.b, Mathf.Lerp(img.color.a, 1.0f, 0.02f));
+		else
+			img.color = new Color(img.color.r, img.color.g, img.color.b, Mathf.Lerp(img.color.a, 0.0f, 0.1f));
+
+		if(Input.GetButtonDown("Cancel"))
+		{
+			gameObject.SetActive(false);
+		}
 	}
 }
