@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ENY_Eye_001 : Enemy
@@ -63,6 +63,7 @@ public class ENY_Eye_001 : Enemy
                 if (m_curTimer <= 0)
                 {
                     m_state = State.ATTACKING;
+					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_eye_fire);
                     //Debug.Log("Enter Attack State");
                 }
                 break;
@@ -110,4 +111,9 @@ public class ENY_Eye_001 : Enemy
         else if (input < 0 && m_isFacingRight)
             Flip();
     }
+
+	public void PlayBlinkSFX()
+	{
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_eye_blink);
+	}
 }

@@ -26,10 +26,8 @@ public class AudioManager : MonoBehaviour
     public AudioMixerSnapshot s_boss;
 	public AudioMixerSnapshot s_temple;
 	public AudioMixerSnapshot s_rumble;
-	[Range(0f,10f)]
+	[Range(0f, 10f)]
 	public float m_standardTransitionTime = 1.0f;
-
-
 
 	[Header("SoundFX")]
 	public int m_numberOfSources = 5;
@@ -51,15 +49,19 @@ public class AudioManager : MonoBehaviour
 	public AudioStruct a_healthPot;
     [Header("Player")]
     public AudioStruct a_player_death;
-    public AudioStruct a_player_jump;
+	public AudioStruct a_player_jump1;
+	public AudioStruct a_player_jump2;
     public AudioStruct a_player_land;
 	public AudioStruct a_player_takeDamage;
 	public AudioStruct a_player_step;
+	public AudioStruct a_player_levelUp;
     [Header("Enemy")]
     public AudioStruct a_eny_die;
     public AudioStruct a_eny_spit;
 	public AudioStruct a_eny_snake_charge;
     public AudioStruct a_eny_takeDamage;
+	public AudioStruct a_eny_eye_fire;
+	public AudioStruct a_eny_eye_blink;
     [Header("UI")]
     public AudioStruct a_ui_purchase;
     public AudioStruct a_ui_cancel;
@@ -152,14 +154,18 @@ public class AudioManager : MonoBehaviour
         allStructs.Add(a_thump);
 
         allStructs.Add(a_player_death);
-        allStructs.Add(a_player_jump);
+		allStructs.Add(a_player_jump1);
+		allStructs.Add(a_player_jump2);
         allStructs.Add(a_player_land);
         allStructs.Add(a_player_takeDamage);
+		allStructs.Add(a_player_levelUp);
        
         allStructs.Add(a_eny_die);
         allStructs.Add(a_eny_spit);
 		allStructs.Add(a_eny_snake_charge);
         allStructs.Add(a_eny_takeDamage);
+		allStructs.Add(a_eny_eye_blink);
+		allStructs.Add(a_eny_eye_fire);
         
         allStructs.Add(a_ui_purchase);
         allStructs.Add(a_ui_cancel);

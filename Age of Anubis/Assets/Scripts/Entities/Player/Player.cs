@@ -236,7 +236,7 @@ public class Player : Damageable
             if (Input.GetButtonDown("Jump"))
             {
                 //Debug.Log("Jump key down");
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_jump);
+				
                 Jump();
             }
 
@@ -309,6 +309,12 @@ public class Player : Damageable
 			m_jumpCounter--;
 
             SetAnimGrounded(false); // Tell the animator we are airborne
+
+			if (Random.Range(0, 2) == 0)
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_jump1);
+			else
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_jump2);
+
 		}
 	}
 

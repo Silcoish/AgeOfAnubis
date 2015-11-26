@@ -137,7 +137,9 @@ public class PlayerInventory : MonoBehaviour
             if (player)
                 player.m_hitPoints += m_hpGainPerLVL;
             else
-                Debug.Log("PlayerInventory - Failed to find GameObject with 'Player' tag");
+               Debug.Log("PlayerInventory - Failed to find GameObject with 'Player' tag");
+
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_levelUp);
         }
     }
 
