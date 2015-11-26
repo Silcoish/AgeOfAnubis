@@ -38,106 +38,115 @@ public class ENY_Snake_001 : PhysicsEnemy
         if(m_isPathing)
             m_rb.velocity = Vector2.zero;
 
-        switch (m_state)
+        if(m_isDead)
         {
-            case State.SEARCHING:
-                if(!m_isPathing)
-                {
-                    // Check if we have hit the ground
-                    if (m_rb.velocity.y == 0)
+        }
+        else
+        {
+            switch (m_state)
+            {
+                case State.SEARCHING:
+                    if (!m_isPathing)
                     {
-                        // Reenable climbing once we stop falling
-                        EnablePathing(true);
-                        GetLedgeTransform();
-                    }
-                }
-                else
-                {
-                    // Check if we hit a wall
-                    if (CheckPosition(m_wallCheck))
-                    {
-                        //Debug.Log("Hit Wall");
-                        m_ledgeCheck = GetTransform(m_ledgeCheck, !m_isVertical);
-                        m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
-
-                        if (!CheckPosition(m_ledgeCheck))
+                        // Check if we have hit the ground
+                        if (m_rb.velocity.y == 0)
                         {
-                            EnablePathing(false);
+                            // Reenable climbing once we stop falling
+                            EnablePathing(true);
+                            GetLedgeTransform();
                         }
                     }
-                    // Check if we hit the end of a platform
-                    else if (!CheckPosition(m_ledgeCheck))
-                    {
-                        //Debug.Log("Hit Ledge");
-                        // Reverse Direction when we hit the end of our ledge
-                        m_ledgeCheck = GetTransform(m_ledgeCheck, !m_isVertical);
-                        m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
-
-                        // If our new ledge choice is also over a ledge then enable gravity
-                        if (!CheckPosition(m_ledgeCheck))
-                        {
-                            EnablePathing(false);
-                        }
-                    }
-                    // Move forward
                     else
                     {
-                        //Debug.Log("Moving");
-                        if (m_isVertical)
+                        // Check if we hit a wall
+                        if (CheckPosition(m_wallCheck))
                         {
-                            m_dir = new Vector2(0, m_ledgeCheck.localPosition.y);
+                            //Debug.Log("Hit Wall");
+                            m_ledgeCheck = GetTransform(m_ledgeCheck, !m_isVertical);
+                            m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
+
+                            if (!CheckPosition(m_ledgeCheck))
+                            {
+                                EnablePathing(false);
+                            }
                         }
+                        // Check if we hit the end of a platform
+                        else if (!CheckPosition(m_ledgeCheck))
+                        {
+                            //Debug.Log("Hit Ledge");
+                            // Reverse Direction when we hit the end of our ledge
+                            m_ledgeCheck = GetTransform(m_ledgeCheck, !m_isVertical);
+                            m_wallCheck = GetTransform(m_ledgeCheck, m_isVertical);
+
+                            // If our new ledge choice is also over a ledge then enable gravity
+                            if (!CheckPosition(m_ledgeCheck))
+                            {
+                                EnablePathing(false);
+                            }
+                        }
+                        // Move forward
                         else
                         {
-                            m_dir = new Vector2(m_ledgeCheck.localPosition.x, 0);
+                            //Debug.Log("Moving");
+                            if (m_isVertical)
+                            {
+                                m_dir = new Vector2(0, m_ledgeCheck.localPosition.y);
+                            }
+                            else
+                            {
+                                m_dir = new Vector2(m_ledgeCheck.localPosition.x, 0);
+                            }
+                            m_dir.Normalize();
+
+                            m_rb.velocity = m_dir * m_moveSpeed;
                         }
-                        m_dir.Normalize();
-
-                        m_rb.velocity = m_dir * m_moveSpeed;
                     }
-                }
-                
-                if(m_curTimer <= 0)
-                {
-                    m_state = State.CHARGING;
-                    m_curTimer = m_chargeTimer;
-					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_snake_charge);
-                    //Debug.Log("Enter Charge State");
-                }
-                break;
-            case State.CHARGING:
-                if (m_curTimer <= 0)
-                {
-                    m_state = State.ATTACKING;
-                    //Debug.Log("Enter Attack State");
-                }
-                break;
-            case State.ATTACKING:
-                GameObject tempProj;
-                tempProj = Instantiate(m_venomProj, transform.position, transform.rotation) as GameObject;
-                Physics2D.IgnoreCollision(tempProj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-                Vector2 tempVec = m_launchVec;
-                if (!m_isFacingRight)
-                    tempVec.x = -m_launchVec.x;
 
-                tempProj.GetComponent<Rigidbody2D>().AddForce(tempVec * m_launchForce, ForceMode2D.Impulse);
+                    if (m_curTimer <= 0)
+                    {
+                        m_state = State.CHARGING;
+                        m_anim.SetTrigger("Charge");
+                        m_curTimer = m_chargeTimer;
+                        AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_snake_charge);
+                        //Debug.Log("Enter Charge State");
+                    }
+                    break;
+                case State.CHARGING:
+                    if (m_curTimer <= 0)
+                    {
+                        m_state = State.ATTACKING;
+                        m_anim.SetTrigger("Attack");
+                        //Debug.Log("Enter Attack State");
+                    }
+                    break;
+                case State.ATTACKING:
+                    GameObject tempProj;
+                    tempProj = Instantiate(m_venomProj, transform.position, transform.rotation) as GameObject;
+                    Physics2D.IgnoreCollision(tempProj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+                    Vector2 tempVec = m_launchVec;
+                    if (!m_isFacingRight)
+                        tempVec.x = -m_launchVec.x;
 
-                m_state = State.RECHARGING;
-                m_curTimer = m_rechargeTimer;
-                //Debug.Log("Enter Recharge State");
-                break;
-            case State.RECHARGING:
-                if (m_curTimer <= 0)
-                {
-                    m_state = State.SEARCHING;
-                    m_curTimer = m_attackTimer;
-                    //Debug.Log("Enter Searching State");
-                }
-                break;
-            default:
-                Debug.Log("Snake enemy failed to select valid State");
-                break;
+                    tempProj.GetComponent<Rigidbody2D>().AddForce(tempVec * m_launchForce, ForceMode2D.Impulse);
+
+                    m_state = State.RECHARGING;
+                    m_curTimer = m_rechargeTimer;
+                    //Debug.Log("Enter Recharge State");
+                    break;
+                case State.RECHARGING:
+                    if (m_curTimer <= 0)
+                    {
+                        m_state = State.SEARCHING;
+                        m_curTimer = m_attackTimer;
+                        //Debug.Log("Enter Searching State");
+                    }
+                    break;
+                default:
+                    Debug.Log("Snake enemy failed to select valid State");
+                    break;
+            }
         }
+
         m_curTimer -= Time.deltaTime;
 
         // Animation
