@@ -11,6 +11,12 @@ public class ShowDeathStats : MonoBehaviour
 {
 
 	public UnityEngine.UI.Image img;
+	public Text title;
+	public Text startGold;
+	public Text endGold;
+	public Text enemiesKilled;
+	public Text hpPickups;
+	public Text roomsCleared;
 
 	void Start()
 	{
@@ -27,7 +33,13 @@ public class ShowDeathStats : MonoBehaviour
 
 	void Init()
 	{
-
+		img.gameObject.SetActive(true);
+		title.text =  LastRunStats.inst.died ? "You passed out!" : "You escaped!";
+		startGold.text = LastRunStats.inst.startGold.ToString();
+		endGold.text = LastRunStats.inst.endGold.ToString();
+		enemiesKilled.text = LastRunStats.inst.endGold.ToString();
+		hpPickups.text = LastRunStats.inst.hpPickups.ToString();
+		roomsCleared.text = LastRunStats.inst.roomsCleared.ToString();
 	}
 
 	void Update()
