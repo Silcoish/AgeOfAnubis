@@ -55,6 +55,7 @@ public class AudioManager : MonoBehaviour
 	public AudioStruct a_player_takeDamage;
 	public AudioStruct a_player_step;
 	public AudioStruct a_player_levelUp;
+	public AudioStruct a_player_low_health;
     [Header("Enemy")]
     public AudioStruct a_eny_die;
     public AudioStruct a_eny_spit;
