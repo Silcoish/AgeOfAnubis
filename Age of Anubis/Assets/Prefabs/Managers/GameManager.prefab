@@ -88,14 +88,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   m_saveManager: {fileID: 11405082}
+  m_lastRunStats: {fileID: 0}
   coinPrefab: {fileID: 116776, guid: f30414f88aea2d1428209d86131f5eb0, type: 2}
   healthPotionPrefab: {fileID: 158366, guid: 4d4dcfc1f2384ec49afa6fc8103893ef, type: 2}
   hpDropChance: .100000001
+  maxEnemiesBeforeHPDrop: 10
   minimap: {fileID: 0}
   minimapTex: {fileID: 0}
   visibleMap: {fileID: 0}
   visibleMapTex: {fileID: 0}
-  destroyNextScene: 0
+  destroyNextScene: 1
+  dungeonLayout: {fileID: 0}
+  currentRoom: 0
+  clearedRooms: 
+  shrineLocation: 
+  startLocation: 0
+  endLocation: 0
 --- !u!114 &11472624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,9 +122,10 @@ MonoBehaviour:
   m_currentXP: 0
   m_XPToLVL: 6400000096000000fa00000090010000
   m_hpGainPerLVL: 50
-  m_currentWeapon: {fileID: 143282, guid: 884e72685771f4f40a5724043467b0dd, type: 2}
-  m_secondaryWeapon: {fileID: 173356, guid: 4cb1172e9c2d7144cb9f42ff618ff6af, type: 2}
-  m_defaultWeapon: {fileID: 143282, guid: 884e72685771f4f40a5724043467b0dd, type: 2}
+  m_healthDrop: 0
+  m_currentWeapon: {fileID: 123034, guid: 8fbc737fdcb1fc24ebb28baca02b6316, type: 2}
+  m_secondaryWeapon: {fileID: 169504, guid: bd26d9d6705de784087354e49e062aa4, type: 2}
+  m_defaultWeapon: {fileID: 123034, guid: 8fbc737fdcb1fc24ebb28baca02b6316, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
