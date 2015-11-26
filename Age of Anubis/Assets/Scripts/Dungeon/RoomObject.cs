@@ -17,6 +17,7 @@ public class RoomObject : MonoBehaviour
 	[HideInInspector] public Door m_doorEast;
 	[HideInInspector] public Door m_doorWest;
 
+	[HideInInspector] public bool isStartRoom = false;
 	[HideInInspector] public int arrayIndex;
 
 	public GameObject m_enemiesParent;
@@ -57,6 +58,11 @@ public class RoomObject : MonoBehaviour
 					Debug.LogError("Error: Invalid Door Direction on GameObject " + gameObject.name);
 					break;
 			}
+		}
+
+		if(isStartRoom)
+		{
+			EnteredRoom();
 		}
 	}
 

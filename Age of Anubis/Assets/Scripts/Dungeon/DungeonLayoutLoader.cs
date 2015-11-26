@@ -167,6 +167,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 								GameObject tempRoom = (GameObject)Instantiate(startRoom, new Vector2(i * roomOffset.x, -lineNum * roomOffset.y), Quaternion.identity);
 								rooms[lineNum * SIZE + i] = tempRoom.GetComponent<RoomObject>();
 								rooms[lineNum * SIZE + i].arrayIndex = lineNum * SIZE + i;
+								rooms[lineNum * SIZE + i].isStartRoom = true;
 
 								//GameObject tempPlayer = (GameObject)Instantiate(player, rooms[lineNum * SIZE + i].gameObject.transform.position, Quaternion.identity);
 								//GameManager.inst.player = tempPlayer;

@@ -105,6 +105,35 @@ public class GameManager : MonoBehaviour {
 
 	public void RefreshMinimap()
 	{
+		for (int i = 0; i < 15 * 15; i++)
+		{
+			PlaceMinimapRoom(i, Color.white, Color.white);
+		}
+		//Place left room if it exists
+		if (currentRoom % 15 != 0)
+		{
+			if(dungeonLayout.rooms[currentRoom - 1] != null)
+				PlaceMinimapRoom(currentRoom - 1, Color.white, Color.black);
+		}
+		//Place right room if it exists
+		if(currentRoom != ((15 * 15) - 1) && (currentRoom + 1) % 15 != 0)
+		{
+			if (dungeonLayout.rooms[currentRoom + 1] != null)
+				PlaceMinimapRoom(currentRoom + 1, Color.white, Color.black);
+		}
+		//top
+		if(currentRoom >= 15)
+		{
+			if (dungeonLayout.rooms[currentRoom - 15] != null)
+				PlaceMinimapRoom(currentRoom - 15, Color.white, Color.black);
+		}
+		//bottom
+		if(currentRoom <= ((15 * 15) - 1) - 15)
+		{
+			if (dungeonLayout.rooms[currentRoom + 15] != null)
+				PlaceMinimapRoom(currentRoom + 15, Color.white, Color.black);
+		}
+		
 		for (int i = 0; i < clearedRooms.Count; i++)
 		{
 			PlaceMinimapRoom(clearedRooms[i], Color.gray, Color.black);
@@ -143,7 +172,7 @@ public class GameManager : MonoBehaviour {
 					//showCol = Color.magenta;
 				//}
 
-				t.SetPixel(((i % 15) * 16) + x, ((t.height - 1 - (int)i / 15) * 8) + y, showCol);
+				t.SetPixel(((i % 15) * 16) + x, ((t.height - 1 - (int)i / 15) * 8) + y, new Color(showCol.r, showCol.g, showCol.b, 0.5f));
 			}
 		}
 
@@ -177,7 +206,7 @@ public class GameManager : MonoBehaviour {
 
 		img.sprite = Sprite.Create(minimapTex, new Rect(Vector2.zero, new Vector2(minimapTex.width, minimapTex.height)), Vector2.zero);
 		print("Moving to: " + new Vector2(minimapStartPos.x - (xOffset * (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15))));
-		visibleMap.GetComponent<RectTransform>().localPosition = new Vector2(minimapStartPos.x - (xOffset * (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15)));
+		visibleMap.GetComponent<RectTransform>().localPosition = new Vector2(minimapStartPos.x - (xOffset * (720 / 15) + (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15)));
 
 	}
 
