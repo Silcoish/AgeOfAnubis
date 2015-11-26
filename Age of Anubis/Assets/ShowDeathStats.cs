@@ -37,7 +37,7 @@ public class ShowDeathStats : MonoBehaviour
 		title.text =  LastRunStats.inst.died ? "You passed out!" : "You escaped!";
 		startGold.text = LastRunStats.inst.startGold.ToString();
 		endGold.text = LastRunStats.inst.endGold.ToString();
-		enemiesKilled.text = LastRunStats.inst.endGold.ToString();
+		enemiesKilled.text = LastRunStats.inst.enemiesKilled.ToString();
 		hpPickups.text = LastRunStats.inst.hpPickups.ToString();
 		roomsCleared.text = LastRunStats.inst.roomsCleared.ToString();
 	}
