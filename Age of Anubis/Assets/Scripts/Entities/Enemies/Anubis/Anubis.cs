@@ -5,11 +5,6 @@
 
 //TODO behaviour
 /*
- * Platforms raise on dash
- * Delay before Dashing
- * Bashing wall
- * Spawn Enemies and Projectiles at once
- * Do stage 2 and 3 behaviour picks
  * ANIMATIONS
  */
  
@@ -333,6 +328,7 @@ public class Anubis : Enemy
 			}
 			rb.velocity = new Vector2(dash, 0f);
 
+			print("Dash : " + dash);
 			if(dash == -1)
 			{
 				if (t.position.x >= rightPos.transform.position.x)
