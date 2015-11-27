@@ -5,6 +5,15 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+	public enum RoomType
+	{
+		CURRENT,
+		BOSS,
+		CLEARED,
+		START,
+		SEEN,
+		EMPTY
+	}
 	public static GameManager inst;
 	public GameObject player;
 	public SaveManager m_saveManager;
@@ -22,11 +31,12 @@ public class GameManager : MonoBehaviour {
 
 	public bool destroyNextScene = false;
 
-	public Sprite room_complete;
-	public Sprite room_current;
-	public Sprite room_boss;
-	public Sprite room_starting;
-	public Sprite room_notComplete;
+	public Texture2D room_complete;
+	public Texture2D room_current;
+	public Texture2D room_boss;
+	public Texture2D room_starting;
+	public Texture2D room_notComplete;
+	public Texture2D room_empty;
 
 	[HideInInspector] public DungeonLayoutLoader dungeonLayout;
 	[HideInInspector] public int currentRoom;
@@ -121,7 +131,7 @@ public class GameManager : MonoBehaviour {
 	{
 		for (int i = 0; i < 15 * 15; i++)
 		{
-			PlaceMinimapRoom(i, Color.white, Color.white);
+			PlaceMinimapRoom(i, Color.white, Color.white, RoomType.EMPTY);
 		}
 		//Place left room if it exists
 		if (currentRoom % 15 != 0)
@@ -150,73 +160,70 @@ public class GameManager : MonoBehaviour {
 
 		for (int k = 0; k < seenRooms.Count; k++)
 		{
-			PlaceMinimapRoom(seenRooms[k], Color.white, Color.black);
+			PlaceMinimapRoom(seenRooms[k], Color.white, Color.black, RoomType.SEEN);
 		}
 
 		for (int i = 0; i < clearedRooms.Count; i++)
 		{
-			PlaceMinimapRoom(clearedRooms[i], Color.gray, Color.black);
+			PlaceMinimapRoom(clearedRooms[i], Color.gray, Color.black, RoomType.CLEARED);
 		}
 
 		for (int j = 0; j < shrineLocation.Count; j++)
 		{
-			PlaceMinimapRoom(shrineLocation[j], Color.yellow, Color.black);
+			PlaceMinimapRoom(shrineLocation[j], Color.yellow, Color.black, RoomType.START);
 		}
-		PlaceMinimapRoom(endLocation, Color.red, Color.black);
-		PlaceMinimapRoom(startLocation, Color.green, Color.black);
-		PlaceMinimapRoom(currentRoom, Color.blue, Color.black);
+		PlaceMinimapRoom(endLocation, Color.red, Color.black, RoomType.BOSS);
+		PlaceMinimapRoom(startLocation, Color.green, Color.black, RoomType.START);
+		PlaceMinimapRoom(currentRoom, Color.blue, Color.black, RoomType.CURRENT);
 		CreateVisibleMap(currentRoom);
 		minimapTex.Apply();
 		minimap.GetComponent<SpriteRenderer>().sprite = Sprite.Create(minimapTex, new Rect(0, 0, minimapTex.width, minimapTex.height), new Vector2(0, 0));
 	}
 
-	public void PlaceMinimapRoom(int i, Color solid, Color border)
+	public void PlaceMinimapRoom(int i, Color solid, Color border, RoomType type)
 	{
-		PlaceMinimapRoom(minimapTex, i, solid, border);
+		PlaceMinimapRoom(minimapTex, i, solid, border, type);
 	}
 
-	public void PlaceMinimapRoom(Texture2D t, int i, Color solid, Color border)
+	public void PlaceMinimapRoom(Texture2D t, int i, Color solid, Color border, RoomType type)
 	{
 		Color showCol = solid;
-		for (int y = 0; y < 8; y++)
+		for (int y = 0; y < 8 * 5; y++)
 		{
-			for (int x = 0; x < 16; x++)
+			for (int x = 0; x < 16 * 5; x++)
 			{
-				showCol = solid;
-				if (y == 0 || y == 7 || x == 0 || x == 15)
+				Color col = new Color();
+				switch(type)
 				{
-					showCol = border;
+					case RoomType.START:
+						col = room_starting.GetPixel(x, y);
+						break;
+					case RoomType.SEEN:
+						col = room_notComplete.GetPixel(x, y);
+						break;
+					case RoomType.BOSS:
+						col = room_boss.GetPixel(x, y);
+						break;
+					case RoomType.CURRENT:
+						col = room_current.GetPixel(x, y);
+						break;
+					case RoomType.CLEARED:
+						col = room_complete.GetPixel(x, y);
+						break;
+					case RoomType.EMPTY:
+						col = room_empty.GetPixel(x, y);
+						break;
 				}
-				//if(((y == 0 || y == 7) && (x == 7 || x == 8)) || ((x == 0 || x == 15) && (y == 3 || y == 4))) 
-				//{
-					//showCol = Color.magenta;
-				//}
-
-				t.SetPixel(((i % 15) * 16) + x, ((t.height - 1 - (int)i / 15) * 8) + y, new Color(showCol.r, showCol.g, showCol.b, 0.5f));
+				t.SetPixel(((i % 15) * 16 * 5) + x, ((t.height - 1 - (int)i / 15) * 8 * 5) + y, col);
 			}
 		}
 
 		t.Apply();
-
-		//CreateVisibleMap();
 	}
 
 	public void CreateVisibleMap(int i)
 	{
 		UnityEngine.UI.Image img = visibleMap.GetComponent<UnityEngine.UI.Image>();
-
-		/*Texture2D tex = new Texture2D(16 * 7, 8 * 9);
-		tex.filterMode = FilterMode.Point;
-
-		for (int y = 0; y < tex.height; y++)
-		{
-			for (int x = 0; x < tex.width; x++)
-			{
-				tex.SetPixel(x, tex.height - y, minimapTex.GetPixel(x + ((int)(i % 15) * 16) - (3 * 16), minimapTex.height - y - ((int)(i / 15)* 8) + (4 * 8)));
-			}
-		}
-
-		tex.Apply();*/
 
 		int xOffset = i % 15;
 		int yOffset = i / 15;

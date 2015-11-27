@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &100264
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 452584}
-  - 114: {fileID: 11405082}
-  m_Layer: 0
-  m_Name: SaveData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &149562
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,41 +24,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.9991922, y: 6.47682619, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 452584}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!4 &452584
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.9991922, y: -6.47682619, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 451810}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11405082
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 209cd8011f3d06e4983b0bd0eccac7b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_currentLevel: 0
-  m_exp: 0
-  m_gold: 0
-  m_weapon1: 0
-  m_weapon2: 0
-  saveExists: 0
 --- !u!114 &11466718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,8 +41,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  m_saveManager: {fileID: 11405082}
-  m_lastRunStats: {fileID: 0}
+  m_saveManager: {fileID: 0}
+  m_lastRunStats: {fileID: 134204, guid: aac21bf3d823ff248a819c99aa4568d1, type: 2}
   coinPrefab: {fileID: 116776, guid: f30414f88aea2d1428209d86131f5eb0, type: 2}
   healthPotionPrefab: {fileID: 158366, guid: 4d4dcfc1f2384ec49afa6fc8103893ef, type: 2}
   hpDropChance: .100000001
@@ -97,9 +51,15 @@ MonoBehaviour:
   minimapTex: {fileID: 0}
   visibleMap: {fileID: 0}
   visibleMapTex: {fileID: 0}
-  destroyNextScene: 1
+  destroyNextScene: 0
+  room_complete: {fileID: 2800000, guid: ca6304977252882418908b16cf42ef93, type: 3}
+  room_current: {fileID: 2800000, guid: 495f1041cb6099440a19d55af07048fe, type: 3}
+  room_boss: {fileID: 2800000, guid: 3b9cf7f19ec9ffd4988e891cb43709f5, type: 3}
+  room_starting: {fileID: 2800000, guid: e5f89fe0d30579141a2d1c861e2110e6, type: 3}
+  room_notComplete: {fileID: 2800000, guid: ab63a3be1b481d546895445d587d21b6, type: 3}
   dungeonLayout: {fileID: 0}
   currentRoom: 0
+  seenRooms: 
   clearedRooms: 
   shrineLocation: 
   startLocation: 0
@@ -123,9 +83,9 @@ MonoBehaviour:
   m_XPToLVL: 6400000096000000fa00000090010000
   m_hpGainPerLVL: 50
   m_healthDrop: 0
-  m_currentWeapon: {fileID: 123034, guid: 8fbc737fdcb1fc24ebb28baca02b6316, type: 2}
-  m_secondaryWeapon: {fileID: 169504, guid: bd26d9d6705de784087354e49e062aa4, type: 2}
-  m_defaultWeapon: {fileID: 123034, guid: 8fbc737fdcb1fc24ebb28baca02b6316, type: 2}
+  m_currentWeapon: {fileID: 143282, guid: 884e72685771f4f40a5724043467b0dd, type: 2}
+  m_secondaryWeapon: {fileID: 173356, guid: 4cb1172e9c2d7144cb9f42ff618ff6af, type: 2}
+  m_defaultWeapon: {fileID: 143282, guid: 884e72685771f4f40a5724043467b0dd, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
