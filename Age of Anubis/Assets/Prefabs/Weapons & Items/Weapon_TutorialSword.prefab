@@ -100,7 +100,7 @@ MonoBehaviour:
     m_effectType: 0
     m_effectDuration: 0
     m_effectStrength: 0
-    m_knockbackForce: 0
+    m_knockbackForce: 10
   m_trail: {fileID: 152188}
   m_swingType: 1
 --- !u!212 &21237752
@@ -161,7 +161,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_attack.m_knockbackForce
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 169504}
