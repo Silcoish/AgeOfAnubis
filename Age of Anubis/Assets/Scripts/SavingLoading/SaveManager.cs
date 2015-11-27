@@ -43,6 +43,8 @@ public class SaveManager : MonoBehaviour
 		m_exp = PlayerInventory.Inst.m_currentXP;
 		m_currentLevel = PlayerInventory.Inst.m_playerLevel;
 
+        PlayerInventory.Inst.CheckWeaponValidity();
+
 		if (PlayerInventory.Inst.m_currentWeapon != null)
 		{
 			m_weapon1 = PlayerInventory.Inst.m_currentWeapon.GetComponent<Weapon>().m_itemID;
@@ -53,6 +55,8 @@ public class SaveManager : MonoBehaviour
 		{
 			m_weapon2 = PlayerInventory.Inst.m_secondaryWeapon.GetComponent<Weapon>().m_itemID;
 		}
+        else
+            m_weapon2 = 0;
 
 		SaveLoad.Save();
 	}
@@ -63,20 +67,23 @@ public class SaveManager : MonoBehaviour
 		m_exp = 0;
 		m_currentLevel = 1;
 		m_weapon1 = 1;
-		m_weapon2 = 1;
+		m_weapon2 = 0;
 		SaveLoad.Save(SaveLoad.currentFilePath, this);
 	}
 
 	public void Load()
 	{
 		SaveLoad.Load();
-		PlayerInventory.Inst.UpdateUIElements();
-
+		
 		if(m_weapon1 != 0)
 			PlayerInventory.Inst.m_currentWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon1);
 		if(m_weapon2 != 0)
 			PlayerInventory.Inst.m_secondaryWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon2);
-		GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
-		
+        Debug.Log("Loadcalled: wep1= " + m_weapon1 + ", wep2= " + m_weapon2);
+        Debug.Log("Loadcalled: wep1= " + PlayerInventory.Inst.m_currentWeapon + ", wep2= " + PlayerInventory.Inst.m_secondaryWeapon);
+        PlayerInventory.Inst.CheckWeaponValidity();
+        //GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
+
+        PlayerInventory.Inst.UpdateUIElements();
 	}
 }
