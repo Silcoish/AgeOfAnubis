@@ -71,8 +71,8 @@ public class ENY_Eye_001 : Enemy
             case State.ATTACKING:
                 GameObject tempProj;
                 tempProj = Instantiate(m_laserProj, transform.position, transform.rotation) as GameObject;
-                tempProj.GetComponent<PROJ_Laser>().SetFacing(dir.x);
                 tempProj.transform.parent = transform;
+                //tempProj.GetComponent<PROJ_Laser>().SetFacing(dir.x);
 
                 m_state = State.RECHARGING;
                 m_curTimer = m_rechargeTimer;

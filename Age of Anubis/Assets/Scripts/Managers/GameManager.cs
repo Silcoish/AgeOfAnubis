@@ -22,7 +22,12 @@ public class GameManager : MonoBehaviour {
 
 	public bool destroyNextScene = false;
 
-	
+	public Sprite room_complete;
+	public Sprite room_current;
+	public Sprite room_boss;
+	public Sprite room_starting;
+	public Sprite room_notComplete;
+
 	[HideInInspector] public DungeonLayoutLoader dungeonLayout;
 	[HideInInspector] public int currentRoom;
 	[HideInInspector] public List<int> seenRooms;
