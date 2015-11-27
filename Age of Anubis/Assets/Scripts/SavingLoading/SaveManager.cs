@@ -77,10 +77,12 @@ public class SaveManager : MonoBehaviour
 		
 		if(m_weapon1 != 0)
 			PlayerInventory.Inst.m_currentWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon1);
+        else
+            PlayerInventory.Inst.m_currentWeapon = null;
 		if(m_weapon2 != 0)
 			PlayerInventory.Inst.m_secondaryWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon2);
-        Debug.Log("Loadcalled: wep1= " + m_weapon1 + ", wep2= " + m_weapon2);
-        Debug.Log("Loadcalled: wep1= " + PlayerInventory.Inst.m_currentWeapon + ", wep2= " + PlayerInventory.Inst.m_secondaryWeapon);
+        else
+            PlayerInventory.Inst.m_secondaryWeapon = null;
         PlayerInventory.Inst.CheckWeaponValidity();
         //GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 
