@@ -172,10 +172,12 @@ public class Shop : MonoBehaviour
     public void BuySelected()
     {
         if (PlayerInventory.Inst.m_currentGold >= m_selected.weapon.GetComponent<Weapon>().m_goldCost)
+        {
             PlayerInventory.Inst.m_currentGold -= m_selected.weapon.GetComponent<Weapon>().m_goldCost;
 
-        PlayerInventory.Inst.m_currentWeapon = m_selected.weapon;
-        GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
+            PlayerInventory.Inst.m_currentWeapon = m_selected.weapon;
+            GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
+        }
 
         //OnCloseShop();
     }

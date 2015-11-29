@@ -36,7 +36,7 @@ public class Damageable : MonoBehaviour
 
 
 	protected SpriteRenderer m_sp;
-	protected Color m_startColor;
+	//protected Color m_startColor;
 
 	protected Rigidbody2D m_rb;
 
@@ -53,7 +53,7 @@ public class Damageable : MonoBehaviour
 		if (m_sp == null)
 			m_sp = gameObject.GetComponentInChildren<SpriteRenderer>();
 
-		m_startColor = m_sp.color;
+		//m_startColor = m_sp.color;
 
 		m_maxHitpoints = m_hitPoints;
 
@@ -73,14 +73,14 @@ public class Damageable : MonoBehaviour
 		if (m_damageTimer > 0)
 		{
 			m_damageTimer -= Time.deltaTime;
-			m_sp.color = Color.Lerp(m_startColor, Color.red, m_damageTimer);
+			//m_sp.color = Color.Lerp(m_startColor, Color.red, m_damageTimer);
 		}
 
 		//POISON
 		if (m_timerPoison > 0)
 		{
 			m_timerPoison -= Time.deltaTime;
-			m_sp.color = Color.Lerp(m_sp.color, Color.green, SinLerp(m_timerPoison));
+			//m_sp.color = Color.Lerp(m_sp.color, Color.green, SinLerp(m_timerPoison));
 
 			m_timerPoisonHits += Time.deltaTime;
 
@@ -95,7 +95,7 @@ public class Damageable : MonoBehaviour
 		if (m_timerBurn > 0)
 		{
 			m_timerBurn -= Time.deltaTime;
-			m_sp.color = Color.Lerp(m_sp.color, Color.red, SinLerp(m_timerPoison));
+			//m_sp.color = Color.Lerp(m_sp.color, Color.red, SinLerp(m_timerPoison));
 
 			DamageBurn();
 
@@ -105,7 +105,7 @@ public class Damageable : MonoBehaviour
 		if (m_timerFreeze > 0)
 		{
 			m_timerFreeze -= Time.deltaTime;
-			m_sp.color = Color.Lerp(m_sp.color, Color.blue, SinLerp(m_timerPoison));
+			//m_sp.color = Color.Lerp(m_sp.color, Color.blue, SinLerp(m_timerPoison));
 
 			m_globalMoveSpeed = 0;
 
