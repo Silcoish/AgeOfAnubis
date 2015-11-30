@@ -771,6 +771,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   room: {fileID: 0}
   shopPlayer: {fileID: 0}
+  m_isBossCam: 0
+  m_playerTrans: {fileID: 0}
+  m_playerOffsetPos: {x: 0, y: 0}
+  m_bossTrans: {fileID: 0}
+  m_transOffset: 0
+  scalarX: 0
+  scalarY: 0
   lerpTime: .100000001
 --- !u!81 &1735124049
 AudioListener:
@@ -969,8 +976,14 @@ MonoBehaviour:
   visibleMap: {fileID: 138512016}
   visibleMapTex: {fileID: 0}
   destroyNextScene: 0
+  room_complete: {fileID: 0}
+  room_current: {fileID: 0}
+  room_boss: {fileID: 0}
+  room_starting: {fileID: 0}
+  room_notComplete: {fileID: 0}
   dungeonLayout: {fileID: 0}
   currentRoom: 0
+  seenRooms: 
   clearedRooms: 
   shrineLocation: 
   startLocation: 0

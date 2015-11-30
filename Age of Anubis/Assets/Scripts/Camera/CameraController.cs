@@ -127,7 +127,7 @@ public class CameraController : MonoBehaviour
 
                     Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, m_size.y / 2, Time.deltaTime * m_lerpSpeed);
 
-                    transform.position =  Vector3.Lerp(transform.position,  new Vector3(m_center.x, m_center.y, transform.position.z) , Time.deltaTime * m_lerpSpeed);
+                    transform.position =  Vector3.Lerp(transform.position,  new Vector3(m_center.x, m_center.y, transform.position.z) , Time.deltaTime * 5);
 
 
 
@@ -144,9 +144,11 @@ public class CameraController : MonoBehaviour
             {
                 if (shopPlayer == null)
                     shopPlayer = GameManager.inst.player;
+                if (shopPlayer == null)
+                    m_playerTrans = GameManager.inst.player.transform;
                 //set the position to the player position, then move it later to adjust for walls
                 //t.position = new Vector3(shopPlayer.transform.position.x, shopPlayer.transform.position.y, t.position.z);
-                t.position = Vector2.Lerp(t.position, shopPlayer.transform.position + (Vector3.right * 1.5f * m_playerForwardOffset * m_playerTrans.localScale.x), Time.deltaTime * lerpTime);
+                t.position = Vector2.Lerp(t.position, shopPlayer.transform.position + (Vector3.right * 1.5f * m_playerForwardOffset * m_playerTrans.localScale.x), Time.deltaTime * 2);
                 t.position = new Vector3(t.position.x, t.position.y, -10f);
 
                 Vector2 pos = new Vector2(t.position.x, t.position.y);
