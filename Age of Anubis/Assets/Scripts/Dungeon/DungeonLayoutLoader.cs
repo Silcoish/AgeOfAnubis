@@ -231,7 +231,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 		GameManager.inst.minimap.transform.position = new Vector2(-40, 0);
 		GameManager.inst.minimap.AddComponent<SpriteRenderer>();
 
-		GameManager.inst.minimapTex = new Texture2D(SIZE * 16, SIZE * 8, TextureFormat.RGBA32, false, true);
+		GameManager.inst.minimapTex = new Texture2D(SIZE * 16 * 5, SIZE * 8 * 5, TextureFormat.RGBA32, false, true);
 		Texture2D tex = GameManager.inst.minimapTex;
 		tex.filterMode = FilterMode.Point;
 
@@ -239,11 +239,11 @@ public class DungeonLayoutLoader : MonoBehaviour
 		{
 			if (rooms[i] != null)
 			{
-				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(1, 1, 1, 0.5f), new Color(0f, 0f, 0f, 0.5f));
+				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(1, 1, 1, 0.5f), new Color(0f, 0f, 0f, 0.5f), GameManager.RoomType.SEEN);
 			}
 			else
 			{
-				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(1, 1, 1, 0.5f), new Color(1, 1, 1, 0.5f));
+				GameManager.inst.PlaceMinimapRoom(tex, i, new Color(1, 1, 1, 0.5f), new Color(1, 1, 1, 0.5f), GameManager.RoomType.SEEN);
 			}
 		}
 
