@@ -311,6 +311,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1241894677 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 124226, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
+  m_PrefabInternal: {fileID: 1056709504}
 --- !u!1 &1400201807
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,9 +412,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97fbcc377984e7489a1cec5b7ae080b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 1661453374}
+  room: {fileID: 1241894677}
   shopPlayer: {fileID: 1909112088}
-  lerpTime: .100000001
+  m_isBossCam: 0
+  m_playerTrans: {fileID: 1909112089}
+  m_playerOffsetPos: {x: 0, y: 0}
+  m_bossTrans: {fileID: 1454910424}
+  m_transOffset: 3
+  scalarX: 0
+  scalarY: 0
+  lerpTime: 2
 --- !u!1001 &1453628461
 Prefab:
   m_ObjectHideFlags: 0
@@ -465,16 +476,16 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 128050, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
   m_PrefabInternal: {fileID: 1056709504}
+--- !u!4 &1454910424 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 458304, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
+  m_PrefabInternal: {fileID: 1056709504}
 --- !u!114 &1541273141 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11413014, guid: 2f49a1ef5444917448f1c8c0ac7c0d77,
     type: 2}
   m_PrefabInternal: {fileID: 1453628461}
   m_Script: {fileID: 11500000, guid: b2a3207e126481f4bad6999b8edb3155, type: 3}
---- !u!1 &1661453374 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 113930, guid: 2f49a1ef5444917448f1c8c0ac7c0d77, type: 2}
-  m_PrefabInternal: {fileID: 1453628461}
 --- !u!1001 &1766956085
 Prefab:
   m_ObjectHideFlags: 0
@@ -484,11 +495,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 409714, guid: fb13bc690afc35d47ba84b4b24f1688e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -94.8259964
+      value: -3.4000001
       objectReference: {fileID: 0}
     - target: {fileID: 409714, guid: fb13bc690afc35d47ba84b4b24f1688e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -7.68900013
+      value: .899999976
       objectReference: {fileID: 0}
     - target: {fileID: 409714, guid: fb13bc690afc35d47ba84b4b24f1688e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -526,6 +537,10 @@ MonoBehaviour:
 --- !u!1 &1909112088 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 118678, guid: fb13bc690afc35d47ba84b4b24f1688e, type: 2}
+  m_PrefabInternal: {fileID: 1766956085}
+--- !u!4 &1909112089 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 409714, guid: fb13bc690afc35d47ba84b4b24f1688e, type: 2}
   m_PrefabInternal: {fileID: 1766956085}
 --- !u!1 &2019747033
 GameObject:

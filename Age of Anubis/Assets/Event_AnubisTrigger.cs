@@ -17,5 +17,8 @@ public class Event_AnubisTrigger : MonoBehaviour
 			anubis.SetActive(true);
 			Destroy(this);
 		}
+
+        Camera.main.gameObject.GetComponent<CameraController>().m_isBossCam = true;
+        Camera.main.gameObject.GetComponent<CameraController>().m_bossTrans = anubis.transform;
 	}
 }

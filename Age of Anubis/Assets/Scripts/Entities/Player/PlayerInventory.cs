@@ -146,15 +146,20 @@ public class PlayerInventory : MonoBehaviour
     public void CheckWeaponValidity()
     {
         // Check for weapon in primary slot, move secondary or generate default if not.
-        if (!m_currentWeapon)
+        if (m_currentWeapon == null)
         {
-            if (m_secondaryWeapon)
+            Debug.Log("Checking Weapon Valididy: curwep = " + m_currentWeapon);
+            if (m_secondaryWeapon != null)
             {
+                Debug.Log("Checking Weapon Valididy: secwep = " + m_secondaryWeapon);
                 m_currentWeapon = m_secondaryWeapon;
                 m_secondaryWeapon = null;
             }
             else
+            {
                 m_currentWeapon = m_defaultWeapon;
+                Debug.Log("Checking Weapon Validity: default = " + m_defaultWeapon);
+            } 
         }
     }
 }
