@@ -57,6 +57,7 @@ MonoBehaviour:
   room_boss: {fileID: 2800000, guid: 3b9cf7f19ec9ffd4988e891cb43709f5, type: 3}
   room_starting: {fileID: 2800000, guid: e5f89fe0d30579141a2d1c861e2110e6, type: 3}
   room_notComplete: {fileID: 2800000, guid: ab63a3be1b481d546895445d587d21b6, type: 3}
+  room_empty: {fileID: 0}
   dungeonLayout: {fileID: 0}
   currentRoom: 0
   seenRooms: 
@@ -83,16 +84,28 @@ MonoBehaviour:
   m_XPToLVL: 6400000096000000fa00000090010000
   m_hpGainPerLVL: 50
   m_healthDrop: 0
-  m_currentWeapon: {fileID: 143282, guid: 884e72685771f4f40a5724043467b0dd, type: 2}
-  m_secondaryWeapon: {fileID: 173356, guid: 4cb1172e9c2d7144cb9f42ff618ff6af, type: 2}
-  m_defaultWeapon: {fileID: 143282, guid: 884e72685771f4f40a5724043467b0dd, type: 2}
+  m_currentWeapon: {fileID: 123034, guid: 8fbc737fdcb1fc24ebb28baca02b6316, type: 2}
+  m_secondaryWeapon: {fileID: 169504, guid: bd26d9d6705de784087354e49e062aa4, type: 2}
+  m_defaultWeapon: {fileID: 123034, guid: 8fbc737fdcb1fc24ebb28baca02b6316, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_secondaryWeapon
+      value: 
+      objectReference: {fileID: 169504, guid: bd26d9d6705de784087354e49e062aa4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_currentWeapon
+      value: 
+      objectReference: {fileID: 123034, guid: 8fbc737fdcb1fc24ebb28baca02b6316, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_defaultWeapon
+      value: 
+      objectReference: {fileID: 123034, guid: 8fbc737fdcb1fc24ebb28baca02b6316, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 149562}
