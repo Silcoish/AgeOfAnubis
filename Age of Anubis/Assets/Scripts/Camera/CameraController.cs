@@ -53,12 +53,14 @@ public class CameraController : MonoBehaviour
 
 	void Update()
 	{
+		m_playerTrans = GameManager.inst.player.transform;
+
         if (m_isBossCam)
         {
             if (room != null)
             {
                 if (shopPlayer == null)
-                   m_playerTrans = GameManager.inst.player.transform;
+					m_playerTrans = GameManager.inst.player.transform;
 
                 if (m_playerTrans != null && m_bossTrans != null)
                 {

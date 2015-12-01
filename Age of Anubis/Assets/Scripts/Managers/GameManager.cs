@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour {
 						col = room_empty.GetPixel(x, y);
 						break;
 				}
-				t.SetPixel(((i % 15) * 16 * 5) + x, ((t.height - 1 - (int)i / 15) * 8 * 5) + y, col);
+				t.SetPixel(((i % 15) * 80) + x, ((t.height - 1 - (int)i / 15) * 40) + y, col);
 			}
 		}
 
