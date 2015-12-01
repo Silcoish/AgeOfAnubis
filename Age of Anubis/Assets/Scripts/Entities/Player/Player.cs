@@ -129,7 +129,7 @@ public class Player : Damageable
         }
 
         Damage d = new Damage();
-        d.amount = 20;
+        d.amount = 2;
         d.type = DamageType.NONE;
 
         if (Input.GetKeyDown(KeyCode.G))

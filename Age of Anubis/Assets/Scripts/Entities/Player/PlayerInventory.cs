@@ -104,9 +104,10 @@ public class PlayerInventory : MonoBehaviour
     
     public void UpdateUIElements()
     {
-        
-        
-        
+        UIManager.Inst.UpdateCoinTotal(m_currentGold);
+        UIManager.Inst.UpdateXPBar(GetCurrentLevelPercent());
+        UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
+        UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
     }
 
     public float GetCurrentLevelPercent()

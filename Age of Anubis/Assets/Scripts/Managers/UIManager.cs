@@ -6,6 +6,11 @@ public class UIManager : MonoBehaviour {
 
 	public static UIManager Inst;
 
+    PlayerInventory m_pi;
+
+    Animator m_anim;
+    AudioSource m_as;
+
 	public Image m_healthBar;
 	public Image m_xPBar;
 
@@ -57,15 +62,28 @@ public class UIManager : MonoBehaviour {
 		{
 			Destroy(gameObject);
 		}
+
+        m_anim = gameObject.GetComponent<Animator>();
+        m_as = gameObject.GetComponent<AudioSource>();
 	}
 
 	void Start()
 	{
 		PlayerInventory.Inst.UpdateUIElements();
+
+        m_pi = PlayerInventory.Inst;
+
+        m_xPBar.fillAmount = m_xPBarSecondary.fillAmount;
+        m_healthBarSecondary.fillAmount = m_healthBar.fillAmount;
+        m_displayGold = m_playerGold;
+        m_coins.text = ((int)m_displayGold).ToString();
+        m_playerLevel.text = m_displayLevel.ToString();
 	}
 
     void Update()
     {
+        //PlayerInventory.Inst.UpdateUIElements();
+
         if (m_xPBar.fillAmount != m_xPBarSecondary.fillAmount)
         {
             m_xPBar.fillAmount += m_fillSpeed * Time.deltaTime;
@@ -86,9 +104,37 @@ public class UIManager : MonoBehaviour {
             }
         }
 
+
+        //ANimation for low health
+        //m_anim.SetLayerWeight(1, (1 - (m_healthBar.fillAmount  * 5f)) + 0.8f);
+
+
+        if (m_healthBar.fillAmount <= 0.2f)
+        {
+            m_anim.SetBool("isLowHealth", true);
+            m_as.volume = 1;
+        }
+        else
+        {
+            m_anim.SetBool("isLowHealth", false);
+            m_as.volume = 0;
+        }
+
+
+
+
         if (m_displayGold != m_playerGold)
         {
-            m_displayGold += m_coinSpeed * Time.deltaTime;
+            float dif = m_playerGold - m_displayGold;
+
+            if (dif > 100)
+                m_displayGold += m_coinSpeed * 5;
+            else if (dif > 50)
+                m_displayGold += m_coinSpeed * 3;
+            else if (dif > 30)
+                m_displayGold += m_coinSpeed * 2;
+            else
+                m_displayGold += m_coinSpeed;
 
             if (m_displayGold > m_playerGold)
             {
@@ -174,6 +220,16 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public void BuyMain()
+    {
+        m_anim.SetTrigger("BuyMain");
+    }
+
+    public void BuySecondary()
+    {
+        m_anim.SetTrigger("BuySecondary");
+    }
+
     void SetEffectIcon(Image im, DamageType dt)
     {
         switch (dt)
@@ -207,18 +263,28 @@ public class UIManager : MonoBehaviour {
 
 	public void UpdateCoinTotal(int amount)
 	{
-        m_playerGold = (float)amount;
+        if (amount > m_playerGold)
+        {
+            m_playerGold = (float)amount;
 
-        Vector2 pos = Player.Inst.gameObject.transform.position;
+            Vector2 pos = Player.Inst.gameObject.transform.position;
 
-        pos = Camera.main.WorldToScreenPoint(pos);
+            pos = Camera.main.WorldToScreenPoint(pos);
 
-        GameObject temp =  Instantiate(m_prefabCoin, pos, m_prefabCoin.transform.rotation) as GameObject;
+            GameObject temp = Instantiate(m_prefabCoin, pos, m_prefabCoin.transform.rotation) as GameObject;
 
-        temp.transform.SetParent(gameObject.transform);
+            temp.transform.SetParent(gameObject.transform);
 
-        temp.transform.position = pos;
-        temp.transform.localScale = Vector3.one;
+            temp.transform.position = pos;
+            temp.transform.localScale = Vector3.one;
+        }
+        else
+        {
+            m_playerGold = (float)amount;
+            m_displayGold = (float)amount;
+            m_coins.text = ((int)m_displayGold).ToString();
+
+        }
 
 	}
 

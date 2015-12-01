@@ -44,6 +44,8 @@ public class Shop : MonoBehaviour
 
     public bool m_needsUpdateing = true;
 
+    public bool m_isActive = true;
+
     //[SerializeField]
     //WeaponPrefabHolder m_allWeaponPrefabs;
 
@@ -109,7 +111,7 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_es.currentSelectedGameObject != null)
+        if (m_es.currentSelectedGameObject != null && m_isActive)
         {
             if (Input.GetButtonDown("Cancel"))
                 OnCloseShop();
@@ -175,9 +177,30 @@ public class Shop : MonoBehaviour
         {
             PlayerInventory.Inst.m_currentGold -= m_selected.weapon.GetComponent<Weapon>().m_goldCost;
 
-            PlayerInventory.Inst.m_currentWeapon = m_selected.weapon;
+            if (PlayerInventory.Inst.m_secondaryWeapon == null)
+            {
+                PlayerInventory.Inst.m_secondaryWeapon = m_selected.weapon;
+                UIManager.Inst.BuySecondary();
+            }
+            else
+            {
+                PlayerInventory.Inst.m_currentWeapon = m_selected.weapon;
+                UIManager.Inst.BuyMain();
+            }
+
+            m_es.currentSelectedGameObject.GetComponent<Button>().interactable = false;
+
+            foreach (var b in m_allButtons)
+            {
+                if (b.interactable == true)
+                    m_es.SetSelectedGameObject(b.gameObject);
+            }
+
+
             GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
         }
+
+        PlayerInventory.Inst.UpdateUIElements();
 
         //OnCloseShop();
     }
@@ -454,7 +477,7 @@ public class Shop : MonoBehaviour
         //ProgressShopItems();
     }
 
-    void DeactivateShop()
+    public void DeactivateShop()
     {
 		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_cancel);
         foreach (var b in m_allButtons)
@@ -462,9 +485,10 @@ public class Shop : MonoBehaviour
             b.interactable = false;
         }
         m_es.SetSelectedGameObject(null);
+        m_isActive = false;
     }
 
-    void ActivateShop()
+    public void ActivateShop()
     {
 		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_confirm);
         foreach (var b in m_allButtons)
@@ -472,6 +496,7 @@ public class Shop : MonoBehaviour
             b.interactable = true;
         }
         m_es.SetSelectedGameObject(m_es.firstSelectedGameObject);
+        m_isActive = true;
     }
 
     public void ForceProgressShop()
