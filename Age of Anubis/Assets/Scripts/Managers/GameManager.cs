@@ -195,24 +195,32 @@ public class GameManager : MonoBehaviour {
 				Color col = new Color();
 				switch(type)
 				{
-					case RoomType.START:
-						col = room_starting.GetPixel(x, y);
-						break;
-					case RoomType.SEEN:
-						col = room_notComplete.GetPixel(x, y);
-						break;
-					case RoomType.BOSS:
-						col = room_boss.GetPixel(x, y);
-						break;
-					case RoomType.CURRENT:
-						col = room_current.GetPixel(x, y);
+					case RoomType.EMPTY:
+						col = room_empty.GetPixel(x, y);
+						col.a = 0.0f;
 						break;
 					case RoomType.CLEARED:
 						col = room_complete.GetPixel(x, y);
+						col.a = 1f;
 						break;
-					case RoomType.EMPTY:
-						col = room_empty.GetPixel(x, y);
+					case RoomType.START:
+						col = room_starting.GetPixel(x, y);
+						col.a = 1f;
 						break;
+					case RoomType.SEEN:
+						col = room_notComplete.GetPixel(x, y);
+						col.a = 1f;
+						break;
+					case RoomType.BOSS:
+						col = room_boss.GetPixel(x, y);
+						col.a = 1f;
+						break;
+					case RoomType.CURRENT:
+						col = room_current.GetPixel(x, y);
+						col.a = 1f;
+						break;
+					
+					
 				}
 				t.SetPixel(((i % 15) * 80) + x, ((t.height - 1 - (int)i / 15) * 40) + y, col);
 			}
