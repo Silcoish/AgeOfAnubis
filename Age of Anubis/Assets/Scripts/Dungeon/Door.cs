@@ -36,9 +36,12 @@ public class Door : MonoBehaviour {
 	{
 		if(col.tag == "Player")
 		{
-			col.transform.position = partnerDoor.transform.GetChild(0).position;
-			partnerDoor.parentRoom.GetComponent<RoomObject>().EnteredRoom();
-			parentRoom.GetComponent<RoomObject>().LeaveRoom();
+            if (partnerDoor != null)
+            {
+                col.transform.position = partnerDoor.transform.GetChild(0).position;
+                partnerDoor.parentRoom.GetComponent<RoomObject>().EnteredRoom();
+                parentRoom.GetComponent<RoomObject>().LeaveRoom();
+            }
 		}
 	}
 
