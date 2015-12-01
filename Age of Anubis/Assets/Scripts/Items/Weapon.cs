@@ -21,8 +21,6 @@ public class Weapon : MonoBehaviour
     {
 		m_col = gameObject.GetComponent<PolygonCollider2D>();
         m_col.enabled = false;
-
-        m_trail.SetActive(false);
     }
 
 	void Update()
@@ -39,12 +37,14 @@ public class Weapon : MonoBehaviour
         if(transform.parent.parent.parent.GetComponent<Player>().isAttacking())
         {
             m_col.enabled = true;
-            m_trail.SetActive(true);
+			if(m_trail != null)
+				m_trail.SetActive(true);
         }
         else
         {
             m_col.enabled = false;
-            m_trail.SetActive(false);
+			if(m_trail != null)
+				m_trail.SetActive(false);
         }
 	}
 
