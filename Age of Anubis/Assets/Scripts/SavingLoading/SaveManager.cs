@@ -48,7 +48,7 @@ public class SaveManager : MonoBehaviour
 		if (PlayerInventory.Inst.m_currentWeapon != null)
 		{
 			m_weapon1 = PlayerInventory.Inst.m_currentWeapon.GetComponent<Weapon>().m_itemID;
-			print(PlayerInventory.Inst.m_currentWeapon.GetComponent<Weapon>().m_name);
+			//print(PlayerInventory.Inst.m_currentWeapon.GetComponent<Weapon>().m_name);
 		}
 
 		if (PlayerInventory.Inst.m_secondaryWeapon != null)

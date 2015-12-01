@@ -176,7 +176,14 @@ public class Damageable : MonoBehaviour
             dam = UpdateDamage(dam);
             m_hitPoints -= dam.amount;
 
-            //AudioManager.Inst.PlaySFX(AudioManager.Inst.a_takeDamage);
+			if(!(this is Player))
+			{
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_takeDamage);
+			}
+			else
+			{
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_takeDamage);
+			}
 
             // Old Knockback calculations
             //Vector2 kbForce = (transform.position - dam.fromGO.position).normalized * dam.knockback;

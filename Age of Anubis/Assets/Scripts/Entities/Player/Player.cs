@@ -158,8 +158,10 @@ public class Player : Damageable
 				LastRunStats.inst.died = true;
 			}
 
+			AudioManager.Inst.FadeMusic(AudioManager.Inst.s_none, 8.0f);
 			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_death);
 			RecoverHealth(0);
+
         } 
     }
 
@@ -202,8 +204,9 @@ public class Player : Damageable
 	
 	void CheckHealth()
 	{
-		if(m_hitPoints / m_maxHitpoints * 100 <= 20.0f)
+		if (((float)m_hitPoints / (float)m_maxHitpoints * 100) <= 20.0f)
 		{
+			print("Lower than 20%: " + ((float)m_hitPoints / (float)m_maxHitpoints * 100));
 			lowHealthCounter += Time.deltaTime;
 			if(lowHealthCounter >= lowHealthTimer)
 			{

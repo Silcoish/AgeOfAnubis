@@ -236,11 +236,8 @@ public class GameManager : MonoBehaviour {
 		int xOffset = i % 15;
 		int yOffset = i / 15;
 
-		print("xOffset: " + xOffset);
-		print("YOffset: " + yOffset);
-
 		img.sprite = Sprite.Create(minimapTex, new Rect(Vector2.zero, new Vector2(minimapTex.width, minimapTex.height)), Vector2.zero);
-		print("Moving to: " + new Vector2(minimapStartPos.x - (xOffset * (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15))));
+		//print("Moving to: " + new Vector2(minimapStartPos.x - (xOffset * (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15))));
 		visibleMap.GetComponent<RectTransform>().localPosition = new Vector2(minimapStartPos.x - (xOffset * (720 / 15) + (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15)));
 
 	}

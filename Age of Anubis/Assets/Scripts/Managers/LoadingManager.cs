@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -128,6 +128,8 @@ public class LoadingManager : MonoBehaviour
 		m_nextScene = levelName;
 		m_showLoadingScreen = showLoadingScreen;
 		ChangeStates(LoadingState.FadeIn);
+
+		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_none, 4.0f);
 	}
 
 

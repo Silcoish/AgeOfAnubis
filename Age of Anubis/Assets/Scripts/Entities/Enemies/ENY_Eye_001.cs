@@ -115,6 +115,6 @@ public class ENY_Eye_001 : Enemy
 
 	public void PlayBlinkSFX()
 	{
-		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_eye_blink);
+		
 	}
 }

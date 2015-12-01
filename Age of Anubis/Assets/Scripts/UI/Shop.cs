@@ -198,7 +198,12 @@ public class Shop : MonoBehaviour
 
 
             GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_purchase);
         }
+		else
+		{
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_cancel);
+		}
 
         PlayerInventory.Inst.UpdateUIElements();
 
@@ -631,4 +636,9 @@ public class Shop : MonoBehaviour
         }
 
     }
+
+	public void SelectAudio()
+	{
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_select);
+	}
 }

@@ -117,6 +117,7 @@ public class ENY_Snake_001 : PhysicsEnemy
                     {
                         m_state = State.ATTACKING;
                         m_anim.SetTrigger("Attack");
+						AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_spit);
                         //Debug.Log("Enter Attack State");
                     }
                     break;

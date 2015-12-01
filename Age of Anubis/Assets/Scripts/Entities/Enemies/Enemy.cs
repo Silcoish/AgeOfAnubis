@@ -86,6 +86,7 @@ public class Enemy : Damageable
         if (GameManager.inst.coinPrefab && !spawnedPotion)
             Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
 
+		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_die);
         PlayerInventory.Inst.ChangeXP(m_XP);
 		gameObject.SetActive(false);
 	}
