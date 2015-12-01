@@ -168,11 +168,20 @@ public class Player : Damageable
 		if(!m_isDead)
 		{
 			m_isDead = true;
-			PlayerInventory.Inst.DeathReset();
-			// Load shop level.
-			LoadingManager.Inst.LoadLevel("ShopScene", false);
+			
+            // Check if we are in a tutorial room, otherwise load shop
+            if (Camera.main.GetComponent<CameraController>().room.name == "Room_Tutorial1"
+                || Camera.main.GetComponent<CameraController>().room.name == "Room_Tutorial2")
+            {
+                LoadingManager.Inst.LoadLevel("Tutorial", false);
+            }
+            else
+            {
+                PlayerInventory.Inst.DeathReset();
+                // Load shop level.
+                LoadingManager.Inst.LoadLevel("ShopScene", false);
+            }            
 		}
-
     }
 
 	public void LeaveDungeon()
