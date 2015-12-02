@@ -10,6 +10,7 @@ public class PlayerLegsSounds : MonoBehaviour
 {
     public void PlayFootstep()
 	{
-		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_step);
+		if(GameManager.inst.player.GetComponent<Player>().isGrounded)
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_step);
 	}
 }

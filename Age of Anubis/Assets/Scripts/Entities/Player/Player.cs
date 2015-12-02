@@ -46,6 +46,9 @@ public class Player : Damageable
 	public float lowHealthTimer = 4.0f;
 	public float lowHealthCounter;
 
+	public bool lastFrameGrounded = false;
+	public bool isGrounded = false;
+
     //public float jumpMaxSpeed;
     //public float jumpMinSpeed;
 
@@ -104,6 +107,8 @@ public class Player : Damageable
 
 	public override void UpdateOverride()
     {
+		lastFrameGrounded = isGrounded;
+
         if(m_isDying)
         {
             m_rb.velocity = new Vector2(0, m_rb.velocity.y);
@@ -379,7 +384,10 @@ public class Player : Damageable
                         SetAnimGrounded(true); // Tell the animator we have landed
                         m_stopJump = false;
 
-						//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_land);
+						if(!lastFrameGrounded)
+							AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_land);
+
+
 					}
 				}
                 else
@@ -463,6 +471,8 @@ public class Player : Damageable
         m_anim.SetBool("Grounded", isGrounded);
         m_anim_arm.SetBool("Grounded", isGrounded);
         m_anim_legs.SetBool("Grounded", isGrounded);
+
+		this.isGrounded = isGrounded;
     }
 
     // Set the vertical speed value of the animators
