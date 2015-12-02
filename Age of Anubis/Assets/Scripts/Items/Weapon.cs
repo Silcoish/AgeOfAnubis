@@ -52,7 +52,7 @@ public class Weapon : MonoBehaviour
     {
         if (!m_isAttacking)
 		{
-			//PlaySFX();
+			PlaySwingSFX();
 			anim.SetInteger("AttackType", (int)m_swingType);
             anim.SetTrigger("Attack");
 		} 
@@ -106,6 +106,22 @@ public class Weapon : MonoBehaviour
 			case WeaponSwing.HEAVY:
 				print("Heavy");
 				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_thump);
+				break;
+		}
+	}
+
+	void PlaySwingSFX()
+	{
+		switch (m_swingType)
+		{
+			case WeaponSwing.LIGHT:
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_dagger_swing);
+				break;
+			case WeaponSwing.MEDIUM:
+				//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_giveDamage); TODO
+				break;
+			case WeaponSwing.HEAVY:
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_axe_swing);
 				break;
 		}
 	}

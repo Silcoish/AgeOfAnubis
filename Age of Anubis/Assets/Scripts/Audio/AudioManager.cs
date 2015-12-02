@@ -46,6 +46,8 @@ public class AudioManager : MonoBehaviour
     public AudioStruct a_poison;
     public AudioStruct a_stab;
     public AudioStruct a_thump;
+	public AudioStruct a_axe_swing;
+	public AudioStruct a_dagger_swing;
 	public AudioStruct a_healthPot;
 	public AudioStruct a_ambience;
     [Header("Player")]
