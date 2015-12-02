@@ -373,6 +373,8 @@ public class Player : Damageable
 		{
 			RaycastHit2D[] allHits = Physics2D.CircleCastAll((Vector2)(transform.position) + (Vector2)m_colFeet.offset, m_colFeet.radius, Vector2.down, m_groundedCheckDistance);
 
+            isGrounded = false;
+
 			foreach (var hit in allHits)
 			{
 				if (hit.collider.CompareTag("NotSolid") || hit.collider.CompareTag("Solid") || hit.collider.CompareTag("Wall"))
@@ -386,15 +388,15 @@ public class Player : Damageable
 
 						if(!lastFrameGrounded)
 							AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_land);
-
-
+                        break;
 					}
 				}
-                else
-                {
-                    SetAnimGrounded(false); // Either we are still airborne from jumping, or are falling off a platform
-                }
 			}
+
+            if (!isGrounded)
+                SetAnimGrounded(false);// Either we are still airborne from jumping, or are falling off a platform
+
+
 		}
 	}
 
