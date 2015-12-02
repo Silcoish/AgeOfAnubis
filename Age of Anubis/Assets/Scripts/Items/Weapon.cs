@@ -96,16 +96,13 @@ public class Weapon : MonoBehaviour
 		switch (m_swingType)
 		{
 			case WeaponSwing.LIGHT:
-				print("Light");
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_cut);
-				break;
 			case WeaponSwing.MEDIUM:
-				print("Medium");
-				//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_giveDamage); TODO
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_takeDamage);
 				break;
 			case WeaponSwing.HEAVY:
 				print("Heavy");
 				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_thump);
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_takeDamage);
 				break;
 		}
 	}
@@ -119,6 +116,7 @@ public class Weapon : MonoBehaviour
 				break;
 			case WeaponSwing.MEDIUM:
 				//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_giveDamage); TODO
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_cut);
 				break;
 			case WeaponSwing.HEAVY:
 				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_axe_swing);
