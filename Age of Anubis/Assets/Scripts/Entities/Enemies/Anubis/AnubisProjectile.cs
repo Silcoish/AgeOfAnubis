@@ -46,4 +46,9 @@ public class AnubisProjectile : Enemy
 	{
 		collider.isTrigger = false;
 	}
+
+    public override void OnTakeDamage(Damage dam)
+    {
+        // Empty override so they don't take damage/knockback/die
+    }
 }

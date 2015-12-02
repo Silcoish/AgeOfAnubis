@@ -326,15 +326,15 @@ public class Player : Damageable
 	{
 		if (m_jumpCounter > 0)
 		{
+            if (m_jumpCloud != null)
+            {
+                Instantiate(m_jumpCloud, new Vector3(transform.position.x, transform.position.y - 0.8F, 0), transform.rotation);
+            }
+
             if(!m_anim.GetBool("Grounded"))
             {
                 m_velocity.y = (m_jumpHeight * 0.8F) * m_globalMoveSpeed;
                 m_stopJump = false;
-
-                if (m_jumpCloud != null)
-                {
-                    Instantiate(m_jumpCloud, new Vector3(transform.position.x, transform.position.y - 0.8F, 0), transform.rotation);
-                }
             }
             else
             {
