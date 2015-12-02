@@ -37,6 +37,7 @@ public class PlayerInventory : MonoBehaviour
 		if(GameManager.inst.m_saveManager != null)
 		{
 			m_currentGold = GameManager.inst.m_saveManager.m_gold;
+			print("Current Gold: " + m_currentGold);
 			m_savedGold = m_currentGold;
 			m_currentXP = (int)GameManager.inst.m_saveManager.m_exp;
 			m_savedXP = m_currentXP;
