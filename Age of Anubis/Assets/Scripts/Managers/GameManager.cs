@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour {
 	public Texture2D room_notComplete;
 	public Texture2D room_empty;
 
+	private bool map_first_refresh = false;
+
 	public GameObject bossHPObject;
 
 	[HideInInspector] public DungeonLayoutLoader dungeonLayout;
@@ -129,12 +131,20 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void RefreshMinimap()
+	public void FirstRefreshMap()
 	{
 		for (int i = 0; i < 15 * 15; i++)
 		{
 			PlaceMinimapRoom(i, Color.white, Color.white, RoomType.EMPTY);
 		}
+
+		map_first_refresh = true;
+	}
+
+	public void RefreshMinimap()
+	{
+		if (!map_first_refresh)
+			FirstRefreshMap();
 		//Place left room if it exists
 		if (currentRoom % 15 != 0)
 		{
