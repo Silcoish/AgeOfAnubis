@@ -76,6 +76,7 @@ public class Door : MonoBehaviour {
 
 	public void Unlock()
 	{
+		
 		//If partner doesn't exist, don't actually unlock the door. 
 		if (partnerDoor == null)
 			return;
