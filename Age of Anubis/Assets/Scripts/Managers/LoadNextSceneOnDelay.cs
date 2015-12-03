@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LoadNextSceneOnDelay : MonoBehaviour 
@@ -16,5 +16,10 @@ public class LoadNextSceneOnDelay : MonoBehaviour
 
 		if (m_timer > m_delayTime)
 			LoadingManager.Inst.LoadLevel(m_nextScene, m_showLoadingScreen);
+
+		if(Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1"))
+		{
+			LoadingManager.Inst.LoadLevel("StartScreen", false);
+		}
 	}
 }
