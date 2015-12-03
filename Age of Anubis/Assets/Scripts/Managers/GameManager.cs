@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour {
 	public Texture2D room_notComplete;
 	public Texture2D room_empty;
 
+	public GameObject bossHPObject;
+
 	[HideInInspector] public DungeonLayoutLoader dungeonLayout;
 	[HideInInspector] public int currentRoom;
 	[HideInInspector] public List<int> seenRooms;

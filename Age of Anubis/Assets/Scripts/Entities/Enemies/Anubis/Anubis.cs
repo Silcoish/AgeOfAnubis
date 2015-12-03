@@ -136,9 +136,9 @@ public class Anubis : Enemy
 		rb = GetComponent<Rigidbody2D>();
 		spawnedEnemies = new List<GameObject>();
 
-		if(GameObject.Find("BossHealth") != null)
+		if (GameManager.inst.bossHPObject != null)
 		{
-			UIObject = GameObject.FindGameObjectWithTag("BossHealth");
+			UIObject = GameManager.inst.bossHPObject;
 			UIObject.SetActive(true);
 			UIImage = UIObject.transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
 		}
