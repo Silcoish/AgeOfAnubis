@@ -22,7 +22,8 @@ public class LoadingManager : MonoBehaviour
 	string m_nextScene = null;
 	bool m_showLoadingScreen = true;
 
-
+	public string[] tooltips;
+	public UnityEngine.UI.Text tooltipText;
 
 	private AsyncOperation m_async;
 
@@ -129,6 +130,7 @@ public class LoadingManager : MonoBehaviour
 		m_showLoadingScreen = showLoadingScreen;
 		ChangeStates(LoadingState.FadeIn);
 
+		tooltipText.text = tooltips[Random.Range(0, tooltips.Length)];
 		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_none, 4.0f);
 	}
 
