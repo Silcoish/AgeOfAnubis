@@ -115,13 +115,6 @@ public class LoadingManager : MonoBehaviour
 
 		}
 
-
-		//if (Input.GetKeyDown(KeyCode.M))
-		//{
-		//	LoadLevel("ShopScene", false);
-		//}
-
-
 	}
 
 	public void LoadLevel(string levelName, bool showLoadingScreen)
