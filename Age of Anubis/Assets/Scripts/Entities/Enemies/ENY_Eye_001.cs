@@ -19,8 +19,8 @@ public class ENY_Eye_001 : Enemy
 
     private Animator m_anim;
 
-    enum State { SEARCHING, CHARGING, ATTACKING, RECHARGING };
-    private State m_state = State.SEARCHING;
+    enum State { IDLE, SEARCHING, CHARGING, ATTACKING, RECHARGING };
+    private State m_state = State.IDLE;
 
     public override void AwakeOverride()
     {
@@ -40,6 +40,13 @@ public class ENY_Eye_001 : Enemy
 
         switch(m_state)
         {
+            case State.IDLE:
+                m_isTracking = (Mathf.Abs(dir.x) < m_trackingRange && Mathf.Abs(dir.y) < m_trackingRange) ? true : false;
+                if(m_isTracking)
+                {
+                    m_state = State.SEARCHING;
+                }
+                break;
             case State.SEARCHING:
                 m_isTracking = (Mathf.Abs(dir.x) < m_trackingRange && Mathf.Abs(dir.y) < m_trackingRange) ? true : false;
                 if (m_isTracking)
@@ -49,6 +56,10 @@ public class ENY_Eye_001 : Enemy
                         dir.x = 0;
                     }
                     m_rb.velocity = dir.normalized * m_moveSpeed;
+                }
+                else
+                {
+                    m_state = State.IDLE;
                 }
 
                 if (Mathf.Abs(dir.x) < (m_xDist + 0.5) && Mathf.Abs(dir.y) < 0.2)
