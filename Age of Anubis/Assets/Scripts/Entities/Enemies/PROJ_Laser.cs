@@ -8,6 +8,7 @@ public class PROJ_Laser : MonoBehaviour
     private float m_timer = 0;
     private bool m_isFacingRight = true;
     private Vector3 m_startScale;
+    public float m_finalScale = 1;
 
     void Awake()
     {
@@ -22,11 +23,11 @@ public class PROJ_Laser : MonoBehaviour
         else
         {
             Vector3 scale = new Vector3(0, 0, 0);
-            scale.y = Mathf.Lerp(m_startScale.y, 1, m_timer);
+            scale.y = Mathf.Lerp(m_startScale.y, m_finalScale, m_timer);
             if(m_isFacingRight)
-                scale.x = Mathf.Lerp(m_startScale.x, 1, m_timer);
+                scale.x = Mathf.Lerp(m_startScale.x, m_finalScale, m_timer);
             else
-                scale.x = Mathf.Lerp(m_startScale.x, -1, m_timer);
+                scale.x = Mathf.Lerp(m_startScale.x, -m_finalScale, m_timer);
 
             transform.localScale = scale;
         }

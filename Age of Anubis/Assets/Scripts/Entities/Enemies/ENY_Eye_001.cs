@@ -128,7 +128,7 @@ public class ENY_Eye_001 : Enemy
                         AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_eye_fire);
                     //Debug.Log("Enter Attack State");
                     m_curTimer = 1;
-                    tempProj = Instantiate(m_laserProj, new Vector3(transform.position.x, transform.position.y + 0.2F, 0), transform.rotation) as GameObject;
+                    tempProj = Instantiate(m_laserProj, new Vector3(transform.position.x, transform.position.y + 0.1F, 0), transform.rotation) as GameObject;
                     tempProj.transform.parent = transform;
                 }
                 break;
