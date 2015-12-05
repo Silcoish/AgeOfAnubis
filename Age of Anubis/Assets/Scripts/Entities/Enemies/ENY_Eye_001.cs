@@ -13,13 +13,17 @@ public class ENY_Eye_001 : Enemy
     private float m_curTimer = 0;
     private bool m_isTracking = false;
     public GameObject m_laserProj;
-    
+    protected bool m_isDead = false;
+    protected bool m_isDeathAnimation = false;
+    private float m_deathTimer;
+    private GameObject tempProj;
+
     private bool m_isFacingRight = true;
     private Transform m_player;
 
     private Animator m_anim;
 
-    enum State { IDLE, SEARCHING, CHARGING, ATTACKING, RECHARGING };
+    enum State { IDLE, SEARCHING, CHARGING, ATTACKING, RECHARGING, FALLING, DEATH };
     private State m_state = State.IDLE;
 
     public override void AwakeOverride()
@@ -33,21 +37,67 @@ public class ENY_Eye_001 : Enemy
         m_anim = GetComponent<Animator>();
     }
 
+    public override void OnDeath()
+    {
+        if(!m_isDead)
+        {
+            //Disable colliders and activate timer so death animation can play before turning off
+            m_rb.gravityScale = 1;
+            gameObject.layer = LayerMask.NameToLayer("NoCollide");
+            m_col.isTrigger = false;
+            m_isDead = true;
+            m_state = State.FALLING;
+
+            if (m_deathParticle)
+                Instantiate(m_deathParticle, transform.position, transform.rotation);
+
+            m_rb.velocity = new Vector2(0, -0.1F);
+
+            if (LastRunStats.inst != null)
+            {
+                LastRunStats.inst.enemiesKilled++;
+            }
+        }
+    }
+
+    protected void AfterDeath()
+    {
+        if (m_room)
+            m_room.EnemyDied(this);
+        bool spawnedPotion = false;
+        if (GameManager.inst.healthPotionPrefab)
+        {
+            if (GameManager.inst.CheckForHPDrop())
+            {
+                Instantiate(GameManager.inst.healthPotionPrefab, transform.position, transform.rotation);
+                spawnedPotion = true;
+            }
+        }
+        if (GameManager.inst.coinPrefab && !spawnedPotion)
+            Instantiate(GameManager.inst.coinPrefab, transform.position, transform.rotation);
+        PlayerInventory.Inst.ChangeXP(m_XP);
+
+        gameObject.SetActive(false);
+    }
+
     public override void EnemyBehaviour()
     {
-        Vector2 dir = m_player.position - transform.position;
-        m_rb.velocity = Vector2.zero;
+        m_anim.SetInteger("State", (int)m_state);
 
-        switch(m_state)
+        Vector2 dir = m_player.position - transform.position;
+
+        switch (m_state)
         {
             case State.IDLE:
+                m_rb.velocity = Vector2.zero;
                 m_isTracking = (Mathf.Abs(dir.x) < m_trackingRange && Mathf.Abs(dir.y) < m_trackingRange) ? true : false;
-                if(m_isTracking)
+                if (m_isTracking)
                 {
                     m_state = State.SEARCHING;
                 }
                 break;
             case State.SEARCHING:
+                m_rb.velocity = Vector2.zero;
                 m_isTracking = (Mathf.Abs(dir.x) < m_trackingRange && Mathf.Abs(dir.y) < m_trackingRange) ? true : false;
                 if (m_isTracking)
                 {
@@ -65,35 +115,51 @@ public class ENY_Eye_001 : Enemy
                 if (Mathf.Abs(dir.x) < (m_xDist + 0.5) && Mathf.Abs(dir.y) < 0.2)
                 {
                     m_state = State.CHARGING;
-                    m_anim.SetTrigger("Blink");
                     m_curTimer = m_chargeTimer;
                     //Debug.Log("Enter Charge State");
                 }
                 break;
             case State.CHARGING:
+                m_rb.velocity = Vector2.zero;
                 if (m_curTimer <= 0)
                 {
                     m_state = State.ATTACKING;
-					if (Vector2.Distance(GameManager.inst.player.transform.position, transform.position) <= 10.0f)
-						AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_eye_fire);
+                    if (Vector2.Distance(GameManager.inst.player.transform.position, transform.position) <= 10.0f)
+                        AudioManager.Inst.PlaySFX(AudioManager.Inst.a_eny_eye_fire);
                     //Debug.Log("Enter Attack State");
+                    m_curTimer = 1;
+                    tempProj = Instantiate(m_laserProj, new Vector3(transform.position.x, transform.position.y + 0.2F, 0), transform.rotation) as GameObject;
+                    tempProj.transform.parent = transform;
                 }
                 break;
             case State.ATTACKING:
-                GameObject tempProj;
-                tempProj = Instantiate(m_laserProj, transform.position, transform.rotation) as GameObject;
-                tempProj.transform.parent = transform;
-                //tempProj.GetComponent<PROJ_Laser>().SetFacing(dir.x);
-
-                m_state = State.RECHARGING;
-                m_curTimer = m_rechargeTimer;
-                //Debug.Log("Enter Recharge State");
+                m_rb.velocity = Vector2.zero;
+                if (m_curTimer <= 0)
+                {
+                    m_state = State.RECHARGING;
+                    m_curTimer = m_rechargeTimer;
+                }
                 break;
             case State.RECHARGING:
+                m_rb.velocity = Vector2.zero;
                 if (m_curTimer <= 0)
                 {
                     m_state = State.SEARCHING;
                     //Debug.Log("Enter Searching State");
+                }
+                break;
+            case State.FALLING:
+                if (m_rb.velocity.y >= 0)
+                {
+                    m_curTimer = 0.5F;
+                    m_state = State.DEATH;
+                }
+                break;
+            case State.DEATH:
+                m_rb.velocity = Vector2.zero;
+                if (m_curTimer <= 0)
+                {
+                    AfterDeath();
                 }
                 break;
             default:
