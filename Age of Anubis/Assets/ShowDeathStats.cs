@@ -41,19 +41,6 @@ public class ShowDeathStats : MonoBehaviour
 
     float m_timer;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	void Start()
 	{
 		if(LastRunStats.inst != null)
@@ -64,7 +51,6 @@ public class ShowDeathStats : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-
 	}
 
 	void Init()
@@ -94,25 +80,16 @@ public class ShowDeathStats : MonoBehaviour
         m_textCurGold.text = "";
 
         ChangeState(State.Enemies);
-
-
-
 	}
-
 
 	void Update()
 	{
-		if(isActive)
-			img.color = new Color(img.color.r, img.color.g, img.color.b, Mathf.Lerp(img.color.a, 1.0f, 0.02f));
-		else
-			img.color = new Color(img.color.r, img.color.g, img.color.b, Mathf.Lerp(img.color.a, 0.0f, 0.1f));
+
 
 		if(Input.GetButtonDown("Cancel"))
 		{
 			gameObject.SetActive(false);
 		}
-
-
 
         switch (m_curState)
         {
@@ -163,7 +140,6 @@ public class ShowDeathStats : MonoBehaviour
 
     void ChangeState(State st)
     {
-      
         switch (st)
         {
             case State.Enemies: break;
