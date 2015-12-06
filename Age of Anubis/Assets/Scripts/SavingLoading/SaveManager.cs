@@ -74,18 +74,21 @@ public class SaveManager : MonoBehaviour
 	public void Load()
 	{
 		SaveLoad.Load();
-		
-		if(m_weapon1 != 0)
-			PlayerInventory.Inst.m_currentWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon1);
-        else
-            PlayerInventory.Inst.m_currentWeapon = null;
-		if(m_weapon2 != 0)
-			PlayerInventory.Inst.m_secondaryWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon2);
-        else
-            PlayerInventory.Inst.m_secondaryWeapon = null;
-        PlayerInventory.Inst.CheckWeaponValidity();
-        //GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 
-        PlayerInventory.Inst.UpdateUIElements();
+		if (PlayerInventory.Inst != null)
+		{
+			if (m_weapon1 != 0)
+				PlayerInventory.Inst.m_currentWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon1);
+			else
+				PlayerInventory.Inst.m_currentWeapon = null;
+			if (m_weapon2 != 0)
+				PlayerInventory.Inst.m_secondaryWeapon = WeaponManager.inst.GenerateWeaponFromID(m_weapon2);
+			else
+				PlayerInventory.Inst.m_secondaryWeapon = null;
+			PlayerInventory.Inst.CheckWeaponValidity();
+			//GameManager.inst.player.GetComponent<Player>().UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
+
+			PlayerInventory.Inst.UpdateUIElements();
+		}
 	}
 }

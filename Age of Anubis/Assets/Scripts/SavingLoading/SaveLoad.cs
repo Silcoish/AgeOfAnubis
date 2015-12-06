@@ -99,12 +99,14 @@ public class SaveLoad
 		data = (SaveData)bformatter.Deserialize(stream);
 		stream.Close();
 
-		GameManager.inst.m_saveManager.m_currentLevel = data.currentLevel;
-		GameManager.inst.m_saveManager.m_exp = data.exp;
-		GameManager.inst.m_saveManager.m_gold = data.gold;
-		GameManager.inst.m_saveManager.m_weapon1 = data.weapon1;
-		GameManager.inst.m_saveManager.m_weapon2 = data.weapon2;
-
+		if (GameManager.inst != null)
+		{
+			GameManager.inst.m_saveManager.m_currentLevel = data.currentLevel;
+			GameManager.inst.m_saveManager.m_exp = data.exp;
+			GameManager.inst.m_saveManager.m_gold = data.gold;
+			GameManager.inst.m_saveManager.m_weapon1 = data.weapon1;
+			GameManager.inst.m_saveManager.m_weapon2 = data.weapon2;
+		}
 		Debug.Log("Weapon 1: " + data.weapon1);
 	}
 
