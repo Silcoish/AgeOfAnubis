@@ -83,8 +83,11 @@ public class Player : Damageable
         // Equip current weapon
         UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 
-		if (LastRunStats.inst != null)
+		if (LastRunStats.inst != null && LastRunStats.inst.m_isEnded == false)
 		{
+			LastRunStats.inst.enemiesKilled = 0;
+			LastRunStats.inst.roomsCleared = 0;
+			LastRunStats.inst.hpPickups = 0;
 			LastRunStats.inst.startGold = PlayerInventory.Inst.m_currentGold;
 		}
     }
@@ -159,6 +162,7 @@ public class Player : Damageable
 
 			if (LastRunStats.inst != null)
 			{
+				LastRunStats.inst.m_isEnded = true;
 				LastRunStats.inst.endGold = PlayerInventory.Inst.m_currentGold;
 				LastRunStats.inst.died = true;
 			}

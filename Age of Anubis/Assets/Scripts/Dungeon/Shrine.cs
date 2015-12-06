@@ -14,7 +14,7 @@ public class Shrine : ActivateArea
 		if (LastRunStats.inst != null)
 		{
 			LastRunStats.inst.endGold = PlayerInventory.Inst.m_currentGold;
-			LastRunStats.inst.died = true;
+			LastRunStats.inst.died = false;
 		}
 
 		if (GameManager.inst.m_saveManager != null)

@@ -11,6 +11,8 @@ public class LastRunStats : MonoBehaviour
 
 	public static LastRunStats inst;
 
+	public bool m_isEnded = false;
+
 	public int startGold = 0;
 	public int endGold = 0;
 	public int enemiesKilled = 0;

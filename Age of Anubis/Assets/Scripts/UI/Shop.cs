@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
 [System.Serializable]
 public struct WeaponPrefabHolder
 {
@@ -173,9 +174,10 @@ public class Shop : MonoBehaviour
 
     public void BuySelected()
     {
-        if (PlayerInventory.Inst.m_currentGold >= m_selected.weapon.GetComponent<Weapon>().m_goldCost)
+		int gold = PlayerPrefs.GetInt("BankGold");
+		if (gold >= m_selected.weapon.GetComponent<Weapon>().m_goldCost)
         {
-            PlayerInventory.Inst.m_currentGold -= m_selected.weapon.GetComponent<Weapon>().m_goldCost;
+			gold -= m_selected.weapon.GetComponent<Weapon>().m_goldCost;
 
             if (PlayerInventory.Inst.m_secondaryWeapon == null)
             {
@@ -204,6 +206,8 @@ public class Shop : MonoBehaviour
 		{
 			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_cancel);
 		}
+
+		PlayerPrefs.SetInt("BankGold", gold);
 
         PlayerInventory.Inst.UpdateUIElements();
 
@@ -484,7 +488,8 @@ public class Shop : MonoBehaviour
 
     public void DeactivateShop()
     {
-		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_cancel);
+		if (AudioManager.Inst != null)
+			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_cancel);
         foreach (var b in m_allButtons)
         {
             b.interactable = false;

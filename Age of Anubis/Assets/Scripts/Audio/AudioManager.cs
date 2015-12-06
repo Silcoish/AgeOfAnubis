@@ -87,16 +87,12 @@ public class AudioManager : MonoBehaviour
 			Inst = this;
 		else
 			Destroy(gameObject);
-	}
 
-	// Use this for initialization
-	public void Start () 
-	{
 		if (m_sources.Count > 0)
 			ClearSources();
 		m_sources = new List<AudioSource>();
 
-		for (int i = 0; i < m_numberOfSources; i ++)
+		for (int i = 0; i < m_numberOfSources; i++)
 		{
 			m_sources.Add(gameObject.AddComponent<AudioSource>());
 		}
@@ -107,6 +103,12 @@ public class AudioManager : MonoBehaviour
 			s.playOnAwake = false;
 			s.loop = false;
 		}
+	}
+
+	// Use this for initialization
+	public void Start () 
+	{
+
 	}
 
 	public void Update()
