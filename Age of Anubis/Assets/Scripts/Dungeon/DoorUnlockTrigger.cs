@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class DoorUnlockTrigger : MonoBehaviour 
@@ -14,7 +14,10 @@ public class DoorUnlockTrigger : MonoBehaviour
             else
             {
                 if(m_targetDoor.m_isLocked)
+				{
                     m_targetDoor.Unlock();
+					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorOpen);
+				}
             }
         }
     }
