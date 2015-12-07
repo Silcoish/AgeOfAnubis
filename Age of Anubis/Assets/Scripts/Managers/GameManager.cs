@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject visibleMap;
 	public Texture2D visibleMapTex;
 
+	public bool isPaused = false;
+
 	public bool destroyNextScene = false;
 
 	public Texture2D room_complete;
@@ -266,6 +268,28 @@ public class GameManager : MonoBehaviour {
 		hpDropChance += increment;
 
 		return false;
+	}
+
+	public void PauseGame(bool pause)
+	{
+		isPaused = pause;
+
+		if(isPaused)
+		{
+			if(dungeonLayout != null)
+			{
+				dungeonLayout.rooms[currentRoom].PauseGame();
+			}
+			player.GetComponent<Player>().PauseGame();
+		}
+		else
+		{
+			if(dungeonLayout != null)
+			{
+				dungeonLayout.rooms[currentRoom].UnpauseGame();
+			}
+			player.GetComponent<Player>().UnpauseGame();
+		}
 	}
 
 }

@@ -150,6 +150,9 @@ public class Anubis : Enemy
 
 	public override void EnemyBehaviour()
 	{
+		if (GameManager.inst.isPaused)
+			return;
+
 		CalculateHPPercentage();
 		CheckSide();
 		CheckForOutOfBounds();

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,6 +9,9 @@ public class ENY_Spider_001 : PhysicsEnemy
 
     public override void EnemyBehaviour()
     {
+		if (GameManager.inst.isPaused)
+			return;
+
         if(m_isDead)
         {
         }

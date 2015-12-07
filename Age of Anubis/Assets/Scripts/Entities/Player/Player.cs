@@ -110,6 +110,9 @@ public class Player : Damageable
 
 	public override void UpdateOverride()
     {
+		if (GameManager.inst.isPaused)
+			return;
+
 		lastFrameGrounded = isGrounded;
 
         if(m_isDying)
@@ -521,4 +524,14 @@ public class Player : Damageable
         else
             return false;
     }
+
+	public void PauseGame()
+	{
+		m_rb.velocity = Vector2.zero;
+	}
+
+	public void UnpauseGame()
+	{
+
+	}
 }
