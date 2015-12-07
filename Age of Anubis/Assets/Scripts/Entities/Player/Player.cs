@@ -223,7 +223,7 @@ public class Player : Damageable
 			lowHealthCounter += Time.deltaTime;
 			if(lowHealthCounter >= lowHealthTimer)
 			{
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_low_health);
+				//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_low_health);
 				lowHealthCounter = 0.0f;
 			}
 		}
