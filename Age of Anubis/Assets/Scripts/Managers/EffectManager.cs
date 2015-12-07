@@ -11,6 +11,7 @@ public class EffectManager : MonoBehaviour
     public GameObject m_damageEffect_None;
     public GameObject m_damageEffect_Poison;
     public GameObject m_damageEffect_Burn;
+	public GameObject m_damageEffect_Bleed;
 
     void Awake()
     {
@@ -28,6 +29,7 @@ public class EffectManager : MonoBehaviour
             case DamageType.POISON: temp = Instantiate(m_damageEffect_Poison, trans.position, m_damageEffect_Poison.transform.rotation) as GameObject; break;
             case DamageType.NONE: temp = Instantiate(m_damageEffect_None, trans.position, m_damageEffect_None.transform.rotation) as GameObject; break;
             case DamageType.BURN: temp = Instantiate(m_damageEffect_Burn, trans.position, m_damageEffect_Burn.transform.rotation) as GameObject; break;
+			case DamageType.BLEED: temp = Instantiate(m_damageEffect_Bleed, trans.position, m_damageEffect_Bleed.transform.rotation) as GameObject; break;
             default: temp = Instantiate(m_damageEffect_None, trans.position, m_damageEffect_None.transform.rotation) as GameObject; break;
             
         }
@@ -39,14 +41,4 @@ public class EffectManager : MonoBehaviour
         Destroy(temp, 1);
     }
 
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
