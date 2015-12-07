@@ -84,6 +84,9 @@ public class GameManager : MonoBehaviour {
 	void OnLevelWasLoaded(int level){
 		CheckForObjects();
 		map_first_refresh = false;
+		seenRooms.Clear();
+		clearedRooms.Clear();
+		shrineLocation.Clear();
 	}
 
 	void CheckForObjects()
