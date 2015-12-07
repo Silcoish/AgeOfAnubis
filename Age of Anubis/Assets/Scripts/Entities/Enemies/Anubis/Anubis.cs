@@ -136,9 +136,9 @@ public class Anubis : Enemy
 		rb = GetComponent<Rigidbody2D>();
 		spawnedEnemies = new List<GameObject>();
 
-		if (GameManager.inst.bossHPObject != null)
+		if (UIManager.Inst.m_bossHealth != null)
 		{
-			UIObject = GameManager.inst.bossHPObject;
+			UIObject = UIManager.Inst.m_bossHealth;
 			UIObject.SetActive(true);
 			UIImage = UIObject.transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
 		}
@@ -150,6 +150,9 @@ public class Anubis : Enemy
 
 	public override void EnemyBehaviour()
 	{
+		if (GameManager.inst.isPaused)
+			return;
+
 		CalculateHPPercentage();
 		CheckSide();
 		CheckForOutOfBounds();

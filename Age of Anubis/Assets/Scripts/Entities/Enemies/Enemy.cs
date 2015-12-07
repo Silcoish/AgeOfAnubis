@@ -23,6 +23,8 @@ public class Enemy : Damageable
 
 	protected enum CheckReturnEnum { None, Grounded, ReachedEdge, ReachedWall };
 
+	protected Vector2 pauseVelocity;
+
 	protected struct CheckReturn
 	{
 		public CheckReturnEnum type;
@@ -107,6 +109,17 @@ public class Enemy : Damageable
             col.gameObject.GetComponent<Damageable>().OnTakeDamage(m_attack.GetDamage(gameObject.transform));
         }
     }
+
+	public void PauseGame()
+	{
+		pauseVelocity = m_rb.velocity;
+		m_rb.velocity = Vector2.zero;
+	}
+
+	public void UnpauseGame()
+	{
+		m_rb.velocity = pauseVelocity;
+	}
 
     //void CreateDirectionColliders()
     //{

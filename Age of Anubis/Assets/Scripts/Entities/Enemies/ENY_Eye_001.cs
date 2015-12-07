@@ -82,6 +82,9 @@ public class ENY_Eye_001 : Enemy
 
     public override void EnemyBehaviour()
     {
+		if (GameManager.inst.isPaused)
+			return;
+
         m_anim.SetInteger("State", (int)m_state);
 
         Vector2 dir = m_player.position - transform.position;

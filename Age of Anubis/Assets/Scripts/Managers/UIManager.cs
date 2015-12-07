@@ -52,6 +52,8 @@ public class UIManager : MonoBehaviour {
     private GameObject m_displayMain;
     private GameObject m_displaySecondary;
 
+	public GameObject m_bossHealth;
+
 	void Awake()
 	{
 		if (Inst == null)

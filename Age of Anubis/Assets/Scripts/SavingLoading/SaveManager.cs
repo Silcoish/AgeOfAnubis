@@ -68,6 +68,7 @@ public class SaveManager : MonoBehaviour
 		m_currentLevel = 1;
 		m_weapon1 = 1;
 		m_weapon2 = 0;
+		PlayerPrefs.DeleteAll();
 		SaveLoad.Save(SaveLoad.currentFilePath, this);
 	}
 

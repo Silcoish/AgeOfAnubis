@@ -35,6 +35,9 @@ public class ENY_Snake_001 : PhysicsEnemy
 
     public override void EnemyBehaviour()
     {
+		if (GameManager.inst.isPaused)
+			return;
+
         if(m_isPathing)
             m_rb.velocity = Vector2.zero;
 

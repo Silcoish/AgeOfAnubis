@@ -110,6 +110,9 @@ public class Player : Damageable
 
 	public override void UpdateOverride()
     {
+		if (GameManager.inst.isPaused)
+			return;
+
 		lastFrameGrounded = isGrounded;
 
         if(m_isDying)
@@ -197,6 +200,7 @@ public class Player : Damageable
 
 	public void LeaveDungeon()
 	{
+		PlayerInventory.Inst.ChangeMultiplier(-9999);
         LoadingManager.Inst.LoadLevel("ShopScene", false);
 	}
 
@@ -219,7 +223,7 @@ public class Player : Damageable
 			lowHealthCounter += Time.deltaTime;
 			if(lowHealthCounter >= lowHealthTimer)
 			{
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_low_health);
+				//AudioManager.Inst.PlaySFX(AudioManager.Inst.a_player_low_health);
 				lowHealthCounter = 0.0f;
 			}
 		}
@@ -521,4 +525,14 @@ public class Player : Damageable
         else
             return false;
     }
+
+	public void PauseGame()
+	{
+		m_rb.velocity = Vector2.zero;
+	}
+
+	public void UnpauseGame()
+	{
+
+	}
 }

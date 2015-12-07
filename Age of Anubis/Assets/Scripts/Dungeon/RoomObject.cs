@@ -189,5 +189,21 @@ public class RoomObject : MonoBehaviour
 			UnlockDoors();
 	}
 
+	public void PauseGame()
+	{
+		for(int i = 0; i < m_allEnemies.Count; i++)
+		{
+			m_allEnemies[i].PauseGame();
+		}
+	}
+
+	public void UnpauseGame()
+	{
+		for (int i = 0; i < m_allEnemies.Count; i++)
+		{
+			m_allEnemies[i].UnpauseGame();
+		}
+	}
+
 
 }
