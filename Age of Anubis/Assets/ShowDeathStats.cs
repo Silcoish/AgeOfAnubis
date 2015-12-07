@@ -77,7 +77,7 @@ public class ShowDeathStats : MonoBehaviour
 
 	void OnEnable()
 	{
-		GameManager.inst.player.GetComponent<Player>().m_isShopOpen = true;
+
 		//m_es.SetSelectedGameObject(m_es.firstSelectedGameObject);
 	}
 
@@ -114,7 +114,13 @@ public class ShowDeathStats : MonoBehaviour
 
 	void Update()
 	{
-		GameManager.inst.player.GetComponent<Player>().m_isShopOpen = true;
+		Player play = null;
+		if (GameManager.inst != null)
+			play = GameManager.inst.player.GetComponent<Player>();
+
+		if (play != null)
+			play.m_isShopOpen = true;
+
 		//m_es.SetSelectedGameObject(m_butonstupidhack);
 		if (m_pauseTimer > 0)
 		{

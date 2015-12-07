@@ -115,6 +115,12 @@ public class Damageable : MonoBehaviour
 			}
 		}
 
+		//BLEED
+		if (m_timerBleed > 0)
+		{
+			m_timerBleed -= Time.deltaTime;
+		}
+
 		//MUD
 		if (m_timerMud > 0)
 		{
@@ -314,6 +320,9 @@ public class Damageable : MonoBehaviour
 	void DamageBleed(int damIn)
 	{
 		m_hitPoints -= (int)(damIn * m_strengthBleed);
+
+		if (EffectManager.Inst != null)
+			EffectManager.Inst.CreateDamageableEffect(gameObject.transform, DamageType.BLEED, (int)(damIn * m_strengthBleed));
 
 		AudioManager.Inst.PlaySFX(AudioManager.Inst.a_bleed);
 	}
