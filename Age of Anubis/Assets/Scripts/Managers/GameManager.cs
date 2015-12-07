@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level){
 		CheckForObjects();
+		map_first_refresh = false;
 	}
 
 	void CheckForObjects()

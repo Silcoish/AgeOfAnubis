@@ -200,6 +200,7 @@ public class Player : Damageable
 
 	public void LeaveDungeon()
 	{
+		PlayerInventory.Inst.ChangeMultiplier(-9999);
         LoadingManager.Inst.LoadLevel("ShopScene", false);
 	}
 

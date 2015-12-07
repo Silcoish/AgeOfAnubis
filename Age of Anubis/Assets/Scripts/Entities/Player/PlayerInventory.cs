@@ -94,6 +94,8 @@ public class PlayerInventory : MonoBehaviour
 	public void ChangeMultiplier(float amount)
 	{
 		m_multiplier += amount;
+		if (m_multiplier < 1)
+			m_multiplier = 1;
         UIManager.Inst.UpdateCoinMultiplier(m_multiplier);
 	}
 
