@@ -81,7 +81,8 @@ public class Player : Damageable
     public override void StartOverride()
     {
         // Equip current weapon
-        UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
+		if (PlayerInventory.Inst != null)
+			UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 
 		if (LastRunStats.inst != null && LastRunStats.inst.m_isEnded == false)
 		{
@@ -110,7 +111,8 @@ public class Player : Damageable
 
 	public override void UpdateOverride()
     {
-		if (GameManager.inst.isPaused)
+		
+		if (GameManager.inst != null && GameManager.inst.isPaused)
 			return;
 
 		lastFrameGrounded = isGrounded;
