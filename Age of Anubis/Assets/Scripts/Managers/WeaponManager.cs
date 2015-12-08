@@ -60,7 +60,7 @@ public class WeaponManager : MonoBehaviour
 
                 //Debug.Log("Weapons Found: " + weapons.Length);
 
-                Debug.Log("Loading Weapons Data");
+                //Debug.Log("Loading Weapons Data");
                 // First entry in array is the column titles
                 // Last entry is a single whitespace, skipping last entry
                 for (int i = 1; i < weapons.Length - 1; i++)
@@ -91,7 +91,7 @@ public class WeaponManager : MonoBehaviour
                         m_weaponData.Add(data);
                     }
                 }
-                Debug.Log("Weapons Loaded: " + m_weaponData.Count);
+                //Debug.Log("Weapons Loaded: " + m_weaponData.Count);
             }
         }
         else

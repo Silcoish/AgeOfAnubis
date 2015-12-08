@@ -8,8 +8,10 @@ public class OpenShop : ActivateArea
 	{
 		base.OnActivate();
 
-        m_shop.SetActive(true);
-        m_player.GetComponent<Player>().m_isShopOpen = true;
+		Shop sh = m_shop.gameObject.GetComponent<Shop>();
+
+		if (sh != null)
+			sh.OnOpenSHop();
         gameObject.SetActive(false);
 	}
 

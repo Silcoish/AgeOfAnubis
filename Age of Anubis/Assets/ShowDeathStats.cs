@@ -14,6 +14,7 @@ public class ShowDeathStats : MonoBehaviour
 
 	Animation m_anim;
 
+	public GameObject m_canvasObject;
 	//public GameObject m_butonstupidhack;
 
 	public bool isActive = false;
@@ -70,7 +71,7 @@ public class ShowDeathStats : MonoBehaviour
 		}
 		else
 		{
-			gameObject.SetActive(false);
+			m_canvasObject.SetActive(false);
 		}
 		Pause(5);
 	}
@@ -91,6 +92,8 @@ public class ShowDeathStats : MonoBehaviour
 		//enemiesKilled.text = LastRunStats.inst.enemiesKilled.ToString();
 		//hpPickups.text = LastRunStats.inst.hpPickups.ToString();
 		//roomsCleared.text = LastRunStats.inst.roomsCleared.ToString();
+
+		m_canvasObject.SetActive(true);
 
 		m_totalEnemies = PlayerPrefs.GetInt("TotalEnemies");
 		m_totalRooms = PlayerPrefs.GetInt("TotalRooms");
@@ -114,152 +117,155 @@ public class ShowDeathStats : MonoBehaviour
 
 	void Update()
 	{
-		Player play = null;
-		if (GameManager.inst != null)
-			play = GameManager.inst.player.GetComponent<Player>();
-
-		if (play != null)
-			play.m_isShopOpen = true;
-
-		//m_es.SetSelectedGameObject(m_butonstupidhack);
-		if (m_pauseTimer > 0)
+		if (m_canvasObject.activeSelf == true)
 		{
-			m_pauseTimer -= Time.deltaTime;
-		}
-		else
-		{
-			if (LastRunStats.inst != null)
+			Player play = null;
+			if (GameManager.inst != null)
+				play = GameManager.inst.player.GetComponent<Player>();
+
+			if (play != null)
+				play.m_isShopOpen = true;
+
+			//m_es.SetSelectedGameObject(m_butonstupidhack);
+			if (m_pauseTimer > 0)
 			{
-				switch (m_curColumn)
+				m_pauseTimer -= Time.deltaTime;
+			}
+			else
+			{
+				if (LastRunStats.inst != null)
 				{
-					case Column.Dungeon:
-						switch (m_curRow)
-						{
-							case Row.Enemies:
-								if (LerpValue(m_textCurEnemies, m_curEnemies, LastRunStats.inst.enemiesKilled, m_increaseTime))
-								{
-									m_curEnemies = LastRunStats.inst.enemiesKilled;
-									m_curRow = Row.Rooms;
-									m_lerpNumber = 0;
-									Pause(m_pauseTime);
-								}
-								break;
-							case Row.Rooms:
-								if (LerpValue(m_textCurRooms, m_curRooms, LastRunStats.inst.roomsCleared, m_increaseTime))
-								{
-									m_curRooms = LastRunStats.inst.roomsCleared;
-									m_curRow = Row.Health;
-									m_lerpNumber = 0;
-									Pause(m_pauseTime);
-								}
-								break;
-							case Row.Health:
-								if (LerpValue(m_textCurHealth, m_curHealth, LastRunStats.inst.hpPickups, m_increaseTime))
-								{
-									m_curHealth = LastRunStats.inst.hpPickups;
-									m_curRow = Row.Gold;
-									m_lerpNumber = 0;
-									Pause(m_pauseTime);
-									m_tempGoldHolder = LastRunStats.inst.endGold;
-								}
-								break;
-							case Row.Gold:
-								if (LerpValue(m_textCurGold, m_curGold, m_tempGoldHolder, m_increaseTime))
-								{
-									m_curGold = m_tempGoldHolder;
-									m_curRow = Row.Weapons;
-									m_lerpNumber = 0;
-									Pause(m_pauseTime);
-									if (LastRunStats.inst.died)
-										m_anim.Play();
-								}
-								break;
-							case Row.Weapons:
-								if (LastRunStats.inst.died)
-								{
-									//Do Final Death stuff
-									if (LerpValue(m_textCurGold, m_curGold, 0, m_increaseTime))
+					switch (m_curColumn)
+					{
+						case Column.Dungeon:
+							switch (m_curRow)
+							{
+								case Row.Enemies:
+									if (LerpValue(m_textCurEnemies, m_curEnemies, LastRunStats.inst.enemiesKilled, m_increaseTime))
+									{
+										m_curEnemies = LastRunStats.inst.enemiesKilled;
+										m_curRow = Row.Rooms;
+										m_lerpNumber = 0;
+										Pause(m_pauseTime);
+									}
+									break;
+								case Row.Rooms:
+									if (LerpValue(m_textCurRooms, m_curRooms, LastRunStats.inst.roomsCleared, m_increaseTime))
+									{
+										m_curRooms = LastRunStats.inst.roomsCleared;
+										m_curRow = Row.Health;
+										m_lerpNumber = 0;
+										Pause(m_pauseTime);
+									}
+									break;
+								case Row.Health:
+									if (LerpValue(m_textCurHealth, m_curHealth, LastRunStats.inst.hpPickups, m_increaseTime))
+									{
+										m_curHealth = LastRunStats.inst.hpPickups;
+										m_curRow = Row.Gold;
+										m_lerpNumber = 0;
+										Pause(m_pauseTime);
+										m_tempGoldHolder = LastRunStats.inst.endGold;
+									}
+									break;
+								case Row.Gold:
+									if (LerpValue(m_textCurGold, m_curGold, m_tempGoldHolder, m_increaseTime))
 									{
 										m_curGold = m_tempGoldHolder;
+										m_curRow = Row.Weapons;
+										m_lerpNumber = 0;
+										Pause(m_pauseTime);
+										if (LastRunStats.inst.died)
+											m_anim.Play();
+									}
+									break;
+								case Row.Weapons:
+									if (LastRunStats.inst.died)
+									{
+										//Do Final Death stuff
+										if (LerpValue(m_textCurGold, m_curGold, 0, m_increaseTime))
+										{
+											m_curGold = m_tempGoldHolder;
+											m_curRow = Row.Enemies;
+											m_curColumn = Column.Bank;
+											Pause(m_pauseTime);
+										}
+									}
+									else
+									{
 										m_curRow = Row.Enemies;
 										m_curColumn = Column.Bank;
 										Pause(m_pauseTime);
 									}
-								}
-								else
-								{
-									m_curRow = Row.Enemies;
-									m_curColumn = Column.Bank;
-									Pause(m_pauseTime);
-								}
 
-								break;
-						}
-						break;
-					case Column.Bank:
-						switch (m_curRow)
-						{
-							case Row.Enemies:
-								if (LerpValue(m_textTotalEnemies, m_totalEnemies, m_totalEnemies + m_curEnemies, m_increaseTime))
-								{
-									m_totalEnemies = m_totalEnemies + m_curEnemies;
-									m_curRow = Row.Rooms;
-									m_lerpNumber = 0;
-									Pause(m_pauseTime);
-								}
-								break;
-							case Row.Rooms:
-								if (LerpValue(m_textTotalRooms, m_totalRooms, m_totalRooms + m_curRooms, m_increaseTime))
-								{
-									m_totalRooms = m_totalRooms + m_curRooms;
-									m_curRow = Row.Health;
-									m_lerpNumber = 0;
-									Pause(m_pauseTime);
-								}
-								break;
-							case Row.Health:
-								if (LerpValue(m_textTotalHealth, m_totalHealth, m_totalHealth + m_curHealth, m_increaseTime))
-								{
-									m_totalHealth = m_totalHealth + m_curHealth;
-									m_curRow = Row.Gold;
-									m_lerpNumber = 0;
-									Pause(m_pauseTime);
-								}
-								break;
-							case Row.Gold:
-								if (LastRunStats.inst.died == false)
-								{
-									if (LerpValue(m_textTotalGold, m_totalGold, m_totalGold + m_curGold, m_increaseTime))
+									break;
+							}
+							break;
+						case Column.Bank:
+							switch (m_curRow)
+							{
+								case Row.Enemies:
+									if (LerpValue(m_textTotalEnemies, m_totalEnemies, m_totalEnemies + m_curEnemies, m_increaseTime))
 									{
-										m_totalGold = m_totalGold + m_curGold;
+										m_totalEnemies = m_totalEnemies + m_curEnemies;
+										m_curRow = Row.Rooms;
+										m_lerpNumber = 0;
+										Pause(m_pauseTime);
+									}
+									break;
+								case Row.Rooms:
+									if (LerpValue(m_textTotalRooms, m_totalRooms, m_totalRooms + m_curRooms, m_increaseTime))
+									{
+										m_totalRooms = m_totalRooms + m_curRooms;
+										m_curRow = Row.Health;
+										m_lerpNumber = 0;
+										Pause(m_pauseTime);
+									}
+									break;
+								case Row.Health:
+									if (LerpValue(m_textTotalHealth, m_totalHealth, m_totalHealth + m_curHealth, m_increaseTime))
+									{
+										m_totalHealth = m_totalHealth + m_curHealth;
+										m_curRow = Row.Gold;
+										m_lerpNumber = 0;
+										Pause(m_pauseTime);
+									}
+									break;
+								case Row.Gold:
+									if (LastRunStats.inst.died == false)
+									{
+										if (LerpValue(m_textTotalGold, m_totalGold, m_totalGold + m_curGold, m_increaseTime))
+										{
+											m_totalGold = m_totalGold + m_curGold;
+											m_curRow = Row.Weapons;
+											m_lerpNumber = 0;
+											Pause(m_pauseTime);
+										}
+									}
+									else
+									{
 										m_curRow = Row.Weapons;
 										m_lerpNumber = 0;
 										Pause(m_pauseTime);
 									}
-								}
-								else
-								{
-									m_curRow = Row.Weapons;
-									m_lerpNumber = 0;
-									Pause(m_pauseTime);
-								}
-								break;
-							case Row.Weapons:
+									break;
+								case Row.Weapons:
 
-								m_isFinished = true;
-								break;
-						}
-						break;
+									m_isFinished = true;
+									break;
+							}
+							break;
+					}
 				}
 			}
-		}
 
-		if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Submit"))
-		{
-			if (AudioManager.Inst != null)
-				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_confirm);
+			if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Submit"))
+			{
+				if (AudioManager.Inst != null)
+					AudioManager.Inst.PlaySFX(AudioManager.Inst.a_ui_confirm);
 
-			Finished();
+				Finished();
+			}
 		}
 	}
 
@@ -282,7 +288,7 @@ public class ShowDeathStats : MonoBehaviour
 					LastRunStats.inst.m_isEnded = false;
 				}
 
-				gameObject.SetActive(false);
+				m_canvasObject.SetActive(false);
 
 				GameManager.inst.m_saveManager.Save();
 				GameManager.inst.player.GetComponent<Player>().m_isShopOpen = false;

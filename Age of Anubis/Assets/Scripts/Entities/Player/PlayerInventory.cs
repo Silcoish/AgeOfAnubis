@@ -38,7 +38,7 @@ public class PlayerInventory : MonoBehaviour
 		if(GameManager.inst.m_saveManager != null)
 		{
 			m_currentGold = GameManager.inst.m_saveManager.m_gold;
-			print("Current Gold: " + m_currentGold);
+			//print("Current Gold: " + m_currentGold);
 			m_savedGold = m_currentGold;
 			m_currentXP = (int)GameManager.inst.m_saveManager.m_exp;
 			m_savedXP = m_currentXP;
@@ -153,7 +153,7 @@ public class PlayerInventory : MonoBehaviour
         // Check for weapon in primary slot, move secondary or generate default if not.
         if (m_currentWeapon == null)
         {
-            Debug.Log("Checking Weapon Valididy: curwep = " + m_currentWeapon);
+            //Debug.Log("Checking Weapon Valididy: curwep = " + m_currentWeapon);
             if (m_secondaryWeapon != null)
             {
                 Debug.Log("Checking Weapon Valididy: secwep = " + m_secondaryWeapon);
@@ -163,7 +163,7 @@ public class PlayerInventory : MonoBehaviour
             else
             {
                 m_currentWeapon = m_defaultWeapon;
-                Debug.Log("Checking Weapon Validity: default = " + m_defaultWeapon);
+                //Debug.Log("Checking Weapon Validity: default = " + m_defaultWeapon);
             } 
         }
     }

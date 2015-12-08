@@ -37,6 +37,8 @@ public class Shop : MonoBehaviour
 {
     public static Shop Inst;
 
+	public GameObject m_shopCanves;
+
     public EventSystem m_es;
     public ShopIcon m_selected;
     public GameObject m_playersWeapon;
@@ -94,80 +96,86 @@ public class Shop : MonoBehaviour
 		else
 			Destroy(gameObject);
 
-        m_anim = gameObject.GetComponent<Animator>();
-        m_allButtons = gameObject.GetComponentsInChildren<Button>();
+		m_anim = m_shopCanves.GetComponent<Animator>();
+		m_allButtons = m_shopCanves.GetComponentsInChildren<Button>();
     }
     // Use this for initialization
     void Start()
     {
         InitializeShop();
-		gameObject.SetActive(false);
-    }
-
-    void OnEnable()
-    {
-        UpdateShop();
+		//m_shopCanves.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_es.currentSelectedGameObject != null && m_isActive)
-        {
-            if (Input.GetButtonDown("Cancel"))
-                OnCloseShop();
-        }
+		if (m_shopCanves.activeSelf == true)
+		{
+			if (m_es.currentSelectedGameObject != null && m_isActive)
+			{
+				if (Input.GetButtonDown("Cancel"))
+					OnCloseShop();
+			}
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ProgressIcons();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ActivateShop();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            m_needsUpdateing = true;
-            OnEnable();
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            UpdateAllIcons();
-        }
+			if (Input.GetKeyDown(KeyCode.P))
+			{
+				ProgressIcons();
+			}
+			if (Input.GetKeyDown(KeyCode.O))
+			{
+				ActivateShop();
+			}
+			if (Input.GetKeyDown(KeyCode.I))
+			{
+				m_needsUpdateing = true;
+				UpdateShop();
+			}
+			if (Input.GetKeyDown(KeyCode.U))
+			{
+				UpdateAllIcons();
+			}
 
-        if (m_es.currentSelectedGameObject == null)
-        {
-            m_es.SetSelectedGameObject(m_newItem1.gameObject);
-        }
+			if (m_es.currentSelectedGameObject == null)
+			{
+				m_es.SetSelectedGameObject(m_newItem1.gameObject);
+			}
 
-        if (m_selected == null)
-        {
-            m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
-        }
+			if (m_selected == null)
+			{
+				m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
+			}
 
-        if (m_es.currentSelectedGameObject != m_selected.gameObject)
-        {
-            m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
+			if (m_es.currentSelectedGameObject != m_selected.gameObject)
+			{
+				m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
 
-            UpdateCompareIcons();
-        }
-
-
-        if (m_playersWeapon != PlayerInventory.Inst.m_currentWeapon)
-        {
-            m_playersWeapon = PlayerInventory.Inst.m_currentWeapon;
-
-            UpdateCompareIcons();
-        }
+				UpdateCompareIcons();
+			}
 
 
+			if (m_playersWeapon != PlayerInventory.Inst.m_currentWeapon)
+			{
+				m_playersWeapon = PlayerInventory.Inst.m_currentWeapon;
+
+				UpdateCompareIcons();
+			}
+
+		}
 
     }
 
+	public void OnOpenSHop()
+	{
+		m_shopCanves.SetActive(true);
+		GameManager.inst.player.GetComponent<Player>().m_isShopOpen = true;
+		UpdateShop();
+
+		
+	}
+
     void OnCloseShop()
     {
-        gameObject.SetActive(false);
+		m_shopCanves.SetActive(false);
         GameManager.inst.player.GetComponent<Player>().m_isShopOpen = false;
         m_activationArea.SetActive(true);
     }

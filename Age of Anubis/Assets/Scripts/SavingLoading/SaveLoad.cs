@@ -85,7 +85,7 @@ public class SaveLoad
 		bformatter.Serialize(stream, data);
 		stream.Close();
 
-		Debug.Log("Saving");
+		//Debug.Log("Saving");
 	}
 
 	// Call this to load from a file into "data"
@@ -107,7 +107,7 @@ public class SaveLoad
 			GameManager.inst.m_saveManager.m_weapon1 = data.weapon1;
 			GameManager.inst.m_saveManager.m_weapon2 = data.weapon2;
 		}
-		Debug.Log("Weapon 1: " + data.weapon1);
+		//Debug.Log("Weapon 1: " + data.weapon1);
 	}
 
 }
