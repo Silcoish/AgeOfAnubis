@@ -52,7 +52,7 @@ public class ShowDeathStats : MonoBehaviour
 	Row m_curRow;
 	Column m_curColumn;
 
-	float m_timer = 0;
+	//float m_timer = 0;
 	float m_lerpNumber = 0;
 	float m_pauseTimer = 0;
 	void Awake()

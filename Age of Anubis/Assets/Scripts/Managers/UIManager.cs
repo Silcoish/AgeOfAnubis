@@ -147,16 +147,16 @@ public class UIManager : MonoBehaviour {
         }
 
 
-        if (m_displayLevel != PlayerInventory.Inst.m_playerLevel)
+		if (m_displayLevel != m_pi.m_playerLevel)
         {
-            m_displayLevel = PlayerInventory.Inst.m_playerLevel;
+			m_displayLevel = m_pi.m_playerLevel;
             m_playerLevel.text = m_displayLevel.ToString();
 
         }
 
        // if (m_displayMain != PlayerInventory.Inst.m_currentWeapon)
         {
-            m_displayMain = PlayerInventory.Inst.m_currentWeapon;
+            m_displayMain = m_pi.m_currentWeapon;
 
             Weapon wp = null;
 
@@ -181,7 +181,7 @@ public class UIManager : MonoBehaviour {
 
         //if (m_displaySecondary != PlayerInventory.Inst.m_secondaryWeapon)
         {
-            m_displaySecondary = PlayerInventory.Inst.m_secondaryWeapon;
+			m_displaySecondary = m_pi.m_secondaryWeapon;
 
             Weapon wp = null;
 

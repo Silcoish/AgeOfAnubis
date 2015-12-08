@@ -13,7 +13,7 @@ public class ENY_Snake_001 : PhysicsEnemy
 
     public GameObject m_venomProj;
     public Vector2 m_launchVec;
-    private float m_launchX;
+    //private float m_launchX = 1f;
     public float m_launchForce;
 
     private GameObject m_animObject;
@@ -28,7 +28,7 @@ public class ENY_Snake_001 : PhysicsEnemy
 
         m_curTimer = m_attackTimer + (Random.value * 2); // Add between 0.1-2 seconds to make the shooting less uniform
 
-        m_launchX = m_launchVec.x;
+        //m_launchX = m_launchVec.x;
 
         m_animObject = m_anim.gameObject;
     }

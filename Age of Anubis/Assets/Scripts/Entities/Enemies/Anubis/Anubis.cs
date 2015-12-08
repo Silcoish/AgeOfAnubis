@@ -48,7 +48,7 @@ public class Anubis : Enemy
 	Transform t;
 	Rigidbody2D rb;
 
-	public BoxCollider2D collider;
+	public BoxCollider2D colliderXX;
 	public BoxCollider2D frontCollider;
 
 	private Animator anim;
@@ -625,7 +625,7 @@ public class Anubis : Enemy
 		if (col.gameObject.tag == "Player")
 		{
 			col.gameObject.GetComponent<Damageable>().OnTakeDamage(m_attack.GetDamage(gameObject.transform));
-			collider.isTrigger = true;
+			colliderXX.isTrigger = true;
 			//frontCollider.isTrigger = true;
 		}
 
@@ -640,7 +640,7 @@ public class Anubis : Enemy
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		collider.isTrigger = false;
+		colliderXX.isTrigger = false;
 		//frontCollider.isTrigger = false;
 	}
 

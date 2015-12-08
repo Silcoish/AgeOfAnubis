@@ -114,7 +114,7 @@ public class DungeonLayoutWindow : EditorWindow
 		EditorGUILayout.LabelField("Yellow = Shrine Room");
 		for (int i = 0; i < SIZE; i++)
 		{
-			Rect r = EditorGUILayout.BeginHorizontal("Button");
+			//Rect r = EditorGUILayout.BeginHorizontal("Button");
 			for (int j = 0; j < SIZE; j++)
 			{
                 GUI.color = layout[i * SIZE + j].color;

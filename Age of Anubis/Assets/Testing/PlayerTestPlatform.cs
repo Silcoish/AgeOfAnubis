@@ -8,7 +8,7 @@ public class PlayerTestPlatform : MonoBehaviour
 	private Rigidbody2D m_rb;
 	private CircleCollider2D m_col;
 
-	private Collider2D m_lastCol;
+	//private Collider2D m_lastCol;
 
 	// Use this for initialization
 	void Start () 
@@ -51,7 +51,7 @@ public class PlayerTestPlatform : MonoBehaviour
 				if (h.collider.gameObject.tag == "NotSolid")
 				{
 					Physics2D.IgnoreCollision(h.collider, m_col,true);
-					m_lastCol = h.collider;
+					//m_lastCol = h.collider;
 				}
 			}
 		}

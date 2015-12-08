@@ -206,7 +206,7 @@ public class DungeonLayoutLoader : MonoBehaviour
 	GameObject GetRoomBasedOnLevel()
 	{
 		int level = 1;
-		if (PlayerInventory.Inst.m_playerLevel != null)
+		if (PlayerInventory.Inst != null)
 		{
 			level = PlayerInventory.Inst.m_playerLevel;
 		}

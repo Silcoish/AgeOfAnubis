@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnterDungeon : ActivateArea 
 {
-	float m_timerColour = 0;
+	//float m_timerColour = 0;
 	public override void OnActivate()
 	{
 		base.OnActivate();

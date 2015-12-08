@@ -13,9 +13,9 @@ public class Enemy : Damageable
 
     public GameObject m_deathParticle;
 
-	private BoxCollider2D m_forwardCol;
-	private BoxCollider2D m_belowCol;
-	private BoxCollider2D m_cornerCol;
+	private BoxCollider2D m_forwardCol = null;
+	private BoxCollider2D m_belowCol = null;
+	private BoxCollider2D m_cornerCol = null;
 
 	protected RoomObject m_room;
 

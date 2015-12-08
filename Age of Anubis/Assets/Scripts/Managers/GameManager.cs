@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour {
 
 	public void PlaceMinimapRoom(Texture2D t, int i, Color solid, Color border, RoomType type)
 	{
-		Color showCol = solid;
+		//Color showCol = solid;
 		for (int y = 0; y < 8 * 5; y++)
 		{
 			for (int x = 0; x < 16 * 5; x++)

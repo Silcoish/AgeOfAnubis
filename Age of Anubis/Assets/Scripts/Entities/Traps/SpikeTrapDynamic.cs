@@ -13,7 +13,7 @@ public class SpikeTrapDynamic : Enemy
 	private float spikeMovedDistance = 0.0f;
 	public float spikeMovementDistance = 0.2f;
 	public float activateSpeed = 2.0f;
-	bool activated = false;
+	//bool activated = false;
 	bool completed = false;
 	public float activateDistance = 2.0f;
 	public float waitReactTime = 0.3f;
@@ -43,7 +43,7 @@ public class SpikeTrapDynamic : Enemy
 			if(waitReactCounter >= waitReactTime)
 			{
 				//Shoot up
-				activated = true;
+				//activated = true;
 				
 				if(!completed)
 				{
@@ -66,7 +66,7 @@ public class SpikeTrapDynamic : Enemy
 		else
 		{
 			waitReactCounter = 0;
-			activated = false;
+			//activated = false;
 			completed = false;
 			spikeMovedDistance = 0;
 

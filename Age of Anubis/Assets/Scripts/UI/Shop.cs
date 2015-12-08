@@ -421,21 +421,8 @@ public class Shop : MonoBehaviour
 
     public void InitializeShop()
     {
-
-
-
-        bool f = PlayerPrefs.HasKey("Shop_Weapon_new_1");
-        bool g = PlayerPrefs.HasKey("Shop_Weapon_new_2");
-        bool h = PlayerPrefs.HasKey("Shop_Weapon_new_3");
-
-
-
          if (PlayerPrefs.HasKey("Shop_Weapon_new_1") && PlayerPrefs.HasKey("Shop_Weapon_new_2") && PlayerPrefs.HasKey("Shop_Weapon_new_3"))
         {
-            int n = PlayerPrefs.GetInt("Shop_Weapon_new_1");
-            int r = PlayerPrefs.GetInt("Shop_Weapon_new_2");
-            int t = PlayerPrefs.GetInt("Shop_Weapon_new_3");
-
             m_newItem1.weapon = WeaponManager.inst.GenerateWeaponFromID(PlayerPrefs.GetInt("Shop_Weapon_new_1"));
             m_newItem2.weapon = WeaponManager.inst.GenerateWeaponFromID(PlayerPrefs.GetInt("Shop_Weapon_new_2"));
             m_newItem3.weapon = WeaponManager.inst.GenerateWeaponFromID(PlayerPrefs.GetInt("Shop_Weapon_new_3"));
@@ -468,17 +455,9 @@ public class Shop : MonoBehaviour
                     break;
             } while (m_newItem3.weapon == m_newItem1.weapon || m_newItem3.weapon == m_newItem2.weapon);
 
-            Weapon wpz = m_newItem1.weapon.GetComponent<Weapon>();
-            Weapon wpc = m_newItem2.weapon.GetComponent<Weapon>();
-            Weapon wpv = m_newItem3.weapon.GetComponent<Weapon>();
-
             PlayerPrefs.SetInt("Shop_Weapon_new_1", m_newItem1.weapon.GetComponent<Weapon>().m_itemID);
             PlayerPrefs.SetInt("Shop_Weapon_new_2", m_newItem2.weapon.GetComponent<Weapon>().m_itemID);
             PlayerPrefs.SetInt("Shop_Weapon_new_3", m_newItem3.weapon.GetComponent<Weapon>().m_itemID);
-
-            int n = PlayerPrefs.GetInt("Shop_Weapon_new_1");
-            int r = PlayerPrefs.GetInt("Shop_Weapon_new_2");
-            int t = PlayerPrefs.GetInt("Shop_Weapon_new_3");
         }
 
         m_needsUpdateing = true;
@@ -540,17 +519,10 @@ public class Shop : MonoBehaviour
         m_lastChanceItem2.weapon = WeaponManager.inst.GenerateWeaponFromID(m_newItem2.weapon.GetComponent<Weapon>().m_itemID);
         m_lastChanceItem3.weapon = WeaponManager.inst.GenerateWeaponFromID(m_newItem3.weapon.GetComponent<Weapon>().m_itemID);
 
-        int ccc = m_lastChanceItem1.weapon.GetComponent<Weapon>().m_itemID;
-        int vvv = m_lastChanceItem2.weapon.GetComponent<Weapon>().m_itemID;
-        int bbb = m_lastChanceItem3.weapon.GetComponent<Weapon>().m_itemID;
 
         PlayerPrefs.SetInt("Shop_Weapon_last_1", m_lastChanceItem1.weapon.GetComponent<Weapon>().m_itemID);
         PlayerPrefs.SetInt("Shop_Weapon_last_2", m_lastChanceItem2.weapon.GetComponent<Weapon>().m_itemID);
         PlayerPrefs.SetInt("Shop_Weapon_last_3", m_lastChanceItem3.weapon.GetComponent<Weapon>().m_itemID);
-
-        ccc = PlayerPrefs.GetInt("Shop_Weapon_last_1");
-        vvv = PlayerPrefs.GetInt("Shop_Weapon_last_2");
-        bbb = PlayerPrefs.GetInt("Shop_Weapon_last_3");
 
         UpdateAllIcons();
 
