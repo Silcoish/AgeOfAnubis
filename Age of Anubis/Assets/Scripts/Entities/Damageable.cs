@@ -180,7 +180,14 @@ public class Damageable : MonoBehaviour
         if(m_timerPause <= 0)
         {
             dam = UpdateDamage(dam);
-            m_hitPoints -= dam.amount;
+            if(m_timerBleed > 0)
+            {
+                m_hitPoints = m_hitPoints - (int)(dam.amount * m_strengthBleed);
+            }
+            else
+            {
+                m_hitPoints -= dam.amount;
+            }
 
 			if(!(this is Player))
 			{
@@ -229,7 +236,7 @@ public class Damageable : MonoBehaviour
                 case DamageType.BLEED:
                     AudioManager.Inst.PlaySFX(AudioManager.Inst.a_bleed);
                     m_timerBleed = dam.effectTime;
-                    m_strengthBleed = dam.effectStrength;
+                    m_strengthBleed = dam.effectStrength / 100;
                     break;
                 default:
                     AudioManager.Inst.PlaySFX(AudioManager.Inst.a_stab);
@@ -319,7 +326,7 @@ public class Damageable : MonoBehaviour
 
 	void DamageBleed(int damIn)
 	{
-		m_hitPoints -= (int)(damIn * m_strengthBleed);
+		//m_hitPoints -= (int)(damIn * m_strengthBleed);
 
 		if (EffectManager.Inst != null)
 			EffectManager.Inst.CreateDamageableEffect(gameObject.transform, DamageType.BLEED, (int)(damIn * m_strengthBleed));
