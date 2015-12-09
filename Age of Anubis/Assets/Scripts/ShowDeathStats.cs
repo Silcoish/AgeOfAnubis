@@ -12,7 +12,7 @@ public class ShowDeathStats : MonoBehaviour
 {
 	bool m_isFinished;
 
-	Animation m_anim;
+	public Animation m_anim;
 
 	public GameObject m_canvasObject;
 	//public GameObject m_butonstupidhack;
@@ -59,7 +59,7 @@ public class ShowDeathStats : MonoBehaviour
 	void Awake()
 	{
 		//m_es = gameObject.GetComponentInChildren<EventSystem>();
-		m_anim = gameObject.GetComponent<Animation>();
+		//m_anim = gameObject.GetComponentInChildren<Animation>();
 	}
 
 

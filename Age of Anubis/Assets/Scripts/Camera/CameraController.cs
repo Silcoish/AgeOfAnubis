@@ -129,8 +129,16 @@ public class CameraController : MonoBehaviour
 
                     Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, m_size.y / 2, Time.deltaTime * m_lerpSpeed);
 
-                    transform.position =  Vector3.Lerp(transform.position,  new Vector3(m_center.x, m_center.y, transform.position.z) , Time.deltaTime * 5);
+					Vector3 pos = Vector3.Lerp(transform.position, new Vector3(m_center.x, m_center.y, transform.position.z), Time.deltaTime * 5);
 
+					if (float.IsNaN(pos.x) == true || float.IsNaN(pos.x) == true || float.IsNaN(pos.x) == true)
+					{
+
+					}
+					else
+					{
+						transform.position = Vector3.Lerp(transform.position, new Vector3(m_center.x, m_center.y, transform.position.z), Time.deltaTime * 5);
+					}
 
 
 
