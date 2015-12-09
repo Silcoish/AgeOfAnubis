@@ -98,8 +98,9 @@ public class UIButtons : MonoBehaviour
 	{
 		if (m_previousMenus.Count > 0)
 		{
-			m_previousMenus[m_previousMenus.Count - 1].SetActive(true);
+			
 			m_curMenu.SetActive(false);
+			m_previousMenus[m_previousMenus.Count - 1].SetActive(true);
 			m_curMenu = m_previousMenus[m_previousMenus.Count - 1];
 			m_previousMenus.Remove(m_curMenu);
 
