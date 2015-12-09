@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UIButtons : MonoBehaviour 
 {
@@ -12,6 +13,9 @@ public class UIButtons : MonoBehaviour
 
 	public UnityEngine.UI.Button continueButton;
 	public SaveManager m_saveManager;
+
+	public Slider m_sfx;
+	public Slider m_music;
 
 	float counter;
 	public float disableTime = 10.0f;
@@ -33,6 +37,9 @@ public class UIButtons : MonoBehaviour
 		{
 			continueButton.interactable = false;
 		}
+
+		LoadSoundVolumes();
+		
 	}
 
 	void Update()
@@ -56,6 +63,17 @@ public class UIButtons : MonoBehaviour
 		}
 
 	}
+
+	void LoadSoundVolumes()
+	{
+		OnChangeSFXVolume(PlayerPrefs.GetFloat("sfxVol"));
+		OnChangeMusicVolume(PlayerPrefs.GetFloat("musicVol"));
+
+		m_sfx.value = PlayerPrefs.GetFloat("sfxVol");
+
+		m_music.value = PlayerPrefs.GetFloat("musicVol");
+	}
+
 
 
 	public void NewGame()
@@ -115,6 +133,8 @@ public class UIButtons : MonoBehaviour
 			AudioManager.Inst.SetSFXVolume(-80);
 		else
 			AudioManager.Inst.SetSFXVolume(value);
+
+		PlayerPrefs.SetFloat("sfxVol", value);
 	}
 
 	public void OnChangeMusicVolume(float value)
@@ -123,6 +143,8 @@ public class UIButtons : MonoBehaviour
 			AudioManager.Inst.SetMusicVolume(-80);
 		else
 			AudioManager.Inst.SetMusicVolume(value);
+
+		PlayerPrefs.SetFloat("musicVol", value);
 	}
 
 	public void OnSelected()
