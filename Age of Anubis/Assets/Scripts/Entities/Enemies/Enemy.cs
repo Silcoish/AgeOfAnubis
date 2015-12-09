@@ -11,6 +11,8 @@ public class Enemy : Damageable
     //protected CircleCollider2D m_colCircle;
     protected Collider2D m_col;
 
+	bool m_isPaused = false;
+
     public GameObject m_deathParticle;
 
 	private BoxCollider2D m_forwardCol = null;
@@ -47,7 +49,8 @@ public class Enemy : Damageable
 	// Update is called once per frame
 	public override void UpdateOverride()
 	{
-		EnemyBehaviour();
+		if (m_isPaused == false)
+			EnemyBehaviour();
 	}
 
 	public virtual void EnemyBehaviour()
@@ -112,13 +115,21 @@ public class Enemy : Damageable
 
 	public void PauseGame()
 	{
-		pauseVelocity = m_rb.velocity;
-		m_rb.velocity = Vector2.zero;
+		if (m_rb != null)
+		{
+			pauseVelocity = m_rb.velocity;
+			m_rb.velocity = Vector2.zero;
+		}
+		m_isPaused = true;
 	}
 
 	public void UnpauseGame()
 	{
-		m_rb.velocity = pauseVelocity;
+		if (m_rb != null)
+		{
+			m_rb.velocity = pauseVelocity;
+		}
+		m_isPaused = false;
 	}
 
     //void CreateDirectionColliders()
