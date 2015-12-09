@@ -258,11 +258,15 @@ public class GameManager : MonoBehaviour {
 
 		int xOffset = i % 15;
 		int yOffset = i / 15;
+		//print("x " + xOffset + " y " + yOffset);
 
 		img.sprite = Sprite.Create(minimapTex, new Rect(Vector2.zero, new Vector2(minimapTex.width, minimapTex.height)), Vector2.zero);
 		//print("Moving to: " + new Vector2(minimapStartPos.x - (xOffset * (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15))));
-		visibleMap.GetComponent<RectTransform>().localPosition = new Vector2(minimapStartPos.x - (xOffset * (720 / 15) + (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15)));
+		//visibleMap.GetComponent<RectTransform>().localPosition = new Vector2(minimapStartPos.x - (xOffset * (720 / 15) + (720 / 15)), minimapStartPos.y + (yOffset * (720 / 15)));
+		RectTransform rt = visibleMap.GetComponent<RectTransform>();
 
+
+		rt.localPosition = new Vector2(((xOffset + 1) * (-16 * rt.localScale.x)) + (8f * rt.localScale.x), (yOffset * (9f * rt.localScale.y)) + (4.5f * rt.localScale.y));
 	}
 
 	public bool CheckForHPDrop()
