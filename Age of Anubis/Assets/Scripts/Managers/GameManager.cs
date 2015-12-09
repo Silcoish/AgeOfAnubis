@@ -295,6 +295,7 @@ public class GameManager : MonoBehaviour {
 
 		if(isPaused)
 		{
+			Time.timeScale = 0.0f;
 			if(dungeonLayout != null)
 			{
 				dungeonLayout.rooms[currentRoom].PauseGame();
@@ -303,6 +304,7 @@ public class GameManager : MonoBehaviour {
 		}
 		else
 		{
+			Time.timeScale = 1.0f;
 			if(dungeonLayout != null)
 			{
 				dungeonLayout.rooms[currentRoom].UnpauseGame();
