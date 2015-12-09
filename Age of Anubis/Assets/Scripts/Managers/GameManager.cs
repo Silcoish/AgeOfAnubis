@@ -150,8 +150,12 @@ public class GameManager : MonoBehaviour {
 
 	public void RefreshMinimap()
 	{
+		//Clears the minimap the first time then draws stuff next frame
 		if (!map_first_refresh)
+		{
 			FirstRefreshMap();
+			return;
+		}
 		//Place left room if it exists
 		if (currentRoom % 15 != 0)
 		{
