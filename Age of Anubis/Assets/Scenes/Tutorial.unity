@@ -782,6 +782,14 @@ Prefab:
       propertyPath: bossHPObject
       value: 
       objectReference: {fileID: 2092749631}
+    - target: {fileID: 11466718, guid: f2cf9aaa343208d4fb91e4bfb41eb362, type: 2}
+      propertyPath: minimap
+      value: 
+      objectReference: {fileID: 2092749632}
+    - target: {fileID: 11466718, guid: f2cf9aaa343208d4fb91e4bfb41eb362, type: 2}
+      propertyPath: visibleMap
+      value: 
+      objectReference: {fileID: 2092749632}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2cf9aaa343208d4fb91e4bfb41eb362, type: 2}
   m_IsPrefabParent: 0
@@ -935,9 +943,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11431736, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
+      propertyPath: colliderXX
+      value: 
+      objectReference: {fileID: 1056709505}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb754748c870d9e48b7cb570023d2afc, type: 2}
   m_IsPrefabParent: 0
+--- !u!61 &1056709505 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 6177076, guid: bb754748c870d9e48b7cb570023d2afc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1056709504}
 --- !u!1 &1136639559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,7 +1080,6 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1521,12 +1537,20 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 154462, guid: c2f8b44c756e47347826549f84f20668, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2f8b44c756e47347826549f84f20668, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2092749631 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 149924, guid: c2f8b44c756e47347826549f84f20668, type: 2}
+  m_PrefabInternal: {fileID: 2092749630}
+--- !u!1 &2092749632 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 154462, guid: c2f8b44c756e47347826549f84f20668, type: 2}
   m_PrefabInternal: {fileID: 2092749630}
 --- !u!1 &2094962331
 GameObject:

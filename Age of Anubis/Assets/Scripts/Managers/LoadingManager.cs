@@ -124,6 +124,7 @@ public class LoadingManager : MonoBehaviour
 		ChangeStates(LoadingState.FadeIn);
 
 		tooltipText.text = tooltips[Random.Range(0, tooltips.Length)];
+		if (AudioManager.Inst != null)
 		AudioManager.Inst.FadeMusic(AudioManager.Inst.s_none, 4.0f);
 	}
 

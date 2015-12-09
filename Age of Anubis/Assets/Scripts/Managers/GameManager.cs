@@ -150,57 +150,60 @@ public class GameManager : MonoBehaviour {
 
 	public void RefreshMinimap()
 	{
-		//Clears the minimap the first time then draws stuff next frame
-		if (!map_first_refresh)
+		if (dungeonLayout != null)
 		{
-			FirstRefreshMap();
-			return;
-		}
-		//Place left room if it exists
-		if (currentRoom % 15 != 0)
-		{
-			if (dungeonLayout.rooms[currentRoom - 1] != null)
-				AddSeenRoom(currentRoom - 1);
-		}
-		//Place right room if it exists
-		if(currentRoom != ((15 * 15) - 1) && (currentRoom + 1) % 15 != 0)
-		{
-			if (dungeonLayout.rooms[currentRoom + 1] != null)
-				AddSeenRoom(currentRoom + 1);
-		}
-		//top
-		if(currentRoom >= 15)
-		{
-			if (dungeonLayout.rooms[currentRoom - 15] != null)
-				AddSeenRoom(currentRoom - 15);
-		}
-		//bottom
-		if(currentRoom <= ((15 * 15) - 1) - 15)
-		{
-			if (dungeonLayout.rooms[currentRoom + 15] != null)
-				AddSeenRoom(currentRoom + 15);
-		}
+			//Clears the minimap the first time then draws stuff next frame
+			if (!map_first_refresh)
+			{
+				FirstRefreshMap();
+				return;
+			}
+			//Place left room if it exists
+			if (currentRoom % 15 != 0)
+			{
+				if (dungeonLayout.rooms[currentRoom - 1] != null)
+					AddSeenRoom(currentRoom - 1);
+			}
+			//Place right room if it exists
+			if (currentRoom != ((15 * 15) - 1) && (currentRoom + 1) % 15 != 0)
+			{
+				if (dungeonLayout.rooms[currentRoom + 1] != null)
+					AddSeenRoom(currentRoom + 1);
+			}
+			//top
+			if (currentRoom >= 15)
+			{
+				if (dungeonLayout.rooms[currentRoom - 15] != null)
+					AddSeenRoom(currentRoom - 15);
+			}
+			//bottom
+			if (currentRoom <= ((15 * 15) - 1) - 15)
+			{
+				if (dungeonLayout.rooms[currentRoom + 15] != null)
+					AddSeenRoom(currentRoom + 15);
+			}
 
-		for (int k = 0; k < seenRooms.Count; k++)
-		{
-			PlaceMinimapRoom(seenRooms[k], Color.white, Color.black, RoomType.SEEN);
-		}
+			for (int k = 0; k < seenRooms.Count; k++)
+			{
+				PlaceMinimapRoom(seenRooms[k], Color.white, Color.black, RoomType.SEEN);
+			}
 
-		for (int i = 0; i < clearedRooms.Count; i++)
-		{
-			PlaceMinimapRoom(clearedRooms[i], Color.gray, Color.black, RoomType.CLEARED);
-		}
+			for (int i = 0; i < clearedRooms.Count; i++)
+			{
+				PlaceMinimapRoom(clearedRooms[i], Color.gray, Color.black, RoomType.CLEARED);
+			}
 
-		for (int j = 0; j < shrineLocation.Count; j++)
-		{
-			PlaceMinimapRoom(shrineLocation[j], Color.yellow, Color.black, RoomType.START);
+			for (int j = 0; j < shrineLocation.Count; j++)
+			{
+				PlaceMinimapRoom(shrineLocation[j], Color.yellow, Color.black, RoomType.START);
+			}
+			PlaceMinimapRoom(endLocation, Color.red, Color.black, RoomType.BOSS);
+			PlaceMinimapRoom(startLocation, Color.green, Color.black, RoomType.START);
+			PlaceMinimapRoom(currentRoom, Color.blue, Color.black, RoomType.CURRENT);
+			CreateVisibleMap(currentRoom);
+			minimapTex.Apply();
+			minimap.GetComponent<SpriteRenderer>().sprite = Sprite.Create(minimapTex, new Rect(0, 0, minimapTex.width, minimapTex.height), new Vector2(0, 0));
 		}
-		PlaceMinimapRoom(endLocation, Color.red, Color.black, RoomType.BOSS);
-		PlaceMinimapRoom(startLocation, Color.green, Color.black, RoomType.START);
-		PlaceMinimapRoom(currentRoom, Color.blue, Color.black, RoomType.CURRENT);
-		CreateVisibleMap(currentRoom);
-		minimapTex.Apply();
-		minimap.GetComponent<SpriteRenderer>().sprite = Sprite.Create(minimapTex, new Rect(0, 0, minimapTex.width, minimapTex.height), new Vector2(0, 0));
 	}
 
 	public void PlaceMinimapRoom(int i, Color solid, Color border, RoomType type)
@@ -210,46 +213,49 @@ public class GameManager : MonoBehaviour {
 
 	public void PlaceMinimapRoom(Texture2D t, int i, Color solid, Color border, RoomType type)
 	{
-		//Color showCol = solid;
-		for (int y = 0; y < 8 * 5; y++)
+		if (t != null)
 		{
-			for (int x = 0; x < 16 * 5; x++)
+			//Color showCol = solid;
+			for (int y = 0; y < 8 * 5; y++)
 			{
-				Color col = new Color();
-				switch(type)
+				for (int x = 0; x < 16 * 5; x++)
 				{
-					case RoomType.EMPTY:
-						col = room_empty.GetPixel(x, y);
-						col.a = 0.0f;
-						break;
-					case RoomType.CLEARED:
-						col = room_complete.GetPixel(x, y);
-						col.a = 1f;
-						break;
-					case RoomType.START:
-						col = room_starting.GetPixel(x, y);
-						col.a = 1f;
-						break;
-					case RoomType.SEEN:
-						col = room_notComplete.GetPixel(x, y);
-						col.a = 1f;
-						break;
-					case RoomType.BOSS:
-						col = room_boss.GetPixel(x, y);
-						col.a = 1f;
-						break;
-					case RoomType.CURRENT:
-						col = room_current.GetPixel(x, y);
-						col.a = 1f;
-						break;
-					
-					
-				}
-				t.SetPixel(((i % 15) * 80) + x, ((t.height - 1 - (int)i / 15) * 40) + y, col);
-			}
-		}
+					Color col = new Color();
+					switch (type)
+					{
+						case RoomType.EMPTY:
+							col = room_empty.GetPixel(x, y);
+							col.a = 0.0f;
+							break;
+						case RoomType.CLEARED:
+							col = room_complete.GetPixel(x, y);
+							col.a = 1f;
+							break;
+						case RoomType.START:
+							col = room_starting.GetPixel(x, y);
+							col.a = 1f;
+							break;
+						case RoomType.SEEN:
+							col = room_notComplete.GetPixel(x, y);
+							col.a = 1f;
+							break;
+						case RoomType.BOSS:
+							col = room_boss.GetPixel(x, y);
+							col.a = 1f;
+							break;
+						case RoomType.CURRENT:
+							col = room_current.GetPixel(x, y);
+							col.a = 1f;
+							break;
 
-		t.Apply();
+
+					}
+					t.SetPixel(((i % 15) * 80) + x, ((t.height - 1 - (int)i / 15) * 40) + y, col);
+				}
+			}
+
+			t.Apply();
+		}
 	}
 
 	public void CreateVisibleMap(int i)
