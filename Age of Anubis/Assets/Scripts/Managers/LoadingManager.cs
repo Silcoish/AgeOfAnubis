@@ -145,15 +145,27 @@ public class LoadingManager : MonoBehaviour
 		switch(ls)
 		{
 			case LoadingState.Idle:
+				LockPlayer(false);
 				break;
 			case LoadingState.FadeIn:
+				LockPlayer(true);
 				break;
 			case LoadingState.LoadScene:
+				LockPlayer(true);
 				break;
 			case LoadingState.FadeOut:
+				LockPlayer(true);
 				break;
 		}
 
+	}
+
+	void LockPlayer(bool toLock)
+	{
+		if (GameManager.inst.player != null)
+		{
+			GameManager.inst.player.GetComponent<Player>().m_isShopOpen = toLock;
+		}
 	}
 
 }
