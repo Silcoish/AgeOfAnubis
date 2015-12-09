@@ -13,6 +13,9 @@ public class UIButtons : MonoBehaviour
 	public UnityEngine.UI.Button continueButton;
 	public SaveManager m_saveManager;
 
+	float counter;
+	public float disableTime = 10.0f;
+
 	void Awake()
 	{
 		if (Inst == null)
@@ -34,6 +37,14 @@ public class UIButtons : MonoBehaviour
 
 	void Update()
 	{
+		counter += Time.deltaTime;
+		if (counter <= disableTime)
+		{
+			if (m_es.currentSelectedGameObject != null)
+				m_es.SetSelectedGameObject(null);
+			return;
+		}
+
 		if(m_es.currentSelectedGameObject == null)
 			m_es.SetSelectedGameObject(continueButton.gameObject);
 
