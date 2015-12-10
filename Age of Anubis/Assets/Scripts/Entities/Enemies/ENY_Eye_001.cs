@@ -53,6 +53,12 @@ public class ENY_Eye_001 : Enemy
 
             m_rb.velocity = new Vector2(0, -0.1F);
 
+            GameObject tempProj = GetComponentInChildren<PROJ_Laser>().gameObject;
+            if(tempProj)
+            {
+                Destroy(tempProj);
+            }
+
             if (LastRunStats.inst != null)
             {
                 LastRunStats.inst.enemiesKilled++;
