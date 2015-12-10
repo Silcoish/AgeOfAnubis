@@ -144,16 +144,16 @@ public class Player : Damageable
         d.type = DamageType.NONE;
 
 		//DEBUG TO DISABLE
-        if (Input.GetKeyDown(KeyCode.G))
-            OnTakeDamage(d);
+        //if (Input.GetKeyDown(KeyCode.G))
+        //    OnTakeDamage(d);
 
 		//DEBUG TO DISABLE
-        if (Input.GetKeyDown(KeyCode.F))
-            PlayerInventory.Inst.ChangeXP(20);
+        //if (Input.GetKeyDown(KeyCode.F))
+        //    PlayerInventory.Inst.ChangeXP(20);
 
 		//DEBUG TO DISABLE
-        if (Input.GetKeyDown(KeyCode.C))
-            PlayerInventory.Inst.ChangeGold(20);
+        //if (Input.GetKeyDown(KeyCode.C))
+        //    PlayerInventory.Inst.ChangeGold(20);
     }
 
     public override void OnDeath()
@@ -264,23 +264,23 @@ public class Player : Damageable
         //    jumpMinSpeed = m_velocity.y;
 
 		//DEBUG TO DISABLE
-		if (Input.GetKeyDown(KeyCode.K))
-		{
-			RecoverHealth(-1000000);
-		}
+		//if (Input.GetKeyDown(KeyCode.K))
+		//{
+		//	RecoverHealth(-1000000);
+		//}
 		//DEBUG TO DISABLE
-		if (Input.GetKeyDown(KeyCode.L))
+		/*if (Input.GetKeyDown(KeyCode.L))
 		{
 			PlayerInventory.Inst.m_currentWeapon = WeaponManager.inst.GenerateWeapon(5);
 			UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 			m_hitPoints = 250;
 			RecoverHealth(10000);
-		}
+		}*/
 		//DEBUG TO DISABLE
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            PlayerInventory.Inst.ChangeGold(1000000);
-        }
+        //if(Input.GetKeyDown(KeyCode.J))
+        //{
+        //   PlayerInventory.Inst.ChangeGold(1000000);
+        //}
 
         if(!m_isShopOpen)
         {
