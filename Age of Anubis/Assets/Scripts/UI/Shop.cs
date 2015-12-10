@@ -118,7 +118,7 @@ public class Shop : MonoBehaviour
 				if (Input.GetButtonDown("Cancel"))
 					OnCloseShop();
 			}
-			//DEBUG TO DISABLE
+			/*//DEBUG TO DISABLE
 			if (Input.GetKeyDown(KeyCode.P))
 			{
 				ProgressIcons();
@@ -138,7 +138,7 @@ public class Shop : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.U))
 			{
 				UpdateAllIcons();
-			}
+			}*/
 
 			if (m_es.currentSelectedGameObject == null)
 			{
