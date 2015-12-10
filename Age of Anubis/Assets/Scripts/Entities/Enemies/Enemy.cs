@@ -54,26 +54,29 @@ public class Enemy : Damageable
             EnemyBehaviour();  
         }
 
-        Bounds bounds = m_room.gameObject.GetComponent<BoxCollider2D>().bounds;
-        if (transform.position.x < (bounds.center.x - bounds.extents.x))
-        {
-            transform.position = new Vector3(bounds.center.x - bounds.extents.x, transform.position.y, 0);
-        }
+		if (m_room != null)
+		{
+			Bounds bounds = m_room.gameObject.GetComponent<BoxCollider2D>().bounds;
+			if (transform.position.x < (bounds.center.x - bounds.extents.x))
+			{
+				transform.position = new Vector3(bounds.center.x - bounds.extents.x, transform.position.y, 0);
+			}
 
-        if (transform.position.x > (bounds.center.x + bounds.extents.x))
-        {
-            transform.position = new Vector3(bounds.center.x + bounds.extents.x, transform.position.y, 0);
-        }
+			if (transform.position.x > (bounds.center.x + bounds.extents.x))
+			{
+				transform.position = new Vector3(bounds.center.x + bounds.extents.x, transform.position.y, 0);
+			}
 
-        if (transform.position.y < (bounds.center.y - bounds.extents.y))
-        {
-            transform.position = new Vector3(transform.position.x, (bounds.center.y - bounds.extents.y), 0);
-        }
+			if (transform.position.y < (bounds.center.y - bounds.extents.y))
+			{
+				transform.position = new Vector3(transform.position.x, (bounds.center.y - bounds.extents.y), 0);
+			}
 
-        if (transform.position.y > (bounds.center.y + bounds.extents.y))
-        {
-            transform.position = new Vector3(transform.position.x, (bounds.center.y + bounds.extents.y), 0);
-        }
+			if (transform.position.y > (bounds.center.y + bounds.extents.y))
+			{
+				transform.position = new Vector3(transform.position.x, (bounds.center.y + bounds.extents.y), 0);
+			}
+		}
 	}
 
 	public virtual void EnemyBehaviour()

@@ -54,7 +54,10 @@ public class ENY_Eye_001 : Enemy
             m_rb.velocity = new Vector2(0, -0.1F);
 
             GameObject tempProj = null;
-            tempProj = GetComponentInChildren<PROJ_Laser>().gameObject;
+			PROJ_Laser laser = GetComponentInChildren<PROJ_Laser>();
+			if (laser != null)
+				tempProj = GetComponentInChildren<PROJ_Laser>().gameObject;
+
             if(tempProj != null)
             {
                 Destroy(tempProj);

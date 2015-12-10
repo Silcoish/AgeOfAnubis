@@ -211,7 +211,8 @@ public class Damageable : MonoBehaviour
             Vector2 kbDir = new Vector2(1F, 0.5F); // Default knockback to right.
             if (kbDirCheck < 0) // If my X minus source X is negative, then they are to my right.
                 kbDir = new Vector2(-1F, 0.5F); // Damage source is to my right, so knockback to left.
-            m_rb.velocity = kbDir * dam.knockback; // set velocity to direction times knockback strength.
+			if (m_rb != null)
+				m_rb.velocity = kbDir * dam.knockback; // set velocity to direction times knockback strength.
             Pause(0.3F); // Pause input briefly.
 
             switch (dam.type)

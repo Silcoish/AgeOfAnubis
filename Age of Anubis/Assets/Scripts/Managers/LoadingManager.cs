@@ -162,7 +162,7 @@ public class LoadingManager : MonoBehaviour
 
 	void LockPlayer(bool toLock)
 	{
-		if (GameManager.inst.player != null)
+		if (GameManager.inst != null && GameManager.inst.player != null)
 		{
 			GameManager.inst.player.GetComponent<Player>().m_isShopOpen = toLock;
 		}
