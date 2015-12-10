@@ -10,9 +10,22 @@ public class OpenShop : ActivateArea
 
 		Shop sh = m_shop.gameObject.GetComponent<Shop>();
 
-		if (sh != null)
-			sh.OnOpenSHop();
-        gameObject.SetActive(false);
+		if (GameManager.inst != null)
+		{
+			if (GameManager.inst.isPaused == false)
+			{
+				if (sh != null)
+					sh.OnOpenSHop();
+				gameObject.SetActive(false);
+			}
+		}
+		else
+		{
+			if (sh != null)
+				sh.OnOpenSHop();
+			gameObject.SetActive(false);
+
+		}
 	}
 
 

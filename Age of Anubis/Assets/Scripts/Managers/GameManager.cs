@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	public Texture2D visibleMapTex;
 
 	public bool isPaused = false;
+	public bool isShopOpen = false;
 
 	public bool destroyNextScene = false;
 

@@ -39,14 +39,17 @@ public class PauseMenu : MonoBehaviour
 
 	public void Pause()
 	{
-		if(!GameManager.inst.isPaused)
+		if (GameManager.inst != null)
 		{
-			GameManager.inst.PauseGame(true);
-			for(int i = 0; i < objectsToEnable.Count; i++)
+			if (GameManager.inst.isPaused == false && GameManager.inst.isShopOpen == false)
 			{
-				objectsToEnable[i].SetActive(true);
+				GameManager.inst.PauseGame(true);
+				for (int i = 0; i < objectsToEnable.Count; i++)
+				{
+					objectsToEnable[i].SetActive(true);
+				}
+				m_event.SetSelectedGameObject(startingSelected);
 			}
-			m_event.SetSelectedGameObject(startingSelected);
 		}
 	}
 
