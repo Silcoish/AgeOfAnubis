@@ -113,6 +113,7 @@ public class AudioManager : MonoBehaviour
 
 	public void Update()
 	{
+		//DEBUG TO DISABLE
 		if(Input.GetKeyDown(KeyCode.Q))
 			PlaySFX(a_coin);
 	}
