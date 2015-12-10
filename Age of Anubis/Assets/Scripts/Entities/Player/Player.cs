@@ -49,8 +49,7 @@ public class Player : Damageable
 	public bool lastFrameGrounded = false;
 	public bool isGrounded = false;
 
-    //public float jumpMaxSpeed;
-    //public float jumpMinSpeed;
+	public GameObject entryDoorObject;
 
 	public override void AwakeOverride() 
     {
@@ -111,7 +110,6 @@ public class Player : Damageable
 
 	public override void UpdateOverride()
     {
-		
 		if (GameManager.inst != null && GameManager.inst.isPaused)
 			return;
 

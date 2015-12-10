@@ -38,7 +38,9 @@ public class Door : MonoBehaviour {
 		{
             if (partnerDoor != null)
             {
+				col.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 col.transform.position = partnerDoor.transform.GetChild(0).position;
+				col.GetComponent<Player>().entryDoorObject = partnerDoor.transform.GetChild(0).gameObject;
                 partnerDoor.parentRoom.GetComponent<RoomObject>().EnteredRoom();
                 parentRoom.GetComponent<RoomObject>().LeaveRoom();
             }

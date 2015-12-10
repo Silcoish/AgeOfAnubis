@@ -12,10 +12,10 @@ public class RoomObject : MonoBehaviour
 	public int roomLevel = 1;
 
 	[HideInInspector] public List<Enemy> m_allEnemies;
-	 public Door m_doorNorth;
-	 public Door m_doorSouth;
-	 public Door m_doorEast;
-	 public Door m_doorWest;
+	public Door m_doorNorth;
+	public Door m_doorSouth;
+	public Door m_doorEast;
+	public Door m_doorWest;
 
 	[HideInInspector] public bool isStartRoom = false;
 	[HideInInspector] public int arrayIndex;

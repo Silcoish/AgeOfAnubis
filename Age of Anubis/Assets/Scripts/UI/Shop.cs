@@ -84,6 +84,7 @@ public class Shop : MonoBehaviour
     public Sprite m_iconPoison;
     public Sprite m_iconFire;
     public Sprite m_iconFreeze;
+	public Sprite m_iconBleed;
     public Sprite m_iconNone;
 
     private Button[] m_allButtons;
@@ -278,6 +279,8 @@ public class Shop : MonoBehaviour
                 return m_iconFire;
             case DamageType.POISON:
                 return m_iconPoison;
+			case DamageType.BLEED:
+				return m_iconBleed;
         }
 
         return m_iconNone;
