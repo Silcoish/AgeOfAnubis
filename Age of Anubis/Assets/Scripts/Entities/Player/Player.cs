@@ -535,4 +535,10 @@ public class Player : Damageable
 	{
 
 	}
+
+	public IEnumerator enterRoom()
+	{
+		yield return 0;
+		transform.position = entryDoorObject.transform.position;
+	}
 }

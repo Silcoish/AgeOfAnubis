@@ -43,6 +43,7 @@ public class Door : MonoBehaviour {
 				col.GetComponent<Player>().entryDoorObject = partnerDoor.transform.GetChild(0).gameObject;
                 partnerDoor.parentRoom.GetComponent<RoomObject>().EnteredRoom();
                 parentRoom.GetComponent<RoomObject>().LeaveRoom();
+				StartCoroutine(col.GetComponent<Player>().enterRoom());
             }
 		}
 	}
