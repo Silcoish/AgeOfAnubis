@@ -28,6 +28,7 @@ public class LastRunStats : MonoBehaviour
 		}
 		else
 		{
+			print("Destroyed");
 			Destroy(gameObject);
 		}
 

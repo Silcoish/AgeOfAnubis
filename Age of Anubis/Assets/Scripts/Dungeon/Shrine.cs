@@ -1,8 +1,3 @@
-/* Copyright (c) Dungeon Crawlers
-*  Script Created by:
-*  Corey Underdown
-*/
- 
 using UnityEngine;
  
 public class Shrine : ActivateArea 

@@ -84,13 +84,13 @@ public class Player : Damageable
 		if (PlayerInventory.Inst != null)
 			UpdateEquippedWeapon(PlayerInventory.Inst.m_currentWeapon);
 
-		if (LastRunStats.inst != null && LastRunStats.inst.m_isEnded == false)
-		{
-			LastRunStats.inst.enemiesKilled = 0;
-			LastRunStats.inst.roomsCleared = 0;
-			LastRunStats.inst.hpPickups = 0;
-			LastRunStats.inst.startGold = PlayerInventory.Inst.m_currentGold;
-		}
+		//if (LastRunStats.inst != null && LastRunStats.inst.m_isEnded == false)
+		//{
+			//LastRunStats.inst.enemiesKilled = 0;
+			//LastRunStats.inst.roomsCleared = 0;
+			//LastRunStats.inst.hpPickups = 0;
+			//LastRunStats.inst.startGold = PlayerInventory.Inst.m_currentGold;
+		//}
     }
 
 	public override void OnTakeDamage(Damage dam)

@@ -1,9 +1,3 @@
-/* Copyright (c) Handsome Dragon Games
-*  http://www.handsomedragongames.com
-*  Script Created by:
-*  Corey Underdown
-*/
- 
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -67,6 +61,7 @@ public class ShowDeathStats : MonoBehaviour
 	{
 		if(LastRunStats.inst != null)
 		{
+			print(LastRunStats.inst.enemiesKilled);
 			Init();
 		}
 		else
@@ -274,24 +269,24 @@ public class ShowDeathStats : MonoBehaviour
 		if (m_isFinished || LastRunStats.inst == null)
 		{
 
-				PlayerPrefs.SetInt("TotalEnemies", m_totalEnemies);
-				PlayerPrefs.SetInt("TotalRooms", m_totalRooms);
-				PlayerPrefs.SetInt("TotalHealth", m_totalHealth);
-				PlayerPrefs.SetInt("BankGold", m_totalGold);
+			PlayerPrefs.SetInt("TotalEnemies", m_totalEnemies);
+			PlayerPrefs.SetInt("TotalRooms", m_totalRooms);
+			PlayerPrefs.SetInt("TotalHealth", m_totalHealth);
+			PlayerPrefs.SetInt("BankGold", m_totalGold);
 
 			UIManager.Inst.UpdateCoinTotal(0);
 
-				PlayerInventory.Inst.m_currentGold = 0;
-				if (LastRunStats.inst != null)
-				{
-					LastRunStats.inst.m_isEnded = false;
-					LastRunStats.inst.m_isEnded = false;
-				}
+			PlayerInventory.Inst.m_currentGold = 0;
+			if (LastRunStats.inst != null)
+			{
+				LastRunStats.inst.m_isEnded = false;
+				Destroy(LastRunStats.inst.gameObject);
+			}
 
-				m_canvasObject.SetActive(false);
+			m_canvasObject.SetActive(false);
 
-				GameManager.inst.m_saveManager.Save();
-				GameManager.inst.player.GetComponent<Player>().m_isShopOpen = false;
+			GameManager.inst.m_saveManager.Save();
+			GameManager.inst.player.GetComponent<Player>().m_isShopOpen = false;
 			
 		}
 		else
