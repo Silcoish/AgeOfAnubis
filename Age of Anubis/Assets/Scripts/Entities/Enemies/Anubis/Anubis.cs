@@ -339,7 +339,7 @@ public class Anubis : Enemy
 			rb.velocity = new Vector2(dash, 0f);
 
 			print("Dash : " + dash);
-			if(dash == -1)
+			if(dash > 0)
 			{
 				if (t.position.x >= rightPos.transform.position.x)
 				{
@@ -356,7 +356,6 @@ public class Anubis : Enemy
 				}
 			}
 		}
-
 	}
 
 	void UpdateStuck()
