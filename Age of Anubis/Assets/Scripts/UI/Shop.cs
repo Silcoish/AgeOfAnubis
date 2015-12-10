@@ -493,6 +493,12 @@ public class Shop : MonoBehaviour
             b.interactable = false;
         }
         m_es.SetSelectedGameObject(null);
+
+		if (GameManager.inst !=null)
+		{
+			GameManager.inst.isShopOpen = false;
+		}
+
         m_isActive = false;
     }
 
@@ -505,6 +511,11 @@ public class Shop : MonoBehaviour
         }
         m_es.SetSelectedGameObject(m_es.firstSelectedGameObject);
         m_isActive = true;
+
+		if (GameManager.inst != null)
+		{
+			GameManager.inst.isShopOpen = true;
+		}
     }
 
     public void ForceProgressShop()
