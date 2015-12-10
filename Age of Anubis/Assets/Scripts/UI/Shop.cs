@@ -187,6 +187,7 @@ public class Shop : MonoBehaviour
     public void BuySelected()
     {
 		int gold = PlayerPrefs.GetInt("BankGold");
+
 		if (gold >= m_selected.weapon.GetComponent<Weapon>().m_goldCost)
         {
 			gold -= m_selected.weapon.GetComponent<Weapon>().m_goldCost;

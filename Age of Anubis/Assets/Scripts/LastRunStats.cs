@@ -1,9 +1,3 @@
-/* Copyright (c) Handsome Dragon Games
-*  http://www.handsomedragongames.com
-*  Script Created by:
-*  Corey Underdown
-*/
- 
 using UnityEngine;
  
 public class LastRunStats : MonoBehaviour
@@ -28,7 +22,6 @@ public class LastRunStats : MonoBehaviour
 		}
 		else
 		{
-			print("Destroyed");
 			Destroy(gameObject);
 		}
 
