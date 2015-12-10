@@ -38,6 +38,7 @@ public class Shop : MonoBehaviour
     public static Shop Inst;
 
 	public GameObject m_shopCanves;
+	//public GameObject m_lastObjectSelected;
 
     public EventSystem m_es;
     public ShopIcon m_selected;
@@ -143,15 +144,18 @@ public class Shop : MonoBehaviour
 			if (m_selected == null)
 			{
 				m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
+				//m_lastObjectSelected = m_es.currentSelectedGameObject;
 			}
 
-			if (m_es.currentSelectedGameObject != m_selected.gameObject)
+			if ( m_es.currentSelectedGameObject != m_selected.gameObject)
 			{
-				m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
+				if (m_es.currentSelectedGameObject != null)
+				{
+					m_selected = m_es.currentSelectedGameObject.GetComponent<ShopIcon>();
+				}
 
 				UpdateCompareIcons();
 			}
-
 
 			if (m_playersWeapon != PlayerInventory.Inst.m_currentWeapon)
 			{
