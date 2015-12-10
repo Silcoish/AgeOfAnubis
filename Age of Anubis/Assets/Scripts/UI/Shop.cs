@@ -118,20 +118,23 @@ public class Shop : MonoBehaviour
 				if (Input.GetButtonDown("Cancel"))
 					OnCloseShop();
 			}
-
+			//DEBUG TO DISABLE
 			if (Input.GetKeyDown(KeyCode.P))
 			{
 				ProgressIcons();
 			}
+			//DEBUG TO DISABLE
 			if (Input.GetKeyDown(KeyCode.O))
 			{
 				ActivateShop();
 			}
+			//DEBUG TO DISABLE
 			if (Input.GetKeyDown(KeyCode.I))
 			{
 				m_needsUpdateing = true;
 				UpdateShop();
 			}
+			//DEBUG TO DISABLE
 			if (Input.GetKeyDown(KeyCode.U))
 			{
 				UpdateAllIcons();

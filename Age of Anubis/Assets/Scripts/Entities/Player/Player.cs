@@ -143,12 +143,15 @@ public class Player : Damageable
         d.amount = 2;
         d.type = DamageType.NONE;
 
+		//DEBUG TO DISABLE
         if (Input.GetKeyDown(KeyCode.G))
             OnTakeDamage(d);
 
+		//DEBUG TO DISABLE
         if (Input.GetKeyDown(KeyCode.F))
             PlayerInventory.Inst.ChangeXP(20);
 
+		//DEBUG TO DISABLE
         if (Input.GetKeyDown(KeyCode.C))
             PlayerInventory.Inst.ChangeGold(20);
     }
@@ -260,12 +263,12 @@ public class Player : Damageable
         //if (m_velocity.y < jumpMinSpeed)
         //    jumpMinSpeed = m_velocity.y;
 
-
+		//DEBUG TO DISABLE
 		if (Input.GetKeyDown(KeyCode.K))
 		{
 			RecoverHealth(-1000000);
 		}
-
+		//DEBUG TO DISABLE
 		if (Input.GetKeyDown(KeyCode.L))
 		{
 			PlayerInventory.Inst.m_currentWeapon = WeaponManager.inst.GenerateWeapon(5);
@@ -273,7 +276,7 @@ public class Player : Damageable
 			m_hitPoints = 250;
 			RecoverHealth(10000);
 		}
-
+		//DEBUG TO DISABLE
         if(Input.GetKeyDown(KeyCode.J))
         {
             PlayerInventory.Inst.ChangeGold(1000000);
