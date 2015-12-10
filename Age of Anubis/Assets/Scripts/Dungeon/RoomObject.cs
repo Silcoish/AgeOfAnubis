@@ -69,13 +69,13 @@ public class RoomObject : MonoBehaviour
 	void Update()
 	{
 		//DEBUG TO DISABLE
-		if(Input.GetKeyDown(KeyCode.K) && isActiveRoom)
+		/*if(Input.GetKeyDown(KeyCode.K) && isActiveRoom)
 		{
 			for(int i = 0; i < m_allEnemies.Count; i++)
 			{
 				m_allEnemies[i].GetComponent<Enemy>().m_hitPoints = 0;
 			}
-		}
+		}*/
 	}
 
 	public void EnteredRoom()

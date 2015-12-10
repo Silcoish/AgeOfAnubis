@@ -28,15 +28,15 @@ public class SaveManager : MonoBehaviour
 	void Update()
 	{
 		//DEBUG TO DISABLE
-		if(Input.GetKeyDown(KeyCode.O))
-		{
-			Save();
-		}
+		//if(Input.GetKeyDown(KeyCode.O))
+		//{
+		//	Save();
+		//}
 		//DEBUG TO DISABLE
-		if(Input.GetKeyDown(KeyCode.P))
-		{
-			Load();
-		}
+		//if(Input.GetKeyDown(KeyCode.P))
+		//{
+		//	Load();
+		//}
 	}
 
 	public void Save()
