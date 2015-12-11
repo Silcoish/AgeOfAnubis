@@ -44,8 +44,8 @@ public class ActivateArea : MonoBehaviour
 			//m_activateIcon.transform.localScale = Vector2.Lerp(Vector2.one, m_iconOffsetScale, m_lerp);
 
 			Vector2 vert;
-			vert.y = Input.GetAxis("Vertical");
-			vert.x = Input.GetAxis("Horizontal");
+			vert.y = Input.GetAxisRaw("Vertical");
+			vert.x = Input.GetAxisRaw("Horizontal");
 
 			if (vert.y > 0.7 && Mathf.Abs(vert.y) > Mathf.Abs(vert.x))
 			{
