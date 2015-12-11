@@ -36,7 +36,10 @@ public class EffectManager : MonoBehaviour
 
         temp.transform.SetParent(trans);
 
-        temp.GetComponentInChildren<Text>().text = "-" + amount.ToString();
+		if (type == DamageType.BLEED)
+			temp.GetComponentInChildren<Text>().text = "+" + amount.ToString();
+		else
+			temp.GetComponentInChildren<Text>().text = "" + amount.ToString();
 
         Destroy(temp, 1);
     }
