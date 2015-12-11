@@ -71,8 +71,17 @@ public class PlayerInventory : MonoBehaviour
     public void DeathReset()
     {
         m_currentGold = m_savedGold;
-        m_currentXP = m_savedXP;
-		m_playerLevel = m_savedPlayerLevel;
+
+		if(m_playerLevel > 1)
+		{
+			m_playerLevel--;
+			m_currentXP = 0;
+		}
+		else
+		{
+			m_playerLevel = 1;
+			m_currentXP = 0;
+		}
         m_currentWeapon = null;
         m_multiplier = 1;
         CheckWeaponValidity();
