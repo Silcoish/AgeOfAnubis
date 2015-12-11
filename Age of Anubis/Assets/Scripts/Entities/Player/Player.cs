@@ -154,6 +154,10 @@ public class Player : Damageable
 		//DEBUG TO DISABLE
         //if (Input.GetKeyDown(KeyCode.C))
         //    PlayerInventory.Inst.ChangeGold(20);
+		if (m_hitPoints > m_maxHitpoints)
+			m_hitPoints = m_maxHitpoints;
+
+		UIManager.Inst.UpdateHealthBar(((float)m_hitPoints / (float)m_maxHitpoints));
     }
 
     public override void OnDeath()
