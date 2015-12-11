@@ -48,6 +48,13 @@ public class PlayerInventory : MonoBehaviour
         UpdateUIElements();
     }
 
+	public void SetXP()
+	{
+		m_savedXP = m_currentXP;
+		m_savedPlayerLevel = m_playerLevel;
+
+	}
+
 	public GameObject SwitchWeapon()
 	{
 		if(m_secondaryWeapon)
@@ -116,7 +123,7 @@ public class PlayerInventory : MonoBehaviour
 
     public float GetCurrentLevelPercent()
     {
-        float pc = m_currentXP + m_savedXP;
+        float pc = m_currentXP;
 
         if(m_playerLevel < 5)
         {

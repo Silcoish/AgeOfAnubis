@@ -84,6 +84,7 @@ public class UIManager : MonoBehaviour {
 
     void Update()
     {
+		//m_xPBarSecondary.fillAmount = PlayerInventory.Inst.GetCurrentLevelPercent();
         //PlayerInventory.Inst.UpdateUIElements();
 
         if (m_xPBar.fillAmount != m_xPBarSecondary.fillAmount)

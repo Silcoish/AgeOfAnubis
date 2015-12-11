@@ -88,7 +88,8 @@ public class GameManager : MonoBehaviour {
 		seenRooms.Clear();
 		clearedRooms.Clear();
 		shrineLocation.Clear();
-
+		if (PlayerInventory.Inst != null)
+			PlayerInventory.Inst.SetXP();
 	}
 
 	void CheckForObjects()
