@@ -24,6 +24,7 @@ public class RoomObject : MonoBehaviour
 
 	bool isActiveRoom = false;
 	bool cleared = false;
+	bool doorsLocked = false;
 
 	void Awake()
 	{
@@ -114,17 +115,22 @@ public class RoomObject : MonoBehaviour
 		print("Lock Doors");
 		if(!cleared)
 		{
-			if (m_doorNorth != null)
-				m_doorNorth.Lock();
-			if (m_doorSouth != null)
-				m_doorSouth.Lock();
-			if (m_doorEast != null)
-				m_doorEast.Lock();
-			if (m_doorWest != null)
-				m_doorWest.Lock();
+			if(!doorsLocked)
+			{
+				if (m_doorNorth != null)
+					m_doorNorth.Lock();
+				if (m_doorSouth != null)
+					m_doorSouth.Lock();
+				if (m_doorEast != null)
+					m_doorEast.Lock();
+				if (m_doorWest != null)
+					m_doorWest.Lock();
 
-			AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorShut);
-			AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
+				AudioManager.Inst.PlaySFX(AudioManager.Inst.a_doorShut);
+				AudioManager.Inst.FadeMusic(AudioManager.Inst.s_fight);
+
+				doorsLocked = true;
+			}
 		}
 	}
 
@@ -141,6 +147,7 @@ public class RoomObject : MonoBehaviour
 			m_doorWest.Unlock();
 
 		cleared = true;
+		doorsLocked = false;
         if (LastRunStats.inst != null)
 		    LastRunStats.inst.roomsCleared++;
 
